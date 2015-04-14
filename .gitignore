@@ -1,28 +1,13 @@
+# Compiled Object files
+*.slo
+*.lo
+*.o
 
-#ignore thumbnails created by windows
-Thumbs.db
-#Ignore files build by Visual Studio
-*.obj
-*.exe
-*.pdb
-*.user
-*.aps
-*.pch
-*.vspscc
-*_i.c
-*_p.c
-*.ncb
-*.suo
-*.tlb
-*.tlh
-*.bak
-*.cache
-*.ilk
-*.log
-[Bb]in
-*.sbr
-obj/
-_ReSharper*/
-[Tt]est[Rr]esult*
-*.sdf
-*.sdp
+# Compiled Dynamic libraries
+*.so
+*.dylib
+
+# Compiled Static libraries
+*.lai
+*.la
+*.a
