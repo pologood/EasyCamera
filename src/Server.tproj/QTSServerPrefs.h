@@ -61,13 +61,10 @@ class QTSServerPrefs : public QTSSPrefs
         //(stored in seconds)
         
         //This is the value we advertise to clients (lower than the real one)
-        UInt32  GetRTSPTimeoutInSecs()  { return fRTSPTimeoutInSecs; }
-        UInt32  GetRTPTimeoutInSecs()   { return fRTPTimeoutInSecs; }
+        UInt32  GetConnectionTimeoutSecs()  { return fConnectionTimeoutInSecs; }
+        UInt32  GetCMSPort()   { return fCMSPort; }
         StrPtrLen*  GetRTSPTimeoutAsString() { return &fRTSPTimeoutString; }
-        
-        //This is the real timeout
-        UInt32  GetRealRTSPTimeoutInSecs(){ return fRealRTSPTimeoutInSecs; }
-        
+
         //-1 means unlimited
         SInt32  GetMaxConnections()         { return fMaximumConnections; }
         SInt32  GetMaxKBitsBandwidth()      { return fMaxBandwidthInKBits; }
@@ -190,15 +187,18 @@ class QTSServerPrefs : public QTSSPrefs
         
         UInt16  GetDefaultStreamQuality()         { return fDefaultStreamQuality; }            
        
-        Bool16 GetAllowGuestDefault()               { return fAllowGuestAuthorizeDefault; }  
+        Bool16 GetAllowGuestDefault()             { return fAllowGuestAuthorizeDefault; }  
+
+		char* GetCMSIP()						  { return this->GetStringPref(qtssPrefsCMSIPAddr); }
         
     private:
 
-        UInt32      fRTSPTimeoutInSecs;
+        UInt32      fConnectionTimeoutInSecs;
         char        fRTSPTimeoutBuf[20];
         StrPtrLen   fRTSPTimeoutString;
-        UInt32      fRealRTSPTimeoutInSecs;
-        UInt32      fRTPTimeoutInSecs;
+
+		char		fCMSIPAddr[20];
+        UInt32      fCMSPort;
         
         SInt32  fMaximumConnections;
         SInt32  fMaxBandwidthInKBits;

@@ -1,11 +1,11 @@
 <CONFIGURATION>
 	<SERVER>
-		<PREF NAME="rtsp_timeout" TYPE="UInt32" >0</PREF>
-		<PREF NAME="real_rtsp_timeout" TYPE="UInt32" >180</PREF>
-		<PREF NAME="rtp_timeout" TYPE="UInt32" >120</PREF>
+		<PREF NAME="connection_timeout" TYPE="UInt32" >0</PREF>
+		<PREF NAME="cms_addr" >cms.easydarwin.org</PREF>
+		<PREF NAME="cms_port" TYPE="UInt32" >120</PREF>
 		<PREF NAME="maximum_connections" TYPE="SInt32" >1000</PREF>
 		<PREF NAME="maximum_bandwidth" TYPE="SInt32" >102400</PREF>
-		<PREF NAME="movie_folder" >c:\Program Files\Darwin Streaming Server\Movies\</PREF>
+		<PREF NAME="movie_folder" >c:\Program Files\EasyCamera\Movies\</PREF>
 		<PREF NAME="bind_ip_addr" >0</PREF>
 		<PREF NAME="break_on_assert" TYPE="Bool16" >false</PREF>
 		<PREF NAME="auto_restart" TYPE="Bool16" >true</PREF>

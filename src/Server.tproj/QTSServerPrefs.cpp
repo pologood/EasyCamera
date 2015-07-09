@@ -87,10 +87,10 @@ char* QTSServerPrefs::sDisable_Thinning_Players[] =
 
 QTSServerPrefs::PrefInfo QTSServerPrefs::sPrefInfo[] =
 {
-    { kDontAllowMultipleValues, "0",        NULL                    },  //rtsp_timeout
-    { kDontAllowMultipleValues, "180",      NULL                    },  //real_rtsp_timeout
-	{ kDontAllowMultipleValues,	"120",		NULL					},	//rtp_timeout
-    { kDontAllowMultipleValues, "1000",     NULL                    },  //maximum_connections
+    { kDontAllowMultipleValues, "0",        NULL                    },  //connection_timeout
+    { kDontAllowMultipleValues, "cms.easydarwin.org",      NULL     },  //cms_addr
+	{ kDontAllowMultipleValues,	"10000",		NULL				},	//cms_port
+    { kDontAllowMultipleValues, "10000",     NULL                   },  //maximum_connections
     { kDontAllowMultipleValues, "102400",   NULL                    },  //maximum_bandwidth
 	{ kDontAllowMultipleValues,	DEFAULTPATHS_MOVIES_DIR, NULL       },	//movie_folder
     { kAllowMultipleValues,     "0",        NULL                    },  //bind_ip_addr
@@ -115,7 +115,7 @@ QTSServerPrefs::PrefInfo QTSServerPrefs::sPrefInfo[] =
 	{ kDontAllowMultipleValues,	"200000",	NULL					},	//max_tcp_buffer_size
     { kDontAllowMultipleValues, ".5",       NULL                    },  //tcp_seconds_to_buffer
     { kDontAllowMultipleValues, "false",    NULL                    },  //do_report_http_connection_ip_address
-    { kDontAllowMultipleValues, "Streaming Server", NULL            },  //default_authorization_realm
+    { kDontAllowMultipleValues, "EasyCamera", NULL					},  //default_authorization_realm
 #ifndef __Win32__
     { kDontAllowMultipleValues, "qtss",     NULL                    },  //run_user_name
     { kDontAllowMultipleValues, "qtss",     NULL                    },  //run_group_name
@@ -173,9 +173,9 @@ QTSServerPrefs::PrefInfo QTSServerPrefs::sPrefInfo[] =
 
 QTSSAttrInfoDict::AttrInfo  QTSServerPrefs::sAttributes[] =
 {   /*fields:   fAttrName, fFuncPtr, fAttrDataType, fAttrPermission */
-    /* 0 */ { "rtsp_timeout",                           NULL,                   qtssAttrDataTypeUInt32,     qtssAttrModeRead | qtssAttrModeWrite },
-    /* 1 */ { "real_rtsp_timeout",                      NULL,                   qtssAttrDataTypeUInt32,     qtssAttrModeRead | qtssAttrModeWrite },
-    /* 2 */ { "rtp_timeout",                            NULL,                   qtssAttrDataTypeUInt32,     qtssAttrModeRead | qtssAttrModeWrite },
+    /* 0 */ { "connection_timeout",                     NULL,                   qtssAttrDataTypeUInt32,     qtssAttrModeRead | qtssAttrModeWrite },
+    /* 1 */ { "cms_addr",								NULL,                   qtssAttrDataTypeCharArray,  qtssAttrModeRead | qtssAttrModeWrite },
+    /* 2 */ { "cms_port",								NULL,                   qtssAttrDataTypeUInt32,     qtssAttrModeRead | qtssAttrModeWrite },
     /* 3 */ { "maximum_connections",                    NULL,                   qtssAttrDataTypeSInt32,     qtssAttrModeRead | qtssAttrModeWrite },
     /* 4 */ { "maximum_bandwidth",                      NULL,                   qtssAttrDataTypeSInt32,     qtssAttrModeRead | qtssAttrModeWrite },
     /* 5 */ { "movie_folder",                           NULL,                   qtssAttrDataTypeCharArray,  qtssAttrModeRead | qtssAttrModeWrite },
@@ -251,10 +251,10 @@ QTSSAttrInfoDict::AttrInfo  QTSServerPrefs::sAttributes[] =
 
 QTSServerPrefs::QTSServerPrefs(XMLPrefsParser* inPrefsSource, Bool16 inWriteMissingPrefs)
 :   QTSSPrefs(inPrefsSource, NULL, QTSSDictionaryMap::GetMap(QTSSDictionaryMap::kPrefsDictIndex), false),
-    fRTSPTimeoutInSecs(0),
+    fConnectionTimeoutInSecs(0),
     fRTSPTimeoutString(fRTSPTimeoutBuf, 0),
-    fRealRTSPTimeoutInSecs(0),
-    fRTPTimeoutInSecs(0),
+
+    fCMSPort(0),
     fMaximumConnections(0),
     fMaxBandwidthInKBits(0),
     fBreakOnAssert(false),
@@ -331,9 +331,10 @@ void QTSServerPrefs::Initialize()
 
 void QTSServerPrefs::SetupAttributes()
 {
-    this->SetVal(qtssPrefsRTSPTimeout,      &fRTSPTimeoutInSecs,        sizeof(fRTSPTimeoutInSecs));
-    this->SetVal(qtssPrefsRealRTSPTimeout,  &fRealRTSPTimeoutInSecs,    sizeof(fRealRTSPTimeoutInSecs));
-    this->SetVal(qtssPrefsRTPTimeout,       &fRTPTimeoutInSecs,         sizeof(fRTPTimeoutInSecs));
+    this->SetVal(qtssPrefsConnectionTimeout,&fConnectionTimeoutInSecs,        sizeof(fConnectionTimeoutInSecs));
+
+	this->SetVal(qtssPrefsCMSIPAddr,		&fCMSIPAddr,				sizeof(fCMSIPAddr));
+    this->SetVal(qtssPrefsCMSPort,			&fCMSPort,					sizeof(fCMSPort));
     this->SetVal(qtssPrefsMaximumConnections,&fMaximumConnections,      sizeof(fMaximumConnections));
     this->SetVal(qtssPrefsMaximumBandwidth, &fMaxBandwidthInKBits,      sizeof(fMaxBandwidthInKBits));
     this->SetVal(qtssPrefsBreakOnAssert,    &fBreakOnAssert,            sizeof(fBreakOnAssert));
