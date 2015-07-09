@@ -242,6 +242,7 @@ void QTSServer::InitModules(QTSS_ServerState inEndState)
 
 void QTSServer::StartTasks()
 {
+	//TODO::在这里创建EasyCamera MsgCenter
     //fRTCPTask = new RTCPTask();
 
     // Start listening
