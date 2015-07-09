@@ -50,9 +50,6 @@
 		<PREF NAME="authentication_scheme" >digest</PREF>
 		<PREF NAME="sdp_file_delete_interval_seconds" TYPE="UInt32" >10</PREF>
 		<PREF NAME="auto_start" TYPE="Bool16" >false</PREF>
-		<PREF NAME="reliable_udp" TYPE="Bool16" >true</PREF>
-		<PREF NAME="reliable_udp_dirs" >\</PREF>
-		<PREF NAME="reliable_udp_printfs" TYPE="Bool16" >false</PREF>
 		<PREF NAME="drop_all_packets_delay" TYPE="SInt32" >2500</PREF>
 		<PREF NAME="thin_all_the_way_delay" TYPE="SInt32" >1500</PREF>
 		<PREF NAME="always_thin_delay" TYPE="SInt32" >750</PREF>

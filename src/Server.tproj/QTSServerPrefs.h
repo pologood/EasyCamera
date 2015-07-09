@@ -111,7 +111,6 @@ class QTSServerPrefs : public QTSSPrefs
         
         //
         // For UDP retransmits
-        UInt32  IsReliableUDPEnabled()          { return fReliableUDP; }
         UInt32  GetMaxRetransmitDelayInMsec()   { return fMaxRetransDelayInMsec; }
         Bool16  IsAckLoggingEnabled()           { return fIsAckLoggingEnabled; }
         UInt32  GetRTCPPollIntervalInMsec()     { return fRTCPPollIntervalInMsec; }
@@ -119,7 +118,6 @@ class QTSServerPrefs : public QTSSPrefs
         UInt32  GetSendIntervalInMsec()         { return fSendIntervalInMsec; }
         UInt32  GetMaxSendAheadTimeInSecs()     { return fMaxSendAheadTimeInSecs; }
         Bool16  IsSlowStartEnabled()            { return fIsSlowStartEnabled; }
-        Bool16  GetReliableUDPPrintfsEnabled()  { return fReliableUDPPrintfs; }
         Bool16  GetRTSPDebugPrintfs()           { return fEnableRTSPDebugPrintfs; }
         Bool16  GetRTSPServerInfoEnabled()      { return fEnableRTSPServerInfo; }
         
@@ -136,10 +134,6 @@ class QTSServerPrefs : public QTSSPrefs
         // force logs to close after each write (true or false)
         Bool16  GetCloseLogsOnWrite()           { return fCloseLogsOnWrite; }
         void    SetCloseLogsOnWrite(Bool16 closeLogsOnWrite);
-        
-        //
-        // Optionally require that reliable UDP content be in certain folders
-        Bool16 IsPathInsideReliableUDPDir(StrPtrLen* inPath);
 
         // Movie folder pref. If the path fits inside the buffer provided,
         // the path is copied into that buffer. Otherwise, a new buffer is allocated
@@ -254,8 +248,6 @@ class QTSServerPrefs : public QTSSPrefs
         QTSS_AuthScheme fAuthScheme;
         UInt32  fsdp_file_delete_interval_seconds;
         Bool16  fAutoStart;
-        Bool16  fReliableUDP;
-        Bool16  fReliableUDPPrintfs;
         Bool16  fEnableRTSPErrMsg;
         Bool16  fEnableRTSPDebugPrintfs;
         Bool16  fEnableRTSPServerInfo;
