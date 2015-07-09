@@ -97,9 +97,8 @@ QTSS_ServerState StartServer(XMLPrefsParser* inPrefsSource, PrefsSource* inMessa
     // re-parse config file
     inPrefsSource->Parse();
 
-    Bool16 createListeners = true;
-    if (qtssShuttingDownState == inInitialState) 
-        createListeners = false;
+	// EasyCamera只对接服务,不做本地监听
+    Bool16 createListeners = false;
     
     sServer->Initialize(inPrefsSource, inMessagesSource, inPortOverride,createListeners);
 

@@ -184,8 +184,6 @@ void    QTSServerInterface::Initialize()
 
 QTSServerInterface::QTSServerInterface()
  :  QTSSDictionary(QTSSDictionaryMap::GetMap(QTSSDictionaryMap::kServerDictIndex), &fMutex),
-    fSocketPool(NULL),
-    fRTPMap(NULL),
     fSrvrPrefs(NULL),
     fSrvrMessages(NULL),
     fServerState(qtssStartingUpState),
@@ -269,7 +267,6 @@ QTSServerInterface::QTSServerInterface()
 
     sServer = this;
 }
-
 
 void QTSServerInterface::LogError(QTSS_ErrorVerbosity inVerbosity, char* inBuffer)
 {

@@ -108,8 +108,6 @@ QTSServer::~QTSServer()
 
     OSThread::SetMainThreadData(NULL);
 
-    delete fRTPMap;
-    delete fSocketPool;
     delete fSrvrMessages;
     delete locker;
     delete serverlocker;
@@ -184,12 +182,11 @@ Bool16 QTSServer::Initialize(XMLPrefsParser* inPrefsSource, PrefsSource* inMessa
     }
     
     if ( fNumListeners == 0 )
-    {   if (createListeners)
+    {  
+		if (createListeners)
             QTSSModuleUtils::LogError(qtssWarningVerbosity, qtssMsgNoPortsSucceeded, 0);
-        return false;
     }
 
-    
     fServerState = qtssStartingUpState;
     return true;
 }
@@ -246,9 +243,7 @@ void QTSServer::InitModules(QTSS_ServerState inEndState)
 void QTSServer::StartTasks()
 {
     //fRTCPTask = new RTCPTask();
-    //fStatsTask = new RTPStatsUpdaterTask();
 
-    //
     // Start listening
     for (UInt32 x = 0; x < fNumListeners; x++)
         fListeners[x]->RequestEvent(EV_RE);

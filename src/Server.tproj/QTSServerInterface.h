@@ -183,15 +183,7 @@ class QTSServerInterface : public QTSSDictionary
         // This object is in fact global, so there is an accessor for it as well.
         
         static QTSServerInterface*  GetServer()         { return sServer; }
-        
-        //Allows you to map RTP session IDs (strings) to actual RTP session objects
-        OSRefTable*         GetRTPSessionMap()          { return fRTPMap; }
-    
-        //Server provides a statically created & bound UDPSocket / Demuxer pair
-        //for each IP address setup to serve RTP. You access those pairs through
-        //this function. This returns a pair pre-bound to the IPAddr specified.
-        UDPSocketPool*      GetSocketPool()             { return fSocketPool; }
-
+            
         QTSServerPrefs*     GetPrefs()                  { return fSrvrPrefs; }
         QTSSMessages*       GetMessages()               { return fSrvrMessages; }
         
@@ -264,15 +256,7 @@ class QTSServerInterface : public QTSSDictionary
         
     protected:
 
-        // Setup by the derived RTSPServer object
-
-        //Sockets are allocated global to the server, and arbitrated through this pool here.
-        //RTCP data is processed completely within the following task.
-        UDPSocketPool*              fSocketPool;
-        
-        // All RTP sessions are put into this map
-        OSRefTable*                 fRTPMap;
-        
+        // Setup by the derived RTSPServer object        
         QTSServerPrefs*             fSrvrPrefs;
         QTSSMessages*               fSrvrMessages;
 
