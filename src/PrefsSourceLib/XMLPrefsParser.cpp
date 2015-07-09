@@ -58,31 +58,6 @@ static char* kTypeAttr = "TYPE";
 
 static char* kFileHeader[] = 
 {
-    "<?xml version =\"1.0\"?>",
-    "<!-- The Document Type Definition (DTD) for the file -->",
-    "<!DOCTYPE CONFIGURATION [",
-    "<!ELEMENT CONFIGURATION (SERVER, MODULE*)>",
-    "<!ELEMENT SERVER (PREF|LIST-PREF|OBJECT|LIST-OBJECT)*>",
-    "<!ELEMENT MODULE (PREF|LIST-PREF|OBJECT|LIST-OBJECT)*>",
-    "<!ATTLIST MODULE",
-    "\tNAME CDATA #REQUIRED>",
-    "<!ELEMENT PREF (#PCDATA)>",
-    "<!ATTLIST PREF",
-    "\tNAME CDATA #REQUIRED",
-    "\tTYPE (UInt8|SInt8|UInt16|SInt16|UInt32|SInt32|UInt64|SInt64|Float32|Float64|Bool16|Bool8|char) \"char\">",
-    "<!ELEMENT LIST-PREF (VALUE*)>",
-    "<!ELEMENT VALUE (#PCDATA)>",
-    "<!ATTLIST LIST-PREF",
-    "\tNAME CDATA #REQUIRED",
-    "\tTYPE  (UInt8|SInt8|UInt16|SInt16|UInt32|SInt32|UInt64|SInt64|Float32|Float64|Bool16|Bool8|char) \"char\">",
-    "<!ELEMENT OBJECT (PREF|LIST-PREF|OBJECT|LIST-OBJECT)*>",
-    "<!ATTLIST OBJECT",
-    "\tNAME CDATA #REQUIRED>",
-    "<!ELEMENT LIST-OBJECT (OBJECT-VALUE*)>",
-    "<!ELEMENT OBJECT-VALUE (PREF|LIST-PREF|OBJECT|LIST-OBJECT)*>",
-    "<!ATTLIST LIST-OBJECT",
-    "\tNAME CDATA #REQUIRED>",
-    "]>",
     NULL
 };
 

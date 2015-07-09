@@ -1,28 +1,3 @@
-<?xml version ="1.0"?>
-<!-- The Document Type Definition (DTD) for the file -->
-<!DOCTYPE CONFIGURATION [
-<!ELEMENT CONFIGURATION (SERVER, MODULE*)>
-<!ELEMENT SERVER (PREF|LIST-PREF|OBJECT|LIST-OBJECT)*>
-<!ELEMENT MODULE (PREF|LIST-PREF|OBJECT|LIST-OBJECT)*>
-<!ATTLIST MODULE
-	NAME CDATA #REQUIRED>
-<!ELEMENT PREF (#PCDATA)>
-<!ATTLIST PREF
-	NAME CDATA #REQUIRED
-	TYPE (UInt8|SInt8|UInt16|SInt16|UInt32|SInt32|UInt64|SInt64|Float32|Float64|Bool16|Bool8|char) "char">
-<!ELEMENT LIST-PREF (VALUE*)>
-<!ELEMENT VALUE (#PCDATA)>
-<!ATTLIST LIST-PREF
-	NAME CDATA #REQUIRED
-	TYPE  (UInt8|SInt8|UInt16|SInt16|UInt32|SInt32|UInt64|SInt64|Float32|Float64|Bool16|Bool8|char) "char">
-<!ELEMENT OBJECT (PREF|LIST-PREF|OBJECT|LIST-OBJECT)*>
-<!ATTLIST OBJECT
-	NAME CDATA #REQUIRED>
-<!ELEMENT LIST-OBJECT (OBJECT-VALUE*)>
-<!ELEMENT OBJECT-VALUE (PREF|LIST-PREF|OBJECT|LIST-OBJECT)*>
-<!ATTLIST LIST-OBJECT
-	NAME CDATA #REQUIRED>
-]>
 <CONFIGURATION>
 	<SERVER>
 		<PREF NAME="rtsp_timeout" TYPE="UInt32" >0</PREF>
@@ -59,9 +34,7 @@
 		<PREF NAME="append_source_addr_in_transport" TYPE="Bool16" >false</PREF>
 		<LIST-PREF NAME="rtsp_port" TYPE="UInt16" >
 			<VALUE>554</VALUE>
-			<VALUE>7070</VALUE>
-			<VALUE>8000</VALUE>
-			<VALUE>8001</VALUE>
+			<VALUE>10010</VALUE>
 		</LIST-PREF>
 		<PREF NAME="max_retransmit_delay" TYPE="UInt32" >500</PREF>
 		<PREF NAME="small_window_size" TYPE="UInt32" >24</PREF>
@@ -117,19 +90,8 @@
 		<PREF NAME="enable_3gpp_protocol_rate_adaptation" TYPE="Bool16" >true</PREF>
 		<PREF NAME="3gpp_protocol_rate_adaptation_report_frequency" TYPE="UInt16" >1</PREF>
 		<PREF NAME="default_stream_quality" TYPE="UInt16" >0</PREF>
-		<PREF NAME="player_requires_rtp_start_time_adjust" >Real</PREF>
-		<PREF NAME="enable_3gpp_debug_printfs" TYPE="Bool16" >false</PREF>
-		<PREF NAME="enable_udp_monitor_stream" TYPE="Bool16" >false</PREF>
-		<PREF NAME="udp_monitor_video_port" TYPE="UInt16" >5002</PREF>
-		<PREF NAME="udp_monitor_audio_port" TYPE="UInt16" >5004</PREF>
-		<PREF NAME="udp_monitor_dest_ip" >127.0.0.1</PREF>
-		<PREF NAME="udp_monitor_src_ip" >0.0.0.0</PREF>
 		<PREF NAME="enable_allow_guest_default" TYPE="Bool16" >true</PREF>
 		<PREF NAME="run_num_rtsp_threads" TYPE="UInt32" >1</PREF>
-		<PREF NAME="player_requires_disable_3gpp_rate_adapt" ></PREF>
-		<PREF NAME="player_requires_3gpp_target_time" ></PREF>
-		<PREF NAME="3gpp_target_time_milliseconds" TYPE="UInt32" >3000</PREF>
-		<PREF NAME="player_requires_disable_thinning" ></PREF>
 	</SERVER>
 	<MODULE NAME="QTSSErrorLogModule" ></MODULE>
 </CONFIGURATION>

@@ -816,21 +816,11 @@ enum
     qtssPrefsEnable3gppProtocolRateAdapt    = 74,   // "enable_3gpp_protocol_rate_adaptation //Bool16 //enable or disable 3gpp release 6 rate adaptation featues
     qtssPrefs3gppRateAdaptReportFrequency   = 75,   // "3gpp_protocol_rate_adaptation_report_frequency //UInt16 //requested rate adaptation rtcp report frequency
     qtssPrefsDefaultStreamQuality           = 76,   // "default_stream_quality //UInt16 //0 is all day and best quality. Higher values are worse maximum depends on the media and the media module
-    qtssPrefsPlayersReqRTPStartTimeAdjust   = 77,   // "player_requires_rtp_start_time_adjust" //Char Array //name of players to match against the player's user agent header
-    qtssPrefsEnable3gppDebugPrintfs         = 78,   // "enable_3gpp_debug_printfs" //Boo1l6 // 3gpp rate adaptation state and debugging printfs.
-    qtssPrefsEnableUDPMonitor               = 79,   // "enable_udp_monitor_stream" //Boo1l6 // reflect all udp streams to the monitor ports, use an sdp to view
-    qtssPrefsUDPMonitorAudioPort            = 80,   // "udp_monitor_video_port" //UInt16 // localhost destination port of reflected stream
-    qtssPrefsUDPMonitorVideoPort            = 81,   // "udp_monitor_audio_port" //UInt16 // localhost destination port of reflected stream
-    qtssPrefsUDPMonitorDestIPAddr           = 82,   // "udp_monitor_dest_ip"    //char array    //IP address the server should send RTP monitor reflected streams. 
-    qtssPrefsUDPMonitorSourceIPAddr         = 83,   // "udp_monitor_src_ip"    //char array    //client IP address the server monitor should reflect. *.*.*.* means all client addresses.
-    qtssPrefsEnableAllowGuestDefault        = 84,   // "enable_allow_guest_authorize_default" //Boo1l6 // server hint to access modules to allow guest access as the default (can be overriden in a qtaccess file or other means)
-    qtssPrefsNumRTSPThreads                 = 85,   // "run_num_rtsp_threads" //UInt32 // if value is non-zero, the server will  create that many task threads; otherwise a single thread will be created.
-	qtssPrefsPlayersReqDisable3gppRateAdapt = 86,	// "player_requires_disable_3gpp_rate_adapt" //Char array //name of players to match against the player's user agent header
-    qtssPrefsPlayersReq3GPPTargetTime 		= 87,   // "player_requires_3gpp_target_time" //Char array //name of player to set the target time for
-    qtssPrefs3GPPTargetTime  				= 88,   // "3gpp_target_time_milliseconds" //UInt32 // milliseconds set as the target time.
-    qtssPrefsPlayersReqDisableThinning 		= 89,   // "player_requires_disable_thinning" //Char array //name of player to set the target time for
+
+	qtssPrefsEnableAllowGuestDefault        = 77,   // "enable_allow_guest_authorize_default" //Boo1l6 // server hint to access modules to allow guest access as the default (can be overriden in a qtaccess file or other means)
+    qtssPrefsNumRTSPThreads                 = 78,   // "run_num_rtsp_threads" //UInt32 // if value is non-zero, the server will  create that many task threads; otherwise a single thread will be created.
 	
-    qtssPrefsNumParams                      = 90
+    qtssPrefsNumParams                      = 79
 };
 
 typedef UInt32 QTSS_PrefsAttributes;

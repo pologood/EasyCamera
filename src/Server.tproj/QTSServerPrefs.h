@@ -197,19 +197,9 @@ class QTSServerPrefs : public QTSSPrefs
         Bool16  Get3GPPEnabled()                  { return f3gppProtocolEnabled; }
         Bool16  Get3GPPRateAdaptationEnabled()    { return f3gppProtocolRateAdaptationEnabled; }
         UInt16  Get3GPPRateAdaptReportFrequency() { return f3gppProtocolRateAdaptationReportFrequency; }
-        UInt16  GetDefaultStreamQuality()         { return fDefaultStreamQuality; }       
-        Bool16  Get3GPPDebugPrintfs()             { return f3gppDebugPrintfsEnabled; }
-        Bool16  GetUDPMonitorEnabled()            { return fUDPMonitorEnabled; }
-        UInt16  GetUDPMonitorVideoPort()          { return fUDPMonitorVideoPort; }       
-        UInt16  GetUDPMonitorAudioPort()          { return fUDPMonitorAudioPort; }       
-            
-        char* GetMonitorDestIP()    { return this->GetStringPref(qtssPrefsUDPMonitorDestIPAddr); }
-        
-        char* GetMonitorSrcIP()     { return this->GetStringPref(qtssPrefsUDPMonitorSourceIPAddr); }
+        UInt16  GetDefaultStreamQuality()         { return fDefaultStreamQuality; }            
        
-        Bool16 GetAllowGuestDefault()               { return fAllowGuestAuthorizeDefault; }
-        
-        UInt32 Get3GPPForcedTargetTime()            {return f3GPPRateAdaptTargetTime; }
+        Bool16 GetAllowGuestDefault()               { return fAllowGuestAuthorizeDefault; }  
         
     private:
 
@@ -274,7 +264,6 @@ class QTSServerPrefs : public QTSSPrefs
         Bool16  fEnableRTSPServerInfo;
         UInt32  fNumThreads;
         UInt32  fNumRTSPThreads;
-        UInt32 f3GPPRateAdaptTargetTime;
         
         Bool16  fEnableMonitorStatsFile;
         UInt32  fStatsFileIntervalSeconds;
@@ -291,12 +280,6 @@ class QTSServerPrefs : public QTSSPrefs
         Bool16 f3gppProtocolRateAdaptationEnabled;
         UInt16 f3gppProtocolRateAdaptationReportFrequency;
         UInt16 fDefaultStreamQuality;
-        Bool16 f3gppDebugPrintfsEnabled;
-        Bool16 fUDPMonitorEnabled;
-        UInt16 fUDPMonitorVideoPort;    
-        UInt16 fUDPMonitorAudioPort;     
-        char   fUDPMonitorDestAddr[20];
-        char   fUDPMonitorSrcAddr[20];
         Bool16 fAllowGuestAuthorizeDefault;
 
         enum //fPacketHeaderPrintfOptions
@@ -341,7 +324,6 @@ class QTSServerPrefs : public QTSSPrefs
         static char*    sAdjust_Bandwidth_Players[];
         static char*    sNo_Adjust_Pause_Time_Players[];
         static char*    sNo_Pause_Time_Adjustment_Players[];
-        static char*    sRTP_Start_Time_Players[];
         static char*    sDisable_Rate_Adapt_Players[];
         static char*    sFixed_Target_Time_Players[];
         static char*    sDisable_Thinning_Players[];
