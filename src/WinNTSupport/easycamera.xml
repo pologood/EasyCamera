@@ -73,22 +73,6 @@
 		<PREF NAME="pid_file" >EasyDarwin.pid</PREF>
 		<PREF NAME="force_logs_close_on_write" TYPE="Bool16" >false</PREF>
 		<PREF NAME="disable_thinning" TYPE="Bool16" >false</PREF>
-		<LIST-PREF NAME="player_requires_rtp_header_info" >
-			<VALUE>Nokia</VALUE>
-			<VALUE>Real</VALUE>
-		</LIST-PREF>
-		<LIST-PREF NAME="player_requires_bandwidth_adjustment" >
-			<VALUE>Nokia</VALUE>
-			<VALUE>Real</VALUE>
-		</LIST-PREF>
-		<LIST-PREF NAME="player_requires_no_pause_time_adjustment" >
-			<VALUE>Nokia</VALUE>
-			<VALUE>Real</VALUE>
-			<VALUE>PVPlayer</VALUE>
-		</LIST-PREF>
-		<PREF NAME="enable_3gpp_protocol" TYPE="Bool16" >true</PREF>
-		<PREF NAME="enable_3gpp_protocol_rate_adaptation" TYPE="Bool16" >true</PREF>
-		<PREF NAME="3gpp_protocol_rate_adaptation_report_frequency" TYPE="UInt16" >1</PREF>
 		<PREF NAME="default_stream_quality" TYPE="UInt16" >0</PREF>
 		<PREF NAME="enable_allow_guest_default" TYPE="Bool16" >true</PREF>
 		<PREF NAME="run_num_rtsp_threads" TYPE="UInt32" >1</PREF>

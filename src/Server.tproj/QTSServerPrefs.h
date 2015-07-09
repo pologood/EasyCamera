@@ -194,9 +194,6 @@ class QTSServerPrefs : public QTSSPrefs
         
         Bool16  GetDisableThinning()              { return fDisableThinning; }
         
-        Bool16  Get3GPPEnabled()                  { return f3gppProtocolEnabled; }
-        Bool16  Get3GPPRateAdaptationEnabled()    { return f3gppProtocolRateAdaptationEnabled; }
-        UInt16  Get3GPPRateAdaptReportFrequency() { return f3gppProtocolRateAdaptationReportFrequency; }
         UInt16  GetDefaultStreamQuality()         { return fDefaultStreamQuality; }            
        
         Bool16 GetAllowGuestDefault()               { return fAllowGuestAuthorizeDefault; }  
@@ -276,9 +273,6 @@ class QTSServerPrefs : public QTSSPrefs
         
         Bool16 fDisableThinning;
         
-        Bool16 f3gppProtocolEnabled;
-        Bool16 f3gppProtocolRateAdaptationEnabled;
-        UInt16 f3gppProtocolRateAdaptationReportFrequency;
         UInt16 fDefaultStreamQuality;
         Bool16 fAllowGuestAuthorizeDefault;
 

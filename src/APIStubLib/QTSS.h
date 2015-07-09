@@ -809,18 +809,13 @@ enum
     qtssPrefsPidFile                        = 67,    //"pid_file" //Char Array //path to pid file
     qtssPrefsCloseLogsOnWrite               = 68,   // "force_logs_close_on_write" //Bool16 // force log files to close after each write.
     qtssPrefsDisableThinning                = 69,   // "disable_thinning" //Bool16 // Usually used for performance testing. Turn off stream thinning from packet loss or stream lateness.
-    qtssPrefsPlayersReqRTPHeader            = 70,   // "player_requires_rtp_header_info" //Char array //name of player to match against the player's user agent header
-    qtssPrefsPlayersReqBandAdjust           = 71,   // "player_requires_bandwidth_adjustment //Char array //name of player to match against the player's user agent header
-    qtssPrefsPlayersReqNoPauseTimeAdjust    = 72,   // "player_requires_no_pause_time_adjustment //Char array //name of player to match against the player's user agent header
-    qtssPrefsEnable3gppProtocol             = 73,   // "enable_3gpp_protocol //Bool16 //enable or disable 3gpp release 6 protocol support featues
-    qtssPrefsEnable3gppProtocolRateAdapt    = 74,   // "enable_3gpp_protocol_rate_adaptation //Bool16 //enable or disable 3gpp release 6 rate adaptation featues
-    qtssPrefs3gppRateAdaptReportFrequency   = 75,   // "3gpp_protocol_rate_adaptation_report_frequency //UInt16 //requested rate adaptation rtcp report frequency
-    qtssPrefsDefaultStreamQuality           = 76,   // "default_stream_quality //UInt16 //0 is all day and best quality. Higher values are worse maximum depends on the media and the media module
+    
+	qtssPrefsDefaultStreamQuality           = 70,   // "default_stream_quality //UInt16 //0 is all day and best quality. Higher values are worse maximum depends on the media and the media module
 
-	qtssPrefsEnableAllowGuestDefault        = 77,   // "enable_allow_guest_authorize_default" //Boo1l6 // server hint to access modules to allow guest access as the default (can be overriden in a qtaccess file or other means)
-    qtssPrefsNumRTSPThreads                 = 78,   // "run_num_rtsp_threads" //UInt32 // if value is non-zero, the server will  create that many task threads; otherwise a single thread will be created.
+	qtssPrefsEnableAllowGuestDefault        = 71,   // "enable_allow_guest_authorize_default" //Boo1l6 // server hint to access modules to allow guest access as the default (can be overriden in a qtaccess file or other means)
+    qtssPrefsNumRTSPThreads                 = 72,   // "run_num_rtsp_threads" //UInt32 // if value is non-zero, the server will  create that many task threads; otherwise a single thread will be created.
 	
-    qtssPrefsNumParams                      = 79
+    qtssPrefsNumParams                      = 73
 };
 
 typedef UInt32 QTSS_PrefsAttributes;

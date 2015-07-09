@@ -166,12 +166,6 @@ QTSServerPrefs::PrefInfo QTSServerPrefs::sPrefInfo[] =
     { kDontAllowMultipleValues, DEFAULTPATHS_PID_DIR PLATFORM_SERVER_BIN_NAME ".pid",	NULL	},	//pid_file
     { kDontAllowMultipleValues, "false",    NULL                    },   //force_logs_close_on_write
     { kDontAllowMultipleValues, "false",    NULL                    },   //disable_thinning
-    { kAllowMultipleValues,     "Nokia",    sRTP_Header_Players     },  //player_requires_rtp_header_info
-    { kAllowMultipleValues,     "Nokia",    sAdjust_Bandwidth_Players     },  //player_requires_bandwidth_adjustment
-    { kAllowMultipleValues,     "Nokia",    sNo_Pause_Time_Adjustment_Players     },  //player_requires_no_pause_time_adjustment
-    { kDontAllowMultipleValues, "true",     NULL                     }, //enable_3gpp_protocol
-    { kDontAllowMultipleValues, "true",     NULL                     }, //enable_3gpp_protocol_rate_adaptation
-    { kDontAllowMultipleValues, "1",        NULL                     }, //3gpp_protocol_rate_adaptation_report_frequency
 	{ kDontAllowMultipleValues, "0",        NULL                     }, //default_stream_quality
     { kDontAllowMultipleValues, "true",     NULL                     }, //enable_allow_guest_default
     { kDontAllowMultipleValues, "1",        NULL                     }  //run_num_rtsp_threads
@@ -252,15 +246,9 @@ QTSSAttrInfoDict::AttrInfo  QTSServerPrefs::sAttributes[] =
 	/* 67 */ { "pid_file",								NULL,					qtssAttrDataTypeCharArray,	qtssAttrModeRead | qtssAttrModeWrite },
     /* 68 */ { "force_logs_close_on_write",             NULL,                   qtssAttrDataTypeBool16,     qtssAttrModeRead | qtssAttrModeWrite },
     /* 69 */ { "disable_thinning",                      NULL,                   qtssAttrDataTypeBool16,     qtssAttrModeRead | qtssAttrModeWrite },
-	/* 70 */ { "player_requires_rtp_header_info",		NULL,					qtssAttrDataTypeCharArray,	qtssAttrModeRead | qtssAttrModeWrite },
-	/* 71 */ { "player_requires_bandwidth_adjustment",	NULL,					qtssAttrDataTypeCharArray,	qtssAttrModeRead | qtssAttrModeWrite },
-	/* 72 */ { "player_requires_no_pause_time_adjustment",	NULL,				qtssAttrDataTypeCharArray,	qtssAttrModeRead | qtssAttrModeWrite },
-    /* 73 */ { "enable_3gpp_protocol",                  NULL,                   qtssAttrDataTypeBool16,     qtssAttrModeRead | qtssAttrModeWrite },
-    /* 74 */ { "enable_3gpp_protocol_rate_adaptation",  NULL,                   qtssAttrDataTypeBool16,     qtssAttrModeRead | qtssAttrModeWrite },
-    /* 75 */ { "3gpp_protocol_rate_adaptation_report_frequency",  NULL,         qtssAttrDataTypeUInt16,     qtssAttrModeRead | qtssAttrModeWrite },
-    /* 76 */ { "default_stream_quality",                NULL,                   qtssAttrDataTypeUInt16,     qtssAttrModeRead | qtssAttrModeWrite },
-    /* 77 */ { "enable_allow_guest_default",  NULL,                             qtssAttrDataTypeBool16,     qtssAttrModeRead | qtssAttrModeWrite },
-    /* 78 */ { "run_num_rtsp_threads",  NULL,                                   qtssAttrDataTypeUInt32,     qtssAttrModeRead | qtssAttrModeWrite }
+	/* 70 */ { "default_stream_quality",                NULL,                   qtssAttrDataTypeUInt16,     qtssAttrModeRead | qtssAttrModeWrite },
+    /* 71 */ { "enable_allow_guest_default",  NULL,                             qtssAttrDataTypeBool16,     qtssAttrModeRead | qtssAttrModeWrite },
+    /* 72 */ { "run_num_rtsp_threads",  NULL,                                   qtssAttrDataTypeUInt32,     qtssAttrModeRead | qtssAttrModeWrite }
     
 
 };
@@ -332,9 +320,6 @@ QTSServerPrefs::QTSServerPrefs(XMLPrefsParser* inPrefsSource, Bool16 inWriteMiss
     fCloseLogsOnWrite(false),
     fDisableThinning(false),
 	//
-	f3gppProtocolEnabled(true),
-	f3gppProtocolRateAdaptationEnabled(true),
-	f3gppProtocolRateAdaptationReportFrequency(1),
 	fDefaultStreamQuality(0),
 	fAllowGuestAuthorizeDefault(true)
 {
@@ -415,11 +400,8 @@ void QTSServerPrefs::SetupAttributes()
     this->SetVal(qtssPrefsCloseLogsOnWrite,             &fCloseLogsOnWrite,             sizeof(fCloseLogsOnWrite));
 	this->SetVal(qtssPrefsOverbufferRate,				&fOverbufferRate,				sizeof(fOverbufferRate));
     this->SetVal(qtssPrefsDisableThinning,              &fDisableThinning,              sizeof(fDisableThinning));
-	
-    this->SetVal(qtssPrefsEnable3gppProtocol,           &f3gppProtocolEnabled,          sizeof(f3gppProtocolEnabled));
-    this->SetVal(qtssPrefsEnable3gppProtocolRateAdapt,  &f3gppProtocolRateAdaptationEnabled,            sizeof(f3gppProtocolRateAdaptationEnabled));
-    this->SetVal(qtssPrefs3gppRateAdaptReportFrequency, &f3gppProtocolRateAdaptationReportFrequency,    sizeof(f3gppProtocolRateAdaptationReportFrequency)); //3gpp_protocol_rate_adaptation_report_frequency
-    this->SetVal(qtssPrefsDefaultStreamQuality, &fDefaultStreamQuality,                 sizeof(fDefaultStreamQuality)); //default_stream_quality
+
+	this->SetVal(qtssPrefsDefaultStreamQuality,			&fDefaultStreamQuality,                 sizeof(fDefaultStreamQuality)); //default_stream_quality
 	this->SetVal(qtssPrefsEnableAllowGuestDefault,      &fAllowGuestAuthorizeDefault,   sizeof(fAllowGuestAuthorizeDefault)); //enable_allow_guest_authorize_default
     this->SetVal(qtssPrefsNumRTSPThreads,               &fNumRTSPThreads,               sizeof(fNumRTSPThreads));
     
