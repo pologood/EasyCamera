@@ -245,6 +245,10 @@ void QTSServer::StartTasks()
 	//TODO::在这里创建EasyCamera MsgCenter
     //fRTCPTask = new RTCPTask();
 
+	char* cmsIP = QTSServerInterface::GetServer()->GetPrefs()->GetCMSIP();
+	UInt32 cmsPort = QTSServerInterface::GetServer()->GetPrefs()->GetCMSPort();
+	qtss_printf("Login CMS:%s:%d \n", cmsIP, cmsPort);
+
     // Start listening
     for (UInt32 x = 0; x < fNumListeners; x++)
         fListeners[x]->RequestEvent(EV_RE);
