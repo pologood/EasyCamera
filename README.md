@@ -8,9 +8,10 @@ EasyCamera并不是做摄像机硬件方案，我们是在硬件方案商基础�
 
 EasyCamera包含:
 
-- **SDk** 摄像机SDK调用示例
+- **SDK** 摄像机SDK调用示例
 - EasyCamera开源程序及相关工具
 - 摄像机开发方法
+- EasyDarwin流媒体平台:https://github.com/EasyDarwin/EasyDarwin
 
 ### 获取更多信息 ###
 
