@@ -37,9 +37,9 @@
 
 #include "QTSServerInterface.h"
 #include "Task.h"
-#include "EasyDeviceInterface.h"
+#include "EasyDarwinCMSAPI.h"
 
-using namespace EasyDSS::libEDClient;
+using namespace EasyDarwin::libEasyCMS;
 
 class RTSPListenerSocket;
 
@@ -145,7 +145,7 @@ class QTSServer : public QTSServerInterface
 #ifndef __Win32__
         static pid_t            sMainPid;
 #endif
-		EasyDeviceInterface *fDevice;
+		EasyDarwinCMSAPI *fDevice;
                 
         friend class RTPSocketPool;
 };

@@ -256,11 +256,46 @@ void* OSThread::_Entry(void *inThread)  //static
     theThread->fThreadID = (UInt32)cthread_self();
     cthread_set_data(cthread_self(), (any_t)theThread);
 #endif
+    theThread->SwitchPersonality();
     //
     // Run the thread
     theThread->Entry();
     return NULL;
 }
+
+
+Bool16  OSThread::SwitchPersonality()
+{
+#if __linux__
+   if (::strlen(sGroup) > 0)
+    {
+        struct group* gr = ::getgrnam(sGroup);
+        if (gr == NULL || ::setgid(gr->gr_gid) == -1)
+        {
+            //qtss_printf("thread %"_U32BITARG_" setgid  to group=%s FAILED \n", (UInt32) this, sGroup);
+            return false;
+        }
+        
+        //qtss_printf("thread %"_U32BITARG_" setgid  to group=%s \n", (UInt32) this, sGroup);
+    }
+    
+        
+    if (::strlen(sUser) > 0)
+    {
+        struct passwd* pw = ::getpwnam(sUser);
+        if (pw == NULL || ::setuid(pw->pw_uid) == -1)
+        {
+            //qtss_printf("thread %"_U32BITARG_" setuid  to user=%s FAILED \n", (UInt32) this, sUser);
+            return false;
+        }
+
+        //qtss_printf("thread %"_U32BITARG_" setuid  to user=%s \n", (UInt32) this, sUser);
+   }
+#endif
+
+   return true;
+}
+
 
 OSThread*   OSThread::GetCurrent()
 {
