@@ -248,7 +248,9 @@ void QTSServer::StartTasks()
 	char* cmsIP = QTSServerInterface::GetServer()->GetPrefs()->GetCMSIP();
 	UInt32 cmsPort = QTSServerInterface::GetServer()->GetPrefs()->GetCMSPort();
 	qtss_printf("Login CMS:%s:%d \n", cmsIP, cmsPort);
-
+	
+	fDevice = new EasyDeviceInterface("127.0.0.1", 5060, "Serial001", "admin", "admin");
+	fDevice->Login(cmsIP, cmsPort, "Serial001", "admin");
     // Start listening
     for (UInt32 x = 0; x < fNumListeners; x++)
         fListeners[x]->RequestEvent(EV_RE);

@@ -37,6 +37,9 @@
 
 #include "QTSServerInterface.h"
 #include "Task.h"
+#include "EasyDeviceInterface.h"
+
+using namespace EasyDSS::libEDClient;
 
 class RTSPListenerSocket;
 
@@ -142,7 +145,7 @@ class QTSServer : public QTSServerInterface
 #ifndef __Win32__
         static pid_t            sMainPid;
 #endif
-
+		EasyDeviceInterface *fDevice;
                 
         friend class RTPSocketPool;
 };
