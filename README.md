@@ -12,7 +12,7 @@ EasyCamera包含:
 - EasyDarwin流媒体平台:https://github.com/EasyDarwin/EasyDarwin
 
 ### 系统架构
-![](http://www.easydarwin.org/skin/easydarwin/images/easydarwin_architecture.png)
+![](http://www.easydarwin.org/skin/easydarwin/images/architecture.png)
 
 ### 获取更多信息 ###
 
