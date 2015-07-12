@@ -14,8 +14,6 @@ EasyCamera包含:
 ### 系统架构
 ![](http://www.easydarwin.org/skin/easydarwin/images/easydarwin_architecture.png)
 
-
-
 ### 获取更多信息 ###
 
 摄像机硬件购买地址：http://easydarwin.taobao.com/
