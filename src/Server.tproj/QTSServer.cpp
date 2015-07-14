@@ -112,7 +112,7 @@ QTSServer::~QTSServer()
     delete locker;
     delete serverlocker;
     delete fSrvrPrefs;
-	if(fDevice) delete fDevice;
+	//if(fDevice) delete fDevice;
 }
 
 Bool16 QTSServer::Initialize(XMLPrefsParser* inPrefsSource, PrefsSource* inMessagesSource, UInt16 inPortOverride, Bool16 createListeners)
@@ -189,7 +189,7 @@ Bool16 QTSServer::Initialize(XMLPrefsParser* inPrefsSource, PrefsSource* inMessa
     }
 
     fServerState = qtssStartingUpState;
-	fDevice = NULL;
+	//fDevice = NULL;
     return true;
 }
 
