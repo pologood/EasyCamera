@@ -249,7 +249,8 @@ void QTSServer::StartTasks()
 
 	char* cmsIP = QTSServerInterface::GetServer()->GetPrefs()->GetCMSIP();
 	UInt32 cmsPort = QTSServerInterface::GetServer()->GetPrefs()->GetCMSPort();
-	qtss_printf("Login CMS:%s:%d \n", cmsIP, cmsPort);
+	char* serial = QTSServerInterface::GetServer()->GetPrefs()->GetDeviceSerialNumber();
+	qtss_printf("Device:%s Login CMS:%s:%d \n",serial, cmsIP, cmsPort);
 	
 	//fDevice = new EasyDarwinCMSAPI();
 	//fDevice->Login(cmsIP, cmsPort, "Serial001", "admin");

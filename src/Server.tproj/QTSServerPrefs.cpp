@@ -51,7 +51,7 @@ QTSServerPrefs::PrefInfo QTSServerPrefs::sPrefInfo[] =
 	{ kDontAllowMultipleValues,	"10000",		NULL				},	//cms_port
     { kDontAllowMultipleValues, "10000",     NULL                   },  //maximum_connections
     { kDontAllowMultipleValues, "102400",   NULL                    },  //maximum_bandwidth
-	{ kDontAllowMultipleValues,	DEFAULTPATHS_MOVIES_DIR, NULL       },	//movie_folder
+	{ kDontAllowMultipleValues,	"000000000000", NULL				},	//serial_number
     { kAllowMultipleValues,     "0",        NULL                    },  //bind_ip_addr
     { kDontAllowMultipleValues, "false",    NULL                    },  //break_on_assert
     { kDontAllowMultipleValues, "true",     NULL                    },  //auto_restart
@@ -137,7 +137,7 @@ QTSSAttrInfoDict::AttrInfo  QTSServerPrefs::sAttributes[] =
     /* 2 */ { "cms_port",								NULL,                   qtssAttrDataTypeUInt32,     qtssAttrModeRead | qtssAttrModeWrite },
     /* 3 */ { "maximum_connections",                    NULL,                   qtssAttrDataTypeSInt32,     qtssAttrModeRead | qtssAttrModeWrite },
     /* 4 */ { "maximum_bandwidth",                      NULL,                   qtssAttrDataTypeSInt32,     qtssAttrModeRead | qtssAttrModeWrite },
-    /* 5 */ { "movie_folder",                           NULL,                   qtssAttrDataTypeCharArray,  qtssAttrModeRead | qtssAttrModeWrite },
+    /* 5 */ { "serial_number",                           NULL,                   qtssAttrDataTypeCharArray,  qtssAttrModeRead | qtssAttrModeWrite },
     /* 6 */ { "bind_ip_addr",                           NULL,                   qtssAttrDataTypeCharArray,  qtssAttrModeRead | qtssAttrModeWrite },
     /* 7 */ { "break_on_assert",                        NULL,                   qtssAttrDataTypeBool16,     qtssAttrModeRead | qtssAttrModeWrite },
     /* 8 */ { "auto_restart",                           NULL,                   qtssAttrDataTypeBool16,     qtssAttrModeRead | qtssAttrModeWrite },
@@ -503,27 +503,6 @@ void    QTSServerPrefs::UpdateAuthScheme()
         fAuthScheme = qtssAuthBasic;
     else if (theAuthScheme->Equal(sDigestAuthScheme))
         fAuthScheme = qtssAuthDigest;
-}
-
-char*   QTSServerPrefs::GetMovieFolder(char* inBuffer, UInt32* ioLen)
-{
-    OSMutexLocker locker(&fPrefsMutex);
-
-    // Get the movie folder attribute
-    StrPtrLen* theMovieFolder = this->GetValue(qtssPrefsMovieFolder);
-
-    // If the movie folder path fits inside the provided buffer, copy it there
-    if (theMovieFolder->Len < *ioLen)
-        ::memcpy(inBuffer, theMovieFolder->Ptr, theMovieFolder->Len);
-    else
-    {
-        // Otherwise, allocate a buffer to store the path
-        inBuffer = NEW char[theMovieFolder->Len + 2];
-        ::memcpy(inBuffer, theMovieFolder->Ptr, theMovieFolder->Len);
-    }
-    inBuffer[theMovieFolder->Len] = 0;
-    *ioLen = theMovieFolder->Len;
-    return inBuffer;
 }
 
 void QTSServerPrefs::UpdatePrintfOptions()
