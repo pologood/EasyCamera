@@ -856,8 +856,6 @@ void QTSSDictionaryMap::Initialize()
     sDictionaryMaps[kPrefsDictIndex]        = new QTSSDictionaryMap(qtssPrefsNumParams, QTSSDictionaryMap::kInstanceAttrsAllowed | QTSSDictionaryMap::kCompleteFunctionsAllowed);
     sDictionaryMaps[kTextMessagesDictIndex] = new QTSSDictionaryMap(qtssMsgNumParams);
     sDictionaryMaps[kServiceDictIndex]      = new QTSSDictionaryMap(0);
-    sDictionaryMaps[kRTPStreamDictIndex]    = new QTSSDictionaryMap(qtssRTPStrNumParams);
-	sDictionaryMaps[kClientSessionDictIndex]= new QTSSDictionaryMap(qtssCliSesNumParams, QTSSDictionaryMap::kCompleteFunctionsAllowed);
     sDictionaryMaps[kRTSPSessionDictIndex]  = new QTSSDictionaryMap(qtssRTSPSesNumParams);
     sDictionaryMaps[kRTSPRequestDictIndex]  = new QTSSDictionaryMap(qtssRTSPReqNumParams);
     sDictionaryMaps[kRTSPHeaderDictIndex]   = new QTSSDictionaryMap(qtssNumHeaders);
@@ -866,10 +864,6 @@ void QTSSDictionaryMap::Initialize()
     sDictionaryMaps[kModulePrefsDictIndex]  = new QTSSDictionaryMap(0, QTSSDictionaryMap::kInstanceAttrsAllowed | QTSSDictionaryMap::kCompleteFunctionsAllowed);
     sDictionaryMaps[kQTSSUserProfileDictIndex] = new QTSSDictionaryMap(qtssUserNumParams);
     sDictionaryMaps[kQTSSConnectedUserDictIndex] = new QTSSDictionaryMap(qtssConnectionNumParams);
-    sDictionaryMaps[k3GPPRequestDictIndex] = new QTSSDictionaryMap(qtss3GPPRequestNumParams);
-    sDictionaryMaps[k3GPPStreamDictIndex] = new QTSSDictionaryMap(qtss3GPPStreamNumParams);
-    sDictionaryMaps[k3GPPClientSessionDictIndex] = new QTSSDictionaryMap(qtss3GPPCliSesNumParams);
-    sDictionaryMaps[k3GPPRTSPSessionDictIndex] = new QTSSDictionaryMap(qtss3GPPRTSPSessNumParams);
 
 }
 
@@ -1112,8 +1106,6 @@ UInt32  QTSSDictionaryMap::GetMapIndex(QTSS_ObjectType inType)
      
      switch (inType)
      {
-        case qtssRTPStreamObjectType:       return kRTPStreamDictIndex;
-        case qtssClientSessionObjectType:   return kClientSessionDictIndex;
         case qtssRTSPSessionObjectType:     return kRTSPSessionDictIndex;
         case qtssRTSPRequestObjectType:     return kRTSPRequestDictIndex;
         case qtssRTSPHeaderObjectType:      return kRTSPHeaderDictIndex;
@@ -1126,12 +1118,6 @@ UInt32  QTSSDictionaryMap::GetMapIndex(QTSS_ObjectType inType)
         case qtssAttrInfoObjectType:        return kAttrInfoDictIndex;
         case qtssUserProfileObjectType:     return kQTSSUserProfileDictIndex;
         case qtssConnectedUserObjectType:   return kQTSSConnectedUserDictIndex;
-        
-        case qtss3GPPStreamObjectType:          return k3GPPStreamDictIndex;
-        case qtss3GPPClientSessionObjectType:   return k3GPPClientSessionDictIndex;
-        case qtss3GPPRTSPObjectType:            return k3GPPRTSPSessionDictIndex;
-        case qtss3GPPRequestObjectType:         return k3GPPRequestDictIndex;
- 
        
         default:                            return kIllegalDictionary;
      }
