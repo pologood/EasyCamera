@@ -47,7 +47,7 @@
 QTSServerPrefs::PrefInfo QTSServerPrefs::sPrefInfo[] =
 {
     { kDontAllowMultipleValues, "0",        NULL                    },  //connection_timeout
-    { kDontAllowMultipleValues, "cms.easydarwin.org",      NULL     },  //cms_addr
+    { kDontAllowMultipleValues, "www.easydarwin.org",      NULL     },  //cms_addr
 	{ kDontAllowMultipleValues,	"10000",		NULL				},	//cms_port
     { kDontAllowMultipleValues, "10000",     NULL                   },  //maximum_connections
     { kDontAllowMultipleValues, "102400",   NULL                    },  //maximum_bandwidth

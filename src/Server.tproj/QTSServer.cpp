@@ -245,7 +245,6 @@ void QTSServer::InitModules(QTSS_ServerState inEndState)
 void QTSServer::StartTasks()
 {
 	//TODO::在这里创建EasyCamera MsgCenter
-    //fRTCPTask = new RTCPTask();
 
 	char* cmsIP = QTSServerInterface::GetServer()->GetPrefs()->GetCMSIP();
 	UInt32 cmsPort = QTSServerInterface::GetServer()->GetPrefs()->GetCMSPort();

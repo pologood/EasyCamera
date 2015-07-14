@@ -77,6 +77,14 @@ int main(int argc, char * argv[])
    char* compileType = "";
 #endif
 
+   qtss_printf("%s/%s ( Build/%s; Platform/%s; %s%s) Built on: %s\n",QTSServerInterface::GetServerName().Ptr,
+                        QTSServerInterface::GetServerVersion().Ptr,
+                        QTSServerInterface::GetServerBuild().Ptr,
+                        QTSServerInterface::GetServerPlatform().Ptr,
+                        compileType,
+                        QTSServerInterface::GetServerComment().Ptr,
+                        QTSServerInterface::GetServerBuildDate().Ptr);
+
     while ((ch = getopt(argc,argv, "vdxp:o:c:irsS:I")) != EOF) // opt: means requires option
     {
         switch(ch)
