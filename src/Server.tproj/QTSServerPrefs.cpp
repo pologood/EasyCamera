@@ -43,47 +43,6 @@
 #include <netinet/in.h>
 #include <arpa/inet.h>
 #endif
- 
-
-char* QTSServerPrefs::sAdditionalDefaultPorts[] =
-{
-    "10010",
-    NULL
-};
-
-char* QTSServerPrefs::sRTP_Header_Players[] =
-{
-	"Real",
-    NULL
-};
-
-char* QTSServerPrefs::sAdjust_Bandwidth_Players[] =
-{
-	"Real",
-    NULL
-};
-
-char* QTSServerPrefs::sNo_Pause_Time_Adjustment_Players[] =
-{
-    "Real",
-    "PVPlayer",
-    NULL
-};
-
-char* QTSServerPrefs::sDisable_Rate_Adapt_Players[] =
-{
-    NULL
-};
-
-char* QTSServerPrefs::sFixed_Target_Time_Players[] =
-{
-    NULL
-};
-
-char* QTSServerPrefs::sDisable_Thinning_Players[] =
-{
-    NULL
-};
 
 QTSServerPrefs::PrefInfo QTSServerPrefs::sPrefInfo[] =
 {
@@ -124,7 +83,7 @@ QTSServerPrefs::PrefInfo QTSServerPrefs::sPrefInfo[] =
     { kDontAllowMultipleValues, "",         NULL                    },  //run_group_name
 #endif
     { kDontAllowMultipleValues, "false",    NULL                    },  //append_source_addr_in_transport
-    { kAllowMultipleValues,     "554",      sAdditionalDefaultPorts },  //rtsp_ports
+    { kAllowMultipleValues,     "554",      NULL					},  //rtsp_ports
     { kDontAllowMultipleValues, "500",      NULL                    },  //max_retransmit_delay
     { kDontAllowMultipleValues, "24",       NULL                    },  //small_window_size
     { kDontAllowMultipleValues, "false",    NULL                    },  //ack_logging_enabled
