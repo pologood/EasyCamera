@@ -197,18 +197,6 @@ typedef UInt32 QTSS_RTSPSessionType;
 
 /**********************************/
 //
-// What type of RTP transport is being used for the RTP stream?
-enum
-{
-    qtssRTPTransportTypeUDP         = 0,
-    qtssRTPTransportTypeReliableUDP = 1,
-    qtssRTPTransportTypeTCP         = 2,
-    qtssRTPTransportType3GPPUDP     = 3
-};
-typedef UInt32 QTSS_RTPTransportType;
-
-/**********************************/
-//
 // What type of RTP network mode is being used for the RTP stream?
 // unicast | multicast (mutually exclusive)
 enum
@@ -262,11 +250,7 @@ enum
     qtssModulePrefsObjectType       = FOUR_CHARS_TO_INT('m', 'o', 'd', 'p'), //modp
     qtssAttrInfoObjectType          = FOUR_CHARS_TO_INT('a', 't', 't', 'r'), //attr
     qtssUserProfileObjectType       = FOUR_CHARS_TO_INT('u', 's', 'p', 'o'), //uspo
-    qtssConnectedUserObjectType     = FOUR_CHARS_TO_INT('c', 'u', 's', 'r'), //cusr
-    qtss3GPPStreamObjectType        = FOUR_CHARS_TO_INT('3', 's', 't', 'r'), //3str
-    qtss3GPPClientSessionObjectType = FOUR_CHARS_TO_INT('3', 's', 'e', 's'), //3ses
-    qtss3GPPRTSPObjectType          = FOUR_CHARS_TO_INT('3', 'r', 't', 's'), //3rts
-    qtss3GPPRequestObjectType       = FOUR_CHARS_TO_INT('3', 'r', 'e', 'q')  //3req
+    qtssConnectedUserObjectType     = FOUR_CHARS_TO_INT('c', 'u', 's', 'r') //cusr
     
 };
 typedef UInt32 QTSS_ObjectType;
@@ -418,22 +402,10 @@ enum
     qtssRTSPSesLocalPort    = 12,       //read      //UInt16        // This is the local port for the connection
     qtssRTSPSesRemotePort   = 13,       //read      //UInt16        // This is the client port for the connection
     
-    qtssRTSPSes3GPPObject  = 14,        //read  //QTSS_3GPPRTSPSessionObject //QTSS_ObjectType qtss3GPPRTSPObjectType 3gpp data and state info
-
-    qtssRTSPSesLastDigestChallenge = 15,//read      //char array        // Private
-    qtssRTSPSesNumParams    = 16
+    qtssRTSPSesLastDigestChallenge = 14,//read      //char array        // Private
+    qtssRTSPSesNumParams    = 15
 };
 typedef UInt32 QTSS_RTSPSessionAttributes;
-
-//QTSS_3GPPRTSPSessionObject //class RTSPSession3GPP
-enum 
-{
-    //All text names are identical to the enumerated type names
-    qtss3GPPRTSPSesEnabled           = 0,
-    qtss3GPPRTSPSessNumParams        = 1
-};
-typedef UInt32 QTSS_3GPPRTSPSessionAttributes;
-
 
 enum 
 {
@@ -503,16 +475,6 @@ enum
     
 };
 typedef UInt32 QTSS_RTSPRequestAttributes;
-
-enum 
-{
-    //All text names are identical to the enumerated type names
-    qtss3GPPRequestEnabled              = 0, //r/w       //Bool16           
-    qtss3GPPRequestRateAdaptationStreamData = 1, //read      //char array    //the rate adaptation url and parameters per stream
-    qtss3GPPRequestNumParams             = 2
-};
-typedef UInt32 QTSS_RTSPRequest3GPPAttributes;
-
 
 enum
 {
