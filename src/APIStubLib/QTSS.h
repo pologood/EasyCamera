@@ -587,7 +587,7 @@ enum
     qtssPrefsDefaultAuthorizationRealm      = 28,   // "default_authorization_realm" //char array   //
     
     qtssPrefsRunUserName                    = 29,   //"run_user_name"       //char array        //Run under this user's account
-    qtssPrefsRunGroupName                   = 30,   //"run_group_name"      //char array        //Run under this group's account
+    qtssPrefsRunPassword                    = 30,   //"run_password"		//char array        //Run under this group's account
     
     qtssPrefsSrcAddrInTransport             = 31,   //"append_source_addr_in_transport" // Bool16   //If true, the server will append the src address to the Transport header responses
     qtssPrefsRTSPPorts                      = 32,   //"rtsp_ports"          // UInt16   

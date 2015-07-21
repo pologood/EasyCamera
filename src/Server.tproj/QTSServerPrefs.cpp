@@ -76,8 +76,8 @@ QTSServerPrefs::PrefInfo QTSServerPrefs::sPrefInfo[] =
     { kDontAllowMultipleValues, "false",    NULL                    },  //do_report_http_connection_ip_address
     { kDontAllowMultipleValues, "EasyCamera", NULL					},  //default_authorization_realm
 #ifndef __Win32__
-    { kDontAllowMultipleValues, "qtss",     NULL                    },  //run_user_name
-    { kDontAllowMultipleValues, "qtss",     NULL                    },  //run_group_name
+    { kDontAllowMultipleValues, "admin",     NULL                    },  //run_user_name
+    { kDontAllowMultipleValues, "admin",     NULL                    },  //run_password
 #else
     { kDontAllowMultipleValues, "",         NULL                    },  //run_user_name
     { kDontAllowMultipleValues, "",         NULL                    },  //run_group_name
@@ -162,7 +162,7 @@ QTSSAttrInfoDict::AttrInfo  QTSServerPrefs::sAttributes[] =
     /* 27 */ { "do_report_http_connection_ip_address",  NULL,                   qtssAttrDataTypeBool16,     qtssAttrModeRead | qtssAttrModeWrite },
     /* 28 */ { "default_authorization_realm",           NULL,                   qtssAttrDataTypeCharArray,  qtssAttrModeRead | qtssAttrModeWrite },
     /* 29 */ { "run_user_name",                         NULL,                   qtssAttrDataTypeCharArray,  qtssAttrModeRead | qtssAttrModeWrite },
-    /* 30 */ { "run_group_name",                        NULL,                   qtssAttrDataTypeCharArray,  qtssAttrModeRead | qtssAttrModeWrite },
+    /* 30 */ { "run_password",							NULL,                   qtssAttrDataTypeCharArray,  qtssAttrModeRead | qtssAttrModeWrite },
     /* 31 */ { "append_source_addr_in_transport",       NULL,                   qtssAttrDataTypeBool16,     qtssAttrModeRead | qtssAttrModeWrite },
     /* 32 */ { "rtsp_port",                             NULL,                   qtssAttrDataTypeUInt16,     qtssAttrModeRead | qtssAttrModeWrite },
     /* 33 */ { "max_retransmit_delay",                  NULL,                   qtssAttrDataTypeUInt32,     qtssAttrModeRead | qtssAttrModeWrite },

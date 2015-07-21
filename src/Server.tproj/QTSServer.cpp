@@ -249,10 +249,10 @@ void QTSServer::StartTasks()
 	char* cmsIP = QTSServerInterface::GetServer()->GetPrefs()->GetCMSIP();
 	UInt32 cmsPort = QTSServerInterface::GetServer()->GetPrefs()->GetCMSPort();
 	char* serial = QTSServerInterface::GetServer()->GetPrefs()->GetDeviceSerialNumber();
-	qtss_printf("Device:%s Login CMS:%s:%d \n",serial, cmsIP, cmsPort);
+	char* password = QTSServerInterface::GetServer()->GetPrefs()->GetRunPassword();
 	
 	fCMSApi = new EasyDarwinCMSAPI();
-	fCMSApi->Login(cmsIP, cmsPort, serial, "admin");
+	fCMSApi->Login(cmsIP, cmsPort, serial, password);
 
     // Start listening
     for (UInt32 x = 0; x < fNumListeners; x++)

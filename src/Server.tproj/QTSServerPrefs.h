@@ -152,8 +152,8 @@ class QTSServerPrefs : public QTSSPrefs
 
         char*   GetRunUserName()
             { return this->GetStringPref(qtssPrefsRunUserName); }
-        char*   GetRunGroupName()
-            { return this->GetStringPref(qtssPrefsRunGroupName); }
+        char*   GetRunPassword()
+            { return this->GetStringPref(qtssPrefsRunPassword); }
 
         char*   GetPidFilePath()
             { return this->GetStringPref(qtssPrefsPidFile); }

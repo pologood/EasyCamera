@@ -72,7 +72,7 @@ static const PrefConversionInfo kPrefs[] =
     { "do_report_http_connection_ip_address",   NULL,   qtssAttrDataTypeBool16 },
     { "default_authorization_realm",            NULL,   qtssAttrDataTypeCharArray },
     { "run_user_name",                          NULL,   qtssAttrDataTypeCharArray },
-    { "run_group_name",                         NULL,   qtssAttrDataTypeCharArray },
+    { "run_password",                         NULL,   qtssAttrDataTypeCharArray },
     { "append_source_addr_in_transport",        NULL,   qtssAttrDataTypeBool16 },
     { "rtsp_port",                              NULL,   qtssAttrDataTypeUInt16 },
     
