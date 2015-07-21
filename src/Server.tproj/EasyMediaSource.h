@@ -14,6 +14,7 @@
 #include "libClientCommondef.h"
 #include "QTSS.h"
 
+
 #define EASY_SNAP_BUFFER_SIZE 1024*1024
 
 class EasyMediaSource : public Task

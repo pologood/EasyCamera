@@ -788,14 +788,6 @@
 				</File>
 			</Filter>
 		</Filter>
-		<Filter
-			Name="Config"
-			>
-			<File
-				RelativePath=".\easycamera.xml"
-				>
-			</File>
-		</Filter>
 	</Files>
 	<Globals>
 	</Globals>

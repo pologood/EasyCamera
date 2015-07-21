@@ -5,6 +5,8 @@
 	Website: http://www.easydarwin.org
 */
 #include "EasyMediaSource.h"
+#include "QTSServerInterface.h"
+#include "QTSServer.h"
 
 static unsigned int sLastVPTS = 0;
 static unsigned int sLastAPTS = 0;
@@ -245,8 +247,14 @@ SInt64 EasyMediaSource::Run()
 			break;
 		}
 
+		QTSServer* svr = (QTSServer*)QTSServerInterface::GetServer();
+		svr->GetCMSApi()->UpdateSnap((const char*)sData, snapBufLen);
+
+		free((void*)sData);
+		sData = NULL;
+
 	}while(0);
 
-	return 60*1000;
+	return 10*1000;
 }
 	
