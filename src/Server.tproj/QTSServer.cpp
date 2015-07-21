@@ -251,8 +251,8 @@ void QTSServer::StartTasks()
 	char* serial = QTSServerInterface::GetServer()->GetPrefs()->GetDeviceSerialNumber();
 	qtss_printf("Device:%s Login CMS:%s:%d \n",serial, cmsIP, cmsPort);
 	
-	//fDevice = new EasyDarwinCMSAPI();
-	//fDevice->Login(cmsIP, cmsPort, "Serial001", "admin");
+	fCMSApi = new EasyDarwinCMSAPI();
+	fCMSApi->Login(cmsIP, cmsPort, serial, "admin");
 
     // Start listening
     for (UInt32 x = 0; x < fNumListeners; x++)

@@ -45,7 +45,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories="../;../Include/;../Server.tproj/;../CommonUtilitiesLib/;../PrefsSourceLib/;../APIModules/;../APIStubLib/;../APICommonCode/;../HTTPUtilitiesLib/"
+				AdditionalIncludeDirectories="../;../Include/;../../../EasyDarwin/CMS/Include/libEasyCMS/;../Server.tproj/;../CommonUtilitiesLib/;../PrefsSourceLib/;../APIModules/;../APIStubLib/;../APICommonCode/;../HTTPUtilitiesLib/"
 				PreprocessorDefinitions="WIN32;_DEBUG;_CONSOLE;DSS_USE_API_CALLBACKS"
 				RuntimeLibrary="1"
 				PrecompiledHeaderFile=".\Debug/EasyDarwin.pch"
@@ -71,10 +71,11 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="ws2_32.lib wsock32.lib winmm.lib"
+				AdditionalDependencies="ws2_32.lib wsock32.lib winmm.lib libEasyCMS.lib"
 				OutputFile="..\WinNTSupport\Debug\EasyCamera.exe"
 				LinkIncremental="2"
 				SuppressStartupBanner="true"
+				AdditionalLibraryDirectories="../../../EasyDarwin/CMS/Bin/"
 				IgnoreDefaultLibraryNames=""
 				GenerateDebugInformation="true"
 				ProgramDatabaseFile=".\Debug/EasyDarwin.pdb"
@@ -782,6 +783,14 @@
 					</FileConfiguration>
 				</File>
 			</Filter>
+		</Filter>
+		<Filter
+			Name="config"
+			>
+			<File
+				RelativePath=".\easycamera.xml"
+				>
+			</File>
 		</Filter>
 	</Files>
 	<Globals>
