@@ -12,9 +12,13 @@
 
 #include "CMSSession.h"
 #include "QTSServerInterface.h"
+#include "QTSServer.h"
 
 SInt64 CMSSession::Run()
 {
 	qtss_printf("CMSSession::Run() \n");
+
+	QTSServer* svr = (QTSServer*)QTSServerInterface::GetServer();
+	svr->GetCMSApi()->UpdateSnap(NULL, 0);
     return 5*1000;
 }

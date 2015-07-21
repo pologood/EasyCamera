@@ -250,9 +250,6 @@ EasyDarwinCMSAPI* QTSServer::GetCMSApi()
 void QTSServer::StartTasks()
 {
 	//TODO::在这里创建EasyCamera MsgCenter
-
-	fCMSSession = new CMSSession();
-
 	char* cmsIP = QTSServerInterface::GetServer()->GetPrefs()->GetCMSIP();
 	UInt32 cmsPort = QTSServerInterface::GetServer()->GetPrefs()->GetCMSPort();
 	char* serial = QTSServerInterface::GetServer()->GetPrefs()->GetDeviceSerialNumber();
@@ -260,6 +257,9 @@ void QTSServer::StartTasks()
 	
 	fCMSApi = new EasyDarwinCMSAPI();
 	fCMSApi->Login(cmsIP, cmsPort, serial, password);
+
+	//CMS Session 必须创建在API调用之后
+	fCMSSession = new CMSSession();
 
     // Start listening
     for (UInt32 x = 0; x < fNumListeners; x++)

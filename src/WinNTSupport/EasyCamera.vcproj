@@ -71,7 +71,7 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="ws2_32.lib wsock32.lib winmm.lib libEasyCMS.lib"
+				AdditionalDependencies="ws2_32.lib wsock32.lib winmm.lib libEasyCMSd.lib"
 				OutputFile="..\WinNTSupport\Debug\EasyCamera.exe"
 				LinkIncremental="2"
 				SuppressStartupBanner="true"
@@ -789,7 +789,7 @@
 			</Filter>
 		</Filter>
 		<Filter
-			Name="config"
+			Name="Config"
 			>
 			<File
 				RelativePath=".\easycamera.xml"
