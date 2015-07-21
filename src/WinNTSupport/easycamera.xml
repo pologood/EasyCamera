@@ -6,6 +6,8 @@
 		<PREF NAME="maximum_connections" TYPE="SInt32" >10000</PREF>
 		<PREF NAME="maximum_bandwidth" TYPE="SInt32" >102400</PREF>
 		<PREF NAME="serial_number" >000000000001</PREF>
+		<PREF NAME="run_user_name" >admin</PREF>
+		<PREF NAME="run_password" >admin</PREF>
 		<PREF NAME="bind_ip_addr" >0</PREF>
 		<PREF NAME="break_on_assert" TYPE="Bool16" >false</PREF>
 		<PREF NAME="auto_restart" TYPE="Bool16" >true</PREF>
@@ -29,8 +31,6 @@
 		<PREF NAME="tcp_seconds_to_buffer" TYPE="Float32" >.5</PREF>
 		<PREF NAME="do_report_http_connection_ip_address" TYPE="Bool16" >false</PREF>
 		<PREF NAME="default_authorization_realm" >EasyCamera</PREF>
-		<PREF NAME="run_user_name" ></PREF>
-		<PREF NAME="run_group_name" ></PREF>
 		<PREF NAME="append_source_addr_in_transport" TYPE="Bool16" >false</PREF>
 		<LIST-PREF NAME="rtsp_port" TYPE="UInt16" >
 			<VALUE>554</VALUE>

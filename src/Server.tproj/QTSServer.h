@@ -106,6 +106,8 @@ class QTSServer : public QTSServerInterface
         // Sets the IP address related attributes of the server.
         Bool16                  SetDefaultIPAddr();
 
+		EasyDarwinCMSAPI*		GetCMSSession();
+
      private:
     
         //
@@ -114,7 +116,7 @@ class QTSServer : public QTSServerInterface
         static XMLPrefsParser* sPrefsSource;
         static PrefsSource* sMessagesSource;
 
-		EasyDarwinCMSAPI*	fCMSApi;
+		EasyDarwinCMSAPI*	fCMSSession;
         
         //
         // Module loading & unloading routines
