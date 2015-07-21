@@ -38,6 +38,7 @@
 #include "QTSServerInterface.h"
 #include "Task.h"
 #include "EasyDarwinCMSAPI.h"
+#include "CMSSession.h"
 
 using namespace std;
 using namespace EasyDarwin::libEasyCMS;
@@ -106,17 +107,18 @@ class QTSServer : public QTSServerInterface
         // Sets the IP address related attributes of the server.
         Bool16                  SetDefaultIPAddr();
 
-		EasyDarwinCMSAPI*		GetCMSSession();
+		EasyDarwinCMSAPI*		GetCMSApi();
 
      private:
     
         //
         // GLOBAL TASKS
+		CMSSession*			fCMSSession;
         static char*        sPortPrefString;
         static XMLPrefsParser* sPrefsSource;
         static PrefsSource* sMessagesSource;
 
-		EasyDarwinCMSAPI*	fCMSSession;
+		EasyDarwinCMSAPI*	fCMSApi;
         
         //
         // Module loading & unloading routines

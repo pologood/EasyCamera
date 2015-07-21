@@ -375,6 +375,10 @@
 				Name="Core"
 				>
 				<File
+					RelativePath="..\Server.tproj\CMSSession.cpp"
+					>
+				</File>
+				<File
 					RelativePath="..\Server.tproj\GenerateXMLPrefs.cpp"
 					>
 					<FileConfiguration

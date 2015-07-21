@@ -242,22 +242,24 @@ void QTSServer::InitModules(QTSS_ServerState inEndState)
     fSrvrPrefs->SetErrorLogVerbosity(serverLevel); // reset the server's verbosity back to the original prefs level.
 }
 
-EasyDarwinCMSAPI* QTSServer::GetCMSSession()
+EasyDarwinCMSAPI* QTSServer::GetCMSApi()
 {
-	return fCMSSession;
+	return fCMSApi;
 }
 
 void QTSServer::StartTasks()
 {
 	//TODO::在这里创建EasyCamera MsgCenter
 
+	fCMSSession = new CMSSession();
+
 	char* cmsIP = QTSServerInterface::GetServer()->GetPrefs()->GetCMSIP();
 	UInt32 cmsPort = QTSServerInterface::GetServer()->GetPrefs()->GetCMSPort();
 	char* serial = QTSServerInterface::GetServer()->GetPrefs()->GetDeviceSerialNumber();
 	char* password = QTSServerInterface::GetServer()->GetPrefs()->GetRunPassword();
 	
-	fCMSSession = new EasyDarwinCMSAPI();
-	fCMSSession->Login(cmsIP, cmsPort, serial, password);
+	fCMSApi = new EasyDarwinCMSAPI();
+	fCMSApi->Login(cmsIP, cmsPort, serial, password);
 
     // Start listening
     for (UInt32 x = 0; x < fNumListeners; x++)
