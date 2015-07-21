@@ -38,7 +38,7 @@
 #include "QTSServerInterface.h"
 #include "Task.h"
 #include "EasyDarwinCMSAPI.h"
-#include "CMSSession.h"
+#include "EasyMediaSource.h"
 
 using namespace std;
 using namespace EasyDarwin::libEasyCMS;
@@ -113,7 +113,7 @@ class QTSServer : public QTSServerInterface
     
         //
         // GLOBAL TASKS
-		CMSSession*			fCMSSession;
+		EasyMediaSource*			fCMSSession;
         static char*        sPortPrefString;
         static XMLPrefsParser* sPrefsSource;
         static PrefsSource* sMessagesSource;

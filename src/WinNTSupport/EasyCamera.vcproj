@@ -71,11 +71,11 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="ws2_32.lib wsock32.lib winmm.lib libEasyCMSd.lib"
+				AdditionalDependencies="ws2_32.lib wsock32.lib winmm.lib libEasyCMSd.lib NetLib.lib"
 				OutputFile="..\WinNTSupport\Debug\EasyCamera.exe"
 				LinkIncremental="2"
 				SuppressStartupBanner="true"
-				AdditionalLibraryDirectories="../../../EasyDarwin/CMS/Bin/"
+				AdditionalLibraryDirectories="../../../EasyDarwin/CMS/Bin/;../Lib/"
 				IgnoreDefaultLibraryNames=""
 				GenerateDebugInformation="true"
 				ProgramDatabaseFile=".\Debug/EasyDarwin.pdb"
@@ -375,7 +375,7 @@
 				Name="Core"
 				>
 				<File
-					RelativePath="..\Server.tproj\CMSSession.cpp"
+					RelativePath="..\Server.tproj\EasyMediaSource.cpp"
 					>
 				</File>
 				<File
