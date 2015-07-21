@@ -228,6 +228,25 @@ bool EasyMediaSource::GetSnapData(unsigned char* pBuf, UInt32 uBufLen, int* uSna
 SInt64 EasyMediaSource::Run()
 {
 	printf("EasyMediaSource::Run Test\n");
-	return 5*1000;
+
+	QTSS_Error nRet = QTSS_NoErr;
+
+	do{
+		//向设备获取快照数据
+		unsigned char *sData = (unsigned char*)malloc(EASY_SNAP_BUFFER_SIZE);
+		int snapBufLen = 0;
+
+		//如果获取到摄像机快照数据，Base64编码/发送
+		if(!GetSnapData(sData, EASY_SNAP_BUFFER_SIZE, &snapBufLen))
+		{
+			//未获取到数据
+			qtss_printf("EasyDeviceCenter::UpdateDeviceSnap => Get Snap Data Fail \n");
+			nRet = QTSS_ValueNotFound;
+			break;
+		}
+
+	}while(0);
+
+	return 60*1000;
 }
 	
