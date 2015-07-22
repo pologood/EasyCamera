@@ -177,7 +177,7 @@ class QTSServerPrefs : public QTSSPrefs
        
         Bool16 GetAllowGuestDefault()             { return fAllowGuestAuthorizeDefault; }  
 
-		char* GetCMSIP()						  { return this->GetStringPref(qtssPrefsCMSIPAddr); }
+		Bool16 GetCMSIP(char* outCMSIP);/*						  { return this->GetStringPref(qtssPrefsCMSIPAddr); }*/
 
 		char* GetDeviceSerialNumber()			  { return this->GetStringPref(qtssPrefsSerialNumber); }
         

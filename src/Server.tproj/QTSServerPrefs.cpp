@@ -352,10 +352,6 @@ void QTSServerPrefs::SetupAttributes()
 	this->SetVal(qtssPrefsDefaultStreamQuality,			&fDefaultStreamQuality,                 sizeof(fDefaultStreamQuality)); //default_stream_quality
 	this->SetVal(qtssPrefsEnableAllowGuestDefault,      &fAllowGuestAuthorizeDefault,   sizeof(fAllowGuestAuthorizeDefault)); //enable_allow_guest_authorize_default
     this->SetVal(qtssPrefsNumRTSPThreads,               &fNumRTSPThreads,               sizeof(fNumRTSPThreads));
-    
-    
-    
-
 }
 
 
@@ -538,5 +534,39 @@ void QTSServerPrefs::SetCloseLogsOnWrite(Bool16 closeLogsOnWrite)
 {
     QTSSRollingLog::SetCloseOnWrite(closeLogsOnWrite);
     fCloseLogsOnWrite = closeLogsOnWrite; 
+}
+
+Bool16 QTSServerPrefs::GetCMSIP(char* outCMSIP)
+{
+	if(outCMSIP == NULL)
+		return false;
+
+	HOSTENT *host_entry = ::gethostbyname(this->GetStringPref(qtssPrefsCMSIPAddr));
+    char ip[20] = {0};
+    if (host_entry == NULL)
+    {
+        switch (h_errno)
+        {
+        case HOST_NOT_FOUND:
+            fputs("The host was not found.\n", stderr);
+            break;
+        case NO_ADDRESS:
+            fputs("The name is valid but it has no address.\n", stderr);
+            break;
+        case NO_RECOVERY:
+            fputs("A non-recoverable name server error occurred.\n", stderr);
+            break;
+        case TRY_AGAIN:
+            fputs("The name server is temporarily unavailable.", stderr);
+            break;
+        }
+        return false;
+    }
+    else
+    {
+        sprintf(outCMSIP, "%s", inet_ntoa(*((struct in_addr *) host_entry->h_addr_list[0])));
+    }
+
+	return true;
 }
 
