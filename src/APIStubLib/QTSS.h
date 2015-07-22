@@ -584,7 +584,7 @@ enum
     
     qtssPrefsDoReportHTTPConnectionAddress  = 27,   //"do_report_http_connection_ip_address"    //Bool16    // when behind a round robin DNS, the client needs to be told the specific ip address of the maching handling its request. this pref tells the server to repot its IP address in the reply to the HTTP GET request when tunneling RTSP through HTTP
 
-    qtssPrefsDefaultAuthorizationRealm      = 28,   // "default_authorization_realm" //char array   //
+    qtssPrefsLocalCameraAddress				= 28,   // "local_camera_addr" //char array   //
     
     qtssPrefsRunUserName                    = 29,   //"run_user_name"       //char array        //Run under this user's account
     qtssPrefsRunPassword                    = 30,   //"run_password"		//char array        //Run under this group's account
