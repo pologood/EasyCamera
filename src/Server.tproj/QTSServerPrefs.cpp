@@ -39,9 +39,11 @@
 #include "QTSSRollingLog.h"
  
 #ifndef __Win32__
-#include <sys/types.h>
-#include <netinet/in.h>
+#include <signal.h>
+#include <netdb.h>
 #include <arpa/inet.h>
+#include <sys/wait.h>
+#include <errno.h>
 #endif
 
 QTSServerPrefs::PrefInfo QTSServerPrefs::sPrefInfo[] =
@@ -541,6 +543,10 @@ Bool16 QTSServerPrefs::GetCMSIP(char* outCMSIP)
 	if(outCMSIP == NULL)
 		return false;
 
+#ifndef _WIN32
+    typedef struct hostent HOSTENT;
+    signal(SIGPIPE, SIG_IGN);
+#endif
 	HOSTENT *host_entry = ::gethostbyname(this->GetStringPref(qtssPrefsCMSIPAddr));
     char ip[20] = {0};
     if (host_entry == NULL)
