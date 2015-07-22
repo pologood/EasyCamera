@@ -121,7 +121,7 @@ bool EasyMediaSource::CameraLogin()
 		QTSServerInterface::GetServer()->GetPrefs()->GetRunUserName(),
 		QTSServerInterface::GetServer()->GetPrefs()->GetRunPassword(),
 		QTSServerInterface::GetServer()->GetPrefs()->GetLocalCameraAddress(),
-		80);
+		QTSServerInterface::GetServer()->GetPrefs()->GetLocalCameraPort());
 
 	if (s32Ret != HI_SUCCESS)
 	{
