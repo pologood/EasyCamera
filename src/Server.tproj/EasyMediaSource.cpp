@@ -233,8 +233,6 @@ bool EasyMediaSource::GetSnapData(unsigned char* pBuf, UInt32 uBufLen, int* uSna
 
 SInt64 EasyMediaSource::Run()
 {
-	printf("EasyMediaSource::Run Test\n");
-
 	QTSS_Error nRet = QTSS_NoErr;
 
 	do{
