@@ -259,6 +259,6 @@ SInt64 EasyMediaSource::Run()
 
 	}while(0);
 
-	return 10*1000;
+	return 2*60*1000;
 }
 	
