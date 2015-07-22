@@ -74,7 +74,7 @@ QTSServerPrefs::PrefInfo QTSServerPrefs::sPrefInfo[] =
 	{ kDontAllowMultipleValues,	"200000",	NULL					},	//max_tcp_buffer_size
     { kDontAllowMultipleValues, ".5",       NULL                    },  //tcp_seconds_to_buffer
     { kDontAllowMultipleValues, "false",    NULL                    },  //do_report_http_connection_ip_address
-    { kDontAllowMultipleValues, "EasyCamera", NULL					},  //default_authorization_realm
+    { kDontAllowMultipleValues, "127.0.0.1", NULL					},  //local_camera_addr
 #ifndef __Win32__
     { kDontAllowMultipleValues, "admin",     NULL                    },  //run_user_name
     { kDontAllowMultipleValues, "admin",     NULL                    },  //run_password
@@ -160,7 +160,7 @@ QTSSAttrInfoDict::AttrInfo  QTSServerPrefs::sAttributes[] =
     /* 25 */ { "max_tcp_buffer_size",                   NULL,                   qtssAttrDataTypeUInt32,     qtssAttrModeRead | qtssAttrModeWrite },
     /* 26 */ { "tcp_seconds_to_buffer",                 NULL,                   qtssAttrDataTypeFloat32,    qtssAttrModeRead | qtssAttrModeWrite },
     /* 27 */ { "do_report_http_connection_ip_address",  NULL,                   qtssAttrDataTypeBool16,     qtssAttrModeRead | qtssAttrModeWrite },
-    /* 28 */ { "default_authorization_realm",           NULL,                   qtssAttrDataTypeCharArray,  qtssAttrModeRead | qtssAttrModeWrite },
+    /* 28 */ { "local_camera_addr",						NULL,                   qtssAttrDataTypeCharArray,  qtssAttrModeRead | qtssAttrModeWrite },
     /* 29 */ { "run_user_name",                         NULL,                   qtssAttrDataTypeCharArray,  qtssAttrModeRead | qtssAttrModeWrite },
     /* 30 */ { "run_password",							NULL,                   qtssAttrDataTypeCharArray,  qtssAttrModeRead | qtssAttrModeWrite },
     /* 31 */ { "append_source_addr_in_transport",       NULL,                   qtssAttrDataTypeBool16,     qtssAttrModeRead | qtssAttrModeWrite },

@@ -147,8 +147,8 @@ class QTSServerPrefs : public QTSSPrefs
         char*   GetModuleDirectory()
             { return this->GetStringPref(qtssPrefsModuleFolder); }
             
-        char*   GetAuthorizationRealm()
-            { return this->GetStringPref(qtssPrefsDefaultAuthorizationRealm); }
+        char*   GetLocalCameraAddress()
+            { return this->GetStringPref(qtssPrefsLocalCameraAddress); }
 
         char*   GetRunUserName()
             { return this->GetStringPref(qtssPrefsRunUserName); }
