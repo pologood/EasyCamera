@@ -559,7 +559,7 @@ enum
     qtssPrefsAutoRestart            = 8,    //"auto_restart"                //Bool16        //If true, the server will automatically restart itself if it crashes.
     qtssPrefsTotalBytesUpdate       = 9,    //"total_bytes_update"          //UInt32    //Interval in seconds between updates of the server's total bytes and current bandwidth statistics
     qtssPrefsAvgBandwidthUpdate     = 10,   //"average_bandwidth_update"    //UInt32    //Interval in seconds between computations of the server's average bandwidth
-    qtssPrefsSafePlayDuration       = 11,   //"safe_play_duration"          //UInt32    //Hard to explain... see streamingserver.conf
+    qtssPrefsLocalCameraPort		= 11,   //"local_camera_port"          //UInt16  //Hard to explain... see streamingserver.conf
     qtssPrefsModuleFolder           = 12,   //"module_folder"               //char array    //Path to the module folder
 
     // There is a compiled-in error log module that loads before all the other modules

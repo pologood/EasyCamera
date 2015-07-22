@@ -93,7 +93,7 @@ class QTSServerPrefs : public QTSSPrefs
 
         UInt32      GetTotalBytesUpdateTimeInSecs()     { return fTBUpdateTimeInSecs; }
         UInt32      GetAvgBandwidthUpdateTimeInSecs()   { return fABUpdateTimeInSecs; }
-        UInt32      GetSafePlayDurationInSecs()         { return fSafePlayDurationInSecs; }
+        UInt32      GetLocalCameraPort()         { return fLocalCameraPort; }
         
         // For the compiled-in error logging module
         
@@ -197,7 +197,7 @@ class QTSServerPrefs : public QTSSPrefs
         Bool16  fAutoRestart;
         UInt32  fTBUpdateTimeInSecs;
         UInt32  fABUpdateTimeInSecs;
-        UInt32  fSafePlayDurationInSecs;
+        UInt32  fLocalCameraPort;
         
         UInt32  fErrorRollIntervalInDays;
         UInt32  fErrorLogBytes;
