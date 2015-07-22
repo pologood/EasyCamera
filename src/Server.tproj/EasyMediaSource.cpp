@@ -117,7 +117,11 @@ bool EasyMediaSource::CameraLogin()
 	if(fCameraLogin) return true;
 	//µÇÂ¼µ½ÉãÏñ»ú
 	HI_S32 s32Ret = HI_SUCCESS;
-	s32Ret = HI_NET_DEV_Login(	&m_u32Handle,"admin","admin","192.168.66.119",80);
+	s32Ret = HI_NET_DEV_Login(	&m_u32Handle,
+		QTSServerInterface::GetServer()->GetPrefs()->GetRunUserName(),
+		QTSServerInterface::GetServer()->GetPrefs()->GetRunPassword(),
+		QTSServerInterface::GetServer()->GetPrefs()->GetLocalCameraAddress(),
+		80);
 
 	if (s32Ret != HI_SUCCESS)
 	{

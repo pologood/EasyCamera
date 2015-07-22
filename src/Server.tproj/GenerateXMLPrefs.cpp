@@ -70,7 +70,7 @@ static const PrefConversionInfo kPrefs[] =
     { "max_tcp_buffer_size",                    NULL,   qtssAttrDataTypeUInt32 },
     { "tcp_seconds_to_buffer",                  NULL,   qtssAttrDataTypeFloat32 },
     { "do_report_http_connection_ip_address",   NULL,   qtssAttrDataTypeBool16 },
-    { "default_authorization_realm",            NULL,   qtssAttrDataTypeCharArray },
+    { "local_camera_addr",						NULL,   qtssAttrDataTypeCharArray },
     { "run_user_name",                          NULL,   qtssAttrDataTypeCharArray },
     { "run_password",                         NULL,   qtssAttrDataTypeCharArray },
     { "append_source_addr_in_transport",        NULL,   qtssAttrDataTypeBool16 },
