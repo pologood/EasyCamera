@@ -29,7 +29,6 @@
                     
 */
 
-
 #ifndef _QTSS_MODULE_UTILS_H_
 #define _QTSS_MODULE_UTILS_H_
 
