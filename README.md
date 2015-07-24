@@ -11,6 +11,13 @@ EasyCamera包含:
 - 摄像机开发方法
 - EasyDarwin流媒体平台:https://github.com/EasyDarwin/EasyDarwin
 
+### 编译依赖
+EasyCamera依赖EasyDarwin项目，从[EasyDarwin](https://github.com/EasyDarwin/EasyDarwin)项目下载最新源码，与EasyCamera放在同一目录中：
+<pre>
+../
+../EasyDarwin
+../EasyCamera
+</pre>
 ### 系统架构
 ![](http://www.easydarwin.org/skin/easydarwin/images/architecture.png)
 
