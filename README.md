@@ -19,7 +19,7 @@ EasyCamera依赖EasyDarwin项目，从[EasyDarwin](https://github.com/EasyDarwin
 ../EasyCamera
 </pre>
 ### 系统架构
-![](http://www.easydarwin.org/skin/easydarwin/images/architecture.png)
+![](http://www.easydarwin.org/skin/easydarwin/images/architecture20150723.png)
 
 ### 获取更多信息 ###
 
