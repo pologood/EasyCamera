@@ -14,14 +14,14 @@ GREP=grep
 NM=nm
 CCADMIN=CCadmin
 RANLIB=ranlib
-CC=arm-none-linux-gnueabi-gcc
-CCC=arm-none-linux-gnueabi-g++
-CXX=arm-none-linux-gnueabi-g++
+CC=gcc
+CCC=g++
+CXX=g++
 FC=gfortran
 AS=as
 
 # Macros
-CND_PLATFORM=GM8126-Linux-x86
+CND_PLATFORM=GNU-Linux-x86
 CND_DLIB_EXT=so
 CND_CONF=Debug
 CND_DISTDIR=dist
@@ -79,7 +79,7 @@ FFLAGS=
 ASFLAGS=
 
 # Link Libraries and Options
-LDLIBSOPTIONS=-LLib/arm
+LDLIBSOPTIONS=-L${AVS_ROOT}/lib
 
 # Build Targets
 .build-conf: ${BUILD_SUBPROJECTS}

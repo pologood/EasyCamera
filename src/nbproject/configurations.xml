@@ -116,7 +116,7 @@
   <confs>
     <conf name="Debug" type="1">
       <toolsSet>
-        <compilerSet>GM8126|GNU</compilerSet>
+        <compilerSet>GNU|GNU</compilerSet>
         <dependencyChecking>true</dependencyChecking>
         <rebuildPropChanged>false</rebuildPropChanged>
       </toolsSet>
@@ -151,7 +151,7 @@
         <linkerTool>
           <output>Bin/EasyCamera</output>
           <linkerAddLib>
-            <pElem>Lib/arm</pElem>
+            <pElem>${AVS_ROOT}/lib</pElem>
           </linkerAddLib>
           <commandLine>-ldl -lEasyCMS -lCommonUtilitiesLib -lEasyDSSProtocol -lNetLib -lavsxmlutil</commandLine>
         </linkerTool>
