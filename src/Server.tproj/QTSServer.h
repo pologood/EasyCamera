@@ -37,7 +37,7 @@
 
 #include "QTSServerInterface.h"
 #include "Task.h"
-#include "EasyDarwinCMSAPI.h"
+#include "EasyCMSAPI.h"
 #include "EasyMediaSource.h"
 
 using namespace std;

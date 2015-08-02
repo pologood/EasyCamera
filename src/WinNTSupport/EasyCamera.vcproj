@@ -139,7 +139,7 @@
 				Name="VCCLCompilerTool"
 				Optimization="1"
 				InlineFunctionExpansion="2"
-				AdditionalIncludeDirectories="../;../Server.tproj/;../CommonUtilitiesLib/;../PrefsSourceLib/;../APIModules/;../APIStubLib/;../APICommonCode/;../HTTPUtilitiesLib/"
+				AdditionalIncludeDirectories="../;../Include/;../../../EasyDarwin/CMS/Include/libEasyCMS/;../Server.tproj/;../CommonUtilitiesLib/;../PrefsSourceLib/;../APIModules/;../APIStubLib/;../APICommonCode/;../HTTPUtilitiesLib/"
 				PreprocessorDefinitions="WIN32;_CONSOLE;DSS_USE_API_CALLBACKS"
 				StringPooling="true"
 				RuntimeLibrary="0"
