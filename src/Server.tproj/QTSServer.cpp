@@ -26,9 +26,6 @@
     File:       QTSServer.cpp
 
     Contains:   Implements object defined in QTSServer.h
-    
-    
-
 */
 
 

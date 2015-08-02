@@ -71,7 +71,7 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="ws2_32.lib wsock32.lib winmm.lib libEasyCMSd.lib NetLib.lib"
+				AdditionalDependencies="ws2_32.lib wsock32.lib winmm.lib libEasyCMS.lib NetLib.lib"
 				OutputFile="..\WinNTSupport\Debug\EasyCamera.exe"
 				LinkIncremental="2"
 				SuppressStartupBanner="true"
@@ -164,10 +164,11 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="ws2_32.lib wsock32.lib winmm.lib"
+				AdditionalDependencies="ws2_32.lib wsock32.lib winmm.lib libEasyCMS.lib NetLib.lib"
 				OutputFile="..\WinNTSupport\Release\EasyCamera.exe"
 				LinkIncremental="2"
 				SuppressStartupBanner="true"
+				AdditionalLibraryDirectories="../../../EasyDarwin/CMS/Bin/;../Lib/"
 				IgnoreDefaultLibraryNames=""
 				ProgramDatabaseFile=".\Release/DarwinStreamingServer.pdb"
 				SubSystem="1"
