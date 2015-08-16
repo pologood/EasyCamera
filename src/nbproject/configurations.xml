@@ -125,6 +125,7 @@
           <incFile>
             <pElem>PlatformHeader.h</pElem>
           </incFile>
+          <commandLine>-m32</commandLine>
           <preprocessorList>
             <Elem>HI_OS_LINUX</Elem>
           </preprocessorList>
@@ -144,6 +145,7 @@
           <incFile>
             <pElem>PlatformHeader.h</pElem>
           </incFile>
+          <commandLine>-m32</commandLine>
           <preprocessorList>
             <Elem>HI_OS_LINUX</Elem>
           </preprocessorList>
@@ -151,9 +153,9 @@
         <linkerTool>
           <output>Bin/EasyCamera</output>
           <linkerAddLib>
-            <pElem>${AVS_ROOT}/lib</pElem>
+            <pElem>Lib/Linux/</pElem>
           </linkerAddLib>
-          <commandLine>-ldl -lEasyCMS -lCommonUtilitiesLib -lEasyDSSProtocol -lNetLib -lavsxmlutil</commandLine>
+          <commandLine>-ldl -lEasyCMS -lCommonUtilitiesLib -lEasyProtocol -lNetLib -ljsoncpp</commandLine>
         </linkerTool>
       </compileType>
       <item path="APICommonCode/QTAccessFile.cpp" ex="false" tool="1" flavor2="0">
@@ -296,7 +298,7 @@
     </conf>
     <conf name="Release" type="1">
       <toolsSet>
-        <compilerSet>GM8126|GNU</compilerSet>
+        <compilerSet>GNU|GNU</compilerSet>
         <dependencyChecking>true</dependencyChecking>
         <rebuildPropChanged>false</rebuildPropChanged>
       </toolsSet>
@@ -306,6 +308,7 @@
           <incFile>
             <pElem>PlatformHeader.h</pElem>
           </incFile>
+          <commandLine>-m32</commandLine>
           <preprocessorList>
             <Elem>HI_OS_LINUX</Elem>
           </preprocessorList>
@@ -326,6 +329,7 @@
           <incFile>
             <pElem>PlatformHeader.h</pElem>
           </incFile>
+          <commandLine>-m32</commandLine>
           <preprocessorList>
             <Elem>HI_OS_LINUX</Elem>
           </preprocessorList>
@@ -339,9 +343,9 @@
         <linkerTool>
           <output>Bin/EasyCamera</output>
           <linkerAddLib>
-            <pElem>Lib/arm</pElem>
+            <pElem>Lib/Linux/</pElem>
           </linkerAddLib>
-          <commandLine>-ldl -lEasyCMS -lCommonUtilitiesLib -lEasyDSSProtocol -lNetLib -lavsxmlutil</commandLine>
+          <commandLine>-ldl -lEasyCMS -lCommonUtilitiesLib -lEasyProtocol -lNetLib -ljsoncpp</commandLine>
         </linkerTool>
       </compileType>
       <item path="APICommonCode/QTAccessFile.cpp" ex="false" tool="1" flavor2="0">

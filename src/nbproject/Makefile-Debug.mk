@@ -66,11 +66,11 @@ OBJECTFILES= \
 
 
 # C Compiler Flags
-CFLAGS=
+CFLAGS=-m32
 
 # CC Compiler Flags
-CCFLAGS=
-CXXFLAGS=
+CCFLAGS=-m32
+CXXFLAGS=-m32
 
 # Fortran Compiler Flags
 FFLAGS=
@@ -79,7 +79,7 @@ FFLAGS=
 ASFLAGS=
 
 # Link Libraries and Options
-LDLIBSOPTIONS=-L${AVS_ROOT}/lib
+LDLIBSOPTIONS=-LLib/Linux/
 
 # Build Targets
 .build-conf: ${BUILD_SUBPROJECTS}
@@ -87,7 +87,7 @@ LDLIBSOPTIONS=-L${AVS_ROOT}/lib
 
 Bin/EasyCamera: ${OBJECTFILES}
 	${MKDIR} -p Bin
-	${LINK.cc} -o Bin/EasyCamera ${OBJECTFILES} ${LDLIBSOPTIONS} -ldl -lEasyCMS -lCommonUtilitiesLib -lEasyDSSProtocol -lNetLib -lavsxmlutil
+	${LINK.cc} -o Bin/EasyCamera ${OBJECTFILES} ${LDLIBSOPTIONS} -ldl -lEasyCMS -lCommonUtilitiesLib -lEasyProtocol -lNetLib -ljsoncpp
 
 ${OBJECTDIR}/APICommonCode/QTAccessFile.o: APICommonCode/QTAccessFile.cpp 
 	${MKDIR} -p ${OBJECTDIR}/APICommonCode

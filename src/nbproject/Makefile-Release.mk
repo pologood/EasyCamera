@@ -14,14 +14,14 @@ GREP=grep
 NM=nm
 CCADMIN=CCadmin
 RANLIB=ranlib
-CC=arm-none-linux-gnueabi-gcc
-CCC=arm-none-linux-gnueabi-g++
-CXX=arm-none-linux-gnueabi-g++
+CC=gcc
+CCC=g++
+CXX=g++
 FC=gfortran
 AS=as
 
 # Macros
-CND_PLATFORM=GM8126-Linux-x86
+CND_PLATFORM=GNU-Linux-x86
 CND_DLIB_EXT=so
 CND_CONF=Release
 CND_DISTDIR=dist
@@ -66,11 +66,11 @@ OBJECTFILES= \
 
 
 # C Compiler Flags
-CFLAGS=
+CFLAGS=-m32
 
 # CC Compiler Flags
-CCFLAGS=
-CXXFLAGS=
+CCFLAGS=-m32
+CXXFLAGS=-m32
 
 # Fortran Compiler Flags
 FFLAGS=
@@ -79,7 +79,7 @@ FFLAGS=
 ASFLAGS=
 
 # Link Libraries and Options
-LDLIBSOPTIONS=-LLib/arm
+LDLIBSOPTIONS=-LLib/Linux/
 
 # Build Targets
 .build-conf: ${BUILD_SUBPROJECTS}
@@ -87,7 +87,7 @@ LDLIBSOPTIONS=-LLib/arm
 
 Bin/EasyCamera: ${OBJECTFILES}
 	${MKDIR} -p Bin
-	${LINK.cc} -o Bin/EasyCamera ${OBJECTFILES} ${LDLIBSOPTIONS} -ldl -lEasyCMS -lCommonUtilitiesLib -lEasyDSSProtocol -lNetLib -lavsxmlutil
+	${LINK.cc} -o Bin/EasyCamera ${OBJECTFILES} ${LDLIBSOPTIONS} -ldl -lEasyCMS -lCommonUtilitiesLib -lEasyProtocol -lNetLib -ljsoncpp
 
 ${OBJECTDIR}/APICommonCode/QTAccessFile.o: APICommonCode/QTAccessFile.cpp 
 	${MKDIR} -p ${OBJECTDIR}/APICommonCode
