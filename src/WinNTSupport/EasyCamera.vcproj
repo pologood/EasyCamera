@@ -376,6 +376,10 @@
 				Name="Core"
 				>
 				<File
+					RelativePath="..\Server.tproj\EasyMediaSink.cpp"
+					>
+				</File>
+				<File
 					RelativePath="..\Server.tproj\EasyMediaSource.cpp"
 					>
 				</File>

@@ -253,7 +253,7 @@ void QTSServer::StartTasks()
 		EasyCMS_Login(fCMSHandle,cmsIP, cmsPort, serial, password);
 
 		//CMS Session 必须创建在API调用之后
-		fCMSSession = new EasyMediaSource();
+		fMediaSource = new EasyMediaSource();
 	}
 
     // Start listening

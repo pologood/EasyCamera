@@ -110,7 +110,7 @@ class QTSServer : public QTSServerInterface
     
         //
         // GLOBAL TASKS
-		EasyMediaSource*			fCMSSession;
+		EasyMediaSource*			fMediaSource;
         static char*        sPortPrefString;
         static XMLPrefsParser* sPrefsSource;
         static PrefsSource* sMessagesSource;

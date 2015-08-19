@@ -4,8 +4,8 @@
 	WEChat: EasyDarwin
 	Website: http://www.easydarwin.org
 */
-#ifndef _CMS_SESSION_H_
-#define _CMS_SESSION_H_
+#ifndef _EASY_MEDIA_SOURCE_H_
+#define _EASY_MEDIA_SOURCE_H_
 
 #include "Task.h"
 #include "hi_type.h"
@@ -54,4 +54,4 @@ public:
 	bool m_bForceIFrame;
 };
 
-#endif //_CMS_SESSION_H_
+#endif //_EASY_MEDIA_SOURCE_H_
