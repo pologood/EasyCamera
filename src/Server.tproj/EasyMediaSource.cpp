@@ -250,7 +250,12 @@ SInt64 EasyMediaSource::Run()
 		}
 
 		QTSServer* svr = (QTSServer*)QTSServerInterface::GetServer();
-		svr->GetCMSApi()->UpdateSnap((const char*)sData, snapBufLen);
+
+		FILE* fSnap1 = fopen("./snap1.jpg","wb");
+		::fwrite(sData, 1, snapBufLen, fSnap1);
+		::fclose(fSnap1);
+
+		EasyCMS_UpdateSnap(svr->GetCMSHandle(), (const char*)sData, snapBufLen);
 
 		free((void*)sData);
 		sData = NULL;

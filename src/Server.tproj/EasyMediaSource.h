@@ -11,7 +11,6 @@
 #include "hi_type.h"
 #include "hi_net_dev_sdk.h"
 #include "hi_net_dev_errors.h"
-#include "libClientCommondef.h"
 #include "QTSS.h"
 
 
