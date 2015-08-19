@@ -11,6 +11,18 @@
 static unsigned int sLastVPTS = 0;
 static unsigned int sLastAPTS = 0;
 
+int __EasyPusher_Callback(int _id, EASY_PUSH_STATE_T _state, EASY_AV_Frame *_frame, void *_userptr)
+{
+    if (_state == EASY_PUSH_STATE_CONNECTING)               printf("Connecting...\n");
+    else if (_state == EASY_PUSH_STATE_CONNECTED)           printf("Connected\n");
+    else if (_state == EASY_PUSH_STATE_CONNECT_FAILED)      printf("Connect failed\n");
+    else if (_state == EASY_PUSH_STATE_CONNECT_ABORT)       printf("Connect abort\n");
+    //else if (_state == EASY_PUSH_STATE_PUSHING)             printf("P->");
+    else if (_state == EASY_PUSH_STATE_DISCONNECTED)        printf("Disconnect.\n");
+
+    return 0;
+}
+
 //摄像机音视频数据回调
 HI_S32 NETSDK_APICALL OnStreamCallback(	HI_U32 u32Handle,		/* 句柄 */
 										HI_U32 u32DataType,     /* 数据类型，视频或音频数据或音视频复合数据 */
@@ -48,11 +60,11 @@ HI_S32 NETSDK_APICALL OnStreamCallback(	HI_U32 u32Handle,		/* 句柄 */
 			unsigned int vInter = pstruAV->u32AVFramePTS - sLastVPTS;
 
 			sLastVPTS = pstruAV->u32AVFramePTS;
-			//pThis->GetMediaSink()->PushPacket((char*)pu8Buffer, u32Length);
+			pThis->PushFrame((unsigned char*)pu8Buffer, u32Length);
 		}
 		else if (pstruAV->u32AVFrameFlag == HI_NET_DEV_AUDIO_FRAME_FLAG)
 		{
-			//pThis->GetMediaSink()->PushPacket((char*)pu8Buffer, u32Length);
+			//pThis->PushFrame((char*)pu8Buffer, u32Length);
 		}
 	}	
 
@@ -90,7 +102,8 @@ EasyMediaSource::EasyMediaSource()
 	m_u32Handle(0),
 	fCameraLogin(false),//是否已登录标识
 	m_bStreamFlag(false),//是否正在流媒体标识
-	m_bForceIFrame(true)
+	m_bForceIFrame(true),
+	fPusherHandle(NULL)
 {
 	//SDK初始化，全局调用一次
 	HI_NET_DEV_Init();
@@ -260,4 +273,63 @@ SInt64 EasyMediaSource::Run()
 
 	return 2*60*1000;
 }
+
+
+QTSS_Error EasyMediaSource::StartStreaming()
+{
+	if(NULL == fPusherHandle)
+	{
+		EASY_MEDIA_INFO_T mediainfo;
+		memset(&mediainfo, 0x00, sizeof(EASY_MEDIA_INFO_T));
+		mediainfo.u32VideoCodec =   0x1C;
+
+		fPusherHandle = EasyPusher_Create();
+
+		EasyPusher_SetEventCallback(fPusherHandle, __EasyPusher_Callback, 0, NULL);
+
+		EasyPusher_StartStream(fPusherHandle, "127.0.0.1", 554, "live.sdp", "", "", &mediainfo, 512);
+	}
+
+	NetDevStartStream();
+
+	return QTSS_NoErr;
+}
+
+QTSS_Error EasyMediaSource::StopStreaming()
+{
+	if(fPusherHandle)
+	{
+		EasyPusher_StopStream(fPusherHandle);
+		EasyPusher_Release(fPusherHandle);
+		fPusherHandle = 0;
+	}
+
+	stopGettingFrames();
+
+	return QTSS_NoErr;
+}
+
+QTSS_Error EasyMediaSource::PushFrame(unsigned char* frame, int len)
+{	
+	if(fPusherHandle == NULL) return QTSS_Unimplemented;
+
+	HI_S_AVFrame* pstruAV = (HI_S_AVFrame*)frame;
+
+	EASY_AV_Frame  avFrame;
+	memset(&avFrame, 0x00, sizeof(EASY_AV_Frame));
 	
+	if (pstruAV->u32AVFrameFlag == HI_NET_DEV_VIDEO_FRAME_FLAG)
+	{
+		avFrame.u32VFrameType = (pstruAV->u32VFrameType == HI_NET_DEV_VIDEO_FRAME_I)?EASY_SDK_VIDEO_FRAME_I:EASY_SDK_VIDEO_FRAME_P;
+		avFrame.pBuffer = (unsigned char*)frame+sizeof(HI_S_AVFrame);
+		avFrame.u32AVFrameLen = pstruAV->u32AVFrameLen;
+	}
+	else if (pstruAV->u32AVFrameFlag == HI_NET_DEV_AUDIO_FRAME_FLAG)
+	{
+		return 0;
+	}
+
+	EasyPusher_PushFrame(fPusherHandle, &avFrame);
+
+	return Easy_NoErr;
+}

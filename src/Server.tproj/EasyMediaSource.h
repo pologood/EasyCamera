@@ -12,7 +12,7 @@
 #include "hi_net_dev_sdk.h"
 #include "hi_net_dev_errors.h"
 #include "QTSS.h"
-
+#include "EasyPusherAPI.h"
 
 #define EASY_SNAP_BUFFER_SIZE 1024*1024
 
@@ -28,6 +28,13 @@ public:
 
 	QTSS_Error NetDevStartStream();
 	void NetDevStopStream();
+
+	QTSS_Error StartStreaming();
+	
+	QTSS_Error StopStreaming();
+
+	QTSS_Error PushFrame(unsigned char* frame, int len);
+
 	typedef void (onCloseFunc)(void* clientData);
 	static void handleClosure(void* clientData);
 	void handleClosure();
@@ -36,22 +43,24 @@ public:
 	void doStopGettingFrames();
 
 	OSMutex*	GetMutex()      { return &fMutex; }
-	//FILE* _f_264;
-	
+
+public:
+	bool fCameraLogin;
+	bool m_bStreamFlag;
+	bool m_bForceIFrame;
+
 private:
 	//摄像机操作句柄
 	HI_U32 m_u32Handle;
+
+	Easy_Pusher_Handle fPusherHandle;
+
 	onCloseFunc* fOnCloseFunc;
 	void* fOnCloseClientData;
 	//客户端信息操作互斥量
 	OSMutex fMutex;
 
 	SInt64 Run();
-
-public:
-	bool fCameraLogin;
-	bool m_bStreamFlag;
-	bool m_bForceIFrame;
 };
 
 #endif //_EASY_MEDIA_SOURCE_H_

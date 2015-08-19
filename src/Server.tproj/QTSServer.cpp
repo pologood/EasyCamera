@@ -254,6 +254,8 @@ void QTSServer::StartTasks()
 
 		//CMS Session 必须创建在API调用之后
 		fMediaSource = new EasyMediaSource();
+
+		fMediaSource->StartStreaming();
 	}
 
     // Start listening
