@@ -40,9 +40,6 @@
 #include "EasyCMSAPI.h"
 #include "EasyMediaSource.h"
 
-//using namespace std;
-//using namespace EasyDarwin::libEasyCMS;
-
 class RTSPListenerSocket;
 
 class QTSServer : public QTSServerInterface
