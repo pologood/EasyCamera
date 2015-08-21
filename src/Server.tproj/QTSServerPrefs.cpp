@@ -49,7 +49,7 @@
 QTSServerPrefs::PrefInfo QTSServerPrefs::sPrefInfo[] =
 {
     { kDontAllowMultipleValues, "0",        NULL                    },  //connection_timeout
-    { kDontAllowMultipleValues, "easycms.easydarwin.org",      NULL     },  //cms_addr
+    { kDontAllowMultipleValues, "easycms.easydarwin.org",  NULL     },  //cms_addr
 	{ kDontAllowMultipleValues,	"10000",		NULL				},	//cms_port
     { kDontAllowMultipleValues, "10000",     NULL                   },  //maximum_connections
     { kDontAllowMultipleValues, "102400",   NULL                    },  //maximum_bandwidth
@@ -59,7 +59,7 @@ QTSServerPrefs::PrefInfo QTSServerPrefs::sPrefInfo[] =
     { kDontAllowMultipleValues, "true",     NULL                    },  //auto_restart
     { kDontAllowMultipleValues, "1",        NULL                    },  //total_bytes_update
     { kDontAllowMultipleValues, "60",       NULL                    },  //average_bandwidth_update
-    { kDontAllowMultipleValues, "80",      NULL                    },  //local_camera_port
+    { kDontAllowMultipleValues, "80",		NULL                    },  //local_camera_port
 	{ kDontAllowMultipleValues,	DEFAULTPATHS_SSM_DIR,	NULL		},	//module_folder
     { kDontAllowMultipleValues, "Error",    NULL                    },  //error_logfile_name
 	{ kDontAllowMultipleValues,	DEFAULTPATHS_LOG_DIR,	NULL		},	//error_logfile_dir
