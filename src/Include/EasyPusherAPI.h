@@ -30,24 +30,24 @@ enum
     Pusher_RequestArrived				= -3,
     Pusher_OutOfState					= -4,
     Pusher_NotAModule					= -5,
-    Pusher_WrongVersion				= -6,
+    Pusher_WrongVersion					= -6,
     Pusher_IllegalService				= -7,
-    Pusher_BadIndex					= -8,
+    Pusher_BadIndex						= -8,
     Pusher_ValueNotFound				= -9,
-    Pusher_BadArgument				= -10,
-    Pusher_ReadOnly					= -11,
+    Pusher_BadArgument					= -10,
+    Pusher_ReadOnly						= -11,
 	Pusher_NotPreemptiveSafe			= -12,
     Pusher_NotEnoughSpace				= -13,
     Pusher_WouldBlock					= -14,
-    Pusher_NotConnected				= -15,
-    Pusher_FileNotFound				= -16,
+    Pusher_NotConnected					= -15,
+    Pusher_FileNotFound					= -16,
     Pusher_NoMoreData					= -17,
-    Pusher_AttrDoesntExist			= -18,
+    Pusher_AttrDoesntExist				= -18,
     Pusher_AttrNameExists				= -19,
-    Pusher_InstanceAttrsNotAllowed	= -20,
+    Pusher_InstanceAttrsNotAllowed		= -20,
 	Pusher_InvalidSocket				= -21,
-	Pusher_MallocError				= -22,
-	Pusher_ConnectError				= -23,
+	Pusher_MallocError					= -22,
+	Pusher_ConnectError					= -23,
 	Pusher_SendError					= -24
 };
 typedef int Pusher_Error;
@@ -71,17 +71,17 @@ typedef struct __EASY_AV_Frame
     Pusher_U32    u32AVFrameFlag;		/* 帧标志  视频 or 音频 */
     Pusher_U32    u32AVFrameLen;		/* 帧的长度 */
     Pusher_U32    u32VFrameType;		/* 视频的类型，I帧或P帧 */
-    Pusher_U8     *pBuffer;			/* 数据 */
+    Pusher_U8     *pBuffer;				/* 数据 */
 }EASY_AV_Frame;
 
 typedef struct __EASY_MEDIA_INFO_T
 {
 	Pusher_U32 u32VideoCodec;			/* 视频编码类型 */
-	Pusher_U32 u32VideoFps;			/* 视频帧率 */
+	Pusher_U32 u32VideoFps;				/* 视频帧率 */
 	
 	Pusher_U32 u32AudioCodec;			/* 音频编码类型 */
-	Pusher_U32 u32AudioSamplerate;	/* 音频采样率 */
-	Pusher_U32 u32AudioChannel;		/* 音频通道数 */
+	Pusher_U32 u32AudioSamplerate;		/* 音频采样率 */
+	Pusher_U32 u32AudioChannel;			/* 音频通道数 */
 }EASY_MEDIA_INFO_T;
 
 /* 推送事件类型定义 */
