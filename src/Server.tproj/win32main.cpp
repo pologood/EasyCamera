@@ -26,8 +26,6 @@
     File:       win32main.cpp
 
     Contains:   main function to drive streaming server on win32.
-
-
 */
 
 #include "getopt.h"
@@ -105,9 +103,9 @@ int main(int argc, char * argv[])
                 qtss_printf("-c c:\\myconfigpath.xml: Specify a config file path\n");
                 qtss_printf("-o c:\\myconfigpath.conf: Specify a DSS 1.x / 2.x config file path\n");
                 qtss_printf("-x: Force create new .xml config file from 1.x / 2.x config\n");
-                qtss_printf("-i: Install the Darwin Streaming Server service\n");
-                qtss_printf("-r: Remove the Darwin Streaming Server service\n");
-                qtss_printf("-s: Start the Darwin Streaming Server service\n");
+                qtss_printf("-i: Install the EasyCamera service\n");
+                qtss_printf("-r: Remove the EasyCamera service\n");
+                qtss_printf("-s: Start the EasyCamera service\n");
                 qtss_printf("-S n: Display server stats in the console every \"n\" seconds\n");
                 qtss_printf("-I: Start the server in the idle state\n");
                 ::exit(0);  
@@ -134,19 +132,19 @@ int main(int argc, char * argv[])
                 theXMLPrefsExist = false; // Force us to generate a new XML prefs file
                 break;
             case 'i':
-                qtss_printf("Installing the Darwin Streaming Server service...\n");
-                ::InstallService("Darwin Streaming Server");
-                qtss_printf("Starting the Darwin Streaming Server service...\n");
-                ::RunAsService("Darwin Streaming Server");
+                qtss_printf("Installing the EasyCamera service...\n");
+                ::InstallService("EasyCamera");
+                qtss_printf("Starting the EasyCamera service...\n");
+                ::RunAsService("EasyCamera");
                 ::exit(0);
                 break;
             case 'r':
-                qtss_printf("Removing the Darwin Streaming Server service...\n");
-                ::RemoveService("Darwin Streaming Server");
+                qtss_printf("Removing the EasyCamera service...\n");
+                ::RemoveService("EasyCamera");
                 ::exit(0);
             case 's':
-                qtss_printf("Starting the Darwin Streaming Server service...\n");
-                ::RunAsService("Darwin Streaming Server");
+                qtss_printf("Starting the EasyCamera service...\n");
+                ::RunAsService("EasyCamera");
                 ::exit(0);
             case 'I':
                 sInitialState = qtssIdleState;
@@ -162,7 +160,7 @@ int main(int argc, char * argv[])
     QTSSExpirationDate::PrintExpirationDate();
     if (QTSSExpirationDate::IsSoftwareExpired())
     {
-        qtss_printf("Streaming Server has expired\n");
+        qtss_printf("EasyCamera has expired\n");
         ::exit(0);
     }
 
@@ -244,9 +242,9 @@ int main(int argc, char * argv[])
 
     //
     // In case someone runs the server improperly, print out a friendly message.
-    qtss_printf("Darwin Streaming Server must either be started from the DOS Console\n");
+    qtss_printf("EasyCamera must either be started from the DOS Console\n");
     qtss_printf("using the -d command-line option, or using the Service Control Manager\n\n");
-    qtss_printf("Waiting for the Service Control Manager to start Darwin Streaming Server...\n");
+    qtss_printf("Waiting for the Service Control Manager to start EasyCamera...\n");
     BOOL theErr = ::StartServiceCtrlDispatcher(dispatchTable);
     if (!theErr)
     {
@@ -466,7 +464,7 @@ void InstallService(char* inServiceName)
                         );
     if (!theSCManager)
     {
-        qtss_printf("Failed to install Darwin Streaming Server Service\n");
+        qtss_printf("Failed to install EasyCamera Service\n");
         return;
     }
 
@@ -488,10 +486,10 @@ void InstallService(char* inServiceName)
     if (theService)
     {
         ::CloseServiceHandle(theService);
-        qtss_printf("Installed Darwin Streaming Server Service\n");
+        qtss_printf("Installed EasyCamera Service\n");
     }
     else
-        qtss_printf("Failed to install Darwin Streaming Server Service\n");
+        qtss_printf("Failed to install EasyCamera Service\n");
 
     ::CloseServiceHandle(theSCManager);
 }
@@ -508,7 +506,7 @@ void RemoveService(char *inServiceName)
                         );
     if (!theSCManager)
     {
-        qtss_printf("Failed to remove Darwin Streaming Server Service\n");
+        qtss_printf("Failed to remove EasyCamera Service\n");
         return;
     }
 
@@ -521,10 +519,10 @@ void RemoveService(char *inServiceName)
 
         (void)::DeleteService(theService);
         ::CloseServiceHandle(theService);
-        qtss_printf("Removed Darwin Streaming Server Service\n");
+        qtss_printf("Removed EasyCamera Service\n");
     }
     else
-        qtss_printf("Failed to remove Darwin Streaming Server Service\n");
+        qtss_printf("Failed to remove EasyCamera Service\n");
 
     ::CloseServiceHandle(theSCManager);
 }

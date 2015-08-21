@@ -36,7 +36,7 @@ static Bool16 sFalse = false;
 static Bool16 sTrue = true;
 static StrPtrLen sCloseString("close", 5);
 static StrPtrLen sKeepAliveString("keep-alive", 10);
-static StrPtrLen sDefaultRealm("Streaming Server", 19);
+static StrPtrLen sDefaultRealm("EasyCamera", 19);
 UInt8 HTTPRequest::sURLStopConditions[] =
 {
   0, 0, 0, 0, 0, 0, 0, 0, 0, 1, //0-9      //'\t' is a stop condition
