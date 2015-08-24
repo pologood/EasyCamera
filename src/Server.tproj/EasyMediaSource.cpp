@@ -248,11 +248,11 @@ SInt64 EasyMediaSource::Run()
 {
 	QTSS_Error nRet = QTSS_NoErr;
 
-	do{
-		//向设备获取快照数据
-		unsigned char *sData = (unsigned char*)malloc(EASY_SNAP_BUFFER_SIZE);
-		int snapBufLen = 0;
+	//向设备获取快照数据
+	unsigned char *sData = (unsigned char*)malloc(EASY_SNAP_BUFFER_SIZE);
+	int snapBufLen = 0;
 
+	do{
 		//如果获取到摄像机快照数据，Base64编码/发送
 		if(!GetSnapData(sData, EASY_SNAP_BUFFER_SIZE, &snapBufLen))
 		{
@@ -266,10 +266,10 @@ SInt64 EasyMediaSource::Run()
 
 		EasyCMS_UpdateSnap(svr->GetCMSHandle(), (const char*)sData, snapBufLen);
 
-		free((void*)sData);
-		sData = NULL;
-
 	}while(0);
+
+	free((void*)sData);
+	sData = NULL;
 
 	return 2*60*1000;
 }
