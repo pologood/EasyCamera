@@ -109,25 +109,23 @@ QTSServer::~QTSServer()
     delete locker;
     delete serverlocker;
     delete fSrvrPrefs;
-	//if(fDevice) delete fDevice;
+	if(fMediaSource) delete fMediaSource;
 }
 
 Bool16 QTSServer::Initialize(XMLPrefsParser* inPrefsSource, PrefsSource* inMessagesSource, UInt16 inPortOverride, Bool16 createListeners)
 {
-    static const UInt32 kRTPSessionMapSize = 577;
     fServerState = qtssFatalErrorState;
     sPrefsSource = inPrefsSource;
     sMessagesSource = inMessagesSource;
     this->InitCallbacks();
 
+	fMediaSource = NULL;
     //
     // DICTIONARY INITIALIZATION
     
     QTSSModule::Initialize();
     QTSServerPrefs::Initialize();
     QTSSMessages::Initialize();
-    //RTSPSessionInterface::Initialize();
-    //RTSPSession::Initialize();
     QTSSFile::Initialize();
     
     //
@@ -149,11 +147,6 @@ Bool16 QTSServer::Initialize(XMLPrefsParser* inPrefsSource, PrefsSource* inMessa
     if (!fSrvrPrefs->ShouldServerBreakOnAssert())
         SetAssertLogger(this->GetErrorLogStream());// the error log stream is our assert logger
         
-    //
-    // CREATE GLOBAL OBJECTS
-    //fRTPMap = new OSRefTable(kRTPSessionMapSize);
-
-    //
     // Load ERROR LOG module only. This is good in case there is a startup error.
     
     QTSSModule* theLoggingModule = new QTSSModule("QTSSErrorLogModule");
@@ -186,7 +179,6 @@ Bool16 QTSServer::Initialize(XMLPrefsParser* inPrefsSource, PrefsSource* inMessa
     }
 
     fServerState = qtssStartingUpState;
-	//fDevice = NULL;
     return true;
 }
 
