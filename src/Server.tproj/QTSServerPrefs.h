@@ -73,10 +73,7 @@ class QTSServerPrefs : public QTSSPrefs
         UInt32  GetMinTCPBufferSizeInBytes()            { return fMinTCPBufferSizeInBytes; }
         UInt32  GetMaxTCPBufferSizeInBytes()            { return fMaxTCPBufferSizeInBytes; }
         Float32 GetTCPSecondsToBuffer()                 { return fTCPSecondsToBuffer; }
-        
-        //for joining HTTP sessions from behind a round-robin DNS
-        Bool16  GetDoReportHTTPConnectionAddress()      { return fDoReportHTTPConnectionAddress;  }
-        
+                
         //for debugging, mainly
         Bool16      ShouldServerBreakOnAssert()         { return fBreakOnAssert; }
         Bool16      IsAutoRestartEnabled()              { return fAutoRestart; }
@@ -177,8 +174,6 @@ class QTSServerPrefs : public QTSSPrefs
         UInt32  fMinTCPBufferSizeInBytes;
         UInt32  fMaxTCPBufferSizeInBytes;
         Float32 fTCPSecondsToBuffer;
-
-        Bool16  fDoReportHTTPConnectionAddress;
 
         QTSS_AuthScheme fAuthScheme;
         Bool16  fEnableRTSPErrMsg;

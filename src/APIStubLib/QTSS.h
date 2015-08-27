@@ -582,39 +582,37 @@ enum
     qtssPrefsMaxTCPBufferSizeInBytes        = 25,   //"max_tcp_buffer_size" //UInt32    // When streaming over TCP, this is the maximum size the TCP socket send buffer can be set to
     qtssPrefsTCPSecondsToBuffer             = 26,   //"tcp_seconds_to_buffer" //Float32 // When streaming over TCP, the size of the TCP send buffer is scaled based on the bitrate of the movie. It will fit all the data that gets sent in this amount of time.
     
-    qtssPrefsDoReportHTTPConnectionAddress  = 27,   //"do_report_http_connection_ip_address"    //Bool16    // when behind a round robin DNS, the client needs to be told the specific ip address of the maching handling its request. this pref tells the server to repot its IP address in the reply to the HTTP GET request when tunneling RTSP through HTTP
-
-    qtssPrefsLocalCameraAddress				= 28,   // "local_camera_addr" //char array   //
+    qtssPrefsLocalCameraAddress				= 27,   // "local_camera_addr" //char array   //
     
-    qtssPrefsRunUserName                    = 29,   //"run_user_name"       //char array        //Run under this user's account
-    qtssPrefsRunPassword                    = 30,   //"run_password"		//char array        //Run under this group's account
+    qtssPrefsRunUserName                    = 28,   //"run_user_name"       //char array        //Run under this user's account
+    qtssPrefsRunPassword                    = 29,   //"run_password"		//char array        //Run under this group's account
     
-	qtssPrefsRTSPPorts                      = 31,   //"rtsp_ports"          // UInt16   
+	qtssPrefsRTSPPorts                      = 30,   //"rtsp_ports"          // UInt16   
 
-    qtssPrefsEnableRTSPErrorMessage         = 32,   //"RTSP_error_message" //Bool16 // Appends a content body string error message for reported RTSP errors.
-    qtssPrefsEnableRTSPDebugPrintfs         = 33,   //"RTSP_debug_printfs" //Boo1l6 // printfs incoming RTSPRequests and Outgoing RTSP responses.
+    qtssPrefsEnableRTSPErrorMessage         = 31,   //"RTSP_error_message" //Bool16 // Appends a content body string error message for reported RTSP errors.
+    qtssPrefsEnableRTSPDebugPrintfs         = 32,   //"RTSP_debug_printfs" //Boo1l6 // printfs incoming RTSPRequests and Outgoing RTSP responses.
 
-    qtssPrefsEnableMonitorStatsFile         = 34,   //"enable_monitor_stats_file" //Bool16 //write server stats to the monitor file
-    qtssPrefsMonitorStatsFileIntervalSec    = 35,   //"monitor_stats_file_interval_seconds" // private
-    qtssPrefsMonitorStatsFileName           = 36,   //"monitor_stats_file_name" // private
+    qtssPrefsEnableMonitorStatsFile         = 33,   //"enable_monitor_stats_file" //Bool16 //write server stats to the monitor file
+    qtssPrefsMonitorStatsFileIntervalSec    = 34,   //"monitor_stats_file_interval_seconds" // private
+    qtssPrefsMonitorStatsFileName           = 35,   //"monitor_stats_file_name" // private
 
-    qtssPrefsEnablePacketHeaderPrintfs      = 37,   // "enable_packet_header_printfs" //Bool16 // RTP and RTCP printfs of outgoing packets.
-    qtssPrefsPacketHeaderPrintfOptions      = 38,   // "packet_header_printf_options" //char //set of printfs to print. Form is [text option] [;]  default is "rtp;rr;sr;". This means rtp packets, rtcp sender reports, and rtcp receiver reports.
-    qtssPrefsOverbufferRate                 = 39,    // "overbuffer_rate"    //Float32
-    qtssPrefsMediumWindowSizeInK            = 40,    // "medium_window_size" // UInt32    //default size that will be used for medium bitrate movies
-    qtssPrefsWindowSizeMaxThreshold         = 41,    //"window_size_threshold"  // UInt32    //bitrate at which we switch from medium to large window size
-    qtssPrefsEnableRTSPServerInfo           = 42,   //"RTSP_server_info" //Boo1l6 // Adds server info to the RTSP responses.
-    qtssPrefsRunNumThreads                  = 43,   //"run_num_threads" //UInt32 // if value is non-zero, will  create that many task threads; otherwise a thread will be created for each processor
-    qtssPrefsPidFile                        = 44,    //"pid_file" //Char Array //path to pid file
-    qtssPrefsCloseLogsOnWrite               = 45,   // "force_logs_close_on_write" //Bool16 // force log files to close after each write.
-    qtssPrefsDisableThinning                = 46,   // "disable_thinning" //Bool16 // Usually used for performance testing. Turn off stream thinning from packet loss or stream lateness.
+    qtssPrefsEnablePacketHeaderPrintfs      = 36,   // "enable_packet_header_printfs" //Bool16 // RTP and RTCP printfs of outgoing packets.
+    qtssPrefsPacketHeaderPrintfOptions      = 37,   // "packet_header_printf_options" //char //set of printfs to print. Form is [text option] [;]  default is "rtp;rr;sr;". This means rtp packets, rtcp sender reports, and rtcp receiver reports.
+    qtssPrefsOverbufferRate                 = 38,    // "overbuffer_rate"    //Float32
+    qtssPrefsMediumWindowSizeInK            = 39,    // "medium_window_size" // UInt32    //default size that will be used for medium bitrate movies
+    qtssPrefsWindowSizeMaxThreshold         = 40,    //"window_size_threshold"  // UInt32    //bitrate at which we switch from medium to large window size
+    qtssPrefsEnableRTSPServerInfo           = 41,   //"RTSP_server_info" //Boo1l6 // Adds server info to the RTSP responses.
+    qtssPrefsRunNumThreads                  = 42,   //"run_num_threads" //UInt32 // if value is non-zero, will  create that many task threads; otherwise a thread will be created for each processor
+    qtssPrefsPidFile                        = 43,    //"pid_file" //Char Array //path to pid file
+    qtssPrefsCloseLogsOnWrite               = 44,   // "force_logs_close_on_write" //Bool16 // force log files to close after each write.
+    qtssPrefsDisableThinning                = 45,   // "disable_thinning" //Bool16 // Usually used for performance testing. Turn off stream thinning from packet loss or stream lateness.
     
-	qtssPrefsDefaultStreamQuality           = 47,   // "default_stream_quality //UInt16 //0 is all day and best quality. Higher values are worse maximum depends on the media and the media module
+	qtssPrefsDefaultStreamQuality           = 46,   // "default_stream_quality //UInt16 //0 is all day and best quality. Higher values are worse maximum depends on the media and the media module
 
-	qtssPrefsEnableAllowGuestDefault        = 48,   // "enable_allow_guest_authorize_default" //Boo1l6 // server hint to access modules to allow guest access as the default (can be overriden in a qtaccess file or other means)
-    qtssPrefsNumRTSPThreads                 = 49,   // "run_num_rtsp_threads" //UInt32 // if value is non-zero, the server will  create that many task threads; otherwise a single thread will be created.
+	qtssPrefsEnableAllowGuestDefault        = 47,   // "enable_allow_guest_authorize_default" //Boo1l6 // server hint to access modules to allow guest access as the default (can be overriden in a qtaccess file or other means)
+    qtssPrefsNumRTSPThreads                 = 48,   // "run_num_rtsp_threads" //UInt32 // if value is non-zero, the server will  create that many task threads; otherwise a single thread will be created.
 	
-    qtssPrefsNumParams                      = 50
+    qtssPrefsNumParams                      = 49
 };
 
 typedef UInt32 QTSS_PrefsAttributes;

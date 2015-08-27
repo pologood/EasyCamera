@@ -870,11 +870,7 @@ void QTSServer::SetupPublicHeader()
 Task*   RTSPListenerSocket::GetSessionTask(TCPSocket** outSocket)
 {
     Assert(outSocket != NULL);
-    
-    // when the server is behing a round robin DNS, the client needs to knwo the IP address ot the server
-    // so that it can direct the "POST" half of the connection to the same machine when tunnelling RTSP thru HTTP
-    Bool16  doReportHTTPConnectionAddress = QTSServerInterface::GetServer()->GetPrefs()->GetDoReportHTTPConnectionAddress();
-    
+     
 	return NULL;
     //RTSPSession* theTask = NEW RTSPSession(doReportHTTPConnectionAddress);
     //*outSocket = theTask->GetSocket();  // out socket is not attached to a unix socket yet.

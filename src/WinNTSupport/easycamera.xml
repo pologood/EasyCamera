@@ -30,7 +30,6 @@
 		<PREF NAME="min_tcp_buffer_size" TYPE="UInt32" >8192</PREF>
 		<PREF NAME="max_tcp_buffer_size" TYPE="UInt32" >200000</PREF>
 		<PREF NAME="tcp_seconds_to_buffer" TYPE="Float32" >.5</PREF>
-		<PREF NAME="do_report_http_connection_ip_address" TYPE="Bool16" >false</PREF>
 		<LIST-PREF NAME="rtsp_port" TYPE="UInt16" >
 			<VALUE>554</VALUE>
 		</LIST-PREF>

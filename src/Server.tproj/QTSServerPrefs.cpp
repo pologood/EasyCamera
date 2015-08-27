@@ -75,7 +75,6 @@ QTSServerPrefs::PrefInfo QTSServerPrefs::sPrefInfo[] =
     { kDontAllowMultipleValues, "8192",     NULL                    },  //min_tcp_buffer_size
 	{ kDontAllowMultipleValues,	"200000",	NULL					},	//max_tcp_buffer_size
     { kDontAllowMultipleValues, ".5",       NULL                    },  //tcp_seconds_to_buffer
-    { kDontAllowMultipleValues, "false",    NULL                    },  //do_report_http_connection_ip_address
     { kDontAllowMultipleValues, "127.0.0.1", NULL					},  //local_camera_addr
 #ifndef __Win32__
     { kDontAllowMultipleValues, "admin",     NULL                    },  //run_user_name
@@ -143,7 +142,7 @@ QTSSAttrInfoDict::AttrInfo  QTSServerPrefs::sAttributes[] =
     /* 24 */ { "min_tcp_buffer_size",                   NULL,                   qtssAttrDataTypeUInt32,     qtssAttrModeRead | qtssAttrModeWrite },
     /* 25 */ { "max_tcp_buffer_size",                   NULL,                   qtssAttrDataTypeUInt32,     qtssAttrModeRead | qtssAttrModeWrite },
     /* 26 */ { "tcp_seconds_to_buffer",                 NULL,                   qtssAttrDataTypeFloat32,    qtssAttrModeRead | qtssAttrModeWrite },
-    /* 27 */ { "do_report_http_connection_ip_address",  NULL,                   qtssAttrDataTypeBool16,     qtssAttrModeRead | qtssAttrModeWrite },
+    /* 27 */ 
     /* 28 */ { "local_camera_addr",						NULL,                   qtssAttrDataTypeCharArray,  qtssAttrModeRead | qtssAttrModeWrite },
     /* 29 */ { "run_user_name",                         NULL,                   qtssAttrDataTypeCharArray,  qtssAttrModeRead | qtssAttrModeWrite },
     /* 30 */ { "run_password",							NULL,                   qtssAttrDataTypeCharArray,  qtssAttrModeRead | qtssAttrModeWrite },
@@ -193,7 +192,6 @@ QTSServerPrefs::QTSServerPrefs(XMLPrefsParser* inPrefsSource, Bool16 inWriteMiss
     fMinTCPBufferSizeInBytes(0),
     fMaxTCPBufferSizeInBytes(0),
     fTCPSecondsToBuffer(0),
-    fDoReportHTTPConnectionAddress(false),
 
     fAuthScheme(qtssAuthDigest),
     fEnableRTSPErrMsg(false),
@@ -250,8 +248,6 @@ void QTSServerPrefs::SetupAttributes()
     this->SetVal(qtssPrefsMinTCPBufferSizeInBytes,  &fMinTCPBufferSizeInBytes,  sizeof(fMinTCPBufferSizeInBytes));
     this->SetVal(qtssPrefsMaxTCPBufferSizeInBytes,  &fMaxTCPBufferSizeInBytes,  sizeof(fMaxTCPBufferSizeInBytes));
     this->SetVal(qtssPrefsTCPSecondsToBuffer,   &fTCPSecondsToBuffer,           sizeof(fTCPSecondsToBuffer));
-
-    this->SetVal(qtssPrefsDoReportHTTPConnectionAddress,    &fDoReportHTTPConnectionAddress,   sizeof(fDoReportHTTPConnectionAddress));
 
 	this->SetVal(qtssPrefsEnableRTSPErrorMessage,       &fEnableRTSPErrMsg,             sizeof(fEnableRTSPErrMsg));
     this->SetVal(qtssPrefsEnableRTSPDebugPrintfs,       &fEnableRTSPDebugPrintfs,       sizeof(fEnableRTSPDebugPrintfs));
