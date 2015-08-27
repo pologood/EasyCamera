@@ -125,12 +125,6 @@ class QTSServerPrefs : public QTSSPrefs
         UInt32  GetNumThreads()                   { return fNumThreads; } //short tasks threads
         UInt32  GetNumBlockingThreads()           { return fNumRTSPThreads; } //return the number of threads that long tasks will be scheduled on -- RTSP processing for example.
         
-        Bool16  GetDisableThinning()              { return fDisableThinning; }
-        
-        UInt16  GetDefaultStreamQuality()         { return fDefaultStreamQuality; }            
-       
-        Bool16 GetAllowGuestDefault()             { return fAllowGuestAuthorizeDefault; }  
-
 		Bool16 GetCMSIP(char* outCMSIP);/*						  { return this->GetStringPref(qtssPrefsCMSIPAddr); }*/
 
 		char* GetDeviceSerialNumber()			  { return this->GetStringPref(qtssPrefsSerialNumber); }
@@ -168,13 +162,6 @@ class QTSServerPrefs : public QTSSPrefs
         UInt32  fNumRTSPThreads;
         
         Bool16  fCloseLogsOnWrite;
-        
-        Bool16 fDisableThinning;
-        
-        UInt16 fDefaultStreamQuality;
-        Bool16 fAllowGuestAuthorizeDefault;
-
-
         enum
         {
             kAllowMultipleValues = 1,

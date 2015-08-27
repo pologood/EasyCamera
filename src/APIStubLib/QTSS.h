@@ -587,14 +587,10 @@ enum
 	qtssPrefsRunNumThreads                  = 27,   //"run_num_threads" //UInt32 // if value is non-zero, will  create that many task threads; otherwise a thread will be created for each processor
     qtssPrefsPidFile                        = 28,    //"pid_file" //Char Array //path to pid file
     qtssPrefsCloseLogsOnWrite               = 29,   // "force_logs_close_on_write" //Bool16 // force log files to close after each write.
-    qtssPrefsDisableThinning                = 30,   // "disable_thinning" //Bool16 // Usually used for performance testing. Turn off stream thinning from packet loss or stream lateness.
-    
-	qtssPrefsDefaultStreamQuality           = 31,   // "default_stream_quality //UInt16 //0 is all day and best quality. Higher values are worse maximum depends on the media and the media module
 
-	qtssPrefsEnableAllowGuestDefault        = 32,   // "enable_allow_guest_authorize_default" //Boo1l6 // server hint to access modules to allow guest access as the default (can be overriden in a qtaccess file or other means)
-    qtssPrefsNumRTSPThreads                 = 33,   // "run_num_rtsp_threads" //UInt32 // if value is non-zero, the server will  create that many task threads; otherwise a single thread will be created.
+	qtssPrefsNumRTSPThreads                 = 30,   // "run_num_rtsp_threads" //UInt32 // if value is non-zero, the server will  create that many task threads; otherwise a single thread will be created.
 	
-    qtssPrefsNumParams                      = 34
+    qtssPrefsNumParams                      = 31
 };
 
 typedef UInt32 QTSS_PrefsAttributes;

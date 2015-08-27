@@ -86,9 +86,7 @@ QTSServerPrefs::PrefInfo QTSServerPrefs::sPrefInfo[] =
 	{ kDontAllowMultipleValues, "0",        NULL                    },  //run_num_threads
     { kDontAllowMultipleValues, DEFAULTPATHS_PID_DIR PLATFORM_SERVER_BIN_NAME ".pid",	NULL	},	//pid_file
     { kDontAllowMultipleValues, "false",    NULL                    },   //force_logs_close_on_write
-    { kDontAllowMultipleValues, "false",    NULL                    },   //disable_thinning
-	{ kDontAllowMultipleValues, "0",        NULL                     }, //default_stream_quality
-    { kDontAllowMultipleValues, "true",     NULL                     }, //enable_allow_guest_default
+
     { kDontAllowMultipleValues, "1",        NULL                     }  //run_num_rtsp_threads
    
 };
@@ -129,10 +127,8 @@ QTSSAttrInfoDict::AttrInfo  QTSServerPrefs::sAttributes[] =
 	/* 27 */ { "run_num_threads",                       NULL,                   qtssAttrDataTypeUInt32,     qtssAttrModeRead | qtssAttrModeWrite },
 	/* 28 */ { "pid_file",								NULL,					qtssAttrDataTypeCharArray,	qtssAttrModeRead | qtssAttrModeWrite },
     /* 29 */ { "force_logs_close_on_write",             NULL,                   qtssAttrDataTypeBool16,     qtssAttrModeRead | qtssAttrModeWrite },
-    /* 30 */ { "disable_thinning",                      NULL,                   qtssAttrDataTypeBool16,     qtssAttrModeRead | qtssAttrModeWrite },
-	/* 31 */ { "default_stream_quality",                NULL,                   qtssAttrDataTypeUInt16,     qtssAttrModeRead | qtssAttrModeWrite },
-    /* 32 */ { "enable_allow_guest_default",			NULL,                   qtssAttrDataTypeBool16,     qtssAttrModeRead | qtssAttrModeWrite },
-    /* 33 */ { "run_num_rtsp_threads",					NULL,                   qtssAttrDataTypeUInt32,     qtssAttrModeRead | qtssAttrModeWrite }
+  
+	/* 30 */ { "run_num_rtsp_threads",					NULL,                   qtssAttrDataTypeUInt32,     qtssAttrModeRead | qtssAttrModeWrite }
 };
 
 
@@ -162,11 +158,7 @@ QTSServerPrefs::QTSServerPrefs(XMLPrefsParser* inPrefsSource, Bool16 inWriteMiss
     fNumThreads(0),
     fNumRTSPThreads(0),
 
-    fCloseLogsOnWrite(false),
-    fDisableThinning(false),
-	//
-	fDefaultStreamQuality(0),
-	fAllowGuestAuthorizeDefault(true)
+    fCloseLogsOnWrite(false)
 {
     SetupAttributes();
     RereadServerPreferences(inWriteMissingPrefs);
@@ -208,10 +200,6 @@ void QTSServerPrefs::SetupAttributes()
     this->SetVal(qtssPrefsRunNumThreads,                &fNumThreads,                   sizeof(fNumThreads));
 
     this->SetVal(qtssPrefsCloseLogsOnWrite,             &fCloseLogsOnWrite,             sizeof(fCloseLogsOnWrite));
-    this->SetVal(qtssPrefsDisableThinning,              &fDisableThinning,              sizeof(fDisableThinning));
-
-	this->SetVal(qtssPrefsDefaultStreamQuality,			&fDefaultStreamQuality,                 sizeof(fDefaultStreamQuality)); //default_stream_quality
-	this->SetVal(qtssPrefsEnableAllowGuestDefault,      &fAllowGuestAuthorizeDefault,   sizeof(fAllowGuestAuthorizeDefault)); //enable_allow_guest_authorize_default
     this->SetVal(qtssPrefsNumRTSPThreads,               &fNumRTSPThreads,               sizeof(fNumRTSPThreads));
 }
 
