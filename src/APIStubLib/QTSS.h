@@ -572,34 +572,29 @@ enum
     qtssPrefsErrorLogVerbosity      = 17,   //"error_logfile_verbosity"     //UInt32    //Max verbosity level of messages the error logger will log
     qtssPrefsScreenLogging          = 18,   //"screen_logging"              //Bool16        //Should the error logger echo messages to the screen?
     qtssPrefsErrorLogEnabled        = 19,   //"error_logging"               //Bool16        //Is error logging enabled?
+    
+    qtssPrefsMinTCPBufferSizeInBytes        = 20,   //"min_tcp_buffer_size" //UInt32    // When streaming over TCP, this is the minimum size the TCP socket send buffer can be set to
+    qtssPrefsMaxTCPBufferSizeInBytes        = 21,   //"max_tcp_buffer_size" //UInt32    // When streaming over TCP, this is the maximum size the TCP socket send buffer can be set to
+    qtssPrefsTCPSecondsToBuffer             = 22,   //"tcp_seconds_to_buffer" //Float32 // When streaming over TCP, the size of the TCP send buffer is scaled based on the bitrate of the movie. It will fit all the data that gets sent in this amount of time.
+    
+    qtssPrefsLocalCameraAddress				= 23,   // "local_camera_addr" //char array   //
+    
+    qtssPrefsRunUserName                    = 24,   //"run_user_name"       //char array        //Run under this user's account
+    qtssPrefsRunPassword                    = 25,   //"run_password"		//char array        //Run under this group's account
+    
+	qtssPrefsRTSPPorts                      = 26,   //"rtsp_ports"          // UInt16   
 
-    qtssPrefsDropVideoAllPacketsDelayInMsec = 20,   //"drop_all_video_delay"    //SInt32 // Don't send video packets later than this
-    qtssPrefsStartThinningDelayInMsec       = 21,   //"start_thinning_delay"    //SInt32 // lateness at which we might start thinning
-    qtssPrefsLargeWindowSizeInK             = 22,   //"large_window_size"  // UInt32    //default size that will be used for high bitrate movies
-    qtssPrefsWindowSizeThreshold            = 23,   //"window_size_threshold"  // UInt32    //bitrate at which we switch to larger window size
+	qtssPrefsRunNumThreads                  = 27,   //"run_num_threads" //UInt32 // if value is non-zero, will  create that many task threads; otherwise a thread will be created for each processor
+    qtssPrefsPidFile                        = 28,    //"pid_file" //Char Array //path to pid file
+    qtssPrefsCloseLogsOnWrite               = 29,   // "force_logs_close_on_write" //Bool16 // force log files to close after each write.
+    qtssPrefsDisableThinning                = 30,   // "disable_thinning" //Bool16 // Usually used for performance testing. Turn off stream thinning from packet loss or stream lateness.
     
-    qtssPrefsMinTCPBufferSizeInBytes        = 24,   //"min_tcp_buffer_size" //UInt32    // When streaming over TCP, this is the minimum size the TCP socket send buffer can be set to
-    qtssPrefsMaxTCPBufferSizeInBytes        = 25,   //"max_tcp_buffer_size" //UInt32    // When streaming over TCP, this is the maximum size the TCP socket send buffer can be set to
-    qtssPrefsTCPSecondsToBuffer             = 26,   //"tcp_seconds_to_buffer" //Float32 // When streaming over TCP, the size of the TCP send buffer is scaled based on the bitrate of the movie. It will fit all the data that gets sent in this amount of time.
-    
-    qtssPrefsLocalCameraAddress				= 27,   // "local_camera_addr" //char array   //
-    
-    qtssPrefsRunUserName                    = 28,   //"run_user_name"       //char array        //Run under this user's account
-    qtssPrefsRunPassword                    = 29,   //"run_password"		//char array        //Run under this group's account
-    
-	qtssPrefsRTSPPorts                      = 30,   //"rtsp_ports"          // UInt16   
+	qtssPrefsDefaultStreamQuality           = 31,   // "default_stream_quality //UInt16 //0 is all day and best quality. Higher values are worse maximum depends on the media and the media module
 
-	qtssPrefsRunNumThreads                  = 31,   //"run_num_threads" //UInt32 // if value is non-zero, will  create that many task threads; otherwise a thread will be created for each processor
-    qtssPrefsPidFile                        = 32,    //"pid_file" //Char Array //path to pid file
-    qtssPrefsCloseLogsOnWrite               = 33,   // "force_logs_close_on_write" //Bool16 // force log files to close after each write.
-    qtssPrefsDisableThinning                = 34,   // "disable_thinning" //Bool16 // Usually used for performance testing. Turn off stream thinning from packet loss or stream lateness.
-    
-	qtssPrefsDefaultStreamQuality           = 35,   // "default_stream_quality //UInt16 //0 is all day and best quality. Higher values are worse maximum depends on the media and the media module
-
-	qtssPrefsEnableAllowGuestDefault        = 36,   // "enable_allow_guest_authorize_default" //Boo1l6 // server hint to access modules to allow guest access as the default (can be overriden in a qtaccess file or other means)
-    qtssPrefsNumRTSPThreads                 = 37,   // "run_num_rtsp_threads" //UInt32 // if value is non-zero, the server will  create that many task threads; otherwise a single thread will be created.
+	qtssPrefsEnableAllowGuestDefault        = 32,   // "enable_allow_guest_authorize_default" //Boo1l6 // server hint to access modules to allow guest access as the default (can be overriden in a qtaccess file or other means)
+    qtssPrefsNumRTSPThreads                 = 33,   // "run_num_rtsp_threads" //UInt32 // if value is non-zero, the server will  create that many task threads; otherwise a single thread will be created.
 	
-    qtssPrefsNumParams                      = 38
+    qtssPrefsNumParams                      = 34
 };
 
 typedef UInt32 QTSS_PrefsAttributes;

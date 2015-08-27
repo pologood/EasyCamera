@@ -36,10 +36,10 @@
 
 # define DEFAULTPATHS_DIRECTORY_SEPARATOR	"\\"
 
-# define DEFAULTPATHS_ETC_DIR			"c:\\Program Files\\Darwin Streaming Server\\"
-# define DEFAULTPATHS_ETC_DIR_OLD		"c:\\Program Files\\Darwin Streaming Server\\"
-# define DEFAULTPATHS_SSM_DIR			"c:\\Program Files\\Darwin Streaming Server\\QTSSModules\\"
-# define DEFAULTPATHS_LOG_DIR			"c:\\Program Files\\Darwin Streaming Server\\Logs\\"
+# define DEFAULTPATHS_ETC_DIR			"./"
+# define DEFAULTPATHS_ETC_DIR_OLD		"./"
+# define DEFAULTPATHS_SSM_DIR			"./QTSSModules/"
+# define DEFAULTPATHS_LOG_DIR			"./Logs/"
 # define DEFAULTPATHS_PID_FILE          ""
 # define DEFAULTPATHS_PID_DIR			""
 #elif __MacOSX__
