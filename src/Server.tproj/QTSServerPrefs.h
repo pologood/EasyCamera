@@ -69,16 +69,6 @@ class QTSServerPrefs : public QTSSPrefs
         SInt32  GetMaxConnections()         { return fMaximumConnections; }
         SInt32  GetMaxKBitsBandwidth()      { return fMaxBandwidthInKBits; }
         
-        // Thinning algorithm parameters
-        SInt32  GetDropAllPacketsTimeInMsec()           { return fDropAllPacketsTimeInMsec; }
-        SInt32  GetDropAllVideoPacketsTimeInMsec()      { return fDropAllVideoPacketsTimeInMsec; }
-        SInt32  GetThinAllTheWayTimeInMsec()            { return fThinAllTheWayTimeInMsec; }
-        SInt32  GetAlwaysThinTimeInMsec()               { return fAlwaysThinTimeInMsec; }
-        SInt32  GetStartThinningTimeInMsec()            { return fStartThinningTimeInMsec; }
-        SInt32  GetStartThickingTimeInMsec()            { return fStartThickingTimeInMsec; }
-        SInt32  GetThickAllTheWayTimeInMsec()           { return fThickAllTheWayTimeInMsec; }
-        UInt32  GetQualityCheckIntervalInMsec()         { return fQualityCheckIntervalInMsec; }
-                
         // for tcp buffer size scaling
         UInt32  GetMinTCPBufferSizeInBytes()            { return fMinTCPBufferSizeInBytes; }
         UInt32  GetMaxTCPBufferSizeInBytes()            { return fMaxTCPBufferSizeInBytes; }
@@ -104,37 +94,18 @@ class QTSServerPrefs : public QTSSPrefs
         UInt32  GetErrorRollIntervalInDays()    { return fErrorRollIntervalInDays; }
         UInt32  GetErrorLogVerbosity()          { return fErrorLogVerbosity; }
         void    SetErrorLogVerbosity(UInt32 verbosity)        { fErrorLogVerbosity = verbosity; }
-        Bool16  GetAppendSrcAddrInTransport()   { return fAppendSrcAddrInTransport; }
         
         //
         // For UDP retransmits
-        UInt32  GetMaxRetransmitDelayInMsec()   { return fMaxRetransDelayInMsec; }
-        Bool16  IsAckLoggingEnabled()           { return fIsAckLoggingEnabled; }
-        UInt32  GetRTCPPollIntervalInMsec()     { return fRTCPPollIntervalInMsec; }
-        UInt32  GetRTCPSocketRcvBufSizeinK()    { return fRTCPSocketRcvBufSizeInK; }
-        UInt32  GetSendIntervalInMsec()         { return fSendIntervalInMsec; }
-        UInt32  GetMaxSendAheadTimeInSecs()     { return fMaxSendAheadTimeInSecs; }
-        Bool16  IsSlowStartEnabled()            { return fIsSlowStartEnabled; }
         Bool16  GetRTSPDebugPrintfs()           { return fEnableRTSPDebugPrintfs; }
         Bool16  GetRTSPServerInfoEnabled()      { return fEnableRTSPServerInfo; }
         
         Float32    GetOverbufferRate()                { return fOverbufferRate; }
-        
-        // RUDP window size
-        UInt32  GetSmallWindowSizeInK()         { return fSmallWindowSizeInK; }
-        UInt32    GetMediumWindowSizeInK()        { return fMediumWindowSizeInK; }
-        UInt32  GetLargeWindowSizeInK()         { return fLargeWindowSizeInK; }
-        UInt32  GetWindowSizeThreshold()        { return fWindowSizeThreshold; }
-         UInt32    GetWindowSizeMaxThreshold()        { return fWindowSizeMaxThreshold; }
-       
+           
         //
         // force logs to close after each write (true or false)
         Bool16  GetCloseLogsOnWrite()           { return fCloseLogsOnWrite; }
         void    SetCloseLogsOnWrite(Bool16 closeLogsOnWrite);
-
-        //
-        // Transport addr pref. Caller must provide a buffer big enough for an IP addr
-        void    GetTransportSrcAddr(StrPtrLen* ioBuf);
                 
         // String preferences. Note that the pointers returned here is allocated
         // memory that you must delete!
@@ -163,10 +134,8 @@ class QTSServerPrefs : public QTSSPrefs
 
         Bool16 ServerStatFileEnabled()      { return fEnableMonitorStatsFile; }
         UInt32 GetStatFileIntervalSec()     { return fStatsFileIntervalSeconds; }
-        Bool16  AutoDeleteSDPFiles()        { return fauto_delete_sdp_files; }
         QTSS_AuthScheme GetAuthScheme()     { return fAuthScheme; }
 
-        UInt32 DeleteSDPFilesInterval()           { return fsdp_file_delete_interval_seconds; }
                 
         UInt32  GetNumThreads()                   { return fNumThreads; } //short tasks threads
         UInt32  GetNumBlockingThreads()           { return fNumRTSPThreads; } //return the number of threads that long tasks will be scheduled on -- RTSP processing for example.
@@ -203,41 +172,15 @@ class QTSServerPrefs : public QTSSPrefs
         UInt32  fErrorLogBytes;
         UInt32  fErrorLogVerbosity;
         Bool16  fScreenLoggingEnabled;
-        Bool16  fErrorLogEnabled;
-        
-        SInt32  fDropAllPacketsTimeInMsec;
-        SInt32  fDropAllVideoPacketsTimeInMsec;
-        SInt32  fThinAllTheWayTimeInMsec;
-        SInt32  fAlwaysThinTimeInMsec;
-        SInt32  fStartThinningTimeInMsec;
-        SInt32  fStartThickingTimeInMsec;
-        SInt32  fThickAllTheWayTimeInMsec;
-        UInt32  fQualityCheckIntervalInMsec;
+        Bool16  fErrorLogEnabled;  
 
         UInt32  fMinTCPBufferSizeInBytes;
         UInt32  fMaxTCPBufferSizeInBytes;
         Float32 fTCPSecondsToBuffer;
 
         Bool16  fDoReportHTTPConnectionAddress;
-        Bool16  fAppendSrcAddrInTransport;
 
-        UInt32  fSmallWindowSizeInK;
-        UInt32  fMediumWindowSizeInK;
-        UInt32  fLargeWindowSizeInK;
-        UInt32  fWindowSizeThreshold;
-        UInt32  fWindowSizeMaxThreshold;
-
-        UInt32  fMaxRetransDelayInMsec;
-        Bool16  fIsAckLoggingEnabled;
-        UInt32  fRTCPPollIntervalInMsec;
-        UInt32  fRTCPSocketRcvBufSizeInK;
-        Bool16  fIsSlowStartEnabled;
-        UInt32  fSendIntervalInMsec;
-        UInt32  fMaxSendAheadTimeInSecs;
-        Bool16  fauto_delete_sdp_files;
         QTSS_AuthScheme fAuthScheme;
-        UInt32  fsdp_file_delete_interval_seconds;
-        Bool16  fAutoStart;
         Bool16  fEnableRTSPErrMsg;
         Bool16  fEnableRTSPDebugPrintfs;
         Bool16  fEnableRTSPServerInfo;
@@ -271,7 +214,6 @@ class QTSServerPrefs : public QTSSPrefs
         };
             
         void SetupAttributes();
-        void UpdateAuthScheme();
         //
         // Returns the string preference with the specified ID. If there
         // was any problem, this will return an empty string.
