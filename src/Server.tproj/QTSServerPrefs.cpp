@@ -86,21 +86,6 @@ QTSServerPrefs::PrefInfo QTSServerPrefs::sPrefInfo[] =
 
     { kAllowMultipleValues,     "554",      NULL					},  //rtsp_ports
 
-    { kDontAllowMultipleValues, "false",    NULL                    },  //RTSP_error_message
-    { kDontAllowMultipleValues, "false",    NULL                    },  //RTSP_debug_printfs
-#if __MacOSX__
-    { kDontAllowMultipleValues, "false",     NULL                    },  //enable_monitor_stats_file
-#else
-    { kDontAllowMultipleValues, "false",    NULL                    },  //enable_monitor_stats_file
-#endif
-    { kDontAllowMultipleValues, "10",        NULL                   },  //monitor_stats_file_interval_seconds
-    { kDontAllowMultipleValues, "server_status",        NULL        },   //monitor_stats_file_name
-    { kDontAllowMultipleValues, "false",    NULL                    },  //enable_packet_header_printfs
-    { kDontAllowMultipleValues, "rtp;rr;sr;app;ack;",NULL           },  //packet_header_printf_options
-	{ kDontAllowMultipleValues, "2.0",		NULL					},	//overbuffer_rate
-	{ kDontAllowMultipleValues,	"48",		NULL					},	//medium_window_size
-	{ kDontAllowMultipleValues,	"1000",		NULL					},	//window_size_max_threshold
-    { kDontAllowMultipleValues, "true",     NULL                    },  //RTSP_server_info
 	{ kDontAllowMultipleValues, "0",        NULL                    },  //run_num_threads
     { kDontAllowMultipleValues, DEFAULTPATHS_PID_DIR PLATFORM_SERVER_BIN_NAME ".pid",	NULL	},	//pid_file
     { kDontAllowMultipleValues, "false",    NULL                    },   //force_logs_close_on_write
@@ -142,32 +127,18 @@ QTSSAttrInfoDict::AttrInfo  QTSServerPrefs::sAttributes[] =
     /* 24 */ { "min_tcp_buffer_size",                   NULL,                   qtssAttrDataTypeUInt32,     qtssAttrModeRead | qtssAttrModeWrite },
     /* 25 */ { "max_tcp_buffer_size",                   NULL,                   qtssAttrDataTypeUInt32,     qtssAttrModeRead | qtssAttrModeWrite },
     /* 26 */ { "tcp_seconds_to_buffer",                 NULL,                   qtssAttrDataTypeFloat32,    qtssAttrModeRead | qtssAttrModeWrite },
-    /* 27 */ 
-    /* 28 */ { "local_camera_addr",						NULL,                   qtssAttrDataTypeCharArray,  qtssAttrModeRead | qtssAttrModeWrite },
-    /* 29 */ { "run_user_name",                         NULL,                   qtssAttrDataTypeCharArray,  qtssAttrModeRead | qtssAttrModeWrite },
-    /* 30 */ { "run_password",							NULL,                   qtssAttrDataTypeCharArray,  qtssAttrModeRead | qtssAttrModeWrite },
-    /* 31 */ { "rtsp_port",                             NULL,                   qtssAttrDataTypeUInt16,     qtssAttrModeRead | qtssAttrModeWrite },
+    /* 27 */ { "local_camera_addr",						NULL,                   qtssAttrDataTypeCharArray,  qtssAttrModeRead | qtssAttrModeWrite },
+    /* 28 */ { "run_user_name",                         NULL,                   qtssAttrDataTypeCharArray,  qtssAttrModeRead | qtssAttrModeWrite },
+    /* 29 */ { "run_password",							NULL,                   qtssAttrDataTypeCharArray,  qtssAttrModeRead | qtssAttrModeWrite },
+    /* 30 */ { "rtsp_port",                             NULL,                   qtssAttrDataTypeUInt16,     qtssAttrModeRead | qtssAttrModeWrite },
 
-	/* 32 */ { "RTSP_error_message",                    NULL,                   qtssAttrDataTypeBool16,     qtssAttrModeRead | qtssAttrModeWrite },
-    /* 33 */ { "RTSP_debug_printfs",                    NULL,                   qtssAttrDataTypeBool16,     qtssAttrModeRead | qtssAttrModeWrite },
-    /* 34 */ { "enable_monitor_stats_file",             NULL,                   qtssAttrDataTypeBool16,     qtssAttrModeRead | qtssAttrModeWrite },
-    /* 35 */ { "monitor_stats_file_interval_seconds",   NULL,                   qtssAttrDataTypeUInt32,     qtssAttrModeRead | qtssAttrModeWrite },
-    /* 36 */ { "monitor_stats_file_name",               NULL,                   qtssAttrDataTypeCharArray,  qtssAttrModeRead | qtssAttrModeWrite },
-    /* 37 */ { "enable_packet_header_printfs",          NULL,                   qtssAttrDataTypeBool16,     qtssAttrModeRead | qtssAttrModeWrite },
-    /* 38 */ { "packet_header_printf_options",          NULL,                   qtssAttrDataTypeCharArray,  qtssAttrModeRead | qtssAttrModeWrite },
-	/* 39 */ { "overbuffer_rate",						NULL,					qtssAttrDataTypeFloat32,	qtssAttrModeRead | qtssAttrModeWrite },
-	/* 40 */ { "medium_window_size",					NULL,					qtssAttrDataTypeUInt32,		qtssAttrModeRead | qtssAttrModeWrite },
-	/* 41 */ { "window_size_max_threshold",				NULL,					qtssAttrDataTypeUInt32,		qtssAttrModeRead | qtssAttrModeWrite },
-    /* 42 */ { "RTSP_server_info",                      NULL,                   qtssAttrDataTypeBool16,     qtssAttrModeRead | qtssAttrModeWrite },
-	/* 43 */ { "run_num_threads",                       NULL,                   qtssAttrDataTypeUInt32,     qtssAttrModeRead | qtssAttrModeWrite },
-	/* 44 */ { "pid_file",								NULL,					qtssAttrDataTypeCharArray,	qtssAttrModeRead | qtssAttrModeWrite },
-    /* 45 */ { "force_logs_close_on_write",             NULL,                   qtssAttrDataTypeBool16,     qtssAttrModeRead | qtssAttrModeWrite },
-    /* 46 */ { "disable_thinning",                      NULL,                   qtssAttrDataTypeBool16,     qtssAttrModeRead | qtssAttrModeWrite },
-	/* 47 */ { "default_stream_quality",                NULL,                   qtssAttrDataTypeUInt16,     qtssAttrModeRead | qtssAttrModeWrite },
-    /* 48 */ { "enable_allow_guest_default",			NULL,                   qtssAttrDataTypeBool16,     qtssAttrModeRead | qtssAttrModeWrite },
-    /* 49 */ { "run_num_rtsp_threads",					NULL,                   qtssAttrDataTypeUInt32,     qtssAttrModeRead | qtssAttrModeWrite }
-    
-
+	/* 31 */ { "run_num_threads",                       NULL,                   qtssAttrDataTypeUInt32,     qtssAttrModeRead | qtssAttrModeWrite },
+	/* 32 */ { "pid_file",								NULL,					qtssAttrDataTypeCharArray,	qtssAttrModeRead | qtssAttrModeWrite },
+    /* 33 */ { "force_logs_close_on_write",             NULL,                   qtssAttrDataTypeBool16,     qtssAttrModeRead | qtssAttrModeWrite },
+    /* 34 */ { "disable_thinning",                      NULL,                   qtssAttrDataTypeBool16,     qtssAttrModeRead | qtssAttrModeWrite },
+	/* 35 */ { "default_stream_quality",                NULL,                   qtssAttrDataTypeUInt16,     qtssAttrModeRead | qtssAttrModeWrite },
+    /* 36 */ { "enable_allow_guest_default",			NULL,                   qtssAttrDataTypeBool16,     qtssAttrModeRead | qtssAttrModeWrite },
+    /* 37 */ { "run_num_rtsp_threads",					NULL,                   qtssAttrDataTypeUInt32,     qtssAttrModeRead | qtssAttrModeWrite }
 };
 
 
@@ -194,18 +165,9 @@ QTSServerPrefs::QTSServerPrefs(XMLPrefsParser* inPrefsSource, Bool16 inWriteMiss
     fTCPSecondsToBuffer(0),
 
     fAuthScheme(qtssAuthDigest),
-    fEnableRTSPErrMsg(false),
-    fEnableRTSPDebugPrintfs(false),
-    fEnableRTSPServerInfo(true),
     fNumThreads(0),
     fNumRTSPThreads(0),
-#if __MacOSX__
-    fEnableMonitorStatsFile(false),
-#else
-    fEnableMonitorStatsFile(false),
-#endif 
-    fStatsFileIntervalSeconds(10),
-	fOverbufferRate(0.0),
+
     fCloseLogsOnWrite(false),
     fDisableThinning(false),
 	//
@@ -249,15 +211,9 @@ void QTSServerPrefs::SetupAttributes()
     this->SetVal(qtssPrefsMaxTCPBufferSizeInBytes,  &fMaxTCPBufferSizeInBytes,  sizeof(fMaxTCPBufferSizeInBytes));
     this->SetVal(qtssPrefsTCPSecondsToBuffer,   &fTCPSecondsToBuffer,           sizeof(fTCPSecondsToBuffer));
 
-	this->SetVal(qtssPrefsEnableRTSPErrorMessage,       &fEnableRTSPErrMsg,             sizeof(fEnableRTSPErrMsg));
-    this->SetVal(qtssPrefsEnableRTSPDebugPrintfs,       &fEnableRTSPDebugPrintfs,       sizeof(fEnableRTSPDebugPrintfs));
-    this->SetVal(qtssPrefsEnableRTSPServerInfo,         &fEnableRTSPServerInfo,         sizeof(fEnableRTSPServerInfo));
     this->SetVal(qtssPrefsRunNumThreads,                &fNumThreads,                   sizeof(fNumThreads));
-    this->SetVal(qtssPrefsEnableMonitorStatsFile,       &fEnableMonitorStatsFile,       sizeof(fEnableMonitorStatsFile));
-    this->SetVal(qtssPrefsMonitorStatsFileIntervalSec,  &fStatsFileIntervalSeconds,     sizeof(fStatsFileIntervalSeconds));
 
     this->SetVal(qtssPrefsCloseLogsOnWrite,             &fCloseLogsOnWrite,             sizeof(fCloseLogsOnWrite));
-	this->SetVal(qtssPrefsOverbufferRate,				&fOverbufferRate,				sizeof(fOverbufferRate));
     this->SetVal(qtssPrefsDisableThinning,              &fDisableThinning,              sizeof(fDisableThinning));
 
 	this->SetVal(qtssPrefsDefaultStreamQuality,			&fDefaultStreamQuality,                 sizeof(fDefaultStreamQuality)); //default_stream_quality
@@ -379,10 +335,6 @@ void QTSServerPrefs::RereadServerPreferences(Bool16 inWriteMissingPrefs)
             
         this->SetPrefValuesFromFileWithRef(pref, x, theNumValues);
     }
-    
-    //
-    // Do any special pref post-processing
-    QTSSModuleUtils::SetEnableRTSPErrorMsg(fEnableRTSPErrMsg);
     
     QTSSRollingLog::SetCloseOnWrite(fCloseLogsOnWrite);
     //

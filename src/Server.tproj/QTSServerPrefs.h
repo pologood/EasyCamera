@@ -91,14 +91,7 @@ class QTSServerPrefs : public QTSSPrefs
         UInt32  GetErrorRollIntervalInDays()    { return fErrorRollIntervalInDays; }
         UInt32  GetErrorLogVerbosity()          { return fErrorLogVerbosity; }
         void    SetErrorLogVerbosity(UInt32 verbosity)        { fErrorLogVerbosity = verbosity; }
-        
-        //
-        // For UDP retransmits
-        Bool16  GetRTSPDebugPrintfs()           { return fEnableRTSPDebugPrintfs; }
-        Bool16  GetRTSPServerInfoEnabled()      { return fEnableRTSPServerInfo; }
-        
-        Float32    GetOverbufferRate()                { return fOverbufferRate; }
-           
+
         //
         // force logs to close after each write (true or false)
         Bool16  GetCloseLogsOnWrite()           { return fCloseLogsOnWrite; }
@@ -126,11 +119,6 @@ class QTSServerPrefs : public QTSSPrefs
         char*   GetPidFilePath()
             { return this->GetStringPref(qtssPrefsPidFile); }
 
-        char*   GetStatsMonitorFileName()
-            { return this->GetStringPref(qtssPrefsMonitorStatsFileName); }
-
-        Bool16 ServerStatFileEnabled()      { return fEnableMonitorStatsFile; }
-        UInt32 GetStatFileIntervalSec()     { return fStatsFileIntervalSeconds; }
         QTSS_AuthScheme GetAuthScheme()     { return fAuthScheme; }
 
                 
@@ -176,16 +164,8 @@ class QTSServerPrefs : public QTSSPrefs
         Float32 fTCPSecondsToBuffer;
 
         QTSS_AuthScheme fAuthScheme;
-        Bool16  fEnableRTSPErrMsg;
-        Bool16  fEnableRTSPDebugPrintfs;
-        Bool16  fEnableRTSPServerInfo;
         UInt32  fNumThreads;
         UInt32  fNumRTSPThreads;
-        
-        Bool16  fEnableMonitorStatsFile;
-        UInt32  fStatsFileIntervalSeconds;
-    
-        Float32    fOverbufferRate;
         
         Bool16  fCloseLogsOnWrite;
         

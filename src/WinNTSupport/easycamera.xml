@@ -33,17 +33,6 @@
 		<LIST-PREF NAME="rtsp_port" TYPE="UInt16" >
 			<VALUE>554</VALUE>
 		</LIST-PREF>
-		<PREF NAME="RTSP_error_message" TYPE="Bool16" >false</PREF>
-		<PREF NAME="RTSP_debug_printfs" TYPE="Bool16" >false</PREF>
-		<PREF NAME="enable_monitor_stats_file" TYPE="Bool16" >false</PREF>
-		<PREF NAME="monitor_stats_file_interval_seconds" TYPE="UInt32" >10</PREF>
-		<PREF NAME="monitor_stats_file_name" >server_status</PREF>
-		<PREF NAME="enable_packet_header_printfs" TYPE="Bool16" >false</PREF>
-		<PREF NAME="packet_header_printf_options" >rtp;rr;sr;app;ack;</PREF>
-		<PREF NAME="overbuffer_rate" TYPE="Float32" >2.0</PREF>
-		<PREF NAME="medium_window_size" TYPE="UInt32" >48</PREF>
-		<PREF NAME="window_size_max_threshold" TYPE="UInt32" >1000</PREF>
-		<PREF NAME="RTSP_server_info" TYPE="Bool16" >true</PREF>
 		<PREF NAME="run_num_threads" TYPE="UInt32" >0</PREF>
 		<PREF NAME="pid_file" >EasyCamera.pid</PREF>
 		<PREF NAME="force_logs_close_on_write" TYPE="Bool16" >false</PREF>

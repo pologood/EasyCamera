@@ -589,30 +589,17 @@ enum
     
 	qtssPrefsRTSPPorts                      = 30,   //"rtsp_ports"          // UInt16   
 
-    qtssPrefsEnableRTSPErrorMessage         = 31,   //"RTSP_error_message" //Bool16 // Appends a content body string error message for reported RTSP errors.
-    qtssPrefsEnableRTSPDebugPrintfs         = 32,   //"RTSP_debug_printfs" //Boo1l6 // printfs incoming RTSPRequests and Outgoing RTSP responses.
-
-    qtssPrefsEnableMonitorStatsFile         = 33,   //"enable_monitor_stats_file" //Bool16 //write server stats to the monitor file
-    qtssPrefsMonitorStatsFileIntervalSec    = 34,   //"monitor_stats_file_interval_seconds" // private
-    qtssPrefsMonitorStatsFileName           = 35,   //"monitor_stats_file_name" // private
-
-    qtssPrefsEnablePacketHeaderPrintfs      = 36,   // "enable_packet_header_printfs" //Bool16 // RTP and RTCP printfs of outgoing packets.
-    qtssPrefsPacketHeaderPrintfOptions      = 37,   // "packet_header_printf_options" //char //set of printfs to print. Form is [text option] [;]  default is "rtp;rr;sr;". This means rtp packets, rtcp sender reports, and rtcp receiver reports.
-    qtssPrefsOverbufferRate                 = 38,    // "overbuffer_rate"    //Float32
-    qtssPrefsMediumWindowSizeInK            = 39,    // "medium_window_size" // UInt32    //default size that will be used for medium bitrate movies
-    qtssPrefsWindowSizeMaxThreshold         = 40,    //"window_size_threshold"  // UInt32    //bitrate at which we switch from medium to large window size
-    qtssPrefsEnableRTSPServerInfo           = 41,   //"RTSP_server_info" //Boo1l6 // Adds server info to the RTSP responses.
-    qtssPrefsRunNumThreads                  = 42,   //"run_num_threads" //UInt32 // if value is non-zero, will  create that many task threads; otherwise a thread will be created for each processor
-    qtssPrefsPidFile                        = 43,    //"pid_file" //Char Array //path to pid file
-    qtssPrefsCloseLogsOnWrite               = 44,   // "force_logs_close_on_write" //Bool16 // force log files to close after each write.
-    qtssPrefsDisableThinning                = 45,   // "disable_thinning" //Bool16 // Usually used for performance testing. Turn off stream thinning from packet loss or stream lateness.
+	qtssPrefsRunNumThreads                  = 31,   //"run_num_threads" //UInt32 // if value is non-zero, will  create that many task threads; otherwise a thread will be created for each processor
+    qtssPrefsPidFile                        = 32,    //"pid_file" //Char Array //path to pid file
+    qtssPrefsCloseLogsOnWrite               = 33,   // "force_logs_close_on_write" //Bool16 // force log files to close after each write.
+    qtssPrefsDisableThinning                = 34,   // "disable_thinning" //Bool16 // Usually used for performance testing. Turn off stream thinning from packet loss or stream lateness.
     
-	qtssPrefsDefaultStreamQuality           = 46,   // "default_stream_quality //UInt16 //0 is all day and best quality. Higher values are worse maximum depends on the media and the media module
+	qtssPrefsDefaultStreamQuality           = 35,   // "default_stream_quality //UInt16 //0 is all day and best quality. Higher values are worse maximum depends on the media and the media module
 
-	qtssPrefsEnableAllowGuestDefault        = 47,   // "enable_allow_guest_authorize_default" //Boo1l6 // server hint to access modules to allow guest access as the default (can be overriden in a qtaccess file or other means)
-    qtssPrefsNumRTSPThreads                 = 48,   // "run_num_rtsp_threads" //UInt32 // if value is non-zero, the server will  create that many task threads; otherwise a single thread will be created.
+	qtssPrefsEnableAllowGuestDefault        = 36,   // "enable_allow_guest_authorize_default" //Boo1l6 // server hint to access modules to allow guest access as the default (can be overriden in a qtaccess file or other means)
+    qtssPrefsNumRTSPThreads                 = 37,   // "run_num_rtsp_threads" //UInt32 // if value is non-zero, the server will  create that many task threads; otherwise a single thread will be created.
 	
-    qtssPrefsNumParams                      = 49
+    qtssPrefsNumParams                      = 38
 };
 
 typedef UInt32 QTSS_PrefsAttributes;

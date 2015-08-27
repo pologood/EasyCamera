@@ -530,8 +530,6 @@ void    QTSServer::LoadCompiledInModules()
 
 }
 
-
-
 void    QTSServer::InitCallbacks()
 {
     sCallbacks.addr[kNewCallback] =                 (QTSS_CallbackProcPtr)QTSSCallbacks::QTSS_New;
@@ -857,15 +855,9 @@ void QTSServer::DoInitRole()
             delete theModule;
         }
     }
-    this->SetupPublicHeader();
 
     OSThread::SetMainThreadData(NULL);
 }
-
-void QTSServer::SetupPublicHeader()
-{
-}
-
 
 Task*   RTSPListenerSocket::GetSessionTask(TCPSocket** outSocket)
 {
