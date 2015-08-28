@@ -869,14 +869,6 @@ typedef struct
 
 } QTSS_IncomingData_Params;
 
-typedef struct 
-{
-    QTSS_RTSPSessionObject		inRTSPSession;
-	UInt8						inChannel;
-    char*                       inPacketData;
-    UInt16                      inPacketLen;
-} QTSS_RelayingData_Params;
-
 typedef struct
 {
     QTSS_RTSPSessionObject      inRTSPSession;
@@ -963,10 +955,7 @@ typedef union
     QTSS_AdviseFile_Params              adviseFileParams;
     QTSS_ReadFile_Params                readFileParams;
     QTSS_CloseFile_Params               closeFileParams;
-    QTSS_RequestEventFile_Params        reqEventFileParams;
-
-	QTSS_RelayingData_Params			rtspRelayingDataParams;
-    
+    QTSS_RequestEventFile_Params        reqEventFileParams;    
 } QTSS_RoleParams, *QTSS_RoleParamPtr;
 
 typedef struct
@@ -1540,44 +1529,6 @@ QTSS_Error  QTSS_SendStandardRTSPResponse(QTSS_RTSPRequestObject inRTSPRequest, 
 
 
 /*****************************************/
-//  CLIENT SESSION CALLBACKS
-//
-//  QTSS API Modules have the option of generating and sending RTP packets. Only
-//  one module currently can generate packets for a particular session. In order
-//  to do this, call QTSS_AddRTPStream. This must be done in response to a RTSP
-//  request, and typically is done in response to a SETUP request from the client.
-//
-//  After one or more streams have been added to the session, the module that "owns"
-//  the packet sending for that session can call QTSS_Play to start the streams playing.
-//  After calling QTSS_Play, the module will get invoked in the QTSS_SendPackets_Role.
-//  Calling QTSS_Pause stops playing.
-//
-//  The "owning" module may call QTSS_Teardown at any time. Doing this closes the
-//  session and will cause the QTSS_SessionClosing_Role to be invoked for this session. 
-//
-//  Returns:    QTSS_NoErr
-//              QTSS_BadArgument: Bad argument
-//              QTSS_RequestFailed: QTSS_RTPStreamObject couldn't be created.
-QTSS_Error  QTSS_AddRTPStream(QTSS_ClientSessionObject inClientSession, QTSS_RTSPRequestObject inRTSPRequest, QTSS_RTPStreamObject* outStream, QTSS_AddStreamFlags inFlags);
-//
-//  Returns:    QTSS_NoErr
-//              QTSS_BadArgument: Bad argument
-//              QTSS_RequestFailed: No streams added to this session.
-QTSS_Error  QTSS_Play(QTSS_ClientSessionObject inClientSession, QTSS_RTSPRequestObject inRTSPRequest, QTSS_PlayFlags inPlayFlags);
-//
-//  Returns:    QTSS_NoErr
-//              QTSS_BadArgument: Bad argument
-QTSS_Error  QTSS_Pause(QTSS_ClientSessionObject inClientSession);
-//
-//  Returns:    QTSS_NoErr
-//              QTSS_BadArgument: Bad argument
-QTSS_Error  QTSS_Teardown(QTSS_ClientSessionObject inClientSession);
-
-//  Returns:    QTSS_NoErr
-//              QTSS_BadArgument: Bad argument
-QTSS_Error  QTSS_RefreshTimeOut(QTSS_ClientSessionObject inClientSession);
-
-/*****************************************/
 //  FILE SYSTEM CALLBACKS
 //
 //  All modules that interact with the local file system should use these APIs instead
@@ -1744,7 +1695,6 @@ QTSS_Error  QTSS_Authenticate(  const char* inAuthUserName,
 //                      QTSS_BadArgument
 QTSS_Error    QTSS_Authorize(QTSS_RTSPRequestObject inAuthRequestObject, char** outAuthRealm, Bool16* outAuthUserAllowed);
 
-QTSS_Error	QTSS_ReflectRTPData(QTSS_Object inObject, const char* inData, UInt32 inDataLen, UInt32 inTrackID);
 
 void        QTSS_LockStdLib();
 void        QTSS_UnlockStdLib();

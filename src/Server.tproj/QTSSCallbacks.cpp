@@ -542,36 +542,6 @@ QTSS_Error QTSSCallbacks::QTSS_SendStandardRTSPResponse(QTSS_RTSPRequestObject i
     return QTSS_BadArgument;
 }
 
-
-
-
-QTSS_Error  QTSSCallbacks::QTSS_AddRTPStream(QTSS_ClientSessionObject inClientSession, QTSS_RTSPRequestObject inRTSPRequest, QTSS_RTPStreamObject* outStream, QTSS_AddStreamFlags inFlags)
-{
-    return QTSS_NoErr;
-}
-
-QTSS_Error  QTSSCallbacks::QTSS_Play(QTSS_ClientSessionObject inClientSession, QTSS_RTSPRequestObject inRTSPRequest, QTSS_PlayFlags inPlayFlags)
-{
-    return QTSS_NoErr;
-}
-
-QTSS_Error  QTSSCallbacks::QTSS_Pause(QTSS_ClientSessionObject inClientSession)
-{
-    return QTSS_NoErr;
-}
-
-QTSS_Error  QTSSCallbacks::QTSS_Teardown(QTSS_ClientSessionObject inClientSession)
-{
-    return QTSS_NoErr;
-}
-
-QTSS_Error  QTSSCallbacks::QTSS_RefreshTimeOut(QTSS_ClientSessionObject inClientSession)
-{
-    return QTSS_NoErr;
-}
-
-
-
 QTSS_Error  QTSSCallbacks::QTSS_RequestEvent(QTSS_StreamRef inStream, QTSS_EventType inEventMask)
 {
     // First thing to do is to alter the thread's module state to reflect the fact
@@ -724,24 +694,3 @@ void QTSSCallbacks::QTSS_UnlockStdLib()
 {
     OS::GetStdLibMutex()->Unlock();
 }
-
-QTSS_Error	QTSSCallbacks::QTSS_ReflectRTPTrackData(QTSS_Object inObject, const char* inData, UInt32 inDataLen, UInt32 inTrackID)
-{
-	QTSS_RoleParams packetParams;
-	packetParams.rtspRelayingDataParams.inRTSPSession = inObject;
-	packetParams.rtspRelayingDataParams.inPacketData = (char*)inData;
-	packetParams.rtspRelayingDataParams.inPacketLen = inDataLen;
-	packetParams.rtspRelayingDataParams.inChannel = inTrackID*2;
-
-	UInt32 fCurrentModule = 0;
-	UInt32 numModules = QTSServerInterface::GetNumModulesInRole(QTSSModule::kRTSPRelayingDataRole);
-	for (; fCurrentModule < numModules; fCurrentModule++)
-	{
-		QTSSModule* theModule = QTSServerInterface::GetModule(QTSSModule::kRTSPRelayingDataRole, fCurrentModule);
-		(void)theModule->CallDispatch(QTSS_RTSPRelayingData_Role, &packetParams);
-	}
-
-	return 0;
-}
-
-

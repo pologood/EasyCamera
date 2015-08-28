@@ -131,15 +131,7 @@ class QTSSCallbacks
         static QTSS_Error   QTSS_SendRTSPHeaders(QTSS_RTSPRequestObject inRef);
         static QTSS_Error   QTSS_AppendRTSPHeader(QTSS_RTSPRequestObject inRef, QTSS_RTSPHeader inHeader, char* inValue, UInt32 inValueLen);
         static QTSS_Error   QTSS_SendStandardRTSPResponse(QTSS_RTSPRequestObject inRTSPRequest, QTSS_Object inRTPInfo, UInt32 inFlags);
-
-        // RTP ROUTINES
-        
-        static QTSS_Error   QTSS_AddRTPStream(QTSS_ClientSessionObject inClientSession, QTSS_RTSPRequestObject inRTSPRequest, QTSS_RTPStreamObject* outStream, QTSS_AddStreamFlags inFlags);
-        static QTSS_Error   QTSS_Play(QTSS_ClientSessionObject inClientSession, QTSS_RTSPRequestObject inRTSPRequest, QTSS_PlayFlags inPlayFlags);
-        static QTSS_Error   QTSS_Pause(QTSS_ClientSessionObject inClientSession);
-        static QTSS_Error   QTSS_Teardown(QTSS_ClientSessionObject inClientSession);
-        static QTSS_Error   QTSS_RefreshTimeOut(QTSS_ClientSessionObject inClientSession);
-        
+       
         // ASYNC I/O ROUTINES
         static QTSS_Error   QTSS_RequestEvent(QTSS_StreamRef inStream, QTSS_EventType inEventMask);
         static QTSS_Error   QTSS_SignalStream(QTSS_StreamRef inStream);
@@ -156,10 +148,7 @@ class QTSSCallbacks
 		static QTSS_Error	QTSS_Authorize(QTSS_RTSPRequestObject inAuthRequestObject, char** outAuthRealm, Bool16* outAuthUserAllowed);
             
         static void   QTSS_LockStdLib();
-        static void   QTSS_UnlockStdLib();
-
-		static	QTSS_Error	QTSS_ReflectRTPTrackData(QTSS_Object inObject, const char* inData, UInt32 inDataLen, UInt32 inTrackID);
-    
+        static void   QTSS_UnlockStdLib();    
 };
 
 #endif //__QTSSCALLBACKS_H__
