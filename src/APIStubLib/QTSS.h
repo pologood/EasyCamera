@@ -750,7 +750,6 @@ enum
     QTSS_RTSPSessionClosing_Role =   FOUR_CHARS_TO_INT('s', 'e', 's', 'c'), //sesc //RTSP session is going away
 
     QTSS_RTSPIncomingData_Role =     FOUR_CHARS_TO_INT('i', 'c', 'm', 'd'), //icmd //Incoming interleaved RTP data on this RTSP connection
-	QTSS_RTSPRelayingData_Role =     FOUR_CHARS_TO_INT('r', 'l', 'y', 'd'), //rlyd //Incoming interleaved RTP data on this RTSP connection
 
     //File system roles
     QTSS_OpenFilePreProcess_Role =  FOUR_CHARS_TO_INT('o', 'p', 'p', 'r'),  //oppr

@@ -66,9 +66,6 @@ char*    QTSSModule::sRoleNames[] =
            "RTSPRequestRole"          ,
            "RTSPPostProcessorRole"    ,
            "RTSPSessionClosingRole"   ,
-           "RTPSendPacketsRole"       ,
-           "ClientSessionClosingRole" ,
-           "RTCPProcessRole"          ,
            "ErrorLogRole"             ,
            "RereadPrefsRole"          ,
            "OpenFileRole"             ,
@@ -276,41 +273,7 @@ QTSS_Error  QTSSModule::AddRole(QTSS_Role inRole)
     if (arrayID < 0)
          return QTSS_BadArgument;
       
-   fRoleArray[arrayID] = true;
-
-/*  
-    switch (inRole)
-    {
-        // Map actual QTSS Role names to our private enum values. Turn on the proper one
-        // in the role array
-        case QTSS_Initialize_Role:          fRoleArray[kInitializeRole] = true;         break;
-        case QTSS_Shutdown_Role:            fRoleArray[kShutdownRole] = true;           break;
-        case QTSS_RTSPFilter_Role:          fRoleArray[kRTSPFilterRole] = true;         break;
-        case QTSS_RTSPRoute_Role:           fRoleArray[kRTSPRouteRole] = true;          break;
-        case QTSS_RTSPAuthenticate_Role:    fRoleArray[kRTSPAthnRole] = true;           break;
-        case QTSS_RTSPAuthorize_Role:       fRoleArray[kRTSPAuthRole] = true;           break;
-        case QTSS_RTSPPreProcessor_Role:    fRoleArray[kRTSPPreProcessorRole] = true;   break;
-        case QTSS_RTSPRequest_Role:         fRoleArray[kRTSPRequestRole] = true;        break;
-        case QTSS_RTSPPostProcessor_Role:   fRoleArray[kRTSPPostProcessorRole] = true;  break;
-        case QTSS_RTSPSessionClosing_Role:  fRoleArray[kRTSPSessionClosingRole] = true; break;
-        case QTSS_RTPSendPackets_Role:      fRoleArray[kRTPSendPacketsRole] = true;     break;
-        case QTSS_ClientSessionClosing_Role:fRoleArray[kClientSessionClosingRole] = true;break;
-        case QTSS_RTCPProcess_Role:         fRoleArray[kRTCPProcessRole] = true;        break;
-        case QTSS_ErrorLog_Role:            fRoleArray[kErrorLogRole] = true;           break;
-        case QTSS_RereadPrefs_Role:         fRoleArray[kRereadPrefsRole] = true;        break;
-        case QTSS_OpenFile_Role:            fRoleArray[kOpenFileRole] = true;           break;
-        case QTSS_OpenFilePreProcess_Role:  fRoleArray[kOpenFilePreProcessRole] = true; break;
-        case QTSS_AdviseFile_Role:          fRoleArray[kAdviseFileRole] = true;         break;
-        case QTSS_ReadFile_Role:            fRoleArray[kReadFileRole] = true;           break;
-        case QTSS_CloseFile_Role:           fRoleArray[kCloseFileRole] = true;          break;
-        case QTSS_RequestEventFile_Role:    fRoleArray[kRequestEventFileRole] = true;   break;
-        case QTSS_RTSPIncomingData_Role:    fRoleArray[kRTSPIncomingDataRole] = true;   break;      
-        case QTSS_StateChange_Role:         fRoleArray[kStateChangeRole] = true;        break;      
-        case QTSS_Interval_Role:            fRoleArray[kTimedIntervalRole] = true;      break;      
-        default:
-            return QTSS_BadArgument;
-    }
-*/
+	fRoleArray[arrayID] = true;
 
     if (inRole == QTSS_RTSPRequest_Role)
         sHasRTSPRequestModule = true;
