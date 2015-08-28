@@ -239,10 +239,8 @@ SInt32 QTSSModule::GetPrivateRoleIndex(QTSS_Role apiRole)
         case QTSS_RTSPRequest_Role:         return kRTSPRequestRole         ;
         case QTSS_RTSPPostProcessor_Role:   return kRTSPPostProcessorRole   ;
         case QTSS_RTSPSessionClosing_Role:  return kRTSPSessionClosingRole  ;
-        case QTSS_RTPSendPackets_Role:      return kRTPSendPacketsRole      ;
-        case QTSS_ClientSessionClosing_Role:return kClientSessionClosingRole;
-        case QTSS_RTCPProcess_Role:         return kRTCPProcessRole         ;
-        case QTSS_ErrorLog_Role:            return kErrorLogRole            ;
+
+		case QTSS_ErrorLog_Role:            return kErrorLogRole            ;
         case QTSS_RereadPrefs_Role:         return kRereadPrefsRole         ;
         case QTSS_OpenFile_Role:            return kOpenFileRole            ;
         case QTSS_OpenFilePreProcess_Role:  return kOpenFilePreProcessRole  ;
@@ -251,8 +249,8 @@ SInt32 QTSSModule::GetPrivateRoleIndex(QTSS_Role apiRole)
         case QTSS_CloseFile_Role:           return kCloseFileRole           ;
         case QTSS_RequestEventFile_Role:    return kRequestEventFileRole    ;
         case QTSS_RTSPIncomingData_Role:    return kRTSPIncomingDataRole    ;  
-		case QTSS_RTSPRelayingData_Role:	return kRTSPRelayingDataRole	;
-        case QTSS_StateChange_Role:         return kStateChangeRole         ;      
+
+		case QTSS_StateChange_Role:         return kStateChangeRole         ;      
         case QTSS_Interval_Role:            return kTimedIntervalRole       ;      
         default:
             return -1;

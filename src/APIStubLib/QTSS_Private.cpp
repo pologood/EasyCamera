@@ -26,9 +26,6 @@
     File:       QTSS_Private.c
 
     Contains:   Code for stub library and stub callback functions.
-                    
-    
-    
 */
 
 #include <stdlib.h>
@@ -237,8 +234,6 @@ QTSS_Error  QTSS_Advise(QTSS_StreamRef inRef, UInt64 inPosition, UInt32 inAdvise
 {
     return (sCallbacks->addr [kAdviseCallback]) (inRef, inPosition, inAdviseSize);      
 }
-
-
 
 // SERVICE ROUTINES
 
