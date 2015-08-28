@@ -105,39 +105,23 @@ QTSSAttrInfoDict::AttrInfo  QTSServerInterface::sAttributes[] =
     /* 8  */ { "qtssSvrState",              NULL,   qtssAttrDataTypeUInt32,     qtssAttrModeRead | qtssAttrModeWrite  },
     /* 9  */ { "qtssSvrIsOutOfDescriptors",     IsOutOfDescriptors,     qtssAttrDataTypeBool16, qtssAttrModeRead },
     /* 10 */ { "qtssRTSPCurrentSessionCount",   NULL,   qtssAttrDataTypeUInt32,     qtssAttrModeRead },
-    /* 11 */ { "qtssRTSPHTTPCurrentSessionCount",NULL,  qtssAttrDataTypeUInt32,     qtssAttrModeRead },
-    /* 12 */ { "qtssRTPSvrNumUDPSockets",       NULL,     qtssAttrDataTypeUInt32, qtssAttrModeRead },
-    /* 13 */ { "qtssRTPSvrCurConn",             NULL,   qtssAttrDataTypeUInt32,     qtssAttrModeRead },
-    /* 14 */ { "qtssRTPSvrTotalConn",           NULL,   qtssAttrDataTypeUInt32,     qtssAttrModeRead },
-    /* 15 */ { "qtssRTPSvrCurBandwidth",        NULL,   qtssAttrDataTypeUInt32,     qtssAttrModeRead },
-    /* 16 */ { "qtssRTPSvrTotalBytes",          NULL,   qtssAttrDataTypeUInt64,     qtssAttrModeRead },
-    /* 17 */ { "qtssRTPSvrAvgBandwidth",        NULL,   qtssAttrDataTypeUInt32,     qtssAttrModeRead },
-    /* 18 */ { "qtssRTPSvrCurPackets",          NULL,   qtssAttrDataTypeUInt32,     qtssAttrModeRead },
-    /* 19 */ { "qtssRTPSvrTotalPackets",        NULL,   qtssAttrDataTypeUInt64,     qtssAttrModeRead },
-    /* 20 */ { "qtssSvrHandledMethods",         NULL,   qtssAttrDataTypeUInt32,     qtssAttrModeRead | qtssAttrModeWrite | qtssAttrModePreempSafe  },
-    /* 21 */ { "qtssSvrModuleObjects",          NULL,   qtssAttrDataTypeQTSS_Object,qtssAttrModeRead | qtssAttrModePreempSafe },
-    /* 22 */ { "qtssSvrStartupTime",            NULL,   qtssAttrDataTypeTimeVal,    qtssAttrModeRead },
-    /* 23 */ { "qtssSvrGMTOffsetInHrs",         NULL,   qtssAttrDataTypeSInt32,     qtssAttrModeRead },
-    /* 24 */ { "qtssSvrDefaultIPAddrStr",       NULL,   qtssAttrDataTypeCharArray,  qtssAttrModeRead },
-    /* 25 */ { "qtssSvrPreferences",            NULL,   qtssAttrDataTypeQTSS_Object,qtssAttrModeRead | qtssAttrModeInstanceAttrAllowed},
-    /* 26 */ { "qtssSvrMessages",               NULL,   qtssAttrDataTypeQTSS_Object,qtssAttrModeRead },
-    /* 27 */ { "qtssSvrClientSessions",         NULL,   qtssAttrDataTypeQTSS_Object,qtssAttrModeRead },
-    /* 28 */ { "qtssSvrCurrentTimeMilliseconds",CurrentUnixTimeMilli,   qtssAttrDataTypeTimeVal,qtssAttrModeRead},
-    /* 29 */ { "qtssSvrCPULoadPercent",         NULL,   qtssAttrDataTypeFloat32,    qtssAttrModeRead},
-    /* 30 */ { "qtssSvrNumReliableUDPBuffers",  NULL,   qtssAttrDataTypeUInt32,     qtssAttrModeRead },
-    /* 31 */ { "qtssSvrReliableUDPWastageInBytes",NULL, qtssAttrDataTypeUInt32,        qtssAttrModeRead },
-    /* 32 */ { "qtssSvrConnectedUsers",         NULL, qtssAttrDataTypeQTSS_Object,      qtssAttrModeRead | qtssAttrModeWrite },
-    /* 33 */ { "qtssMP3SvrCurConn",             NULL, qtssAttrDataTypeUInt32,       qtssAttrModeRead | qtssAttrModeWrite | qtssAttrModePreempSafe },
-    /* 34 */ { "qtssMP3SvrTotalConn",           NULL, qtssAttrDataTypeUInt32,       qtssAttrModeRead | qtssAttrModeWrite | qtssAttrModePreempSafe },
-    /* 35 */ { "qtssMP3SvrCurBandwidth",        NULL, qtssAttrDataTypeUInt32,       qtssAttrModeRead | qtssAttrModeWrite | qtssAttrModePreempSafe },
-    /* 36 */ { "qtssMP3SvrTotalBytes",          NULL, qtssAttrDataTypeUInt64,       qtssAttrModeRead | qtssAttrModeWrite | qtssAttrModePreempSafe },
-    /* 37 */ { "qtssMP3SvrAvgBandwidth",        NULL, qtssAttrDataTypeUInt32,       qtssAttrModeRead | qtssAttrModeWrite | qtssAttrModePreempSafe },
 
-    /* 38  */ { "qtssSvrServerBuild",           NULL,   qtssAttrDataTypeCharArray,  qtssAttrModeRead | qtssAttrModePreempSafe },
-    /* 39  */ { "qtssSvrServerPlatform",        NULL,   qtssAttrDataTypeCharArray,  qtssAttrModeRead | qtssAttrModePreempSafe },
-    /* 40  */ { "qtssSvrRTSPServerComment",     NULL,   qtssAttrDataTypeCharArray,  qtssAttrModeRead | qtssAttrModePreempSafe },
-	/* 41  */ { "qtssSvrNumThinned",            NULL,   qtssAttrDataTypeSInt32,     qtssAttrModeRead | qtssAttrModePreempSafe },
-    /* 42  */ { "qtssSvrNumThreads",            NULL,   qtssAttrDataTypeUInt32,     qtssAttrModeRead | qtssAttrModePreempSafe }
+	/* 11 */ { "qtssSvrHandledMethods",         NULL,   qtssAttrDataTypeUInt32,     qtssAttrModeRead | qtssAttrModeWrite | qtssAttrModePreempSafe  },
+    /* 12 */ { "qtssSvrModuleObjects",          NULL,   qtssAttrDataTypeQTSS_Object,qtssAttrModeRead | qtssAttrModePreempSafe },
+    /* 13 */ { "qtssSvrStartupTime",            NULL,   qtssAttrDataTypeTimeVal,    qtssAttrModeRead },
+    /* 14 */ { "qtssSvrGMTOffsetInHrs",         NULL,   qtssAttrDataTypeSInt32,     qtssAttrModeRead },
+    /* 15 */ { "qtssSvrDefaultIPAddrStr",       NULL,   qtssAttrDataTypeCharArray,  qtssAttrModeRead },
+    /* 16 */ { "qtssSvrPreferences",            NULL,   qtssAttrDataTypeQTSS_Object,qtssAttrModeRead | qtssAttrModeInstanceAttrAllowed},
+    /* 17 */ { "qtssSvrMessages",               NULL,   qtssAttrDataTypeQTSS_Object,qtssAttrModeRead },
+    /* 18 */ { "qtssSvrClientSessions",         NULL,   qtssAttrDataTypeQTSS_Object,qtssAttrModeRead },
+    /* 19 */ { "qtssSvrCurrentTimeMilliseconds",CurrentUnixTimeMilli,   qtssAttrDataTypeTimeVal,qtssAttrModeRead},
+    /* 20 */ { "qtssSvrCPULoadPercent",         NULL,   qtssAttrDataTypeFloat32,    qtssAttrModeRead},
+
+    /* 21  */ { "qtssSvrServerBuild",           NULL,   qtssAttrDataTypeCharArray,  qtssAttrModeRead | qtssAttrModePreempSafe },
+    /* 22  */ { "qtssSvrServerPlatform",        NULL,   qtssAttrDataTypeCharArray,  qtssAttrModeRead | qtssAttrModePreempSafe },
+    /* 23  */ { "qtssSvrRTSPServerComment",     NULL,   qtssAttrDataTypeCharArray,  qtssAttrModeRead | qtssAttrModePreempSafe },
+	/* 24  */ { "qtssSvrNumThinned",            NULL,   qtssAttrDataTypeSInt32,     qtssAttrModeRead | qtssAttrModePreempSafe },
+    /* 25  */ { "qtssSvrNumThreads",            NULL,   qtssAttrDataTypeUInt32,     qtssAttrModeRead | qtssAttrModePreempSafe }
     
 };
 
@@ -193,29 +177,11 @@ QTSServerInterface::QTSServerInterface()
     fStartupTime_UnixMilli(0),
     fGMTOffset(0),
     fNumRTSPSessions(0),
-    fNumRTSPHTTPSessions(0),
-    fNumRTPSessions(0),
-    fNumRTPPlayingSessions(0),
-    fTotalRTPSessions(0),
-    fTotalRTPBytes(0),
-    fTotalRTPPackets(0),
-    fTotalRTPPacketsLost(0),
-    fPeriodicRTPBytes(0),
-    fPeriodicRTPPacketsLost(0),
-    fPeriodicRTPPackets(0),
-    fCurrentRTPBandwidthInBits(0),
-    fAvgRTPBandwidthInBits(0),
-    fRTPPacketsPerSecond(0),
-    fCPUPercent(0),
+
+	fCPUPercent(0),
     fCPUTimeUsedInSec(0),
-    fUDPWastageInBytes(0),
-    fNumUDPBuffers(0),
-    fNumMP3Sessions(0),
-    fTotalMP3Sessions(0),
-    fCurrentMP3BandwidthInBits(0),
-    fTotalMP3Bytes(0),
-    fAvgMP3BandwidthInBits(0),
-    fSigInt(false),
+	
+	fSigInt(false),
     fSigTerm(false),
     fDebugLevel(0),
     fDebugOptions(0),    
@@ -240,22 +206,10 @@ QTSServerInterface::QTSServerInterface()
     this->SetVal(qtssSvrServerBuildDate,    sServerBuildDateStr.Ptr,    sServerBuildDateStr.Len);
     this->SetVal(qtssSvrRTSPServerHeader,   sServerHeaderPtr.Ptr,       sServerHeaderPtr.Len);
     this->SetVal(qtssRTSPCurrentSessionCount, &fNumRTSPSessions,        sizeof(fNumRTSPSessions));
-    this->SetVal(qtssRTSPHTTPCurrentSessionCount, &fNumRTSPHTTPSessions,sizeof(fNumRTSPHTTPSessions));
-    this->SetVal(qtssRTPSvrCurConn,         &fNumRTPSessions,           sizeof(fNumRTPSessions));
-    this->SetVal(qtssRTPSvrTotalConn,       &fTotalRTPSessions,         sizeof(fTotalRTPSessions));
-    this->SetVal(qtssRTPSvrCurBandwidth,    &fCurrentRTPBandwidthInBits,sizeof(fCurrentRTPBandwidthInBits));
-    this->SetVal(qtssRTPSvrTotalBytes,      &fTotalRTPBytes,            sizeof(fTotalRTPBytes));
-    this->SetVal(qtssRTPSvrAvgBandwidth,    &fAvgRTPBandwidthInBits,    sizeof(fAvgRTPBandwidthInBits));
-    this->SetVal(qtssRTPSvrCurPackets,      &fRTPPacketsPerSecond,      sizeof(fRTPPacketsPerSecond));
-    this->SetVal(qtssRTPSvrTotalPackets,    &fTotalRTPPackets,          sizeof(fTotalRTPPackets));
-    this->SetVal(qtssSvrStartupTime,        &fStartupTime_UnixMilli,    sizeof(fStartupTime_UnixMilli));
+
+	this->SetVal(qtssSvrStartupTime,        &fStartupTime_UnixMilli,    sizeof(fStartupTime_UnixMilli));
     this->SetVal(qtssSvrGMTOffsetInHrs,     &fGMTOffset,                sizeof(fGMTOffset));
     this->SetVal(qtssSvrCPULoadPercent,     &fCPUPercent,               sizeof(fCPUPercent));
-    this->SetVal(qtssMP3SvrCurConn,         &fNumMP3Sessions,           sizeof(fNumMP3Sessions));
-    this->SetVal(qtssMP3SvrTotalConn,       &fTotalMP3Sessions,         sizeof(fTotalMP3Sessions));
-    this->SetVal(qtssMP3SvrCurBandwidth,    &fCurrentMP3BandwidthInBits,sizeof(fCurrentMP3BandwidthInBits));
-    this->SetVal(qtssMP3SvrTotalBytes,      &fTotalMP3Bytes,            sizeof(fTotalMP3Bytes));
-    this->SetVal(qtssMP3SvrAvgBandwidth,    &fAvgMP3BandwidthInBits,    sizeof(fAvgMP3BandwidthInBits));
 
     this->SetVal(qtssSvrServerBuild,        sServerBuildStr.Ptr,    sServerBuildStr.Len);
     this->SetVal(qtssSvrRTSPServerComment,  sServerCommentStr.Ptr,  sServerCommentStr.Len);

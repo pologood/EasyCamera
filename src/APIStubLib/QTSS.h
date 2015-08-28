@@ -497,45 +497,25 @@ enum
     qtssSvrState                    = 8,    //r/w   //QTSS_ServerState  //The current state of the server. If a module sets the server state, the server will respond in the appropriate fashion. Setting to qtssRefusingConnectionsState causes the server to refuse connections, setting to qtssFatalErrorState or qtssShuttingDownState causes the server to quit.
     qtssSvrIsOutOfDescriptors       = 9,    //read  //Bool16            //true if the server has run out of file descriptors, false otherwise
     qtssRTSPCurrentSessionCount     = 10,   //read  //UInt32            //Current number of connected clients over standard RTSP
-    qtssRTSPHTTPCurrentSessionCount = 11,   //read  //UInt32            //Current number of connected clients over RTSP / HTTP
+   
+    qtssSvrHandledMethods           = 11,   //r/w       //QTSS_RTSPMethod   //The methods that the server supports. Modules should append the methods they support to this attribute in their QTSS_Initialize_Role.
+    qtssSvrModuleObjects            = 12,   //read  // this IS PREMPTIVE SAFE!  //QTSS_ModuleObject // A module object representing each module
+    qtssSvrStartupTime              = 13,   //read      //QTSS_TimeVal  //Time the server started up
+    qtssSvrGMTOffsetInHrs           = 14,   //read      //SInt32        //Server time zone (offset from GMT in hours)
+    qtssSvrDefaultIPAddrStr         = 15,   //read      //char array    //The "default" IP address of the server as a string
 
-    qtssRTPSvrNumUDPSockets         = 12,   //read      //UInt32    //Number of UDP sockets currently being used by the server
-    qtssRTPSvrCurConn               = 13,   //read      //UInt32    //Number of clients currently connected to the server
-    qtssRTPSvrTotalConn             = 14,   //read      //UInt32    //Total number of clients since startup
-    qtssRTPSvrCurBandwidth          = 15,   //read      //UInt32    //Current bandwidth being output by the server in bits per second
-    qtssRTPSvrTotalBytes            = 16,   //read      //UInt64    //Total number of bytes served since startup
-    qtssRTPSvrAvgBandwidth          = 17,   //read      //UInt32    //Average bandwidth being output by the server in bits per second
-    qtssRTPSvrCurPackets            = 18,   //read      //UInt32    //Current packets per second being output by the server
-    qtssRTPSvrTotalPackets          = 19,   //read      //UInt64    //Total number of bytes served since startup
-    
-    qtssSvrHandledMethods           = 20,   //r/w       //QTSS_RTSPMethod   //The methods that the server supports. Modules should append the methods they support to this attribute in their QTSS_Initialize_Role.
-    qtssSvrModuleObjects            = 21,   //read  // this IS PREMPTIVE SAFE!  //QTSS_ModuleObject // A module object representing each module
-    qtssSvrStartupTime              = 22,   //read      //QTSS_TimeVal  //Time the server started up
-    qtssSvrGMTOffsetInHrs           = 23,   //read      //SInt32        //Server time zone (offset from GMT in hours)
-    qtssSvrDefaultIPAddrStr         = 24,   //read      //char array    //The "default" IP address of the server as a string
+    qtssSvrPreferences              = 16,   //read      //QTSS_PrefsObject  // An object representing each the server's preferences
+    qtssSvrMessages                 = 17,   //read      //QTSS_Object   // An object containing the server's error messages.
+    qtssSvrClientSessions           = 18,   //read      //QTSS_Object // An object containing all client sessions stored as indexed QTSS_ClientSessionObject(s).
+    qtssSvrCurrentTimeMilliseconds  = 19,   //read      //QTSS_TimeVal  //Server's current time in milliseconds. Retrieving this attribute is equivalent to calling QTSS_Milliseconds
+    qtssSvrCPULoadPercent           = 20,   //read      //Float32       //Current % CPU being used by the server
 
-    qtssSvrPreferences              = 25,   //read      //QTSS_PrefsObject  // An object representing each the server's preferences
-    qtssSvrMessages                 = 26,   //read      //QTSS_Object   // An object containing the server's error messages.
-    qtssSvrClientSessions           = 27,   //read      //QTSS_Object // An object containing all client sessions stored as indexed QTSS_ClientSessionObject(s).
-    qtssSvrCurrentTimeMilliseconds  = 28,   //read      //QTSS_TimeVal  //Server's current time in milliseconds. Retrieving this attribute is equivalent to calling QTSS_Milliseconds
-    qtssSvrCPULoadPercent           = 29,   //read      //Float32       //Current % CPU being used by the server
-
-    qtssSvrNumReliableUDPBuffers    = 30,   //read      //UInt32    //Number of buffers currently allocated for UDP retransmits
-    qtssSvrReliableUDPWastageInBytes= 31,   //read      //UInt32    //Amount of data in the reliable UDP buffers being wasted
-    qtssSvrConnectedUsers           = 32,   //r/w       //QTSS_Object   //List of connected user sessions (updated by modules for their sessions)
-    
-    qtssMP3SvrCurConn               = 33,   //r/w       //UInt32    //Number of MP3 client sessions connected
-    qtssMP3SvrTotalConn             = 34,   //r/w       //UInt32    //Total number of MP3  clients since startup
-    qtssMP3SvrCurBandwidth          = 35,   //r/w       //UInt32    //Current MP3 bandwidth being output by the server in bits per second
-    qtssMP3SvrTotalBytes            = 36,   //r/w       //UInt64    //Total number of MP3 bytes served since startup
-    qtssMP3SvrAvgBandwidth          = 37,   //r/w       //UInt32    //Average MP3 bandwidth being output by the server in bits per second
-
-    qtssSvrServerBuild              = 38,   //read      //char array //build of the server
-    qtssSvrServerPlatform           = 39,   //read      //char array //Platform (OS) of the server
-    qtssSvrRTSPServerComment        = 40,   //read      //char array //RTSP comment for the server header    
-    qtssSvrNumThinned               = 41,   //read      //SInt32    //Number of thinned sessions
-    qtssSvrNumThreads               = 42,   //read     //UInt32    //Number of task threads // see also qtssPrefsRunNumThreads
-    qtssSvrNumParams                = 43
+    qtssSvrServerBuild              = 21,   //read      //char array //build of the server
+    qtssSvrServerPlatform           = 22,   //read      //char array //Platform (OS) of the server
+    qtssSvrRTSPServerComment        = 23,   //read      //char array //RTSP comment for the server header    
+    qtssSvrNumThinned               = 24,   //read      //SInt32    //Number of thinned sessions
+    qtssSvrNumThreads               = 25,   //read     //UInt32    //Number of task threads // see also qtssPrefsRunNumThreads
+    qtssSvrNumParams                = 26
 };
 typedef UInt32 QTSS_ServerAttributes;
 

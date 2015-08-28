@@ -261,12 +261,6 @@ void RunServer()
                 restartServer = true;
         }
     }
-    
-    //
-    // Kill all the sessions and wait for them to die,
-    // but don't wait more than 5 seconds
-    for (UInt32 shutdownWaitCount = 0; (sServer->GetNumRTPSessions() > 0) && (shutdownWaitCount < 5); shutdownWaitCount++)
-        OSThread::Sleep(1000);
         
     //Now, make sure that the server can't do any work
     TaskThreadPool::RemoveThreads();

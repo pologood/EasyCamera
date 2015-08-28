@@ -885,11 +885,8 @@ Bool16 RTSPListenerSocket::OverMaxConnections(UInt32 buffer)
     if (maxConns > -1) // limit connections
     { 
         maxConns += buffer;
-        if  ( (theServer->GetNumRTPSessions() > (UInt32) maxConns) 
-              ||
-              ( theServer->GetNumRTSPSessions() + theServer->GetNumRTSPHTTPSessions() > (UInt32) maxConns ) 
-            )
-        {
+        if  ( theServer->GetNumRTSPSessions() > (UInt32) maxConns ) 
+		{
             overLimit = true;          
         }
     } 

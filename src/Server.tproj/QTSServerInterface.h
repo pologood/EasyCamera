@@ -91,31 +91,6 @@ class QTSServerInterface : public QTSSDictionary
         
         void                AlterCurrentRTSPSessionCount(SInt32 inDifference)
             { OSMutexLocker locker(&fMutex); fNumRTSPSessions += inDifference; }
-        void                AlterCurrentRTSPHTTPSessionCount(SInt32 inDifference)
-            { OSMutexLocker locker(&fMutex); fNumRTSPHTTPSessions += inDifference; }
-        void                SwapFromRTSPToHTTP()
-            { OSMutexLocker locker(&fMutex); fNumRTSPSessions--; fNumRTSPHTTPSessions++; }
-            
-        //total rtp bytes sent by the server
-        void            IncrementTotalRTPBytes(UInt32 bytes)
-                                        { (void)atomic_add(&fPeriodicRTPBytes, bytes); }
-        //total rtp packets sent by the server
-        void            IncrementTotalPackets()
-                                        { (void)atomic_add(&fPeriodicRTPPackets, 1); }
-        //total rtp bytes reported as lost by the clients
-        void            IncrementTotalRTPPacketsLost(UInt32 packets)
-                                        { (void)atomic_add(&fPeriodicRTPPacketsLost, packets); }
-                                        
-        // Also increments current RTP session count
-        void            IncrementTotalRTPSessions()
-            { OSMutexLocker locker(&fMutex); fNumRTPSessions++; fTotalRTPSessions++; }            
-        void            AlterCurrentRTPSessionCount(SInt32 inDifference)
-            { OSMutexLocker locker(&fMutex); fNumRTPSessions += inDifference; }
-
-        //track how many sessions are playing
-        void            AlterRTPPlayingSessions(SInt32 inDifference)
-            { OSMutexLocker locker(&fMutex); fNumRTPPlayingSessions += inDifference; }
-            
         
         void            IncrementTotalLate(SInt64 milliseconds)
            {    OSMutexLocker locker(&fMutex); 
@@ -144,26 +119,11 @@ class QTSServerInterface : public QTSSDictionary
         // ACCESSORS
         
         QTSS_ServerState    GetServerState()        { return fServerState; }
-        UInt32              GetNumRTPSessions()     { return fNumRTPSessions; }
         UInt32              GetNumRTSPSessions()    { return fNumRTSPSessions; }
-        UInt32              GetNumRTSPHTTPSessions(){ return fNumRTSPHTTPSessions; }
-        
-        UInt32              GetTotalRTPSessions()   { return fTotalRTPSessions; }
-        UInt32              GetNumRTPPlayingSessions()   { return fNumRTPPlayingSessions; }
-        
-        UInt32              GetCurBandwidthInBits() { return fCurrentRTPBandwidthInBits; }
-        UInt32              GetAvgBandwidthInBits() { return fAvgRTPBandwidthInBits; }
-        UInt32              GetRTPPacketsPerSec()   { return fRTPPacketsPerSecond; }
-        UInt64              GetTotalRTPBytes()      { return fTotalRTPBytes; }
-        UInt64              GetTotalRTPPacketsLost(){ return fTotalRTPPacketsLost; }
-        UInt64              GetTotalRTPPackets()    { return fTotalRTPPackets; }
+
         Float32             GetCPUPercent()         { return fCPUPercent; }
         Bool16              SigIntSet()             { return fSigInt; }
         Bool16				SigTermSet()			{ return fSigTerm; }
-		
-        UInt32              GetNumMP3Sessions()     { return fNumMP3Sessions; }
-        UInt32              GetTotalMP3Sessions()   { return fTotalMP3Sessions; }
-        UInt64              GetTotalMP3Bytes()      { return fTotalMP3Bytes; }
         
         UInt32              GetDebugLevel()                     { return fDebugLevel; }
         UInt32              GetDebugOptions()                   { return fDebugOptions; }
@@ -307,32 +267,6 @@ class QTSServerInterface : public QTSSDictionary
         OSMutex             fMutex;
 
         UInt32              fNumRTSPSessions;
-        UInt32              fNumRTSPHTTPSessions;
-        UInt32              fNumRTPSessions;
-
-        //stores the current number of playing connections.
-        UInt32              fNumRTPPlayingSessions;
-
-        //stores the total number of connections since startup.
-        UInt32              fTotalRTPSessions;
-        //stores the total number of bytes served since startup
-        UInt64              fTotalRTPBytes;
-        //total number of rtp packets sent since startup
-        UInt64              fTotalRTPPackets;
-        //stores the total number of bytes lost (as reported by clients) since startup
-        UInt64              fTotalRTPPacketsLost;
-
-        //because there is no 64 bit atomic add (for obvious reasons), we efficiently
-        //implement total byte counting by atomic adding to this variable, then every
-        //once in awhile updating the sTotalBytes.
-        unsigned int        fPeriodicRTPBytes;
-        unsigned int        fPeriodicRTPPacketsLost;
-        unsigned int        fPeriodicRTPPackets;
-        
-        //stores the current served bandwidth in BITS per second
-        UInt32              fCurrentRTPBandwidthInBits;
-        UInt32              fAvgRTPBandwidthInBits;
-        UInt32              fRTPPacketsPerSecond;
         
         Float32             fCPUPercent;
         Float32             fCPUTimeUsedInSec;              
@@ -346,17 +280,6 @@ class QTSServerInterface : public QTSSDictionary
         
         // Storage for current time attribute
         SInt64              fCurrentTime_UnixMilli;
-
-        // Stats for UDP retransmits
-        UInt32              fUDPWastageInBytes;
-        UInt32              fNumUDPBuffers;
-        
-        // MP3 Client Session params
-        UInt32              fNumMP3Sessions;
-        UInt32              fTotalMP3Sessions;
-        UInt32              fCurrentMP3BandwidthInBits;
-        UInt64              fTotalMP3Bytes;
-        UInt32              fAvgMP3BandwidthInBits;
         
         Bool16              fSigInt;
         Bool16              fSigTerm;
