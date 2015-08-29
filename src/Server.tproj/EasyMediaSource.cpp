@@ -279,9 +279,13 @@ QTSS_Error EasyMediaSource::StartStreaming()
 {
 	if(NULL == fPusherHandle)
 	{
-		EASY_MEDIA_INFO_T mediainfo;
+		EASY_MEDIA_INFO_T	mediainfo;
 		memset(&mediainfo, 0x00, sizeof(EASY_MEDIA_INFO_T));
-		mediainfo.u32VideoCodec =   0x1C;
+		mediainfo.u32VideoCodec =   EASY_SDK_VIDEO_CODEC_H264;
+		mediainfo.u32AudioCodec	=	EASY_SDK_AUDIO_CODEC_G711A;
+		mediainfo.u32AudioSamplerate = 8000;
+		mediainfo.u32AudioChannel = 1;
+		mediainfo.u32VideoFps = 20;
 
 		fPusherHandle = EasyPusher_Create();
 
@@ -323,6 +327,11 @@ QTSS_Error EasyMediaSource::PushFrame(unsigned char* frame, int len)
 		avFrame.u32VFrameType = (pstruAV->u32VFrameType == HI_NET_DEV_VIDEO_FRAME_I)?EASY_SDK_VIDEO_FRAME_I:EASY_SDK_VIDEO_FRAME_P;
 		avFrame.pBuffer = (unsigned char*)frame+sizeof(HI_S_AVFrame);
 		avFrame.u32AVFrameLen = pstruAV->u32AVFrameLen;
+
+
+		avFrame.u32AVFrameFlag	=	EASY_SDK_VIDEO_FRAME_FLAG;
+
+
 	}
 	else if (pstruAV->u32AVFrameFlag == HI_NET_DEV_AUDIO_FRAME_FLAG)
 	{
