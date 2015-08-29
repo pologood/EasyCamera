@@ -87,7 +87,7 @@ LDLIBSOPTIONS=-LLib/Linux/
 
 Bin/EasyCamera: ${OBJECTFILES}
 	${MKDIR} -p Bin
-	${LINK.cc} -o Bin/EasyCamera ${OBJECTFILES} ${LDLIBSOPTIONS} -ldl -lEasyCMS -lCommonUtilitiesLib -lEasyProtocol -lNetLib -ljsoncpp
+	${LINK.cc} -o Bin/EasyCamera ${OBJECTFILES} ${LDLIBSOPTIONS} -ldl -lEasyCMS -lCommonUtilitiesLib -lEasyProtocol -lNetLib -ljsoncpp -leasypush
 
 ${OBJECTDIR}/APICommonCode/QTAccessFile.o: APICommonCode/QTAccessFile.cpp 
 	${MKDIR} -p ${OBJECTDIR}/APICommonCode
