@@ -233,7 +233,7 @@ void QTSServer::InitModules(QTSS_ServerState inEndState)
 
 void QTSServer::StartTasks()
 {
-	//TODO::在这里创建EasyCamera MsgCenter
+	//TODO::在这里创建libEasyCMS
 	char cmsIP[16] = { 0 };
 	if(QTSServerInterface::GetServer()->GetPrefs()->GetCMSIP(cmsIP))
 	{
