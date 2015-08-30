@@ -151,7 +151,7 @@
           </preprocessorList>
         </ccTool>
         <linkerTool>
-          <output>Bin/EasyCamera</output>
+          <output>Bin/easycamera</output>
           <linkerAddLib>
             <pElem>Lib/Linux/</pElem>
           </linkerAddLib>
@@ -341,7 +341,7 @@
           <developmentMode>5</developmentMode>
         </asmTool>
         <linkerTool>
-          <output>Bin/EasyCamera</output>
+          <output>Bin/easycamera</output>
           <linkerAddLib>
             <pElem>Lib/Linux/</pElem>
           </linkerAddLib>
@@ -530,7 +530,7 @@
           <developmentMode>5</developmentMode>
         </asmTool>
         <linkerTool>
-          <output>Bin/EasyCamera</output>
+          <output>Bin/easycamera</output>
           <linkerAddLib>
             <pElem>Lib/arm</pElem>
           </linkerAddLib>

@@ -9,24 +9,24 @@ CND_DISTDIR=dist
 # Debug configuration
 CND_PLATFORM_Debug=GNU-Linux-x86
 CND_ARTIFACT_DIR_Debug=Bin
-CND_ARTIFACT_NAME_Debug=EasyCamera
-CND_ARTIFACT_PATH_Debug=Bin/EasyCamera
+CND_ARTIFACT_NAME_Debug=easycamera
+CND_ARTIFACT_PATH_Debug=Bin/easycamera
 CND_PACKAGE_DIR_Debug=dist/Debug/GNU-Linux-x86/package
 CND_PACKAGE_NAME_Debug=src.tar
 CND_PACKAGE_PATH_Debug=dist/Debug/GNU-Linux-x86/package/src.tar
 # Release configuration
 CND_PLATFORM_Release=GNU-Linux-x86
 CND_ARTIFACT_DIR_Release=Bin
-CND_ARTIFACT_NAME_Release=EasyCamera
-CND_ARTIFACT_PATH_Release=Bin/EasyCamera
+CND_ARTIFACT_NAME_Release=easycamera
+CND_ARTIFACT_PATH_Release=Bin/easycamera
 CND_PACKAGE_DIR_Release=dist/Release/GNU-Linux-x86/package
 CND_PACKAGE_NAME_Release=src.tar
 CND_PACKAGE_PATH_Release=dist/Release/GNU-Linux-x86/package/src.tar
 # ARM configuration
 CND_PLATFORM_ARM=GM8126-Linux-x86
 CND_ARTIFACT_DIR_ARM=Bin
-CND_ARTIFACT_NAME_ARM=EasyCamera
-CND_ARTIFACT_PATH_ARM=Bin/EasyCamera
+CND_ARTIFACT_NAME_ARM=easycamera
+CND_ARTIFACT_PATH_ARM=Bin/easycamera
 CND_PACKAGE_DIR_ARM=dist/ARM/GM8126-Linux-x86/package
 CND_PACKAGE_NAME_ARM=src.tar
 CND_PACKAGE_PATH_ARM=dist/ARM/GM8126-Linux-x86/package/src.tar

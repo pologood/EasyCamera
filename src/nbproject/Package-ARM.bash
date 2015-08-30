@@ -13,8 +13,8 @@ CND_BUILDDIR=build
 CND_DLIB_EXT=so
 NBTMPDIR=${CND_BUILDDIR}/${CND_CONF}/${CND_PLATFORM}/tmp-packaging
 TMPDIRNAME=tmp-packaging
-OUTPUT_PATH=Bin/EasyCamera
-OUTPUT_BASENAME=EasyCamera
+OUTPUT_PATH=Bin/easycamera
+OUTPUT_BASENAME=easycamera
 PACKAGE_TOP_DIR=src/
 
 # Functions

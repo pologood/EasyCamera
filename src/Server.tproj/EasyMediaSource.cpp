@@ -291,7 +291,7 @@ QTSS_Error EasyMediaSource::StartStreaming()
 
 		EasyPusher_SetEventCallback(fPusherHandle, __EasyPusher_Callback, 0, NULL);
 
-		EasyPusher_StartStream(fPusherHandle, "127.0.0.1", 554, "live.sdp", "", "", &mediainfo, 512);
+		EasyPusher_StartStream(fPusherHandle, "211.140.169.83", 554, "ipc.sdp", "", "", &mediainfo, 512);//115.29.139.20
 	}
 
 	NetDevStartStream();

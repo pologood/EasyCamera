@@ -6,7 +6,7 @@
 		<PREF NAME="maximum_connections" TYPE="SInt32" >10000</PREF>
 		<PREF NAME="maximum_bandwidth" TYPE="SInt32" >102400</PREF>
 		<PREF NAME="serial_number" >000000000001</PREF>
-		<PREF NAME="local_camera_addr" >127.0.0.1</PREF>
+		<PREF NAME="local_camera_addr" >192.168.0.105</PREF>
 		<PREF NAME="local_camera_port" TYPE="UInt16" >80</PREF>
 		<PREF NAME="bind_ip_addr" >0</PREF>
 		<PREF NAME="run_num_rtsp_threads" TYPE="UInt32" >1</PREF>
@@ -25,8 +25,8 @@
 		<PREF NAME="min_tcp_buffer_size" TYPE="UInt32" >8192</PREF>
 		<PREF NAME="max_tcp_buffer_size" TYPE="UInt32" >200000</PREF>
 		<PREF NAME="tcp_seconds_to_buffer" TYPE="Float32" >.5</PREF>
-		<PREF NAME="run_user_name" ></PREF>
-		<PREF NAME="run_password" ></PREF>
+		<PREF NAME="run_user_name" >admin</PREF>
+		<PREF NAME="run_password" >admin</PREF>
 		<PREF NAME="rtsp_port" TYPE="UInt16" >554</PREF>
 		<PREF NAME="run_num_threads" TYPE="UInt32" >0</PREF>
 		<PREF NAME="pid_file" >EasyCamera.pid</PREF>

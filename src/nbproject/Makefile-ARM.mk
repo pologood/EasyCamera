@@ -83,11 +83,11 @@ LDLIBSOPTIONS=-LLib/arm
 
 # Build Targets
 .build-conf: ${BUILD_SUBPROJECTS}
-	"${MAKE}"  -f nbproject/Makefile-${CND_CONF}.mk Bin/EasyCamera
+	"${MAKE}"  -f nbproject/Makefile-${CND_CONF}.mk Bin/easycamera
 
-Bin/EasyCamera: ${OBJECTFILES}
+Bin/easycamera: ${OBJECTFILES}
 	${MKDIR} -p Bin
-	${LINK.cc} -o Bin/EasyCamera ${OBJECTFILES} ${LDLIBSOPTIONS} -ldl -lEasyCMS -lCommonUtilitiesLib -lEasyProtocol -lNetLib -ljsoncpp -leasypusher
+	${LINK.cc} -o Bin/easycamera ${OBJECTFILES} ${LDLIBSOPTIONS} -ldl -lEasyCMS -lCommonUtilitiesLib -lEasyProtocol -lNetLib -ljsoncpp -leasypusher
 
 ${OBJECTDIR}/APICommonCode/QTAccessFile.o: APICommonCode/QTAccessFile.cpp 
 	${MKDIR} -p ${OBJECTDIR}/APICommonCode
@@ -235,7 +235,7 @@ ${OBJECTDIR}/Server.tproj/main.o: Server.tproj/main.cpp
 # Clean Targets
 .clean-conf: ${CLEAN_SUBPROJECTS}
 	${RM} -r ${CND_BUILDDIR}/${CND_CONF}
-	${RM} Bin/EasyCamera
+	${RM} Bin/easycamera
 
 # Subprojects
 .clean-subprojects:
