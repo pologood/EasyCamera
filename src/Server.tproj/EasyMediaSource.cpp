@@ -291,7 +291,10 @@ QTSS_Error EasyMediaSource::StartStreaming()
 
 		EasyPusher_SetEventCallback(fPusherHandle, __EasyPusher_Callback, 0, NULL);
 
-		EasyPusher_StartStream(fPusherHandle, "211.140.169.83", 554, "ipc.sdp", "", "", &mediainfo, 512);//115.29.139.20
+		char sdpName[64] = { 0 };
+		sprintf(sdpName,"%s.sdp",QTSServerInterface::GetServer()->GetPrefs()->GetDeviceSerialNumber()); 
+
+		EasyPusher_StartStream(fPusherHandle, "211.140.169.83", 554, sdpName, "", "", &mediainfo, 1024);//115.29.139.20 211.140.169.83
 	}
 
 	NetDevStartStream();
