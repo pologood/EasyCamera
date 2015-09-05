@@ -45,7 +45,7 @@ static const PrefConversionInfo kPrefs[] =
     /* 0 */ { "connection_timeout",             NULL,           qtssAttrDataTypeUInt32 },
     /* 1 */ { "cms_addr",						NULL,           qtssAttrDataTypeCharArray },
     /* 2 */ { "cms_port",                    NULL,           qtssAttrDataTypeUInt32 },
-    /* 3 */ { "maximum_connections",            NULL,           qtssAttrDataTypeSInt32 },
+    /* 3 */ { "camera_stream_type",            NULL,           qtssAttrDataTypeUInt32 },
     /* 4 */ { "maximum_bandwidth",              NULL,           qtssAttrDataTypeSInt32 },
     /* 5 */ { "serial_number",                   NULL,           qtssAttrDataTypeCharArray },
 

@@ -40,8 +40,6 @@
 #include "EasyCMSAPI.h"
 #include "EasyMediaSource.h"
 
-class RTSPListenerSocket;
-
 class QTSServer : public QTSServerInterface
 {
     public:

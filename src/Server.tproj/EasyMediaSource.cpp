@@ -170,7 +170,7 @@ QTSS_Error EasyMediaSource::NetDevStartStream()
 	HI_NET_DEV_SetDataCallBack(m_u32Handle, (HI_ON_DATA_CALLBACK)OnDataCallback, this);
 
 	struStreamInfo.u32Channel = HI_NET_DEV_CHANNEL_1;
-	struStreamInfo.blFlag = HI_FALSE;
+	struStreamInfo.blFlag = QTSServerInterface::GetServer()->GetPrefs()->GetCameraStreamType()?HI_TRUE:HI_FALSE;
 	struStreamInfo.u32Mode = HI_NET_DEV_STREAM_MODE_TCP;
 	struStreamInfo.u8Type = HI_NET_DEV_STREAM_ALL;
 	s32Ret = HI_NET_DEV_StartStream(m_u32Handle, &struStreamInfo);
@@ -294,7 +294,7 @@ QTSS_Error EasyMediaSource::StartStreaming()
 		char sdpName[64] = { 0 };
 		sprintf(sdpName,"%s.sdp",QTSServerInterface::GetServer()->GetPrefs()->GetDeviceSerialNumber()); 
 
-		EasyPusher_StartStream(fPusherHandle, "211.140.169.83", 554, sdpName, "", "", &mediainfo, 1024);//115.29.139.20 211.140.169.83
+		EasyPusher_StartStream(fPusherHandle, "115.29.139.20", 554, sdpName, "", "", &mediainfo, 1024);//115.29.139.20 211.140.169.83
 	}
 
 	NetDevStartStream();

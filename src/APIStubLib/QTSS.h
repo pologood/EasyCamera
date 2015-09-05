@@ -531,7 +531,7 @@ enum
     qtssPrefsConnectionTimeout      = 0,    //"connection_timeout"          //UInt32    //Connection timeout in seconds sent to the client.
     qtssPrefsCMSIPAddr				= 1,    //"cms_addr"					//char array    //Amount of time in seconds the server will wait before disconnecting idle RTSP clients. 0 means no timeout
     qtssPrefsCMSPort				= 2,    //"cms_port"					//UInt32    //Amount of time in seconds the server will wait before disconnecting idle RTP clients. 0 means no timeout
-    qtssPrefsMaximumConnections     = 3,    //"maximum_connections"         //SInt32    //Maximum # of concurrent RTP connections allowed by the server. -1 means unlimited.
+    qtssPrefsCameraStreamType		= 3,    //"camera_stream_type"         //SInt32    //Maximum # of concurrent RTP connections allowed by the server. -1 means unlimited.
     qtssPrefsMaximumBandwidth       = 4,    //"maximum_bandwidth"           //SInt32    //Maximum amt of bandwidth the server is allowed to serve in K bits. -1 means unlimited.
     qtssPrefsSerialNumber           = 5,    //"serial_number"                //char array    //Path to the root movie folder
 

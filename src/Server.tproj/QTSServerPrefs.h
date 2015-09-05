@@ -65,8 +65,8 @@ class QTSServerPrefs : public QTSSPrefs
         UInt32  GetCMSPort()   { return fCMSPort; }
         StrPtrLen*  GetRTSPTimeoutAsString() { return &fRTSPTimeoutString; }
 
-        //-1 means unlimited
-        SInt32  GetMaxConnections()         { return fMaximumConnections; }
+        //
+        UInt32  GetCameraStreamType()       { return fCameraStreamType; }
         SInt32  GetMaxKBitsBandwidth()      { return fMaxBandwidthInKBits; }
                 
         UInt32      GetLocalCameraPort()         { return fLocalCameraPort; }
@@ -127,7 +127,7 @@ class QTSServerPrefs : public QTSSPrefs
 		char		fCMSIPAddr[20];
         UInt32      fCMSPort;
         
-        SInt32  fMaximumConnections;
+        UInt32  fCameraStreamType;
         SInt32  fMaxBandwidthInKBits;
         
         UInt32  fLocalCameraPort;

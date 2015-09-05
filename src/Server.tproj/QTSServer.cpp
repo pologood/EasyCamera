@@ -60,22 +60,6 @@
 #include "OS.h"
 
 // CLASS DEFINITIONS
-
-class RTSPListenerSocket : public TCPListenerSocket
-{
-    public:
-    
-        RTSPListenerSocket() {}
-        virtual ~RTSPListenerSocket() {}
-        
-        //sole job of this object is to implement this function
-        virtual Task*   GetSessionTask(TCPSocket** outSocket);
-        
-        //check whether the Listener should be idling
-        Bool16 OverMaxConnections(UInt32 buffer);
-
-};
-
 char*           QTSServer::sPortPrefString = "rtsp_port";
 QTSS_Callbacks  QTSServer::sCallbacks;
 XMLPrefsParser* QTSServer::sPrefsSource = NULL;
@@ -572,41 +556,6 @@ void QTSServer::DoInitRole()
     }
 
     OSThread::SetMainThreadData(NULL);
-}
-
-Task*   RTSPListenerSocket::GetSessionTask(TCPSocket** outSocket)
-{
-    Assert(outSocket != NULL);
-     
-	return NULL;
-    //RTSPSession* theTask = NEW RTSPSession(doReportHTTPConnectionAddress);
-    //*outSocket = theTask->GetSocket();  // out socket is not attached to a unix socket yet.
-
-    //if (this->OverMaxConnections(0))
-    //    this->SlowDown();
-    //else
-    //    this->RunNormal();
-    //    
-    //return theTask;
-}
-
-
-Bool16 RTSPListenerSocket::OverMaxConnections(UInt32 buffer)
-{
-    QTSServerInterface* theServer = QTSServerInterface::GetServer();
-    SInt32 maxConns = theServer->GetPrefs()->GetMaxConnections();
-    Bool16 overLimit = false;
-    
-    if (maxConns > -1) // limit connections
-    { 
-        maxConns += buffer;
-        if  ( theServer->GetNumRTSPSessions() > (UInt32) maxConns ) 
-		{
-            overLimit = true;          
-        }
-    } 
-    return overLimit;
-     
 }
 
 QTSS_Error QTSServer::RereadPrefsService(QTSS_ServiceFunctionArgsPtr /*inArgs*/)
