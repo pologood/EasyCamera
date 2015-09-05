@@ -84,8 +84,6 @@ QTSServerPrefs::PrefInfo QTSServerPrefs::sPrefInfo[] =
    
 };
 
-
-
 QTSSAttrInfoDict::AttrInfo  QTSServerPrefs::sAttributes[] =
 {   /*fields:   fAttrName, fFuncPtr, fAttrDataType, fAttrPermission */
     /* 0 */ { "connection_timeout",                     NULL,                   qtssAttrDataTypeUInt32,     qtssAttrModeRead | qtssAttrModeWrite },
