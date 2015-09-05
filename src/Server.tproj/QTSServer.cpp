@@ -139,13 +139,7 @@ Bool16 QTSServer::Initialize(XMLPrefsParser* inPrefsSource, PrefsSource* inMessa
     fSrvrMessages = new QTSSMessages(inMessagesSource);
     QTSSModuleUtils::Initialize(fSrvrMessages, this, QTSServerInterface::GetErrorLogStream());
 
-    //
-    // SETUP ASSERT BEHAVIOR
-    //
-    // Depending on the server preference, we will either break when we hit an
-    // assert, or log the assert to the error log
-    if (!fSrvrPrefs->ShouldServerBreakOnAssert())
-        SetAssertLogger(this->GetErrorLogStream());// the error log stream is our assert logger
+	SetAssertLogger(this->GetErrorLogStream());// the error log stream is our assert logger
         
     // Load ERROR LOG module only. This is good in case there is a startup error.
     
@@ -155,22 +149,9 @@ Bool16 QTSServer::Initialize(XMLPrefsParser* inPrefsSource, PrefsSource* inMessa
     this->BuildModuleRoleArrays();
 
     //
-    // DEFAULT IP ADDRESS & DNS NAME
-    if (!this->SetDefaultIPAddr())
-        return false;
-
-    //
     // STARTUP TIME - record it
     fStartupTime_UnixMilli = OS::Milliseconds();
     fGMTOffset = OS::GetGMTOffset();
-        
-    //
-    // BEGIN LISTENING
-    if (createListeners)
-    {
-        if ( !this->CreateListeners(false, fSrvrPrefs, inPortOverride) )
-            QTSSModuleUtils::LogError(qtssWarningVerbosity, qtssMsgSomePortsFailed, 0);
-    }
     
     if ( fNumListeners == 0 )
     {  
@@ -253,265 +234,6 @@ void QTSServer::StartTasks()
     // Start listening
     for (UInt32 x = 0; x < fNumListeners; x++)
         fListeners[x]->RequestEvent(EV_RE);
-}
-
-Bool16 QTSServer::SetDefaultIPAddr()
-{
-    //check to make sure there is an available ip interface
-    if (SocketUtils::GetNumIPAddrs() == 0)
-    {
-        QTSSModuleUtils::LogError(qtssFatalVerbosity, qtssMsgNotConfiguredForIP, 0);
-        return false;
-    }
-
-    //find out what our default IP addr is & dns name
-    UInt32 theNumAddrs = 0;
-    UInt32* theIPAddrs = this->GetRTSPIPAddrs(fSrvrPrefs, &theNumAddrs);
-    if (theNumAddrs == 1)
-        fDefaultIPAddr = SocketUtils::GetIPAddr(0);
-    else
-        fDefaultIPAddr = theIPAddrs[0];
-    delete [] theIPAddrs;
-        
-    for (UInt32 ipAddrIter = 0; ipAddrIter < SocketUtils::GetNumIPAddrs(); ipAddrIter++)
-    {
-        if (SocketUtils::GetIPAddr(ipAddrIter) == fDefaultIPAddr)
-        {
-            this->SetVal(qtssSvrDefaultDNSName, SocketUtils::GetDNSNameStr(ipAddrIter));
-            Assert(this->GetValue(qtssSvrDefaultDNSName)->Ptr != NULL);
-            this->SetVal(qtssSvrDefaultIPAddrStr, SocketUtils::GetIPAddrStr(ipAddrIter));
-            Assert(this->GetValue(qtssSvrDefaultDNSName)->Ptr != NULL);
-            break;
-        }
-    }
-    if (this->GetValue(qtssSvrDefaultDNSName)->Ptr == NULL)
-    {
-        //If we've gotten here, what has probably happened is the IP address (explicitly
-        //entered as a preference) doesn't exist
-        QTSSModuleUtils::LogError(qtssFatalVerbosity, qtssMsgDefaultRTSPAddrUnavail, 0);
-        return false;   
-    }
-    return true;
-}               
-
-
-Bool16 QTSServer::CreateListeners(Bool16 startListeningNow, QTSServerPrefs* inPrefs, UInt16 inPortOverride)
-{
-    struct PortTracking
-    {
-        PortTracking() : fPort(0), fIPAddr(0), fNeedsCreating(true) {}
-        
-        UInt16 fPort;
-        UInt32 fIPAddr;
-        Bool16 fNeedsCreating;
-    };
-    
-    PortTracking* thePortTrackers = NULL;   
-    UInt32 theTotalPortTrackers = 0;
-    
-    // Get the IP addresses from the pref
-    UInt32 theNumAddrs = 0;
-    UInt32* theIPAddrs = this->GetRTSPIPAddrs(inPrefs, &theNumAddrs);   
-    UInt32 index = 0;
-    
-    if ( inPortOverride != 0)
-    {
-        theTotalPortTrackers = theNumAddrs; // one port tracking struct for each IP addr
-        thePortTrackers = NEW PortTracking[theTotalPortTrackers];
-        for (index = 0; index < theNumAddrs; index++)
-        {
-            thePortTrackers[index].fPort = inPortOverride;
-            thePortTrackers[index].fIPAddr = theIPAddrs[index];
-        }
-    }
-    else
-    {
-        UInt32 theNumPorts = 0;
-        UInt16* thePorts = GetRTSPPorts(inPrefs, &theNumPorts);
-        theTotalPortTrackers = theNumAddrs * theNumPorts;
-        thePortTrackers = NEW PortTracking[theTotalPortTrackers];
-        
-        UInt32 currentIndex  = 0;
-        
-        for (index = 0; index < theNumAddrs; index++)
-        {
-            for (UInt32 portIndex = 0; portIndex < theNumPorts; portIndex++)
-            {
-                currentIndex = (theNumPorts * index) + portIndex;
-                
-                thePortTrackers[currentIndex].fPort = thePorts[portIndex];
-                thePortTrackers[currentIndex].fIPAddr = theIPAddrs[index];
-            }
-        }
-                
-                delete [] thePorts;
-    }
-    
-        delete [] theIPAddrs;
-    //
-    // Now figure out which of these ports we are *already* listening on.
-    // If we already are listening on that port, just move the pointer to the
-    // listener over to the new array
-    TCPListenerSocket** newListenerArray = NEW TCPListenerSocket*[theTotalPortTrackers];
-    UInt32 curPortIndex = 0;
-    
-    for (UInt32 count = 0; count < theTotalPortTrackers; count++)
-    {
-        for (UInt32 count2 = 0; count2 < fNumListeners; count2++)
-        {
-            if ((fListeners[count2]->GetLocalPort() == thePortTrackers[count].fPort) &&
-                (fListeners[count2]->GetLocalAddr() == thePortTrackers[count].fIPAddr))
-            {
-                thePortTrackers[count].fNeedsCreating = false;
-                newListenerArray[curPortIndex++] = fListeners[count2];
-                Assert(curPortIndex <= theTotalPortTrackers);
-                break;
-            }
-        }
-    }
-    
-    //
-    // Create any new listeners we need
-    for (UInt32 count3 = 0; count3 < theTotalPortTrackers; count3++)
-    {
-        if (thePortTrackers[count3].fNeedsCreating)
-        {
-            newListenerArray[curPortIndex] = NEW RTSPListenerSocket();
-            QTSS_Error err = newListenerArray[curPortIndex]->Initialize(thePortTrackers[count3].fIPAddr, thePortTrackers[count3].fPort);
-
-            char thePortStr[20];
-            qtss_sprintf(thePortStr, "%hu", thePortTrackers[count3].fPort);
-            
-            //
-            // If there was an error creating this listener, destroy it and log an error
-            if ((startListeningNow) && (err != QTSS_NoErr))
-                delete newListenerArray[curPortIndex];
-
-            if (err == EADDRINUSE)
-                QTSSModuleUtils::LogError(qtssWarningVerbosity, qtssListenPortInUse, 0, thePortStr);
-            else if (err == EACCES)
-                QTSSModuleUtils::LogError(qtssWarningVerbosity, qtssListenPortAccessDenied, 0, thePortStr);
-            else if (err != QTSS_NoErr)
-                QTSSModuleUtils::LogError(qtssWarningVerbosity, qtssListenPortError, 0, thePortStr);
-            else
-            {
-                //
-                // This listener was successfully created.
-                if (startListeningNow)
-                    newListenerArray[curPortIndex]->RequestEvent(EV_RE);
-                curPortIndex++;
-            }
-        }
-    }
-    
-    //
-    // Kill any listeners that we no longer need
-    for (UInt32 count4 = 0; count4 < fNumListeners; count4++)
-    {
-        Bool16 deleteThisOne = true;
-        
-        for (UInt32 count5 = 0; count5 < curPortIndex; count5++)
-        {
-            if (newListenerArray[count5] == fListeners[count4])
-                deleteThisOne = false;
-        }
-        
-        if (deleteThisOne)
-            fListeners[count4]->Signal(Task::kKillEvent);
-    }
-    
-    //
-    // Finally, make our server attributes and fListener privy to the new...
-    fListeners = newListenerArray;
-    fNumListeners = curPortIndex;
-    UInt32 portIndex = 0;
-    
-    for (UInt32 count6 = 0; count6 < fNumListeners; count6++)
-    {
-        if  (fListeners[count6]->GetLocalAddr() != INADDR_LOOPBACK)
-        {
-            UInt16 thePort = fListeners[count6]->GetLocalPort();
-            (void)this->SetValue(qtssSvrRTSPPorts, portIndex, &thePort, sizeof(thePort), QTSSDictionary::kDontObeyReadOnly);
-            portIndex++;
-        }
-    }
-    this->SetNumValues(qtssSvrRTSPPorts, portIndex);
-
-    delete [] thePortTrackers;
-    return (fNumListeners > 0);
-}
-
-UInt32* QTSServer::GetRTSPIPAddrs(QTSServerPrefs* inPrefs, UInt32* outNumAddrsPtr)
-{
-    UInt32 numAddrs = inPrefs->GetNumValues(qtssPrefsRTSPIPAddr);
-    UInt32* theIPAddrArray = NULL;
-    
-    if (numAddrs == 0)
-    {
-        *outNumAddrsPtr = 1;
-        theIPAddrArray = NEW UInt32[1];
-        theIPAddrArray[0] = INADDR_ANY;
-    }
-    else
-    {
-        theIPAddrArray = NEW UInt32[numAddrs + 1];
-        UInt32 arrIndex = 0;
-        
-        for (UInt32 theIndex = 0; theIndex < numAddrs; theIndex++)
-        {
-            // Get the ip addr out of the prefs dictionary
-            QTSS_Error theErr = QTSS_NoErr;
-            
-            char* theIPAddrStr = NULL;
-            theErr = inPrefs->GetValueAsString(qtssPrefsRTSPIPAddr, theIndex, &theIPAddrStr);
-            if (theErr != QTSS_NoErr)
-            {
-                delete [] theIPAddrStr;
-                break;
-            }
-
-            
-            UInt32 theIPAddr = 0;
-            if (theIPAddrStr != NULL)
-            {
-                theIPAddr = SocketUtils::ConvertStringToAddr(theIPAddrStr);
-                delete [] theIPAddrStr;
-                
-                if (theIPAddr != 0)
-                    theIPAddrArray[arrIndex++] = theIPAddr;
-            }   
-        }
-        
-        if ((numAddrs == 1) && (arrIndex == 0))
-            theIPAddrArray[arrIndex++] = INADDR_ANY;
-        else
-            theIPAddrArray[arrIndex++] = INADDR_LOOPBACK;
-    
-        *outNumAddrsPtr = arrIndex;
-    }
-    
-    return theIPAddrArray;
-}
-
-UInt16* QTSServer::GetRTSPPorts(QTSServerPrefs* inPrefs, UInt32* outNumPortsPtr)
-{
-    *outNumPortsPtr = inPrefs->GetNumValues(qtssPrefsRTSPPorts);
-    
-    if (*outNumPortsPtr == 0)
-        return NULL;
-        
-    UInt16* thePortArray = NEW UInt16[*outNumPortsPtr];
-    
-    for (UInt32 theIndex = 0; theIndex < *outNumPortsPtr; theIndex++)
-    {
-        // Get the ip addr out of the prefs dictionary
-        UInt32 theLen = sizeof(UInt16);
-        QTSS_Error theErr = QTSS_NoErr;
-        theErr = inPrefs->GetValue(qtssPrefsRTSPPorts, theIndex, &thePortArray[theIndex], &theLen);
-        Assert(theErr == QTSS_NoErr);   
-    }
-    
-    return thePortArray;
 }
 
 void    QTSServer::LoadCompiledInModules()
@@ -922,14 +644,6 @@ QTSS_Error QTSServer::RereadPrefsService(QTSS_ServiceFunctionArgsPtr /*inArgs*/)
     // Reread preferences
     sPrefsSource->Parse();
     thePrefs->RereadServerPreferences(true);
-    
-    {
-        //
-        // Update listeners, ports, and IP addrs.
-        OSMutexLocker locker(theServer->GetServerObjectMutex());
-        (void)((QTSServer*)theServer)->SetDefaultIPAddr();
-        (void)((QTSServer*)theServer)->CreateListeners(true, thePrefs, 0);
-    }
     
     // Delete all the streams
     QTSSModule** theModule = NULL;

@@ -534,43 +534,36 @@ enum
     qtssPrefsMaximumConnections     = 3,    //"maximum_connections"         //SInt32    //Maximum # of concurrent RTP connections allowed by the server. -1 means unlimited.
     qtssPrefsMaximumBandwidth       = 4,    //"maximum_bandwidth"           //SInt32    //Maximum amt of bandwidth the server is allowed to serve in K bits. -1 means unlimited.
     qtssPrefsSerialNumber           = 5,    //"serial_number"                //char array    //Path to the root movie folder
-    qtssPrefsRTSPIPAddr             = 6,    //"bind_ip_addr"                //char array    //IP address the server should accept RTSP connections on. 0.0.0.0 means all addresses on the machine.
-    qtssPrefsBreakOnAssert          = 7,    //"break_on_assert"             //Bool16        //If true, the server will break in the debugger when an assert fails.
-    qtssPrefsAutoRestart            = 8,    //"auto_restart"                //Bool16        //If true, the server will automatically restart itself if it crashes.
-    qtssPrefsTotalBytesUpdate       = 9,    //"total_bytes_update"          //UInt32    //Interval in seconds between updates of the server's total bytes and current bandwidth statistics
-    qtssPrefsAvgBandwidthUpdate     = 10,   //"average_bandwidth_update"    //UInt32    //Interval in seconds between computations of the server's average bandwidth
-    qtssPrefsLocalCameraPort		= 11,   //"local_camera_port"          //UInt16  //Hard to explain... see streamingserver.conf
-    qtssPrefsModuleFolder           = 12,   //"module_folder"               //char array    //Path to the module folder
+
+	qtssPrefsLocalCameraPort		= 6,   //"local_camera_port"          //UInt16  //Hard to explain... see streamingserver.conf
+    qtssPrefsModuleFolder           = 7,   //"module_folder"               //char array    //Path to the module folder
 
     // There is a compiled-in error log module that loads before all the other modules
     // (so it can log errors from the get-go). It uses these prefs.
     
-    qtssPrefsErrorLogName           = 13,   //"error_logfile_name"          //char array        //Name of error log file
-    qtssPrefsErrorLogDir            = 14,   //"error_logfile_dir"           //char array        //Path to error log file directory
-    qtssPrefsErrorRollInterval      = 15,   //"error_logfile_interval"      //UInt32    //Interval in days between error logfile rolls
-    qtssPrefsMaxErrorLogSize        = 16,   //"error_logfile_size"          //UInt32    //Max size in bytes of the error log
-    qtssPrefsErrorLogVerbosity      = 17,   //"error_logfile_verbosity"     //UInt32    //Max verbosity level of messages the error logger will log
-    qtssPrefsScreenLogging          = 18,   //"screen_logging"              //Bool16        //Should the error logger echo messages to the screen?
-    qtssPrefsErrorLogEnabled        = 19,   //"error_logging"               //Bool16        //Is error logging enabled?
+    qtssPrefsErrorLogName           = 8,   //"error_logfile_name"          //char array        //Name of error log file
+    qtssPrefsErrorLogDir            = 9,   //"error_logfile_dir"           //char array        //Path to error log file directory
+    qtssPrefsErrorRollInterval      = 10,   //"error_logfile_interval"      //UInt32    //Interval in days between error logfile rolls
+    qtssPrefsMaxErrorLogSize        = 11,   //"error_logfile_size"          //UInt32    //Max size in bytes of the error log
+    qtssPrefsErrorLogVerbosity      = 12,   //"error_logfile_verbosity"     //UInt32    //Max verbosity level of messages the error logger will log
+    qtssPrefsScreenLogging          = 13,   //"screen_logging"              //Bool16        //Should the error logger echo messages to the screen?
+    qtssPrefsErrorLogEnabled        = 14,   //"error_logging"               //Bool16        //Is error logging enabled?
     
-    qtssPrefsMinTCPBufferSizeInBytes        = 20,   //"min_tcp_buffer_size" //UInt32    // When streaming over TCP, this is the minimum size the TCP socket send buffer can be set to
-    qtssPrefsMaxTCPBufferSizeInBytes        = 21,   //"max_tcp_buffer_size" //UInt32    // When streaming over TCP, this is the maximum size the TCP socket send buffer can be set to
-    qtssPrefsTCPSecondsToBuffer             = 22,   //"tcp_seconds_to_buffer" //Float32 // When streaming over TCP, the size of the TCP send buffer is scaled based on the bitrate of the movie. It will fit all the data that gets sent in this amount of time.
     
-    qtssPrefsLocalCameraAddress				= 23,   // "local_camera_addr" //char array   //
+    qtssPrefsLocalCameraAddress				= 15,   // "local_camera_addr" //char array   //
     
-    qtssPrefsRunUserName                    = 24,   //"run_user_name"       //char array        //Run under this user's account
-    qtssPrefsRunPassword                    = 25,   //"run_password"		//char array        //Run under this group's account
+    qtssPrefsRunUserName                    = 16,   //"run_user_name"       //char array        //Run under this user's account
+    qtssPrefsRunPassword                    = 17,   //"run_password"		//char array        //Run under this group's account
     
-	qtssPrefsRTSPPorts                      = 26,   //"rtsp_ports"          // UInt16   
+	qtssPrefsRTSPPorts                      = 18,   //"rtsp_ports"          // UInt16   
 
-	qtssPrefsRunNumThreads                  = 27,   //"run_num_threads" //UInt32 // if value is non-zero, will  create that many task threads; otherwise a thread will be created for each processor
-    qtssPrefsPidFile                        = 28,    //"pid_file" //Char Array //path to pid file
-    qtssPrefsCloseLogsOnWrite               = 29,   // "force_logs_close_on_write" //Bool16 // force log files to close after each write.
+	qtssPrefsRunNumThreads                  = 19,   //"run_num_threads" //UInt32 // if value is non-zero, will  create that many task threads; otherwise a thread will be created for each processor
+    qtssPrefsPidFile                        = 20,    //"pid_file" //Char Array //path to pid file
+    qtssPrefsCloseLogsOnWrite               = 21,   // "force_logs_close_on_write" //Bool16 // force log files to close after each write.
 
-	qtssPrefsNumRTSPThreads                 = 30,   // "run_num_rtsp_threads" //UInt32 // if value is non-zero, the server will  create that many task threads; otherwise a single thread will be created.
+	qtssPrefsNumRTSPThreads                 = 22,   // "run_num_rtsp_threads" //UInt32 // if value is non-zero, the server will  create that many task threads; otherwise a single thread will be created.
 	
-    qtssPrefsNumParams                      = 31
+    qtssPrefsNumParams                      = 23
 };
 
 typedef UInt32 QTSS_PrefsAttributes;

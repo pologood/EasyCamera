@@ -68,18 +68,7 @@ class QTSServerPrefs : public QTSSPrefs
         //-1 means unlimited
         SInt32  GetMaxConnections()         { return fMaximumConnections; }
         SInt32  GetMaxKBitsBandwidth()      { return fMaxBandwidthInKBits; }
-        
-        // for tcp buffer size scaling
-        UInt32  GetMinTCPBufferSizeInBytes()            { return fMinTCPBufferSizeInBytes; }
-        UInt32  GetMaxTCPBufferSizeInBytes()            { return fMaxTCPBufferSizeInBytes; }
-        Float32 GetTCPSecondsToBuffer()                 { return fTCPSecondsToBuffer; }
                 
-        //for debugging, mainly
-        Bool16      ShouldServerBreakOnAssert()         { return fBreakOnAssert; }
-        Bool16      IsAutoRestartEnabled()              { return fAutoRestart; }
-
-        UInt32      GetTotalBytesUpdateTimeInSecs()     { return fTBUpdateTimeInSecs; }
-        UInt32      GetAvgBandwidthUpdateTimeInSecs()   { return fABUpdateTimeInSecs; }
         UInt32      GetLocalCameraPort()         { return fLocalCameraPort; }
         
         // For the compiled-in error logging module
@@ -141,10 +130,6 @@ class QTSServerPrefs : public QTSSPrefs
         SInt32  fMaximumConnections;
         SInt32  fMaxBandwidthInKBits;
         
-        Bool16  fBreakOnAssert;
-        Bool16  fAutoRestart;
-        UInt32  fTBUpdateTimeInSecs;
-        UInt32  fABUpdateTimeInSecs;
         UInt32  fLocalCameraPort;
         
         UInt32  fErrorRollIntervalInDays;
@@ -152,10 +137,6 @@ class QTSServerPrefs : public QTSSPrefs
         UInt32  fErrorLogVerbosity;
         Bool16  fScreenLoggingEnabled;
         Bool16  fErrorLogEnabled;  
-
-        UInt32  fMinTCPBufferSizeInBytes;
-        UInt32  fMaxTCPBufferSizeInBytes;
-        Float32 fTCPSecondsToBuffer;
 
         QTSS_AuthScheme fAuthScheme;
         UInt32  fNumThreads;

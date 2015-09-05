@@ -90,20 +90,6 @@ class QTSServer : public QTSServerInterface
         
         static QTSS_Error RereadPrefsService(QTSS_ServiceFunctionArgsPtr inArgs);
 
-        //
-        // CreateListeners
-        //
-        // This function may be called multiple times & at any time.
-        // It updates the server's listeners to reflect what the preferences say.
-        // Returns false if server couldn't listen on one or more of the ports, true otherwise
-        Bool16                  CreateListeners(Bool16 startListeningNow, QTSServerPrefs* inPrefs, UInt16 inPortOverride);
-
-        //
-        // SetDefaultIPAddr
-        //
-        // Sets the IP address related attributes of the server.
-        Bool16                  SetDefaultIPAddr();
-
 		Easy_CMS_Handle		GetCMSHandle() {return fCMSHandle; }
 
      private:
@@ -137,8 +123,6 @@ class QTSServer : public QTSServerInterface
         
         // Call module init roles
         void                    DoInitRole();
-        UInt32*                 GetRTSPIPAddrs(QTSServerPrefs* inPrefs, UInt32* outNumAddrsPtr);
-        UInt16*                 GetRTSPPorts(QTSServerPrefs* inPrefs, UInt32* outNumPortsPtr);
         
         // Build & destroy the optimized role / module arrays for invoking modules
         void                    BuildModuleRoleArrays();
