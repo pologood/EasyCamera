@@ -536,26 +536,27 @@ enum
     qtssPrefsSerialNumber           = 5,    //"serial_number"                //char array    //Path to the root movie folder
 
 	qtssPrefsLocalCameraPort		= 6,   //"local_camera_port"          //UInt16
-    qtssPrefsRTSPServerAddr           = 7,   //"rtsp_server_addr"               //char array    //Path to the module folder
+
+    qtssPrefsRTSPServerAddr			= 7,   //"rtsp_server_addr"				//char array
+	qtssPrefsRTSPServerPort			= 8,   //"rtsp_server_port"				// UInt16   
 
     // There is a compiled-in error log module that loads before all the other modules
     // (so it can log errors from the get-go). It uses these prefs.
     
-    qtssPrefsErrorLogName           = 8,   //"error_logfile_name"          //char array        //Name of error log file
-    qtssPrefsErrorLogDir            = 9,   //"error_logfile_dir"           //char array        //Path to error log file directory
-    qtssPrefsErrorRollInterval      = 10,   //"error_logfile_interval"      //UInt32    //Interval in days between error logfile rolls
-    qtssPrefsMaxErrorLogSize        = 11,   //"error_logfile_size"          //UInt32    //Max size in bytes of the error log
-    qtssPrefsErrorLogVerbosity      = 12,   //"error_logfile_verbosity"     //UInt32    //Max verbosity level of messages the error logger will log
-    qtssPrefsScreenLogging          = 13,   //"screen_logging"              //Bool16        //Should the error logger echo messages to the screen?
-    qtssPrefsErrorLogEnabled        = 14,   //"error_logging"               //Bool16        //Is error logging enabled?
+    qtssPrefsErrorLogName           = 9,   //"error_logfile_name"          //char array        //Name of error log file
+    qtssPrefsErrorLogDir            = 10,   //"error_logfile_dir"           //char array        //Path to error log file directory
+    qtssPrefsErrorRollInterval      = 11,   //"error_logfile_interval"      //UInt32    //Interval in days between error logfile rolls
+    qtssPrefsMaxErrorLogSize        = 12,   //"error_logfile_size"          //UInt32    //Max size in bytes of the error log
+    qtssPrefsErrorLogVerbosity      = 13,   //"error_logfile_verbosity"     //UInt32    //Max verbosity level of messages the error logger will log
+    qtssPrefsScreenLogging          = 14,   //"screen_logging"              //Bool16        //Should the error logger echo messages to the screen?
+    qtssPrefsErrorLogEnabled        = 15,   //"error_logging"               //Bool16        //Is error logging enabled?
     
     
-    qtssPrefsLocalCameraAddress				= 15,   // "local_camera_addr" //char array   //
+    qtssPrefsLocalCameraAddress				= 16,   // "local_camera_addr" //char array   //
     
-    qtssPrefsRunUserName                    = 16,   //"run_user_name"       //char array        //Run under this user's account
-    qtssPrefsRunPassword                    = 17,   //"run_password"		//char array        //Run under this group's account
+    qtssPrefsRunUserName                    = 17,   //"run_user_name"       //char array        //Run under this user's account
+    qtssPrefsRunPassword                    = 18,   //"run_password"		//char array        //Run under this group's account
     
-	qtssPrefsRTSPServerPort					= 18,   //"rtsp_server_port"          // UInt16   
 
 	qtssPrefsRunNumThreads                  = 19,   //"run_num_threads" //UInt32 // if value is non-zero, will  create that many task threads; otherwise a thread will be created for each processor
     qtssPrefsPidFile                        = 20,    //"pid_file" //Char Array //path to pid file

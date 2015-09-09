@@ -57,6 +57,7 @@ QTSServerPrefs::PrefInfo QTSServerPrefs::sPrefInfo[] =
 
     { kDontAllowMultipleValues, "80",		NULL                    },  //local_camera_port
 	{ kDontAllowMultipleValues,	"www.easydarwin.org",	NULL		},	//rtsp_server_addr
+    { kDontAllowMultipleValues,	"554",      NULL					},  //rtsp_server_port
 
     { kDontAllowMultipleValues, "Error",    NULL                    },  //error_logfile_name
 	{ kDontAllowMultipleValues,	DEFAULTPATHS_LOG_DIR,	NULL		},	//error_logfile_dir
@@ -74,8 +75,6 @@ QTSServerPrefs::PrefInfo QTSServerPrefs::sPrefInfo[] =
     { kDontAllowMultipleValues, "",         NULL                    },  //run_user_name
     { kDontAllowMultipleValues, "",         NULL                    },  //run_group_name
 #endif
-
-    { kDontAllowMultipleValues,	"554",      NULL					},  //rtsp_server_port
 
 	{ kDontAllowMultipleValues, "0",        NULL                    },  //run_num_threads
     { kDontAllowMultipleValues, DEFAULTPATHS_PID_DIR PLATFORM_SERVER_BIN_NAME ".pid",	NULL	},	//pid_file
@@ -96,19 +95,19 @@ QTSSAttrInfoDict::AttrInfo  QTSServerPrefs::sAttributes[] =
 	/* 6 */ { "local_camera_port",						NULL,                   qtssAttrDataTypeUInt16,     qtssAttrModeRead | qtssAttrModeWrite },
     
 	/* 7 */ { "rtsp_server_addr",                       NULL,                   qtssAttrDataTypeCharArray,  qtssAttrModeRead | qtssAttrModeWrite },
+    /* 8 */ { "rtsp_server_port",						NULL,                   qtssAttrDataTypeUInt16,     qtssAttrModeRead | qtssAttrModeWrite },
 
-    /* 8 */ { "error_logfile_name",						NULL,                   qtssAttrDataTypeCharArray,  qtssAttrModeRead | qtssAttrModeWrite },
-    /* 9 */ { "error_logfile_dir",						NULL,                   qtssAttrDataTypeCharArray,  qtssAttrModeRead | qtssAttrModeWrite },
-    /* 10 */ { "error_logfile_interval",                NULL,                   qtssAttrDataTypeUInt32,     qtssAttrModeRead | qtssAttrModeWrite },
-    /* 11 */ { "error_logfile_size",                    NULL,                   qtssAttrDataTypeUInt32,     qtssAttrModeRead | qtssAttrModeWrite },
-    /* 12 */ { "error_logfile_verbosity",               NULL,                   qtssAttrDataTypeUInt32,     qtssAttrModeRead | qtssAttrModeWrite },
-    /* 13 */ { "screen_logging",                        NULL,                   qtssAttrDataTypeBool16,     qtssAttrModeRead | qtssAttrModeWrite },
-    /* 14 */ { "error_logging",                         NULL,                   qtssAttrDataTypeBool16,     qtssAttrModeRead | qtssAttrModeWrite },
+    /* 9 */ { "error_logfile_name",						NULL,                   qtssAttrDataTypeCharArray,  qtssAttrModeRead | qtssAttrModeWrite },
+    /* 10 */ { "error_logfile_dir",						NULL,                   qtssAttrDataTypeCharArray,  qtssAttrModeRead | qtssAttrModeWrite },
+    /* 11 */ { "error_logfile_interval",                NULL,                   qtssAttrDataTypeUInt32,     qtssAttrModeRead | qtssAttrModeWrite },
+    /* 12 */ { "error_logfile_size",                    NULL,                   qtssAttrDataTypeUInt32,     qtssAttrModeRead | qtssAttrModeWrite },
+    /* 13 */ { "error_logfile_verbosity",               NULL,                   qtssAttrDataTypeUInt32,     qtssAttrModeRead | qtssAttrModeWrite },
+    /* 14 */ { "screen_logging",                        NULL,                   qtssAttrDataTypeBool16,     qtssAttrModeRead | qtssAttrModeWrite },
+    /* 15 */ { "error_logging",                         NULL,                   qtssAttrDataTypeBool16,     qtssAttrModeRead | qtssAttrModeWrite },
 
-    /* 15 */ { "local_camera_addr",						NULL,                   qtssAttrDataTypeCharArray,  qtssAttrModeRead | qtssAttrModeWrite },
-    /* 16 */ { "run_user_name",                         NULL,                   qtssAttrDataTypeCharArray,  qtssAttrModeRead | qtssAttrModeWrite },
-    /* 17 */ { "run_password",							NULL,                   qtssAttrDataTypeCharArray,  qtssAttrModeRead | qtssAttrModeWrite },
-    /* 18 */ { "rtsp_server_port",						NULL,                   qtssAttrDataTypeUInt16,     qtssAttrModeRead | qtssAttrModeWrite },
+    /* 16 */ { "local_camera_addr",						NULL,                   qtssAttrDataTypeCharArray,  qtssAttrModeRead | qtssAttrModeWrite },
+    /* 17 */ { "run_user_name",                         NULL,                   qtssAttrDataTypeCharArray,  qtssAttrModeRead | qtssAttrModeWrite },
+    /* 18 */ { "run_password",							NULL,                   qtssAttrDataTypeCharArray,  qtssAttrModeRead | qtssAttrModeWrite },
 
 	/* 19 */ { "run_num_threads",                       NULL,                   qtssAttrDataTypeUInt32,     qtssAttrModeRead | qtssAttrModeWrite },
 	/* 20 */ { "pid_file",								NULL,					qtssAttrDataTypeCharArray,	qtssAttrModeRead | qtssAttrModeWrite },
