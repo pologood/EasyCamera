@@ -528,40 +528,40 @@ enum
     
     // All of these parameters are read-write. 
     
-    qtssPrefsConnectionTimeout      = 0,    //"connection_timeout"          //UInt32    //Connection timeout in seconds sent to the client.
-    qtssPrefsCMSIPAddr				= 1,    //"cms_addr"					//char array    //Amount of time in seconds the server will wait before disconnecting idle RTSP clients. 0 means no timeout
-    qtssPrefsCMSPort				= 2,    //"cms_port"					//UInt32    //Amount of time in seconds the server will wait before disconnecting idle RTP clients. 0 means no timeout
+    qtssPrefsConnectionTimeout			= 0,    //"connection_timeout"          //UInt32    //Connection timeout in seconds sent to the client.
+    qtssPrefsCMSIPAddr					= 1,    //"cms_addr"					//char array    //Amount of time in seconds the server will wait before disconnecting idle RTSP clients. 0 means no timeout
+    qtssPrefsCMSPort					= 2,    //"cms_port"					//UInt32    //Amount of time in seconds the server will wait before disconnecting idle RTP clients. 0 means no timeout
  
-	qtssPrefsLocalCameraAddress		= 3,   // "local_camera_addr" //char array   //
-	qtssPrefsLocalCameraPort		= 4,   //"local_camera_port"          //UInt16
-	qtssPrefsSerialNumber           = 5,    //"serial_number"                //char array    //Path to the root movie folder
-	qtssPrefsCameraStreamType		= 6,    //"camera_stream_type"         //SInt32    //Maximum # of concurrent RTP connections allowed by the server. -1 means unlimited.
+	qtssPrefsLocalCameraAddress			= 3,   // "local_camera_addr" //char array   //
+	qtssPrefsLocalCameraPort			= 4,   //"local_camera_port"          //UInt16
+	qtssPrefsSerialNumber				= 5,    //"serial_number"                //char array    //Path to the root movie folder
+	qtssPrefsCameraStreamType			= 6,    //"camera_stream_type"         //SInt32    //Maximum # of concurrent RTP connections allowed by the server. -1 means unlimited.
 
-    qtssPrefsRTSPServerAddr			= 7,   //"rtsp_server_addr"				//char array
-	qtssPrefsRTSPServerPort			= 8,   //"rtsp_server_port"				// UInt16   
+    qtssPrefsRTSPServerAddr				= 7,   //"rtsp_server_addr"				//char array
+	qtssPrefsRTSPServerPort				= 8,   //"rtsp_server_port"				// UInt16   
 
     // There is a compiled-in error log module that loads before all the other modules
     // (so it can log errors from the get-go). It uses these prefs.
     
-    qtssPrefsErrorLogName           = 9,   //"error_logfile_name"          //char array        //Name of error log file
-    qtssPrefsErrorLogDir            = 10,   //"error_logfile_dir"           //char array        //Path to error log file directory
-    qtssPrefsErrorRollInterval      = 11,   //"error_logfile_interval"      //UInt32    //Interval in days between error logfile rolls
-    qtssPrefsMaxErrorLogSize        = 12,   //"error_logfile_size"          //UInt32    //Max size in bytes of the error log
-    qtssPrefsErrorLogVerbosity      = 13,   //"error_logfile_verbosity"     //UInt32    //Max verbosity level of messages the error logger will log
-    qtssPrefsScreenLogging          = 14,   //"screen_logging"              //Bool16        //Should the error logger echo messages to the screen?
-    qtssPrefsErrorLogEnabled        = 15,   //"error_logging"               //Bool16        //Is error logging enabled?
+    qtssPrefsErrorLogName				= 9,   //"error_logfile_name"          //char array        //Name of error log file
+    qtssPrefsErrorLogDir				= 10,   //"error_logfile_dir"           //char array        //Path to error log file directory
+    qtssPrefsErrorRollInterval			= 11,   //"error_logfile_interval"      //UInt32    //Interval in days between error logfile rolls
+    qtssPrefsMaxErrorLogSize			= 12,   //"error_logfile_size"          //UInt32    //Max size in bytes of the error log
+    qtssPrefsErrorLogVerbosity			= 13,   //"error_logfile_verbosity"     //UInt32    //Max verbosity level of messages the error logger will log
+    qtssPrefsScreenLogging				= 14,   //"screen_logging"              //Bool16        //Should the error logger echo messages to the screen?
+    qtssPrefsErrorLogEnabled			= 15,   //"error_logging"               //Bool16        //Is error logging enabled?
     
-    qtssPrefsRunUserName                    = 16,   //"run_user_name"       //char array        //Run under this user's account
-    qtssPrefsRunPassword                    = 17,   //"run_password"		//char array        //Run under this group's account
+    qtssPrefsRunUserName				= 16,   //"run_user_name"       //char array        //Run under this user's account
+    qtssPrefsRunPassword				= 17,   //"run_password"		//char array        //Run under this group's account
     
 
-	qtssPrefsRunNumThreads                  = 18,   //"run_num_threads" //UInt32 // if value is non-zero, will  create that many task threads; otherwise a thread will be created for each processor
-    qtssPrefsPidFile                        = 19,    //"pid_file" //Char Array //path to pid file
-    qtssPrefsCloseLogsOnWrite               = 20,   // "force_logs_close_on_write" //Bool16 // force log files to close after each write.
+	qtssPrefsRunNumThreads				= 18,   //"run_num_threads" //UInt32 // if value is non-zero, will  create that many task threads; otherwise a thread will be created for each processor
+    qtssPrefsPidFile					= 19,    //"pid_file" //Char Array //path to pid file
+    qtssPrefsCloseLogsOnWrite			= 20,   // "force_logs_close_on_write" //Bool16 // force log files to close after each write.
 
-	qtssPrefsNumRTSPThreads                 = 21,   // "run_num_rtsp_threads" //UInt32 // if value is non-zero, the server will  create that many task threads; otherwise a single thread will be created.
+	qtssPrefsNumRTSPThreads				= 21,   // "run_num_rtsp_threads" //UInt32 // if value is non-zero, the server will  create that many task threads; otherwise a single thread will be created.
 	
-    qtssPrefsNumParams                      = 22
+    qtssPrefsNumParams					= 22
 };
 
 typedef UInt32 QTSS_PrefsAttributes;

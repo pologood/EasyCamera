@@ -70,7 +70,7 @@ class QTSServerPrefs : public QTSSPrefs
         //
         UInt32  GetCameraStreamType()       { return fCameraStreamType; }
                 
-        UInt32	GetLocalCameraPort()         { return fLocalCameraPort; }
+        UInt16	GetLocalCameraPort()         { return fLocalCameraPort; }
         
         // For the compiled-in error logging module
         
@@ -128,7 +128,7 @@ class QTSServerPrefs : public QTSSPrefs
 		UInt16		fRTSPServerPort;
         
         UInt32  fCameraStreamType;
-        UInt32  fLocalCameraPort;
+        UInt16  fLocalCameraPort;
         
         UInt32  fErrorRollIntervalInDays;
         UInt32  fErrorLogBytes;

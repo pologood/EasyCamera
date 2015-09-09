@@ -294,7 +294,8 @@ QTSS_Error EasyMediaSource::StartStreaming()
 		char sdpName[64] = { 0 };
 		sprintf(sdpName,"%s.sdp",QTSServerInterface::GetServer()->GetPrefs()->GetDeviceSerialNumber()); 
 
-		EasyPusher_StartStream(fPusherHandle, "115.29.139.20", 554, sdpName, "", "", &mediainfo, 1024);//115.29.139.20 211.140.169.83
+		EasyPusher_StartStream(fPusherHandle, QTSServerInterface::GetServer()->GetPrefs()->GetRTSPServerAddr(), 
+			QTSServerInterface::GetServer()->GetPrefs()->GetRTSPServerPort(), sdpName, "", "", &mediainfo, 1024);
 	}
 
 	NetDevStartStream();
@@ -330,11 +331,7 @@ QTSS_Error EasyMediaSource::PushFrame(unsigned char* frame, int len)
 		avFrame.u32VFrameType = (pstruAV->u32VFrameType == HI_NET_DEV_VIDEO_FRAME_I)?EASY_SDK_VIDEO_FRAME_I:EASY_SDK_VIDEO_FRAME_P;
 		avFrame.pBuffer = (unsigned char*)frame+sizeof(HI_S_AVFrame);
 		avFrame.u32AVFrameLen = pstruAV->u32AVFrameLen;
-
-
-		avFrame.u32AVFrameFlag	=	EASY_SDK_VIDEO_FRAME_FLAG;
-
-
+		avFrame.u32AVFrameFlag = EASY_SDK_VIDEO_FRAME_FLAG;
 	}
 	else if (pstruAV->u32AVFrameFlag == HI_NET_DEV_AUDIO_FRAME_FLAG)
 	{
