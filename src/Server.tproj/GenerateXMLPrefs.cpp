@@ -45,24 +45,26 @@ static const PrefConversionInfo kPrefs[] =
     /* 0 */ { "connection_timeout",             NULL,           qtssAttrDataTypeUInt32 },
     /* 1 */ { "cms_addr",						NULL,           qtssAttrDataTypeCharArray },
     /* 2 */ { "cms_port",						NULL,           qtssAttrDataTypeUInt32 },
-    /* 3 */ { "camera_stream_type",				NULL,           qtssAttrDataTypeUInt32 },
-    /* 4 */ { "maximum_bandwidth",              NULL,           qtssAttrDataTypeSInt32 },
+	
+	/* 3 */ { "local_camera_addr",				NULL,			qtssAttrDataTypeCharArray },
+	/* 4 */ { "local_camera_port",				NULL,			qtssAttrDataTypeUInt16 },
     /* 5 */ { "serial_number",					NULL,           qtssAttrDataTypeCharArray },
+    /* 6 */ { "camera_stream_type",				NULL,           qtssAttrDataTypeUInt32 },
 
-	/* 6 */ { "local_camera_port",				NULL,			qtssAttrDataTypeUInt16 },
+    /* 7 */ { "maximum_bandwidth",              NULL,           qtssAttrDataTypeSInt32 },
 
-    /* 7 */ { "rtsp_server_addr",               NULL,			qtssAttrDataTypeCharArray },
-    /* 8 */ { "rtsp_server_port",				NULL,			qtssAttrDataTypeUInt16 },
 
-    /* 9 */ { "error_logfile_name",             NULL,			qtssAttrDataTypeCharArray },
-    /* 10 */ { "error_logfile_dir",              NULL,			qtssAttrDataTypeCharArray },
-    /* 11 */ { "error_logfile_interval",        NULL,			qtssAttrDataTypeUInt32 },
-    /* 12 */ { "error_logfile_size",			NULL,			qtssAttrDataTypeUInt32 },
-    /* 13 */ { "error_logfile_verbosity",		NULL,			qtssAttrDataTypeUInt32 },
-    /* 14 */ { "screen_logging",				NULL,			qtssAttrDataTypeBool16 },
-    /* 15 */ { "error_logging",					NULL,			qtssAttrDataTypeBool16 },
+    /* 8 */ { "rtsp_server_addr",               NULL,			qtssAttrDataTypeCharArray },
+    /* 9 */ { "rtsp_server_port",				NULL,			qtssAttrDataTypeUInt16 },
 
-	/* 16 */ { "local_camera_addr",				NULL,			qtssAttrDataTypeCharArray },
+    /* 10 */ { "error_logfile_name",             NULL,			qtssAttrDataTypeCharArray },
+    /* 11 */ { "error_logfile_dir",              NULL,			qtssAttrDataTypeCharArray },
+    /* 12 */ { "error_logfile_interval",        NULL,			qtssAttrDataTypeUInt32 },
+    /* 13 */ { "error_logfile_size",			NULL,			qtssAttrDataTypeUInt32 },
+    /* 14 */ { "error_logfile_verbosity",		NULL,			qtssAttrDataTypeUInt32 },
+    /* 15 */ { "screen_logging",				NULL,			qtssAttrDataTypeBool16 },
+    /* 16 */ { "error_logging",					NULL,			qtssAttrDataTypeBool16 },
+
     /* 17 */ { "run_user_name",					NULL,			qtssAttrDataTypeCharArray },
     /* 18 */ { "run_password",					NULL,			qtssAttrDataTypeCharArray },
     //

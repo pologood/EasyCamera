@@ -199,7 +199,7 @@ void QTSServer::StartTasks()
 	char cmsIP[16] = { 0 };
 	if(QTSServerInterface::GetServer()->GetPrefs()->GetCMSIP(cmsIP))
 	{
-		UInt32 cmsPort = QTSServerInterface::GetServer()->GetPrefs()->GetCMSPort();
+		UInt16 cmsPort = QTSServerInterface::GetServer()->GetPrefs()->GetCMSPort();
 		char* serial = QTSServerInterface::GetServer()->GetPrefs()->GetDeviceSerialNumber();
 		char* password = QTSServerInterface::GetServer()->GetPrefs()->GetRunPassword();
 		
