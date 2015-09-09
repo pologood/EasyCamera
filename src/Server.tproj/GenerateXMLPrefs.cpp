@@ -44,32 +44,33 @@ static const PrefConversionInfo kPrefs[] =
 {
     /* 0 */ { "connection_timeout",             NULL,           qtssAttrDataTypeUInt32 },
     /* 1 */ { "cms_addr",						NULL,           qtssAttrDataTypeCharArray },
-    /* 2 */ { "cms_port",                    NULL,           qtssAttrDataTypeUInt32 },
-    /* 3 */ { "camera_stream_type",            NULL,           qtssAttrDataTypeUInt32 },
+    /* 2 */ { "cms_port",						NULL,           qtssAttrDataTypeUInt32 },
+    /* 3 */ { "camera_stream_type",				NULL,           qtssAttrDataTypeUInt32 },
     /* 4 */ { "maximum_bandwidth",              NULL,           qtssAttrDataTypeSInt32 },
-    /* 5 */ { "serial_number",                   NULL,           qtssAttrDataTypeCharArray },
+    /* 5 */ { "serial_number",					NULL,           qtssAttrDataTypeCharArray },
 
-	/* 6 */ { "local_camera_port",                     NULL,	qtssAttrDataTypeUInt16 },
+	/* 6 */ { "local_camera_port",				NULL,			qtssAttrDataTypeUInt16 },
 
-    /* 7 */ { "module_folder",                          NULL,   qtssAttrDataTypeCharArray },
-    /* 8 */ { "error_logfile_name",                     NULL,   qtssAttrDataTypeCharArray },
-    /* 9 */ { "error_logfile_dir",                      NULL,   qtssAttrDataTypeCharArray },
-    /* 10 */ { "error_logfile_interval",                 NULL,   qtssAttrDataTypeUInt32 },
-    /* 11 */ { "error_logfile_size",                     NULL,   qtssAttrDataTypeUInt32 },
-    /* 12 */ { "error_logfile_verbosity",                NULL,   qtssAttrDataTypeUInt32 },
-    /* 13 */ { "screen_logging",                         NULL,   qtssAttrDataTypeBool16 },
-    /* 14 */ { "error_logging",                          NULL,   qtssAttrDataTypeBool16 },
+    /* 7 */ { "rtsp_server_addr",               NULL,			qtssAttrDataTypeCharArray },
 
-	/* 15 */ { "local_camera_addr",						NULL,   qtssAttrDataTypeCharArray },
-    /* 16 */ { "run_user_name",                          NULL,   qtssAttrDataTypeCharArray },
-    /* 17 */ { "run_password",                         NULL,   qtssAttrDataTypeCharArray },
+    /* 8 */ { "error_logfile_name",             NULL,			qtssAttrDataTypeCharArray },
+    /* 9 */ { "error_logfile_dir",              NULL,			qtssAttrDataTypeCharArray },
+    /* 10 */ { "error_logfile_interval",        NULL,			qtssAttrDataTypeUInt32 },
+    /* 11 */ { "error_logfile_size",			NULL,			qtssAttrDataTypeUInt32 },
+    /* 12 */ { "error_logfile_verbosity",		NULL,			qtssAttrDataTypeUInt32 },
+    /* 13 */ { "screen_logging",				NULL,			qtssAttrDataTypeBool16 },
+    /* 14 */ { "error_logging",					NULL,			qtssAttrDataTypeBool16 },
 
-    /* 18 */ { "rtsp_port",                              NULL,   qtssAttrDataTypeUInt16 },
+	/* 15 */ { "local_camera_addr",				NULL,			qtssAttrDataTypeCharArray },
+    /* 16 */ { "run_user_name",					NULL,			qtssAttrDataTypeCharArray },
+    /* 17 */ { "run_password",					NULL,			qtssAttrDataTypeCharArray },
+
+    /* 18 */ { "rtsp_port",						NULL,			qtssAttrDataTypeUInt16 },
     
     //
     // This element will be used if the pref is something we don't know about.
     // Just have unknown prefs default to be server prefs with a type of char
-    { NULL,                                     NULL,               qtssAttrDataTypeCharArray }
+    { NULL,                                     NULL,			qtssAttrDataTypeCharArray }
 };
 
 int GenerateAllXMLPrefs(FilePrefsSource* inPrefsSource, XMLPrefsParser* inXMLPrefs)

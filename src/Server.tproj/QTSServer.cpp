@@ -155,8 +155,6 @@ void QTSServer::InitModules(QTSS_ServerState inEndState)
     // temporarily set the verbosity on missing prefs when starting up to debug level
     // This keeps all the pref messages being written to the config file from being logged.
     // don't exit until the verbosity level is reset back to the initial prefs.
-     
-    LoadModules(fSrvrPrefs);
     LoadCompiledInModules();
     this->BuildModuleRoleArrays();
 
@@ -312,106 +310,6 @@ void    QTSServer::InitCallbacks()
     sCallbacks.addr[kLockStdLibCallback] =                  (QTSS_CallbackProcPtr)QTSSCallbacks::QTSS_LockStdLib;
     sCallbacks.addr[kUnlockStdLibCallback] =                (QTSS_CallbackProcPtr)QTSSCallbacks::QTSS_UnlockStdLib;
 	
-}
-
-void QTSServer::LoadModules(QTSServerPrefs* inPrefs)
-{
-    // Fetch the name of the module directory and open it.
-    OSCharArrayDeleter theModDirName(inPrefs->GetModuleDirectory());
-    
-#ifdef __Win32__
-    // NT doesn't seem to have support for the POSIX directory parsing APIs.
-    OSCharArrayDeleter theLargeModDirName(NEW char[::strlen(theModDirName.GetObject()) + 3]);
-    ::strcpy(theLargeModDirName.GetObject(), theModDirName.GetObject());
-    ::strcat(theLargeModDirName.GetObject(), "\\*");
-    
-    WIN32_FIND_DATA theFindData;
-    HANDLE theSearchHandle = ::FindFirstFile(theLargeModDirName.GetObject(), &theFindData);
-    
-    if (theSearchHandle == INVALID_HANDLE_VALUE)
-    {
-        QTSSModuleUtils::LogError(qtssWarningVerbosity, qtssMsgNoModuleFolder, 0);  
-        return;
-    }
-    
-    while (theSearchHandle != INVALID_HANDLE_VALUE)
-    {
-        this->CreateModule(theModDirName.GetObject(), theFindData.cFileName);
-        
-        if (!::FindNextFile(theSearchHandle, &theFindData))
-        {
-            ::FindClose(theSearchHandle);
-            theSearchHandle = INVALID_HANDLE_VALUE;
-        }
-    }
-#else       
-
-    // POSIX version
-	// opendir mallocs memory for DIR* so call closedir to free the allocated memory
-    DIR* theDir = ::opendir(theModDirName.GetObject());
-    if (theDir == NULL)
-    {
-        QTSSModuleUtils::LogError(qtssWarningVerbosity, qtssMsgNoModuleFolder, 0);  
-        return;
-    }
-    
-    while (true)
-    {
-        // Iterate over each file in the directory, attempting to construct
-        // a module object from that file.
-        
-        struct dirent* theFile = ::readdir(theDir);
-        if (theFile == NULL)
-            break;
-        
-        this->CreateModule(theModDirName.GetObject(), theFile->d_name);
-    }
-	
-	(void)::closedir(theDir);
-	
-#endif
-}
-
-void    QTSServer::CreateModule(char* inModuleFolderPath, char* inModuleName)
-{
-    // Ignore these silly directory names
-        
-    if (::strcmp(inModuleName, ".") == 0)
-        return;
-    if (::strcmp(inModuleName, "..") == 0)
-        return;
-    if (::strlen(inModuleName) == 0)
-        return;
-    if (*inModuleName == '.')
-        return; // Fix 2572248. Do not attempt to load '.' files as modules at all 
-
-    //
-    // Construct a full path to this module
-    UInt32 totPathLen = ::strlen(inModuleFolderPath) + ::strlen(inModuleName);
-    OSCharArrayDeleter theModPath(NEW char[totPathLen + 4]);
-    ::strcpy(theModPath.GetObject(), inModuleFolderPath);
-    ::strcat(theModPath.GetObject(), kPathDelimiterString);
-    ::strcat(theModPath.GetObject(), inModuleName);
-            
-    //
-    // Construct a QTSSModule object, and attempt to initialize the module
-    QTSSModule* theNewModule = NEW QTSSModule(inModuleName, theModPath.GetObject());
-    QTSS_Error theErr = theNewModule->SetupModule(&sCallbacks);
-    
-    if (theErr != QTSS_NoErr)
-    {
-        QTSSModuleUtils::LogError(qtssWarningVerbosity, qtssMsgBadModule, theErr,
-                                        inModuleName);
-        delete theNewModule;
-    }
-    //
-    // If the module was successfully initialized, add it to our module queue
-    else if (!this->AddModule(theNewModule))
-    {
-        QTSSModuleUtils::LogError(qtssWarningVerbosity, qtssMsgRegFailed, theErr,
-                                        inModuleName);
-        delete theNewModule;
-    }
 }
 
 Bool16 QTSServer::AddModule(QTSSModule* inModule)

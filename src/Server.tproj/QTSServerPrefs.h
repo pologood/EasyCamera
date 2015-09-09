@@ -94,8 +94,8 @@ class QTSServerPrefs : public QTSSPrefs
         char*   GetErrorLogName()
             { return this->GetStringPref(qtssPrefsErrorLogName); }
 
-        char*   GetModuleDirectory()
-            { return this->GetStringPref(qtssPrefsModuleFolder); }
+        char*   GetRTSPServerAddr()
+            { return this->GetStringPref(qtssPrefsRTSPServerAddr); }
             
         char*   GetLocalCameraAddress()
             { return this->GetStringPref(qtssPrefsLocalCameraAddress); }
@@ -114,7 +114,7 @@ class QTSServerPrefs : public QTSSPrefs
         UInt32  GetNumThreads()                   { return fNumThreads; } //short tasks threads
         UInt32  GetNumBlockingThreads()           { return fNumRTSPThreads; } //return the number of threads that long tasks will be scheduled on -- RTSP processing for example.
         
-		Bool16 GetCMSIP(char* outCMSIP);/*						  { return this->GetStringPref(qtssPrefsCMSIPAddr); }*/
+		Bool16 GetCMSIP(char* outCMSIP);
 
 		char* GetDeviceSerialNumber()			  { return this->GetStringPref(qtssPrefsSerialNumber); }
         

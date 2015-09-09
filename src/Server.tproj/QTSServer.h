@@ -111,10 +111,6 @@ class QTSServer : public QTSServerInterface
         
         // Loads compiled-in modules
         void                    LoadCompiledInModules();
-
-        // Loads modules from disk
-        void                    LoadModules(QTSServerPrefs* inPrefs);
-        void                    CreateModule(char* inModuleFolderPath, char* inModuleName);
         
         // Adds a module to the module array
         Bool16                  AddModule(QTSSModule* inModule);

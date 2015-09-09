@@ -535,8 +535,8 @@ enum
     qtssPrefsMaximumBandwidth       = 4,    //"maximum_bandwidth"           //SInt32    //Maximum amt of bandwidth the server is allowed to serve in K bits. -1 means unlimited.
     qtssPrefsSerialNumber           = 5,    //"serial_number"                //char array    //Path to the root movie folder
 
-	qtssPrefsLocalCameraPort		= 6,   //"local_camera_port"          //UInt16  //Hard to explain... see streamingserver.conf
-    qtssPrefsModuleFolder           = 7,   //"module_folder"               //char array    //Path to the module folder
+	qtssPrefsLocalCameraPort		= 6,   //"local_camera_port"          //UInt16
+    qtssPrefsRTSPServerAddr           = 7,   //"rtsp_server_addr"               //char array    //Path to the module folder
 
     // There is a compiled-in error log module that loads before all the other modules
     // (so it can log errors from the get-go). It uses these prefs.

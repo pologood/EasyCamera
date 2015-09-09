@@ -49,14 +49,15 @@
 QTSServerPrefs::PrefInfo QTSServerPrefs::sPrefInfo[] =
 {
     { kDontAllowMultipleValues, "0",        NULL                    },  //connection_timeout
-    { kDontAllowMultipleValues, "easycms.easydarwin.org",  NULL     },  //cms_addr
+    { kDontAllowMultipleValues, "www.easydarwin.org",  NULL			},  //cms_addr
 	{ kDontAllowMultipleValues,	"10000",		NULL				},	//cms_port
     { kDontAllowMultipleValues, "0",     NULL						},  //camera_stream_type
     { kDontAllowMultipleValues, "102400",   NULL                    },  //maximum_bandwidth
 	{ kDontAllowMultipleValues,	"000000000000", NULL				},	//serial_number
 
     { kDontAllowMultipleValues, "80",		NULL                    },  //local_camera_port
-	{ kDontAllowMultipleValues,	DEFAULTPATHS_SSM_DIR,	NULL		},	//module_folder
+	{ kDontAllowMultipleValues,	"www.easydarwin.org",	NULL		},	//rtsp_server_addr
+
     { kDontAllowMultipleValues, "Error",    NULL                    },  //error_logfile_name
 	{ kDontAllowMultipleValues,	DEFAULTPATHS_LOG_DIR,	NULL		},	//error_logfile_dir
     { kDontAllowMultipleValues, "7",        NULL                    },  //error_logfile_interval
@@ -94,9 +95,10 @@ QTSSAttrInfoDict::AttrInfo  QTSServerPrefs::sAttributes[] =
     /* 5 */ { "serial_number",                          NULL,					qtssAttrDataTypeCharArray,  qtssAttrModeRead | qtssAttrModeWrite },
 	/* 6 */ { "local_camera_port",						NULL,                   qtssAttrDataTypeUInt16,     qtssAttrModeRead | qtssAttrModeWrite },
     
-	/* 7 */ { "module_folder",                         NULL,                   qtssAttrDataTypeCharArray,  qtssAttrModeRead | qtssAttrModeWrite },
-    /* 8 */ { "error_logfile_name",                    NULL,                   qtssAttrDataTypeCharArray,  qtssAttrModeRead | qtssAttrModeWrite },
-    /* 9 */ { "error_logfile_dir",                     NULL,                   qtssAttrDataTypeCharArray,  qtssAttrModeRead | qtssAttrModeWrite },
+	/* 7 */ { "rtsp_server_addr",                       NULL,                   qtssAttrDataTypeCharArray,  qtssAttrModeRead | qtssAttrModeWrite },
+
+    /* 8 */ { "error_logfile_name",						NULL,                   qtssAttrDataTypeCharArray,  qtssAttrModeRead | qtssAttrModeWrite },
+    /* 9 */ { "error_logfile_dir",						NULL,                   qtssAttrDataTypeCharArray,  qtssAttrModeRead | qtssAttrModeWrite },
     /* 10 */ { "error_logfile_interval",                NULL,                   qtssAttrDataTypeUInt32,     qtssAttrModeRead | qtssAttrModeWrite },
     /* 11 */ { "error_logfile_size",                    NULL,                   qtssAttrDataTypeUInt32,     qtssAttrModeRead | qtssAttrModeWrite },
     /* 12 */ { "error_logfile_verbosity",               NULL,                   qtssAttrDataTypeUInt32,     qtssAttrModeRead | qtssAttrModeWrite },
