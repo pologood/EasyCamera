@@ -65,7 +65,7 @@ static const PrefConversionInfo kPrefs[] =
     /* 16 */ { "run_user_name",					NULL,			qtssAttrDataTypeCharArray },
     /* 17 */ { "run_password",					NULL,			qtssAttrDataTypeCharArray },
 
-    /* 18 */ { "rtsp_port",						NULL,			qtssAttrDataTypeUInt16 },
+    /* 18 */ { "rtsp_server_port",						NULL,			qtssAttrDataTypeUInt16 },
     
     //
     // This element will be used if the pref is something we don't know about.

@@ -62,14 +62,16 @@ class QTSServerPrefs : public QTSSPrefs
         
         //This is the value we advertise to clients (lower than the real one)
         UInt32  GetConnectionTimeoutSecs()  { return fConnectionTimeoutInSecs; }
-        UInt32  GetCMSPort()   { return fCMSPort; }
+        UInt16  GetCMSPort()   { return fCMSPort; }
         StrPtrLen*  GetRTSPTimeoutAsString() { return &fRTSPTimeoutString; }
+
+		UInt32	GetRTSPServerPort()	{ return fRTSPServerPort; }
 
         //
         UInt32  GetCameraStreamType()       { return fCameraStreamType; }
         SInt32  GetMaxKBitsBandwidth()      { return fMaxBandwidthInKBits; }
                 
-        UInt32      GetLocalCameraPort()         { return fLocalCameraPort; }
+        UInt32	GetLocalCameraPort()         { return fLocalCameraPort; }
         
         // For the compiled-in error logging module
         
@@ -107,10 +109,7 @@ class QTSServerPrefs : public QTSSPrefs
 
         char*   GetPidFilePath()
             { return this->GetStringPref(qtssPrefsPidFile); }
-
-        QTSS_AuthScheme GetAuthScheme()     { return fAuthScheme; }
-
-                
+               
         UInt32  GetNumThreads()                   { return fNumThreads; } //short tasks threads
         UInt32  GetNumBlockingThreads()           { return fNumRTSPThreads; } //return the number of threads that long tasks will be scheduled on -- RTSP processing for example.
         
@@ -125,7 +124,9 @@ class QTSServerPrefs : public QTSSPrefs
         StrPtrLen   fRTSPTimeoutString;
 
 		char		fCMSIPAddr[20];
-        UInt32      fCMSPort;
+        UInt16      fCMSPort;
+
+		UInt16		fRTSPServerPort;
         
         UInt32  fCameraStreamType;
         SInt32  fMaxBandwidthInKBits;
@@ -138,7 +139,6 @@ class QTSServerPrefs : public QTSSPrefs
         Bool16  fScreenLoggingEnabled;
         Bool16  fErrorLogEnabled;  
 
-        QTSS_AuthScheme fAuthScheme;
         UInt32  fNumThreads;
         UInt32  fNumRTSPThreads;
         
@@ -164,9 +164,5 @@ class QTSServerPrefs : public QTSSPrefs
         
         static QTSSAttrInfoDict::AttrInfo   sAttributes[];
         static PrefInfo sPrefInfo[];
-        
-        // Prefs that have multiple default values (rtsp_ports) have
-        // to be dealt with specially
-        static char*    sAdditionalDefaultPorts[];       
 };
 #endif //__QTSSPREFS_H__

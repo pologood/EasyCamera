@@ -555,7 +555,7 @@ enum
     qtssPrefsRunUserName                    = 16,   //"run_user_name"       //char array        //Run under this user's account
     qtssPrefsRunPassword                    = 17,   //"run_password"		//char array        //Run under this group's account
     
-	qtssPrefsRTSPPorts                      = 18,   //"rtsp_ports"          // UInt16   
+	qtssPrefsRTSPServerPort					= 18,   //"rtsp_server_port"          // UInt16   
 
 	qtssPrefsRunNumThreads                  = 19,   //"run_num_threads" //UInt32 // if value is non-zero, will  create that many task threads; otherwise a thread will be created for each processor
     qtssPrefsPidFile                        = 20,    //"pid_file" //Char Array //path to pid file

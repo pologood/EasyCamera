@@ -75,7 +75,7 @@ QTSServerPrefs::PrefInfo QTSServerPrefs::sPrefInfo[] =
     { kDontAllowMultipleValues, "",         NULL                    },  //run_group_name
 #endif
 
-    { kAllowMultipleValues,     "554",      NULL					},  //rtsp_ports
+    { kDontAllowMultipleValues,	"554",      NULL					},  //rtsp_server_port
 
 	{ kDontAllowMultipleValues, "0",        NULL                    },  //run_num_threads
     { kDontAllowMultipleValues, DEFAULTPATHS_PID_DIR PLATFORM_SERVER_BIN_NAME ".pid",	NULL	},	//pid_file
@@ -108,7 +108,7 @@ QTSSAttrInfoDict::AttrInfo  QTSServerPrefs::sAttributes[] =
     /* 15 */ { "local_camera_addr",						NULL,                   qtssAttrDataTypeCharArray,  qtssAttrModeRead | qtssAttrModeWrite },
     /* 16 */ { "run_user_name",                         NULL,                   qtssAttrDataTypeCharArray,  qtssAttrModeRead | qtssAttrModeWrite },
     /* 17 */ { "run_password",							NULL,                   qtssAttrDataTypeCharArray,  qtssAttrModeRead | qtssAttrModeWrite },
-    /* 18 */ { "rtsp_port",                             NULL,                   qtssAttrDataTypeUInt16,     qtssAttrModeRead | qtssAttrModeWrite },
+    /* 18 */ { "rtsp_server_port",						NULL,                   qtssAttrDataTypeUInt16,     qtssAttrModeRead | qtssAttrModeWrite },
 
 	/* 19 */ { "run_num_threads",                       NULL,                   qtssAttrDataTypeUInt32,     qtssAttrModeRead | qtssAttrModeWrite },
 	/* 20 */ { "pid_file",								NULL,					qtssAttrDataTypeCharArray,	qtssAttrModeRead | qtssAttrModeWrite },
@@ -124,6 +124,8 @@ QTSServerPrefs::QTSServerPrefs(XMLPrefsParser* inPrefsSource, Bool16 inWriteMiss
     fRTSPTimeoutString(fRTSPTimeoutBuf, 0),
 
     fCMSPort(0),
+	fRTSPServerPort(554),
+
     fCameraStreamType(0),
     fMaxBandwidthInKBits(0),
 
@@ -134,7 +136,6 @@ QTSServerPrefs::QTSServerPrefs(XMLPrefsParser* inPrefsSource, Bool16 inWriteMiss
     fScreenLoggingEnabled(true),
     fErrorLogEnabled(false),
 
-    fAuthScheme(qtssAuthDigest),
     fNumThreads(0),
     fNumRTSPThreads(0),
 
@@ -160,6 +161,8 @@ void QTSServerPrefs::SetupAttributes()
 	this->SetVal(qtssPrefsCMSIPAddr,		&fCMSIPAddr,				sizeof(fCMSIPAddr));
     this->SetVal(qtssPrefsCMSPort,			&fCMSPort,					sizeof(fCMSPort));
     this->SetVal(qtssPrefsCameraStreamType,	&fCameraStreamType,			sizeof(fCameraStreamType));
+
+	this->SetVal(qtssPrefsRTSPServerPort,	&fRTSPServerPort,			sizeof(fRTSPServerPort));
 
     this->SetVal(qtssPrefsMaximumBandwidth, &fMaxBandwidthInKBits,      sizeof(fMaxBandwidthInKBits));
 

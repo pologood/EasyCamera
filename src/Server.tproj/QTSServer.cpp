@@ -60,7 +60,6 @@
 #include "OS.h"
 
 // CLASS DEFINITIONS
-char*           QTSServer::sPortPrefString = "rtsp_port";
 QTSS_Callbacks  QTSServer::sCallbacks;
 XMLPrefsParser* QTSServer::sPrefsSource = NULL;
 PrefsSource*    QTSServer::sMessagesSource = NULL;
