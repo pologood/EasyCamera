@@ -69,7 +69,6 @@ class QTSServerPrefs : public QTSSPrefs
 
         //
         UInt32  GetCameraStreamType()       { return fCameraStreamType; }
-        SInt32  GetMaxKBitsBandwidth()      { return fMaxBandwidthInKBits; }
                 
         UInt32	GetLocalCameraPort()         { return fLocalCameraPort; }
         
@@ -129,8 +128,6 @@ class QTSServerPrefs : public QTSSPrefs
 		UInt16		fRTSPServerPort;
         
         UInt32  fCameraStreamType;
-        SInt32  fMaxBandwidthInKBits;
-        
         UInt32  fLocalCameraPort;
         
         UInt32  fErrorRollIntervalInDays;

@@ -51,11 +51,12 @@ QTSServerPrefs::PrefInfo QTSServerPrefs::sPrefInfo[] =
     { kDontAllowMultipleValues, "0",        NULL                    },  //connection_timeout
     { kDontAllowMultipleValues, "www.easydarwin.org",  NULL			},  //cms_addr
 	{ kDontAllowMultipleValues,	"10000",		NULL				},	//cms_port
-    { kDontAllowMultipleValues, "0",     NULL						},  //camera_stream_type
-    { kDontAllowMultipleValues, "102400",   NULL                    },  //maximum_bandwidth
-	{ kDontAllowMultipleValues,	"000000000000", NULL				},	//serial_number
 
+    { kDontAllowMultipleValues, "127.0.0.1", NULL					},  //local_camera_addr
     { kDontAllowMultipleValues, "80",		NULL                    },  //local_camera_port
+	{ kDontAllowMultipleValues,	"000000000000", NULL				},	//serial_number
+    { kDontAllowMultipleValues, "0",     NULL						},  //camera_stream_type
+
 	{ kDontAllowMultipleValues,	"www.easydarwin.org",	NULL		},	//rtsp_server_addr
     { kDontAllowMultipleValues,	"554",      NULL					},  //rtsp_server_port
 
@@ -67,13 +68,13 @@ QTSServerPrefs::PrefInfo QTSServerPrefs::sPrefInfo[] =
     { kDontAllowMultipleValues, "true",     NULL                    },  //screen_logging
     { kDontAllowMultipleValues, "true",     NULL                    },  //error_logging
 
-    { kDontAllowMultipleValues, "127.0.0.1", NULL					},  //local_camera_addr
+
 #ifndef __Win32__
     { kDontAllowMultipleValues, "admin",     NULL                    },  //run_user_name
     { kDontAllowMultipleValues, "admin",     NULL                    },  //run_password
 #else
-    { kDontAllowMultipleValues, "",         NULL                    },  //run_user_name
-    { kDontAllowMultipleValues, "",         NULL                    },  //run_group_name
+    { kDontAllowMultipleValues, "admin",         NULL                    },  //run_user_name
+    { kDontAllowMultipleValues, "admin",         NULL                    },  //run_group_name
 #endif
 
 	{ kDontAllowMultipleValues, "0",        NULL                    },  //run_num_threads
@@ -89,11 +90,12 @@ QTSSAttrInfoDict::AttrInfo  QTSServerPrefs::sAttributes[] =
     /* 0 */ { "connection_timeout",                     NULL,                   qtssAttrDataTypeUInt32,     qtssAttrModeRead | qtssAttrModeWrite },
     /* 1 */ { "cms_addr",								NULL,                   qtssAttrDataTypeCharArray,  qtssAttrModeRead | qtssAttrModeWrite },
     /* 2 */ { "cms_port",								NULL,                   qtssAttrDataTypeUInt32,     qtssAttrModeRead | qtssAttrModeWrite },
-    /* 3 */ { "camera_stream_type",						NULL,                   qtssAttrDataTypeUInt32,     qtssAttrModeRead | qtssAttrModeWrite },
-    /* 4 */ { "maximum_bandwidth",                      NULL,                   qtssAttrDataTypeSInt32,     qtssAttrModeRead | qtssAttrModeWrite },
-    /* 5 */ { "serial_number",                          NULL,					qtssAttrDataTypeCharArray,  qtssAttrModeRead | qtssAttrModeWrite },
-	/* 6 */ { "local_camera_port",						NULL,                   qtssAttrDataTypeUInt16,     qtssAttrModeRead | qtssAttrModeWrite },
     
+	/* 3 */ { "local_camera_addr",						NULL,                   qtssAttrDataTypeCharArray,  qtssAttrModeRead | qtssAttrModeWrite },
+ 	/* 4 */ { "local_camera_port",						NULL,                   qtssAttrDataTypeUInt16,     qtssAttrModeRead | qtssAttrModeWrite },
+  	/* 5 */ { "serial_number",                          NULL,					qtssAttrDataTypeCharArray,  qtssAttrModeRead | qtssAttrModeWrite },
+	/* 6 */ { "camera_stream_type",						NULL,                   qtssAttrDataTypeUInt32,     qtssAttrModeRead | qtssAttrModeWrite },
+
 	/* 7 */ { "rtsp_server_addr",                       NULL,                   qtssAttrDataTypeCharArray,  qtssAttrModeRead | qtssAttrModeWrite },
     /* 8 */ { "rtsp_server_port",						NULL,                   qtssAttrDataTypeUInt16,     qtssAttrModeRead | qtssAttrModeWrite },
 
@@ -105,15 +107,14 @@ QTSSAttrInfoDict::AttrInfo  QTSServerPrefs::sAttributes[] =
     /* 14 */ { "screen_logging",                        NULL,                   qtssAttrDataTypeBool16,     qtssAttrModeRead | qtssAttrModeWrite },
     /* 15 */ { "error_logging",                         NULL,                   qtssAttrDataTypeBool16,     qtssAttrModeRead | qtssAttrModeWrite },
 
-    /* 16 */ { "local_camera_addr",						NULL,                   qtssAttrDataTypeCharArray,  qtssAttrModeRead | qtssAttrModeWrite },
-    /* 17 */ { "run_user_name",                         NULL,                   qtssAttrDataTypeCharArray,  qtssAttrModeRead | qtssAttrModeWrite },
-    /* 18 */ { "run_password",							NULL,                   qtssAttrDataTypeCharArray,  qtssAttrModeRead | qtssAttrModeWrite },
+    /* 16 */ { "run_user_name",                         NULL,                   qtssAttrDataTypeCharArray,  qtssAttrModeRead | qtssAttrModeWrite },
+    /* 17 */ { "run_password",							NULL,                   qtssAttrDataTypeCharArray,  qtssAttrModeRead | qtssAttrModeWrite },
 
-	/* 19 */ { "run_num_threads",                       NULL,                   qtssAttrDataTypeUInt32,     qtssAttrModeRead | qtssAttrModeWrite },
-	/* 20 */ { "pid_file",								NULL,					qtssAttrDataTypeCharArray,	qtssAttrModeRead | qtssAttrModeWrite },
-    /* 21 */ { "force_logs_close_on_write",             NULL,                   qtssAttrDataTypeBool16,     qtssAttrModeRead | qtssAttrModeWrite },
+	/* 18 */ { "run_num_threads",                       NULL,                   qtssAttrDataTypeUInt32,     qtssAttrModeRead | qtssAttrModeWrite },
+	/* 19 */ { "pid_file",								NULL,					qtssAttrDataTypeCharArray,	qtssAttrModeRead | qtssAttrModeWrite },
+    /* 20 */ { "force_logs_close_on_write",             NULL,                   qtssAttrDataTypeBool16,     qtssAttrModeRead | qtssAttrModeWrite },
   
-	/* 22 */ { "run_num_rtsp_threads",					NULL,                   qtssAttrDataTypeUInt32,     qtssAttrModeRead | qtssAttrModeWrite }
+	/* 21 */ { "run_num_rtsp_threads",					NULL,                   qtssAttrDataTypeUInt32,     qtssAttrModeRead | qtssAttrModeWrite }
 };
 
 
@@ -126,8 +127,6 @@ QTSServerPrefs::QTSServerPrefs(XMLPrefsParser* inPrefsSource, Bool16 inWriteMiss
 	fRTSPServerPort(554),
 
     fCameraStreamType(0),
-    fMaxBandwidthInKBits(0),
-
 	fLocalCameraPort(80),
     fErrorRollIntervalInDays(0),
     fErrorLogBytes(0),
@@ -162,8 +161,6 @@ void QTSServerPrefs::SetupAttributes()
     this->SetVal(qtssPrefsCameraStreamType,	&fCameraStreamType,			sizeof(fCameraStreamType));
 
 	this->SetVal(qtssPrefsRTSPServerPort,	&fRTSPServerPort,			sizeof(fRTSPServerPort));
-
-    this->SetVal(qtssPrefsMaximumBandwidth, &fMaxBandwidthInKBits,      sizeof(fMaxBandwidthInKBits));
 
     this->SetVal(qtssPrefsLocalCameraPort, &fLocalCameraPort,   sizeof(fLocalCameraPort));
 

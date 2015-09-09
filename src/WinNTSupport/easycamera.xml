@@ -1,15 +1,14 @@
 <CONFIGURATION>
 	<SERVER>
 		<PREF NAME="connection_timeout" TYPE="UInt32" >0</PREF>
-		<PREF NAME="cms_addr" >cms.easydarwin.org</PREF>
+		<PREF NAME="cms_addr" >www.easydarwin.org</PREF>
 		<PREF NAME="cms_port" TYPE="UInt32" >10000</PREF>
-		<PREF NAME="local_camera_addr" >192.168.0.101</PREF>
+		<PREF NAME="local_camera_addr" >127.0.0.1</PREF>
 		<PREF NAME="local_camera_port" TYPE="UInt16" >80</PREF>
-		<PREF NAME="serial_number" >000000001201</PREF>
-		<PREF NAME="run_user_name" >admin</PREF>
-		<PREF NAME="run_password" >admin</PREF>
-		<PREF NAME="camera_stream_type" TYPE="UInt32" >1</PREF>
-		<PREF NAME="module_folder" >./QTSSModules/</PREF>
+		<PREF NAME="serial_number" >000000000000</PREF>
+		<PREF NAME="camera_stream_type" TYPE="UInt32" >0</PREF>
+		<PREF NAME="rtsp_server_addr" >www.easydarwin.org</PREF>
+		<PREF NAME="rtsp_server_port" TYPE="UInt16" >554</PREF>
 		<PREF NAME="error_logfile_name" >Error</PREF>
 		<PREF NAME="error_logfile_dir" >./Logs/</PREF>
 		<PREF NAME="error_logfile_interval" TYPE="UInt32" >7</PREF>
@@ -17,12 +16,12 @@
 		<PREF NAME="error_logfile_verbosity" TYPE="UInt32" >2</PREF>
 		<PREF NAME="screen_logging" TYPE="Bool16" >true</PREF>
 		<PREF NAME="error_logging" TYPE="Bool16" >true</PREF>
-		<PREF NAME="rtsp_port" TYPE="UInt16" >554</PREF>
+		<PREF NAME="run_user_name" >admin</PREF>
+		<PREF NAME="run_password" >admin</PREF>
 		<PREF NAME="run_num_threads" TYPE="UInt32" >0</PREF>
-		<PREF NAME="pid_file" >easycamera.pid</PREF>
+		<PREF NAME="pid_file" >EasyCamera.pid</PREF>
 		<PREF NAME="force_logs_close_on_write" TYPE="Bool16" >false</PREF>
 		<PREF NAME="run_num_rtsp_threads" TYPE="UInt32" >1</PREF>
-		<PREF NAME="maximum_bandwidth" TYPE="SInt32" >102400</PREF>
 	</SERVER>
 	<MODULE NAME="QTSSErrorLogModule" ></MODULE>
 </CONFIGURATION>
