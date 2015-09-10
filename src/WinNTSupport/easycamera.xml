@@ -2,6 +2,7 @@
 	<SERVER>
 		<PREF NAME="connection_timeout" TYPE="UInt32" >0</PREF>
 		<PREF NAME="cms_addr" >www.easydarwin.org</PREF>
+		<PREF NAME="cms_port" TYPE="UInt16" >10000</PREF>
 		<PREF NAME="local_camera_addr" >127.0.0.1</PREF>
 		<PREF NAME="local_camera_port" TYPE="UInt16" >80</PREF>
 		<PREF NAME="serial_number" >000000000000</PREF>
@@ -20,8 +21,7 @@
 		<PREF NAME="run_num_threads" TYPE="UInt32" >0</PREF>
 		<PREF NAME="pid_file" >EasyCamera.pid</PREF>
 		<PREF NAME="force_logs_close_on_write" TYPE="Bool16" >false</PREF>
-		<PREF NAME="run_num_rtsp_threads" TYPE="UInt32" >1</PREF>
-		<PREF NAME="cms_port" TYPE="UInt16" >10000</PREF>
+		<PREF NAME="run_num_blocking_threads" TYPE="UInt32" >1</PREF>
 	</SERVER>
 	<MODULE NAME="QTSSErrorLogModule" ></MODULE>
 </CONFIGURATION>

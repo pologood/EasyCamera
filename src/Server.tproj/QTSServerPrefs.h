@@ -63,7 +63,6 @@ class QTSServerPrefs : public QTSSPrefs
         //This is the value we advertise to clients (lower than the real one)
         UInt32  GetConnectionTimeoutSecs()  { return fConnectionTimeoutInSecs; }
         UInt16  GetCMSPort()   { return fCMSPort; }
-        StrPtrLen*  GetRTSPTimeoutAsString() { return &fRTSPTimeoutString; }
 
 		UInt32	GetRTSPServerPort()	{ return fRTSPServerPort; }
 
@@ -110,7 +109,7 @@ class QTSServerPrefs : public QTSSPrefs
             { return this->GetStringPref(qtssPrefsPidFile); }
                
         UInt32  GetNumThreads()                   { return fNumThreads; } //short tasks threads
-        UInt32  GetNumBlockingThreads()           { return fNumRTSPThreads; } //return the number of threads that long tasks will be scheduled on -- RTSP processing for example.
+        UInt32  GetNumBlockingThreads()           { return fNumBlockingThreads; } //return the number of threads that long tasks will be scheduled on -- RTSP processing for example.
         
 		Bool16 GetCMSIP(char* outCMSIP);
 
@@ -119,8 +118,6 @@ class QTSServerPrefs : public QTSSPrefs
     private:
 
         UInt32      fConnectionTimeoutInSecs;
-        char        fRTSPTimeoutBuf[20];
-        StrPtrLen   fRTSPTimeoutString;
 
 		char		fCMSIPAddr[20];
         UInt16      fCMSPort;
@@ -137,7 +134,7 @@ class QTSServerPrefs : public QTSSPrefs
         Bool16  fErrorLogEnabled;  
 
         UInt32  fNumThreads;
-        UInt32  fNumRTSPThreads;
+        UInt32  fNumBlockingThreads;
         
         Bool16  fCloseLogsOnWrite;
         enum

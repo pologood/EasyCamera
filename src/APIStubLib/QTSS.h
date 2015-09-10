@@ -559,7 +559,7 @@ enum
     qtssPrefsPidFile					= 19,    //"pid_file" //Char Array //path to pid file
     qtssPrefsCloseLogsOnWrite			= 20,   // "force_logs_close_on_write" //Bool16 // force log files to close after each write.
 
-	qtssPrefsNumRTSPThreads				= 21,   // "run_num_rtsp_threads" //UInt32 // if value is non-zero, the server will  create that many task threads; otherwise a single thread will be created.
+	qtssPrefsNumBlockingThreads				= 21,   // "run_num_blocking_threads" //UInt32 // if value is non-zero, the server will  create that many task threads; otherwise a single thread will be created.
 	
     qtssPrefsNumParams					= 22
 };

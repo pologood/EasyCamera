@@ -81,7 +81,7 @@ QTSServerPrefs::PrefInfo QTSServerPrefs::sPrefInfo[] =
     { kDontAllowMultipleValues, DEFAULTPATHS_PID_DIR PLATFORM_SERVER_BIN_NAME ".pid",	NULL	},	//pid_file
     { kDontAllowMultipleValues, "false",    NULL                    },   //force_logs_close_on_write
 
-    { kDontAllowMultipleValues, "1",        NULL                     }  //run_num_rtsp_threads
+    { kDontAllowMultipleValues, "1",        NULL                     }  //run_num_blocking_threads
    
 };
 
@@ -114,14 +114,13 @@ QTSSAttrInfoDict::AttrInfo  QTSServerPrefs::sAttributes[] =
 	/* 19 */ { "pid_file",								NULL,					qtssAttrDataTypeCharArray,	qtssAttrModeRead | qtssAttrModeWrite },
     /* 20 */ { "force_logs_close_on_write",             NULL,                   qtssAttrDataTypeBool16,     qtssAttrModeRead | qtssAttrModeWrite },
   
-	/* 21 */ { "run_num_rtsp_threads",					NULL,                   qtssAttrDataTypeUInt32,     qtssAttrModeRead | qtssAttrModeWrite }
+	/* 21 */ { "run_num_blocking_threads",				NULL,                   qtssAttrDataTypeUInt32,     qtssAttrModeRead | qtssAttrModeWrite }
 };
 
 
 QTSServerPrefs::QTSServerPrefs(XMLPrefsParser* inPrefsSource, Bool16 inWriteMissingPrefs)
 :   QTSSPrefs(inPrefsSource, NULL, QTSSDictionaryMap::GetMap(QTSSDictionaryMap::kPrefsDictIndex), false),
     fConnectionTimeoutInSecs(0),
-    fRTSPTimeoutString(fRTSPTimeoutBuf, 0),
 
     fCMSPort(0),
 	fRTSPServerPort(554),
@@ -135,7 +134,7 @@ QTSServerPrefs::QTSServerPrefs(XMLPrefsParser* inPrefsSource, Bool16 inWriteMiss
     fErrorLogEnabled(false),
 
     fNumThreads(0),
-    fNumRTSPThreads(0),
+    fNumBlockingThreads(0),
 
     fCloseLogsOnWrite(false)
 {
@@ -173,7 +172,7 @@ void QTSServerPrefs::SetupAttributes()
     this->SetVal(qtssPrefsRunNumThreads,                &fNumThreads,                   sizeof(fNumThreads));
 
     this->SetVal(qtssPrefsCloseLogsOnWrite,             &fCloseLogsOnWrite,             sizeof(fCloseLogsOnWrite));
-    this->SetVal(qtssPrefsNumRTSPThreads,               &fNumRTSPThreads,               sizeof(fNumRTSPThreads));
+    this->SetVal(qtssPrefsNumBlockingThreads,               &fNumBlockingThreads,               sizeof(fNumBlockingThreads));
 }
 
 void QTSServerPrefs::RereadServerPreferences(Bool16 inWriteMissingPrefs)
