@@ -63,16 +63,38 @@ Windows版本运行(控制台调试运行)：
 
 
 摄像机内运行：
-首先是将arm程序如何放入摄像机内部，方法见：http://www.easydarwin.org/article/doc/EasyCamera/32.html#5 
+首先是将arm程序如何放入摄像机内部，方法见随后的*摄像机操作指南*部分，加入我们将可执行文件放置于**/mnt/mtd/easydarwin/**目录；
+
 调试模式运行（具体配置文件路径根据实际情况设置）,
 
+	cd /mnt/mtd/easydarwin/
     ./easycamera -c ./easycamera.xml  -d
 后台服务运行,
 
     ./easycamera -c ./easycamera.xml  &
 注：如果xml配置文件路径不能确定，建议最保险的方式就是用全路径，例如 “/mnt/mtd/easydarwin/easycamera.xml”，这样在下一次更新服务的时候，配置文件可以保留！
 
-### 4、检查EasyCamera是否运行成功 ###
+### 4、跟随摄像机系统自启动 ###
+需要让EasyCamera程序跟随摄像机系统自动启动，我们需要修改**/mnt/mtd/ipc/allexit.sh**和**/mnt/mtd/ipc/platform.sh**两个启动脚本：
+
+在allexit.sh最后一行加上：
+
+	#! /bin/sh
+	...
+
+	OPID=`ps | grep easycamera | awk '{print $1}'`
+	kill -9 $OPID
+
+在platform.sh最后一行加上：
+
+	#! /bin/sh
+	...
+
+	cd /mnt/mtd/easydarwin &&
+	./easycamera -c ./easycamera.xml &
+
+
+### 5、检查EasyCamera是否运行成功 ###
 可以通过EasyCamera -d调试模式，查看是否配置成功，也可以到EasyCMS查看设备是否上线；
 
 
