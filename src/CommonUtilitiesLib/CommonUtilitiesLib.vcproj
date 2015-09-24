@@ -42,7 +42,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories="../,../WinNTSupport/,.."
+				AdditionalIncludeDirectories="../;../WinNTSupport/;.."
 				PreprocessorDefinitions="WIN32;_DEBUG;_LIB"
 				RuntimeLibrary="1"
 				PrecompiledHeaderFile=".\Debug/CommonUtilitiesLib.pch"
@@ -118,7 +118,7 @@
 				Name="VCCLCompilerTool"
 				Optimization="4"
 				InlineFunctionExpansion="2"
-				AdditionalIncludeDirectories="../,../WinNTSupport/,.."
+				AdditionalIncludeDirectories="../;../WinNTSupport/"
 				PreprocessorDefinitions="WIN32;_LIB"
 				RuntimeLibrary="0"
 				PrecompiledHeaderFile=".\Release/CommonUtilitiesLib.pch"
