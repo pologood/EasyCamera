@@ -41,13 +41,6 @@ HI_S32 NETSDK_APICALL OnStreamCallback(	HI_U32 u32Handle,		/* 句柄 */
 
 		if (pstruAV->u32AVFrameFlag == HI_NET_DEV_VIDEO_FRAME_FLAG)
 		{
-			//qtss_printf("   PTS:%d increase:%d --\n",pstruAV->u32AVFramePTS, pstruAV->u32AVFramePTS - sLastVPTS);
-			
-			////qtss_printf("u32Length %u PTS: %u Len: %u \n", u32Length, pstruAV->u32AVFramePTS,pstruAV->u32AVFrameLen);
-			//视频帧处理
-			//fwrite(pu8Buffer+sizeof(HI_S_AVFrame),1,pstruAV->u32AVFrameLen,pThis->_f_264);
-			//推送给MediaSink进行队列/缓冲/发送
-
 			//强制要求第一帧为I关键帧
 			if(pThis->m_bForceIFrame)
 			{
@@ -64,7 +57,7 @@ HI_S32 NETSDK_APICALL OnStreamCallback(	HI_U32 u32Handle,		/* 句柄 */
 		}
 		else if (pstruAV->u32AVFrameFlag == HI_NET_DEV_AUDIO_FRAME_FLAG)
 		{
-			//pThis->PushFrame((char*)pu8Buffer, u32Length);
+			pThis->PushFrame((unsigned char*)pu8Buffer, u32Length);
 		}
 	}	
 
@@ -285,7 +278,7 @@ QTSS_Error EasyMediaSource::StartStreaming()
 		mediainfo.u32AudioCodec	=	EASY_SDK_AUDIO_CODEC_G711A;
 		mediainfo.u32AudioSamplerate = 8000;
 		mediainfo.u32AudioChannel = 1;
-		mediainfo.u32VideoFps = 20;
+		mediainfo.u32VideoFps = 25;
 
 		fPusherHandle = EasyPusher_Create();
 
@@ -325,20 +318,39 @@ QTSS_Error EasyMediaSource::PushFrame(unsigned char* frame, int len)
 
 	EASY_AV_Frame  avFrame;
 	memset(&avFrame, 0x00, sizeof(EASY_AV_Frame));
-	
+
 	if (pstruAV->u32AVFrameFlag == HI_NET_DEV_VIDEO_FRAME_FLAG)
 	{
-		avFrame.u32VFrameType = (pstruAV->u32VFrameType == HI_NET_DEV_VIDEO_FRAME_I)?EASY_SDK_VIDEO_FRAME_I:EASY_SDK_VIDEO_FRAME_P;
-		avFrame.pBuffer = (unsigned char*)frame+sizeof(HI_S_AVFrame);
-		avFrame.u32AVFrameLen = pstruAV->u32AVFrameLen;
-		avFrame.u32AVFrameFlag = EASY_SDK_VIDEO_FRAME_FLAG;
+		if(pstruAV->u32AVFrameLen > 0)
+		{
+			unsigned char* pbuf = (unsigned char*)frame+sizeof(HI_S_AVFrame);
+
+			EASY_AV_Frame  avFrame;
+			memset(&avFrame, 0x00, sizeof(EASY_AV_Frame));
+			avFrame.u32AVFrameLen = pstruAV->u32AVFrameLen;
+			avFrame.pBuffer = (unsigned char*)pbuf;
+			avFrame.u32VFrameType = (pstruAV->u32VFrameType==HI_NET_DEV_VIDEO_FRAME_I)?EASY_SDK_VIDEO_FRAME_I:EASY_SDK_VIDEO_FRAME_P;
+			avFrame.u32AVFrameFlag = EASY_SDK_VIDEO_FRAME_FLAG;
+			avFrame.u32TimestampSec = pstruAV->u32AVFramePTS/1000;
+			avFrame.u32TimestampUsec = (pstruAV->u32AVFramePTS%1000)*1000;
+			EasyPusher_PushFrame(fPusherHandle, &avFrame);
+		}	
 	}
 	else if (pstruAV->u32AVFrameFlag == HI_NET_DEV_AUDIO_FRAME_FLAG)
 	{
-		return 0;
+		if(pstruAV->u32AVFrameLen > 0)
+		{
+			unsigned char* pbuf = (unsigned char*)frame+sizeof(HI_S_AVFrame);
+
+			EASY_AV_Frame  avFrame;
+			memset(&avFrame, 0x00, sizeof(EASY_AV_Frame));
+			avFrame.u32AVFrameLen = pstruAV->u32AVFrameLen-4;//去掉厂家自定义的4字节头
+			avFrame.pBuffer = (unsigned char*)pbuf+4;
+			avFrame.u32AVFrameFlag = EASY_SDK_AUDIO_FRAME_FLAG;
+			avFrame.u32TimestampSec = pstruAV->u32AVFramePTS/1000;
+			avFrame.u32TimestampUsec = (pstruAV->u32AVFramePTS%1000)*1000;
+			EasyPusher_PushFrame(fPusherHandle, &avFrame);
+		}			
 	}
-
-	EasyPusher_PushFrame(fPusherHandle, &avFrame);
-
 	return Easy_NoErr;
 }
