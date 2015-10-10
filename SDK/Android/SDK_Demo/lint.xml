@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<lint>
+    <issue id="NewApi" severity="ignore" />
+    <issue id="SimpleDateFormat">
+        <ignore path="src/hsl/p2pipcam/manager/Device.java" />
+        <ignore path="src/hsl/p2pipcam/manager/DeviceManager.java" />
+    </issue>
+</lint>
