@@ -22,7 +22,7 @@ HI_S32 NETSDK_APICALL OnEventCallback(HI_U32 u32Handle, /* ¾ä±ú */
 {
 	CSamnetlibDlg *pSamnetlibDlg = (CSamnetlibDlg*)pUserData;
 	//if(HI_NET_DEV_NORMAL_DISCONNECTED == u32Event)
-	//pSamnetlibDlg->AlartData();
+	//	pSamnetlibDlg->AlartData();
 	return HI_SUCCESS;
 }
 
@@ -30,6 +30,7 @@ HI_S32 NETSDK_APICALL OnEventCallback(HI_U32 u32Handle, /* ¾ä±ú */
 void SaveRecordFile(HI_CHAR* pPath, HI_U8* pu8Buffer, HI_U32 u32Length)
 {
 	FILE* fp;
+
 	fp = fopen(pPath, "ab+");
 	fwrite(pu8Buffer, 1, u32Length, fp);
 	fclose(fp);
@@ -56,9 +57,11 @@ HI_S32 NETSDK_APICALL OnStreamCallback(HI_U32 u32Handle, /* ¾ä±ú */
 	//return 0;
 
 	CSamnetlibDlg *pSamnetlibDlg = (CSamnetlibDlg*)pUserData;
+
 	if (u32DataType == HI_NET_DEV_AV_DATA)
 	{
 		pstruAV = (HI_S_AVFrame*)pu8Buffer;
+
 		if (pstruAV->u32AVFrameFlag == HI_NET_DEV_VIDEO_FRAME_FLAG)
 		{
 			//printf("%d\n", pstruAV->u32AVFramePTS - u32LastPts);
@@ -68,22 +71,36 @@ HI_S32 NETSDK_APICALL OnStreamCallback(HI_U32 u32Handle, /* ¾ä±ú */
 			if(NULL != pSamnetlibDlg->m_hPlay)
 			{
 				if(pstruAV->u32VFrameType == 1)
-				   s32KeyFrame = 1;
-				else  s32KeyFrame = 0;
-				HI_PLAYER_InputVideoDataEx( pSamnetlibDlg->m_hPlay, pu8Buffer+sizeof(HI_S_AVFrame),  pstruAV->u32AVFrameLen, s32KeyFrame, pstruAV->u32AVFramePTS);
+					s32KeyFrame = 1;
+				else
+					s32KeyFrame = 0;
+				
+				HI_PLAYER_InputVideoDataEx( pSamnetlibDlg->m_hPlay, 
+					pu8Buffer+sizeof(HI_S_AVFrame),  
+					pstruAV->u32AVFrameLen, 
+					s32KeyFrame, 
+					pstruAV->u32AVFramePTS);
 				//printf("%u----\n", pstruAV->u32AVFramePTS);
 			}	
 		}
-		else if (pstruAV->u32AVFrameFlag == HI_NET_DEV_AUDIO_FRAME_FLAG)
+		else
+		if (pstruAV->u32AVFrameFlag == HI_NET_DEV_AUDIO_FRAME_FLAG)
 		{
 			if(NULL != pSamnetlibDlg->m_hPlay)
 			{
-				HI_PLAYER_InputAudioData(pSamnetlibDlg->m_hPlay, pu8Buffer+sizeof(HI_S_AVFrame), pstruAV->u32AVFrameLen, pstruAV->u32AVFramePTS);
+				HI_PLAYER_InputAudioData(pSamnetlibDlg->m_hPlay, 
+					pu8Buffer+sizeof(HI_S_AVFrame), 
+					pstruAV->u32AVFrameLen, 
+					pstruAV->u32AVFramePTS);
+
 				//printf("%u\n", pstruAV->u32AVFramePTS);
 			}
+
 			if(pSamnetlibDlg->m_pAO_MM != NULL)
 			{
-				//pSamnetlibDlg->m_pAO_MM->HI_ADEC_InPutAudioData(pu8Buffer+sizeof(HI_S_AVFrame), pstruAV->u32AVFrameLen, pstruAV->u32AVFramePTS);
+				//pSamnetlibDlg->m_pAO_MM->HI_ADEC_InPutAudioData(pu8Buffer+sizeof(HI_S_AVFrame), 
+				//														pstruAV->u32AVFrameLen, 
+				//														pstruAV->u32AVFramePTS);
 			}
 		}
 		/*if(NULL != pSamnetlibDlg->m_hPlay)
@@ -92,14 +109,19 @@ HI_S32 NETSDK_APICALL OnStreamCallback(HI_U32 u32Handle, /* ¾ä±ú */
 			printf("%d, %d\n", 1280*768, u32Length);
 		}*/
 	}
-	else if (u32DataType == HI_NET_DEV_SYS_DATA)
+	else
+	if (u32DataType == HI_NET_DEV_SYS_DATA)
 	{
 		pstruSys = (HI_S_SysHeader*)pu8Buffer;
-		pSamnetlibDlg->SetCamAttr(pstruSys->struVHeader.u32Width, pstruSys->struVHeader.u32Height, pstruSys->struAHeader.u32Format);
+		pSamnetlibDlg->SetCamAttr(pstruSys->struVHeader.u32Width, 
+								  pstruSys->struVHeader.u32Height, 
+								  pstruSys->struAHeader.u32Format);
 		pSamnetlibDlg->StartAudio(pstruSys->struAHeader.u32Format);
 	} 
+
 	//pSamnetlibDlg->SaveFile(pu8Buffer, u32Length, u32DataType);
 	//SaveRecordFile("D://video1.hx", pu8Buffer, u32Length);
+
 	return HI_SUCCESS;
 }
 
@@ -111,16 +133,23 @@ HI_S32 NETSDK_APICALL OnDataCallback(HI_U32 u32Handle, /* ¾ä±ú */
                                 )
 {
 	//CSamnetlibDlg *pSamnetlibDlg = (CSamnetlibDlg*)pUserData;
+	
 	//pSamnetlibDlg->AlartData();
 	return HI_SUCCESS;
 }
 
-HI_S32 WINAPI OnAudioCallbackEx(HI_U8 *pBuf,HI_S32 s32Size,HI_U64 u64TimeStamp,HI_VOID *pUserData)
+
+HI_S32 WINAPI OnAudioCallbackEx(HI_U8 *pBuf,
+					   HI_S32 s32Size,
+					   HI_U64 u64TimeStamp,
+					   HI_VOID *pUserData)
 {
 	CSamnetlibDlg *pSamnetlibDlg = (CSamnetlibDlg*)pUserData;
+
 	pSamnetlibDlg->OnSendData(pBuf, s32Size, u64TimeStamp);
 	return HI_SUCCESS;
 }
+
 
 /////////////////////////////////////////////////////////////////////////////
 // CSamnetlibDlg dialog
@@ -128,6 +157,7 @@ HI_S32 WINAPI OnAudioCallbackEx(HI_U8 *pBuf,HI_S32 s32Size,HI_U64 u64TimeStamp,H
 CSamnetlibDlg::CSamnetlibDlg(CWnd* pParent /*=NULL*/)
 	: CDialog(CSamnetlibDlg::IDD, pParent)
 {
+	//{{AFX_DATA_INIT(CSamnetlibDlg)
 	m_strHost = _T("192.168.1.88");
 	m_uiPort = 80;
 	m_strPword = _T("admin");
@@ -137,12 +167,15 @@ CSamnetlibDlg::CSamnetlibDlg(CWnd* pParent /*=NULL*/)
 	m_u32Width = 0;
 	m_u32Height = 0;
 	m_u32Format = 0;
+	//}}AFX_DATA_INIT
+	// Note that LoadIcon does not require a subsequent DestroyIcon in Win32
 	m_hIcon = AfxGetApp()->LoadIcon(IDR_MAINFRAME);
 }
 
 void CSamnetlibDlg::DoDataExchange(CDataExchange* pDX)
 {
 	CDialog::DoDataExchange(pDX);
+	//{{AFX_DATA_MAP(CSamnetlibDlg)
 	DDX_Control(pDX, IDC_COMBO_REC, m_combRec);
 	DDX_Control(pDX, IDC_COMBO_TYPE, m_combType);
 	DDX_Text(pDX, IDC_E_HOST, m_strHost);
@@ -164,9 +197,11 @@ void CSamnetlibDlg::DoDataExchange(CDataExchange* pDX)
 	DDX_Control(pDX, IDC_COMBO_FRAMERATE, m_combFrameRate);
 	DDX_Control(pDX, IDC_COMBO_QUALITY, m_combQuality);
 	DDX_Control(pDX, IDC_COMBO_RESOLUTION, m_combResolution);
+	//}}AFX_DATA_MAP
 }
 
 BEGIN_MESSAGE_MAP(CSamnetlibDlg, CDialog)
+	//{{AFX_MSG_MAP(CSamnetlibDlg)
 	ON_WM_PAINT()
 	ON_WM_QUERYDRAGICON()
 	ON_BN_CLICKED(IDC_BTN_CNT, OnBtnCnt)
@@ -199,6 +234,7 @@ BEGIN_MESSAGE_MAP(CSamnetlibDlg, CDialog)
 	ON_BN_CLICKED(IDC_BTN_IRISSMALL, OnBtnIrissmall)
 	ON_BN_CLICKED(IDC_BTN_FOCUSOUT, OnBtnFocusout)
 	ON_BN_CLICKED(IDC_BTN_FOCUSIN, OnBtnFocusin)
+	//}}AFX_MSG_MAP
 END_MESSAGE_MAP()
 
 /////////////////////////////////////////////////////////////////////////////
@@ -208,6 +244,9 @@ BOOL CSamnetlibDlg::OnInitDialog()
 {
 	g_SetWndStaticText(this);
 	CDialog::OnInitDialog();
+
+	// Set the icon for this dialog.  The framework does this automatically
+	//  when the application's main window is not a dialog
 	SetIcon(m_hIcon, TRUE);			// Set big icon
 	SetIcon(m_hIcon, FALSE);		// Set small icon
 	
@@ -229,9 +268,11 @@ BOOL CSamnetlibDlg::OnInitDialog()
 	m_combType.InsertString(1, ConvertString("Second Stream"));
 	m_combType.InsertString(2, ConvertString("Third Stream"));
 	m_combType.SetCurSel(0);
+
 	m_combPtzType.InsertString(0, ConvertString("Continuous"));
 	m_combPtzType.InsertString(1, ConvertString("Step"));
 	m_combPtzType.SetCurSel(0);
+
 	// ³õÊ¼»¯±àÂë²ÎÊý
 	// ÂëÁ÷
 	m_combResolution.InsertString(0, "VGA");
@@ -247,7 +288,9 @@ BOOL CSamnetlibDlg::OnInitDialog()
 	m_combResolution.InsertString(10, "960H");
 	m_combResolution.InsertString(11, "Q960H");
 	m_combResolution.InsertString(12, "QQ960H");
+
 	m_combResolution.SetCurSel(0);
+
 	//m_combResolution.setIt
 
 	CString strBuf;
@@ -259,8 +302,10 @@ BOOL CSamnetlibDlg::OnInitDialog()
 		{
 			m_combQuality.InsertString(i, strBuf);
 		}
+
 		m_combFrameRate.InsertString(i, strBuf);
 	}
+
 	for(i=0; i<64; i++)
 	{
 		strBuf.Format("%d", i);
@@ -286,6 +331,8 @@ BOOL CSamnetlibDlg::OnInitDialog()
 
 	m_combInput.InsertString(0, ConvertString("Line in"));
 	m_combInput.InsertString(1, ConvertString("MIC"));
+	
+	
 	
 	m_combInput.SetCurSel(0);
 
@@ -341,6 +388,7 @@ void CSamnetlibDlg::OnPaint()
 	if (IsIconic())
 	{
 		CPaintDC dc(this); // device context for painting
+
 		SendMessage(WM_ICONERASEBKGND, (WPARAM) dc.GetSafeHdc(), 0);
 
 		// Center icon in client rectangle
@@ -375,7 +423,8 @@ void CSamnetlibDlg::OnBtnCnt()
 	if(m_uiHandle == 0)
 	{
 		UpdateData();
-		s32Ret = HI_NET_DEV_Login(&m_uiHandle, (LPCTSTR)m_strUname, (LPCTSTR)m_strPword,(LPCTSTR)m_strHost, m_uiPort);
+		s32Ret = HI_NET_DEV_Login(&m_uiHandle, (LPCTSTR)m_strUname, (LPCTSTR)m_strPword,
+						(LPCTSTR)m_strHost, m_uiPort);
 		if(HI_SUCCESS == s32Ret)
 		{
 			HI_NET_DEV_SetReconnect(m_uiHandle, 5000);
@@ -413,11 +462,13 @@ void CSamnetlibDlg::OnBtnCnt()
 			SetDlgItemText(IDC_BTN_START, ConvertString("Stop Stream"));
 			m_bStreamFlag = TRUE;
 		}*/
+
 		UpdateData(FALSE);
 	}
 	else
 	{
 		StreamStop();
+
 		s32Ret = HI_NET_DEV_Logout(m_uiHandle);
 		if(HI_SUCCESS == s32Ret)
 		{
@@ -429,9 +480,13 @@ void CSamnetlibDlg::OnBtnCnt()
 
 void CSamnetlibDlg::OnBtnStart() 
 {
+	// TODO: Add your control notification handler code here
 	HI_S32 s32Ret = HI_SUCCESS;
 	HI_S_STREAM_INFO_EXT struStreamInfo;
-	if (m_uiHandle == 0)return;
+
+	if (m_uiHandle == 0)
+		return;
+
 	if(!m_bStreamFlag)
 	{
 		HI_NET_DEV_SetEventCallBack(m_uiHandle, OnEventCallback, (HI_VOID*)this);
@@ -457,6 +512,7 @@ void CSamnetlibDlg::OnBtnStart()
 			//m_uiHandle = 0;
 			return;
 		}
+
 		SetDlgItemText(IDC_BTN_START, ConvertString("Stop Stream"));
 		m_bStreamFlag = TRUE;
 	}
@@ -468,20 +524,26 @@ void CSamnetlibDlg::OnBtnStart()
 
 void CSamnetlibDlg::StreamStop() 
 {
+	// TODO: Add your control notification handler code here
 	HI_S32 s32Ret = HI_SUCCESS;
-	if (m_uiHandle == 0)return;
+
+	if (m_uiHandle == 0)
+		return;
+
 	if(m_bStreamFlag)
 	{
 		if(m_pAO_MM != NULL)
 		{
 			m_pAO_MM->HI_AO_Stop();
 		}
+		
 		s32Ret = HI_NET_DEV_StopStream(m_uiHandle);
 		if (s32Ret != HI_SUCCESS)
 		{
 			MessageBox("FAILURT!");
 			return;
 		}
+		
 		SetDlgItemText(IDC_BTN_START, ConvertString("Start Stream"));
 		m_bStreamFlag = FALSE;
 	}
@@ -497,48 +559,45 @@ void CSamnetlibDlg::StreamStop()
 
 void CSamnetlibDlg::OnCancel() 
 {
-	if(m_phFile != NULL)
-	{
+	if(m_phFile != NULL){
 		fclose(m_phFile);
 		m_phFile = NULL;
 	}
+
 	if(m_pAI_MM != NULL)
 	{
 		delete m_pAI_MM;
 		m_pAI_MM = NULL;
 	}
+	
 	if(m_pAO_MM != NULL)
 	{
 		m_pAO_MM->HI_AO_Stop();
 		delete m_pAO_MM;
 		m_pAO_MM = NULL;
 	}
+	
 	CDialog::OnCancel();
 }
 
 void CSamnetlibDlg::SaveFile(HI_U8* pu8Buffer, HI_U32 u32Length, HI_S32 u32DataType)
 {
-	if(NULL == m_phFile)
-	{
+	if(NULL == m_phFile){
 		return;
 	}
-	if(m_bFirstFrame == TRUE)
-	{
-		if(u32DataType != HI_NET_DEV_AV_DATA)return;
+
+	if(m_bFirstFrame == TRUE){
+		if(u32DataType != HI_NET_DEV_AV_DATA)
+			return;
+
 		HI_S_AVFrame* pstruAV = (HI_S_AVFrame*)pu8Buffer;
-		if(pstruAV->u32AVFrameFlag == HI_NET_DEV_VIDEO_FRAME_FLAG)
-		{
-			if(pstruAV->u32VFrameType == 1)
-			{
+		if(pstruAV->u32AVFrameFlag == HI_NET_DEV_VIDEO_FRAME_FLAG){
+			if(pstruAV->u32VFrameType == 1){
 				m_bFirstFrame = FALSE;
-			}
-			else
-			{
+			}else{
 				return;
 			}
-		}
-		else
-		{
+		}else{
 			return;
 		}
 	}
@@ -582,7 +641,9 @@ void CSamnetlibDlg::OnBtnRecord()
 		HI_NET_DEV_StartRecord(m_uiHandle, strPath.GetBuffer(0), nType, 0);
 		m_bRecord = TRUE;
 	}
+	
 }
+
 
 void CSamnetlibDlg::OnBtnStartTalk() 
 {
@@ -606,6 +667,7 @@ void CSamnetlibDlg::OnBtnStartTalk()
 		{
 			return;
 		}
+		
 		if(g_audioType == 1)
 			hr = HI_NET_DEV_StartVoice(m_uiHandle, 4); //1-G711, 4-G726
 		else
@@ -615,11 +677,13 @@ void CSamnetlibDlg::OnBtnStartTalk()
 			MessageBox(ConvertString("Open Talk Failure!"));
 			return;
 		}
+
 		hr = m_pAI_MM->HI_AI_Start(OnAudioCallbackEx, this);
 		if (HI_SUCCESS != hr)
 		{
 			return;
 		}
+
 		m_bTalk = TRUE;
 		SetDlgItemText(IDC_BTN_STARTTALK, ConvertString("Stop Talk"));
 	}
@@ -628,6 +692,7 @@ void CSamnetlibDlg::OnBtnStartTalk()
 HI_S32 CSamnetlibDlg::NewAI()
 {
 	PLAYER_ATTR_AUDIO_S audioAttr;
+
 	audioAttr.lSamplesPerSec = 8000;
 	audioAttr.lChannels = 1;
 	audioAttr.lBitsPerSample = 16;
@@ -644,10 +709,15 @@ HI_S32 CSamnetlibDlg::NewAI()
     return HI_SUCCESS;
 }
 
-void CSamnetlibDlg::OnSendData(HI_U8 *pBuf,HI_S32 s32Size,HI_U64 u64TimeStamp)
+void CSamnetlibDlg::OnSendData(HI_U8 *pBuf,
+							   HI_S32 s32Size,
+							   HI_U64 u64TimeStamp)
 {
 	HI_S32 s32Ret = HI_SUCCESS;
-	if (m_uiHandle == 0)return;
+
+	if (m_uiHandle == 0)
+		return;
+
 	printf("%d\n", s32Size);
 	s32Ret = HI_NET_DEV_SendVoiceData(m_uiHandle, (char*)pBuf, s32Size, u64TimeStamp);
 }
@@ -689,18 +759,26 @@ void CSamnetlibDlg::StartAudio(HI_U32 u32Type)
 void CSamnetlibDlg::OnBtnProduct() 
 {
 	HI_S32 s32Ret = HI_FAILURE; 
+
 	if(0 == m_uiHandle)
 	{
 		MessageBox(ConvertString("No connection!"));
 		return;
 	}
+
+
 	HI_S_ProductVendor sProduct;
-	s32Ret = HI_NET_DEV_GetConfig(m_uiHandle, HI_NET_DEV_GET_PRODUCT_VENDOR, &sProduct, sizeof(HI_S_ProductVendor));
+	s32Ret = HI_NET_DEV_GetConfig(m_uiHandle, 
+								  HI_NET_DEV_GET_PRODUCT_VENDOR, 
+								  &sProduct, 
+								  sizeof(HI_S_ProductVendor));
+
 	if(HI_SUCCESS != s32Ret)
 	{
 		MessageBox(ConvertString("Obtain Info Failure!"));
 		return;
 	}
+
 	SetDlgItemText(IDC_EDIT_DEVTYPE, sProduct.sProduct);
 	SetDlgItemText(IDC_EDIT_VENDOR, sProduct.sVendor);
 	
@@ -737,7 +815,11 @@ void CSamnetlibDlg::OnBtnGetVideo()
 	int videoType = m_combType.GetCurSel();
 	if(videoType == 1)
 		sVideo.blFlag = HI_FALSE;
-	s32Ret = HI_NET_DEV_GetConfig(m_uiHandle,HI_NET_DEV_CMD_VIDEO_PARAM, &sVideo, sizeof(HI_S_Video));
+	s32Ret = HI_NET_DEV_GetConfig(	m_uiHandle,
+									HI_NET_DEV_CMD_VIDEO_PARAM, 
+									&sVideo, 
+									sizeof(HI_S_Video));
+
 	if(HI_SUCCESS != s32Ret)
 	{
 		MessageBox(ConvertString("Obtain Info Failure!"));
@@ -794,9 +876,13 @@ void CSamnetlibDlg::OnBtnSetVideo()
 	sVideo.u32ImgQuality = m_combQuality.GetCurSel()+1;
 	
 	HI_BOOL bLcbr = HI_FALSE;
-	if(1 == m_combLcbr.GetCurSel())bLcbr = HI_TRUE;
+	if(1 == m_combLcbr.GetCurSel())
+		bLcbr = HI_TRUE;
 	sVideo.blCbr = bLcbr;
-	s32Ret = HI_NET_DEV_SetConfig(	m_uiHandle,HI_NET_DEV_CMD_VIDEO_PARAM, &sVideo, sizeof(HI_S_Video));
+	s32Ret = HI_NET_DEV_SetConfig(	m_uiHandle,
+									HI_NET_DEV_CMD_VIDEO_PARAM, 
+									&sVideo, 
+									sizeof(HI_S_Video));
 	
 	if(HI_SUCCESS != s32Ret)
 	{
@@ -877,7 +963,11 @@ void CSamnetlibDlg::OnBtnSetAudio()
 		bEnable = HI_TRUE;
 	sAudio.blEnable = bEnable;
 
-	s32Ret = HI_NET_DEV_SetConfig(	m_uiHandle,HI_NET_DEV_CMD_AUDIO_PARAM, &sAudio, sizeof(HI_S_Audio));
+	s32Ret = HI_NET_DEV_SetConfig(	m_uiHandle,
+									HI_NET_DEV_CMD_AUDIO_PARAM, 
+									&sAudio, 
+									sizeof(HI_S_Audio));
+	
 	if(HI_SUCCESS != s32Ret)
 	{
 		MessageBox(ConvertString("Setting Audio Failure!"));
@@ -939,7 +1029,12 @@ void CSamnetlibDlg::OnBtnSetMic()
 	//								HI_NET_DEV_CMD_AUDIO_INPUT, 
 	//								&u32Input[nInput], 
 	//								sizeof(HI_U32));
-	s32Ret = HI_NET_DEV_SetConfig(	m_uiHandle,HI_NET_DEV_CMD_AUDIO_INPUT, &nInput, sizeof(HI_U32));
+	s32Ret = HI_NET_DEV_SetConfig(	m_uiHandle,
+									HI_NET_DEV_CMD_AUDIO_INPUT, 
+									&nInput, 
+									sizeof(HI_U32));
+	
+	
 	if(HI_SUCCESS != s32Ret)
 	{
 		MessageBox(ConvertString("Setting Audio Input Failure!"));
@@ -1083,7 +1178,9 @@ void CSamnetlibDlg::OnBtnSetPtz()
 	}
 
 	HI_U32 u32Protocol[2]	= {HI_NET_DEV_PTZ_PRO_PELCOD, HI_NET_DEV_PTZ_PRO_PELCOP};
-	HI_U32 u32Baud[9]		= {	HI_NET_DEV_PTZ_B110, HI_NET_DEV_PTZ_B300, HI_NET_DEV_PTZ_B1200,HI_NET_DEV_PTZ_B2400, HI_NET_DEV_PTZ_B4800, HI_NET_DEV_PTZ_B9600,HI_NET_DEV_PTZ_B19200, HI_NET_DEV_PTZ_B38400, HI_NET_DEV_PTZ_B57600};
+	HI_U32 u32Baud[9]		= {	HI_NET_DEV_PTZ_B110, HI_NET_DEV_PTZ_B300, HI_NET_DEV_PTZ_B1200,
+								HI_NET_DEV_PTZ_B2400, HI_NET_DEV_PTZ_B4800, HI_NET_DEV_PTZ_B9600,
+								HI_NET_DEV_PTZ_B19200, HI_NET_DEV_PTZ_B38400, HI_NET_DEV_PTZ_B57600};
 	HI_U32 u32DataBit[4]	= {HI_NET_DEV_PTZ_DATA_5, HI_NET_DEV_PTZ_DATA_6, HI_NET_DEV_PTZ_DATA_7, HI_NET_DEV_PTZ_DATA_8};
 	HI_U32 u32StopBit[2]	= {HI_NET_DEV_PTZ_STOP_1, HI_NET_DEV_PTZ_STOP_2};
 	HI_U32 u32Parity[3]		= {HI_NET_DEV_PTZ_PARITY_NONE, HI_NET_DEV_PTZ_PARITY_ODD, HI_NET_DEV_PTZ_PARITY_EVEN};
@@ -1094,8 +1191,7 @@ void CSamnetlibDlg::OnBtnSetPtz()
 	
 	GetDlgItemText(IDC_EDIT_ADDRESS, strBuf);
 	nValue = atoi(strBuf);
-	if(nValue<0 || nValue>255)
-	{
+	if(nValue<0 || nValue>255){
 		MessageBox(ConvertString("Address range is 0 to 255!"));
 		return;
 	}
@@ -1113,7 +1209,10 @@ void CSamnetlibDlg::OnBtnSetPtz()
 	nValue = m_combParity.GetCurSel();
 	sPtz.u32Parity = u32Parity[nValue];
 	
-	s32Ret = HI_NET_DEV_SetConfig(m_uiHandle,HI_NET_DEV_CMD_PTZ_PARAM, &sPtz, sizeof(HI_S_PTZ));
+	s32Ret = HI_NET_DEV_SetConfig(	m_uiHandle,
+									HI_NET_DEV_CMD_PTZ_PARAM, 
+									&sPtz, 
+									sizeof(HI_S_PTZ));
 	
 	if(HI_SUCCESS != s32Ret)
 	{
@@ -1138,7 +1237,10 @@ void CSamnetlibDlg::OnBtnGetRes()
 	if(videoType == 1)
 		sResolution.blFlag = HI_FALSE;
 	
-	s32Ret = HI_NET_DEV_GetConfig(	m_uiHandle,HI_NET_DEV_CMD_RESOLUTION, &sResolution, sizeof(HI_S_Resolution));
+	s32Ret = HI_NET_DEV_GetConfig(	m_uiHandle,
+									HI_NET_DEV_CMD_RESOLUTION, 
+									&sResolution, 
+									sizeof(HI_S_Resolution));
 	
 	if(HI_SUCCESS != s32Ret)
 	{
@@ -1360,6 +1462,8 @@ void CSamnetlibDlg::OnBtnGetRes()
 			}
 		}
 	}
+
+
 	int nNum = sizeof(strReslution)/sizeof(CString);
 	CString strTemp="";
 	strTemp.Empty();
@@ -1372,6 +1476,8 @@ void CSamnetlibDlg::OnBtnGetRes()
 			break;
 		}
 	}
+
+
 	//m_combResolution.SetCurSel(sResolution.u32Resolution);
 }
 
@@ -1391,6 +1497,8 @@ void CSamnetlibDlg::OnBtnSetRes()
 	int videoType = m_combType.GetCurSel();
 	if(videoType == 1)
 		sResolution.blFlag = HI_FALSE;
+
+
 	//sResolution.u32Resolution = m_combResolution.GetCurSel();
 	//2014/03/26
 	CString strReslution[15] = {"VGA", "QVGA", "QQVGA", "D1", "CIF", "QCIF", "720P", "Q720", "QQ720", "UXQA", "960H", "Q960H", "QQ960H", "1080P", "960P"};
@@ -1400,9 +1508,17 @@ void CSamnetlibDlg::OnBtnSetRes()
 	m_combResolution.GetLBText(m_combResolution.GetCurSel() , strTemp);
 	for(int j=0; j<nNum; j++)
 	{
-		if(strTemp == strReslution[j])sResolution.u32Resolution = j;
+		if(strTemp == strReslution[j])
+			sResolution.u32Resolution = j;
 	}
-	s32Ret = HI_NET_DEV_SetConfig(	m_uiHandle,HI_NET_DEV_CMD_RESOLUTION, &sResolution, sizeof(HI_S_Resolution));
+
+
+
+	s32Ret = HI_NET_DEV_SetConfig(	m_uiHandle,
+									HI_NET_DEV_CMD_RESOLUTION, 
+									&sResolution, 
+									sizeof(HI_S_Resolution));
+	
 	if(HI_SUCCESS != s32Ret)
 	{
 		MessageBox(ConvertString("Setting Resolution Failure!"));
@@ -1564,19 +1680,23 @@ void CSamnetlibDlg::OnBtnPreCall()
 	
 	CString strPresetNum = "";
 	DWORD dwPresetNum=0;
+	
 	GetDlgItemText(IDC_EDIT_PRESET, strPresetNum);
 	dwPresetNum=atoi(strPresetNum);
+	
 	if ((dwPresetNum<0) || (dwPresetNum>256))
 	{
 		MessageBox(ConvertString("Preset point range is 0 to 255!"));
 		return;
 	}
+	
 	s32Ret = HI_NET_DEV_PTZ_Ctrl_Preset(m_uiHandle, HI_NET_DEV_CTRL_PTZ_GOTO_PRESET, dwPresetNum);
 }
 
 void CSamnetlibDlg::OnBtnPtzTrans() 
 {
 	HI_S32 s32Ret = HI_FAILURE;
+	
 	if(0 == m_uiHandle)
 	{
 		MessageBox(ConvertString("No connection!"));
@@ -1584,7 +1704,9 @@ void CSamnetlibDlg::OnBtnPtzTrans()
 	}
 	
 	CString strPtzData="";
+	
 	GetDlgItemText(IDC_EDIT_PTZDATA, strPtzData);
+	
 	s32Ret = HI_NET_DEV_PTZ_Fully_Trans(m_uiHandle, strPtzData.GetBuffer(0), strlen(strPtzData));
 	if(HI_SUCCESS != s32Ret)
 	{
@@ -1592,21 +1714,33 @@ void CSamnetlibDlg::OnBtnPtzTrans()
 	}
 }
 
+
+
 void CSamnetlibDlg::OnBtnPlay() 
 {
 	if(NULL == m_hPlay)
 	{
-		if(m_uiHandle == 0)return;
-		if(m_u32Width == 0 ||m_u32Height == 0)return;
+		if(m_uiHandle == 0)
+			return;
+
+		if(m_u32Width == 0 ||
+			m_u32Height == 0)
+			return;
+
 		HI_S32 s32Ret = HI_FAILURE;
 		s32Ret = HI_PLAYER_Initialize(&m_hPlay);
-		if(s32Ret != HI_SUCCESS)return;
+		if(s32Ret != HI_SUCCESS)
+			return;
+
 		s32Ret = HI_PLAYER_SetDrawWnd(m_hPlay, GetDlgItem(IDC_VIEW)->GetSafeHwnd());
-		if(s32Ret != HI_SUCCESS)return;
+		if(s32Ret != HI_SUCCESS)
+			return;
+
 		HI_S_SysHeader sSysHeader;
 		sSysHeader.struAHeader.u32Format = m_u32Format;
 		sSysHeader.struVHeader.u32Width = m_u32Width;
 		sSysHeader.struVHeader.u32Height = m_u32Height;
+
 		s32Ret = HI_PLAYER_OpenStream(m_hPlay, (HI_U8*)&sSysHeader, sizeof(HI_S_SysHeader));
 		/*PLAYER_ATTR_VIDEO_STREAM_S stVStreamAttr;
 		PLAYER_ATTR_AUDIO_S stAStreamAttr;
@@ -1652,9 +1786,12 @@ void CSamnetlibDlg::OnBtnPlay()
 		}*/
 
 		HI_PLAYER_Play(m_hPlay);
+
 		SetDlgItemText(IDC_BTN_PLAY, ConvertString("Stop"));
 		HI_U32 u32Channel = 11;
-		if(!m_bStream)u32Channel = 12;
+		if(!m_bStream)
+			u32Channel = 12;
+		
 		HI_NET_DEV_MakeKeyFrame(m_uiHandle, u32Channel);
 	}
 	else
@@ -1677,6 +1814,7 @@ void CSamnetlibDlg::SetCamAttr(HI_U32 u32Width, HI_U32 u32Height, HI_U32 u32Form
 void CSamnetlibDlg::OnBtnIrisbig() 
 {
 	HI_S32 s32Ret = HI_FAILURE;
+	
 	if(0 == m_uiHandle)
 	{
 		MessageBox(ConvertString("No connection!"));
@@ -1693,6 +1831,7 @@ void CSamnetlibDlg::OnBtnIrisbig()
 void CSamnetlibDlg::OnBtnIrissmall() 
 {
 	HI_S32 s32Ret = HI_FAILURE;
+	
 	if(0 == m_uiHandle)
 	{
 		MessageBox(ConvertString("No connection!"));
@@ -1709,11 +1848,13 @@ void CSamnetlibDlg::OnBtnIrissmall()
 void CSamnetlibDlg::OnBtnFocusout() 
 {
 	HI_S32 s32Ret = HI_FAILURE;
+	
 	if(0 == m_uiHandle)
 	{
 		MessageBox(ConvertString("No connection!"));
 		return;
 	}
+	
 	HI_S32 s32Type = m_combPtzType.GetCurSel();
 	if(s32Type == 1)
 		HI_NET_DEV_PTZ_Ctrl_StandardEx(m_uiHandle, HI_NET_DEV_CTRL_PTZ_FOCUSOUT);
@@ -1724,11 +1865,13 @@ void CSamnetlibDlg::OnBtnFocusout()
 void CSamnetlibDlg::OnBtnFocusin() 
 {
 	HI_S32 s32Ret = HI_FAILURE;
+	
 	if(0 == m_uiHandle)
 	{
 		MessageBox(ConvertString("No connection!"));
 		return;
 	}
+	
 	HI_S32 s32Type = m_combPtzType.GetCurSel();
 	if(s32Type == 1)
 		HI_NET_DEV_PTZ_Ctrl_StandardEx(m_uiHandle, HI_NET_DEV_CTRL_PTZ_FOCUSIN);

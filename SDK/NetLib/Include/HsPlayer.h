@@ -9,8 +9,6 @@ extern "C"
 #endif
 #endif /* __cplusplus */
 
-#if defined(WIN32)
-
 #if defined(HSPLAYER_EXPORTS)
 #define HSPLAYER_API      __declspec( dllexport )
 #define HSPLAYER_APICALL  __stdcall
@@ -24,20 +22,14 @@ extern "C"
 #define HSPLAYER_APICALL  __stdcall
 #endif
 
-#elif defined(LINUX)
-#define HSPLAYER_API
-#define HSPLAYER_APICALL
-#else
-#error "Please specify a design-in platform!"
-#endif
-
 #ifndef __HI_TYPE_H__
-#include "hi_datatype.h"
+#include "hi_type.h"
 #else
 
 #endif
 
 #define PLAYHANDLE void*
+#define HSPLAYER_CALLBACK  __stdcall
 
 #ifndef _HRESULT_DEFINED
 #define _HRESULT_DEFINED
@@ -49,11 +41,11 @@ extern "C"
 
 #define HI3511 1 // 090708
 #ifdef HI3511// 090708
-#define PLAYER_MAX_WIDTH                1600//1280
-#define PLAYER_MAX_HEIGHT               1200//720
+#define PLAYER_MAX_WIDTH                1920
+#define PLAYER_MAX_HEIGHT               1080
 #else
-#define PLAYER_MAX_WIDTH                720
-#define PLAYER_MAX_HEIGHT               576
+#define PLAYER_MAX_WIDTH                1920
+#define PLAYER_MAX_HEIGHT               1080
 #endif
 
 #define PLAYER_MIN_BMPBUF_SIZE          (PLAYER_MAX_WIDTH*PLAYER_MAX_HEIGHT*3+54)
@@ -105,13 +97,42 @@ extern "C"
 #define HI_ERR_VIDEOOUT_DRAWYUV_LOACK               0xA1888043  //loack off surface failed
 
 #define HI_ERR_PB_STOPPLAY							0xA1888050  
-#define HI_ERR_VDEC_NOPIC							0xA1888051	  
+#define HI_ERR_VDEC_NOPIC							0xA1888051
+#define HI_ERR_FILE_END								0xA1888052
 	
 #define HI_NET_DEV_VIDEO_FRAME_FLAG					0x46565848
 #define HI_NET_DEV_AUDIO_FRAME_FLAG					0x46415848
 
+#define HI_STREAM_OVER								0x5245564F
+
 #define HI_STREAM_REALTIME	0
 #define HI_STREAM_FILE		1
+
+	typedef struct 
+	{
+		HI_U32 u32AVFrameFlag;  /* 音频帧标志*/
+		HI_U32 u32AVFrameLen;   /* 音频帧的长度*/
+		HI_U32 u32AVFramePTS;	/* 时间戳 */
+		HI_U32 u32VFrameType;   /* 视频的类型，I帧或P帧*/
+	} HI_S_AVFrame;
+	
+	typedef struct
+	{
+		HI_U32 u32Width;
+		HI_U32 u32Height;
+	} HI_S_VideoHeader;
+	
+	typedef struct
+	{
+		HI_U32 u32Format;       /*音频格式*/
+	} HI_S_AudioHeader;
+	
+	typedef struct 
+	{
+		HI_U32 u32SysFlag;
+		HI_S_VideoHeader struVHeader;
+		HI_S_AudioHeader struAHeader;
+	} HI_S_SysHeader;
 
     //video encoding format
     typedef enum hiPLAYER_VIDEO_FORMAT_E
@@ -139,12 +160,6 @@ extern "C"
         PLAYER_AUDIO_CODEC_FORMAT_MP3,            //MP3
         PLAYER_AUDIO_CODEC_FORMAT_BUTT
     }PLAYER_AUDIO_FORMAT_E, AUDIO_FORMAT_E;
-
-	typedef enum hiPLAYER_DISPLAYMODE_E
-	{
-		PLAYER_DPY_D3D = 0,
-			PLAYER_DPY_DDRAW,
-	}PLAYER_DISPLAYMODE_E;
 
     //OutPut image format
     typedef enum hiPLAYER_DRAW_FORMAT_E
@@ -194,7 +209,10 @@ extern "C"
         PLAYER_STATE_FPAUSE	= 2,
         PLAYER_STATE_FPLAY	= 3,
         PLAYER_STATE_FSTOP	= 4,
-		PLAYER_STATE_SPAUSE = 5
+		PLAYER_STATE_SPAUSE = 5,
+		PLAYER_STATE_SEND	= 6,
+		PLAYER_STATE_FEND	= 7,
+		PLAYER_STATE_SSTOP	= 8
     }PLAYER_STATE_E;
 
     //media attr type
@@ -212,6 +230,12 @@ extern "C"
         PLAYER_AUDIO_OUT = 0,  //Audio input direction
         PLAYER_AUDIO_IN = 1    //audio output direction
     }PLAYER_AUDIO_DIRECT_E;
+
+	typedef enum hiPLAYER_DISPLAYMODE_E
+	{
+		PLAYER_DPY_D3D = 0,
+		PLAYER_DPY_DDRAW,
+	}PLAYER_DISPLAYMODE_E;
 
     //the caps of video decoding
     typedef struct hiPLAYER_CAPS_VDEC_S
@@ -321,12 +345,12 @@ extern "C"
     }
     PLAYER_FRAME_INFO_S;
 
-    typedef HRESULT (HSPLAYER_APICALL *HI_PLAYER_StateCallBack)(PLAYHANDLE hHandle,
+    typedef HRESULT (HSPLAYER_CALLBACK *HI_PLAYER_StateCallBack)(PLAYHANDLE hHandle,
             PLAYER_STATE_ID_E eStateID,
             HI_U32 u32State,
             HI_VOID *pPara);
 
-    typedef HRESULT (HSPLAYER_APICALL *HI_PLAYER_PostDrawCallBack)(PLAYHANDLE hHandle,
+    typedef HRESULT (HSPLAYER_CALLBACK *HI_PLAYER_PostDrawCallBack)(PLAYHANDLE hHandle,
             HI_VOID *hDc,
             HI_S32 s32ImageWidth,
             HI_S32 s32ImageHeight,
@@ -335,7 +359,7 @@ extern "C"
             HI_U64 u64TimeStamp,
             HI_VOID *pPara);
 
-	typedef HRESULT (HSPLAYER_APICALL *HI_PLAYER_PostDrawCallBackEx)(PLAYHANDLE hHandle,
+	typedef HRESULT (HSPLAYER_CALLBACK *HI_PLAYER_PostDrawCallBackEx)(PLAYHANDLE hHandle,
 			HI_VOID *hDc,
 			HI_S32 s32ImageWidth,
 			HI_S32 s32ImageHeight,
@@ -346,11 +370,11 @@ extern "C"
 			HI_U64 u64TimeStamp,
             HI_VOID *pPara);
 
-    typedef HRESULT(HSPLAYER_APICALL *HI_PLAYER_DecCallBack )(PLAYHANDLE hHandle,
+    typedef HRESULT(HSPLAYER_CALLBACK *HI_PLAYER_DecCallBack )(PLAYHANDLE hHandle,
             const PLAYER_FRAME_INFO_S *pFrameInfo,
             HI_VOID *pPara);
 
-    typedef HRESULT(HSPLAYER_APICALL *HI_PLAYER_TalkCallBack)(PLAYHANDLE hHandle,
+    typedef HRESULT(HSPLAYER_CALLBACK *HI_PLAYER_TalkCallBack)(PLAYHANDLE hHandle,
             HI_U8 *pBuf,
             HI_S32 s32Size,
             HI_U64 u64TimeStamp,
@@ -362,10 +386,10 @@ extern "C"
 
     HSPLAYER_API HRESULT HSPLAYER_APICALL HI_PLAYER_SetDrawWnd(PLAYHANDLE hHandle, HI_VOID *hWnd);
 
+	HSPLAYER_API HRESULT HSPLAYER_APICALL HI_PLAYER_Reset(PLAYHANDLE hHandle);
+	HSPLAYER_API HRESULT HSPLAYER_APICALL HI_PLAYER_ResetAudio(PLAYHANDLE hHandle, HI_U32 u32AFormat);
     HSPLAYER_API HRESULT HSPLAYER_APICALL HI_PLAYER_Play(PLAYHANDLE hHandle);
-
     HSPLAYER_API HRESULT HSPLAYER_APICALL HI_PLAYER_Pause(PLAYHANDLE hHandle);
-
     HSPLAYER_API HRESULT HSPLAYER_APICALL HI_PLAYER_Stop(PLAYHANDLE hHandle);
 
     HSPLAYER_API HRESULT HSPLAYER_APICALL HI_PLAYER_InputVideoData(PLAYHANDLE hHandle,
@@ -389,8 +413,8 @@ extern "C"
 
 	HSPLAYER_API HRESULT HSPLAYER_APICALL HI_PLAYER_SetPostDrawCallBackEx(PLAYHANDLE hHandle,
 			HI_PLAYER_PostDrawCallBackEx CallBack,
-			HI_VOID *pPara);
-	
+            HI_VOID *pPara);
+
 	HSPLAYER_API HRESULT HSPLAYER_APICALL HI_PLAYER_DisplayAll(PLAYHANDLE hHandle,
 			HI_S32 s32Left = 0, 
 			HI_S32 s32Top = 0, 
@@ -438,7 +462,7 @@ extern "C"
 	HSPLAYER_API HRESULT HSPLAYER_APICALL HI_PLAYER_SetRate(PLAYHANDLE hHandle, HI_S32 rate);
 
 	HSPLAYER_API HRESULT HSPLAYER_APICALL HI_PLAYER_GetRate(PLAYHANDLE hHandle, HI_S32 *rate);
-
+	
     HSPLAYER_API HRESULT HSPLAYER_APICALL HI_PLAYER_Fast(PLAYHANDLE hHandle);
 
     HSPLAYER_API HRESULT HSPLAYER_APICALL HI_PLAYER_Slow(PLAYHANDLE hHandle);
@@ -448,13 +472,6 @@ extern "C"
     HSPLAYER_API HRESULT HSPLAYER_APICALL HI_PLAYER_GetFileAttr( PLAYHANDLE hHandle,
             PLAYER_ATTR_FILE_S *pFileAttr);
 
-    /*Rec*/
-    HSPLAYER_API HRESULT HSPLAYER_APICALL HI_PLAYER_StartRecord(PLAYHANDLE hHandle,
-            HI_U8 *pFileName,
-            PLAYER_FILE_FORMAT_E eFormat,
-            PLAYER_REC_AVFLAG_E eFlag);
-    HSPLAYER_API HRESULT HSPLAYER_APICALL HI_PLAYER_StopRecord(PLAYHANDLE hHandle);
-
     /*Snap*/
     HSPLAYER_API HRESULT HSPLAYER_APICALL HI_PLAYER_SnapBMP(PLAYHANDLE hHandle,
             HI_CHAR *pSnapPath);
@@ -462,6 +479,13 @@ extern "C"
     HSPLAYER_API HRESULT HSPLAYER_APICALL HI_PLAYER_SnapJPEG(PLAYHANDLE hHandle,
             HI_CHAR *pSnapPath,
             HI_S32 s32QValue);
+	HSPLAYER_API HRESULT HSPLAYER_APICALL HI_PLAYER_SnapData(PLAYHANDLE hHandle, 
+			HI_U8 *pData, 
+			HI_U32 *pu32Size, 
+			HI_U32 *pu32Width, 
+			HI_U32 *pu32Height, 
+			HI_S32 s32Type, 
+			HI_S32 s32QValue);
 
     /*Attr、State and Caps*/
     HSPLAYER_API HRESULT HSPLAYER_APICALL HI_PLAYER_GetState(PLAYHANDLE hHandle,
@@ -512,11 +536,15 @@ extern "C"
 	HSPLAYER_API HRESULT HSPLAYER_APICALL HI_PLAYER_ResetSourceBuffer(PLAYHANDLE hHandle);
 	HSPLAYER_API HI_S32 HSPLAYER_APICALL HI_PLAYER_GetBufferValue(PLAYHANDLE hHandle);
 	HSPLAYER_API HRESULT HSPLAYER_APICALL HI_PLAYER_GetCurrentPts(PLAYHANDLE hHandle, HI_U64 *pCurPts);
+	HSPLAYER_API HRESULT HSPLAYER_APICALL HI_PLAYER_GetStreamEnd(PLAYHANDLE hHandle);
+	HSPLAYER_API HRESULT HSPLAYER_APICALL HI_PLAYER_StopDisplay(PLAYHANDLE hHandle);
+	HSPLAYER_API HRESULT HSPLAYER_APICALL HI_PLAYER_SetDisplay(PLAYHANDLE hHandle, HI_BOOL bDisplay);
+	HSPLAYER_API HRESULT HSPLAYER_APICALL HI_PLAYER_SetImageAttr(PLAYHANDLE hHandle, HI_S32 s32Width, HI_S32 s32Height);
+	HSPLAYER_API HRESULT HSPLAYER_APICALL HI_PLAYER_SetStreamEnd(PLAYHANDLE hHandle);
 
 	HSPLAYER_API HRESULT HSPLAYER_APICALL HI_PLAYER_SetDisplayMode(PLAYHANDLE hHandle, PLAYER_DISPLAYMODE_E eDisplayMode);
 	HSPLAYER_API HRESULT HSPLAYER_APICALL HI_PLAYER_GetDisplayMode(PLAYHANDLE hHandle, PLAYER_DISPLAYMODE_E *pDisplayMode);
 	HSPLAYER_API HRESULT HSPLAYER_APICALL HI_PLAYER_SetDrawCallBack(PLAYHANDLE hHandle, HI_BOOL bDrawCallback);
-
 
 #ifdef __cplusplus
 #if __cplusplus

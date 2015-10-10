@@ -65,6 +65,7 @@ HRESULT CHI_AENC_ENC::HI_AENC_Init(PLAYER_ATTR_AUDIO_S *pAudioAttr)
 
     /*重新初始化解码*/
     s32Rel = HI_VOICE_EncReset(m_pAEncHandle, u16CodeType);
+
     return (s32Rel == HI_SUCCESS) ? HI_SUCCESS : HI_FAILURE;
 }
 
@@ -74,9 +75,15 @@ HRESULT CHI_AENC_ENC::HI_AENC_DeInit()
     return HI_SUCCESS;
 }
 
-HRESULT CHI_AENC_ENC::HI_AENC_Encoder(HI_U8 *pInBuf,HI_S32 s32InLen,HI_U8 *pOutBuf,HI_S32 *pOutLen)
+HRESULT CHI_AENC_ENC::HI_AENC_Encoder(HI_U8 *pInBuf,
+                                       HI_S32 s32InLen,
+                                       HI_U8 *pOutBuf,
+                                       HI_S32 *pOutLen)
 {
-    if ((NULL == pInBuf)|| (NULL == pOutBuf)|| NULL == pOutLen|| NULL == m_pAEncHandle)
+    if ((NULL == pInBuf)
+        || (NULL == pOutBuf)
+        || NULL == pOutLen
+        || NULL == m_pAEncHandle)
     {
         return HI_ERR_NULL_POINTER;
     }
@@ -84,7 +91,11 @@ HRESULT CHI_AENC_ENC::HI_AENC_Encoder(HI_U8 *pInBuf,HI_S32 s32InLen,HI_U8 *pOutB
     {
         return HI_ERR_INVALID_ARGUMENTS;
     }
-    HI_S32 s32Rel = HI_VOICE_EncodeFrame((HI_VOID*)m_pAEncHandle,(HI_S16*)pInBuf,(HI_S16*)pOutBuf,(HI_S16)s32InLen/2);
+
+    HI_S32 s32Rel = HI_VOICE_EncodeFrame((HI_VOID*)m_pAEncHandle,
+                                         (HI_S16*)pInBuf,
+                                         (HI_S16*)pOutBuf,
+                                         (HI_S16)s32InLen/2);
     if (HI_SUCCESS == s32Rel)
     {
         //码流数据加上海思帧结构头

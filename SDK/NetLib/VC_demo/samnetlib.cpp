@@ -140,6 +140,7 @@ void g_SetWndStaticText(CWnd * pWnd)
 		pChild->GetWindowText(strCaption);
 		strText=ConvertString(strCaption);
 		pChild->SetWindowText(strText);
+		
 		//下一个子窗口
 		pChild=pChild->GetWindow(GW_HWNDNEXT);
 	}

@@ -47,6 +47,7 @@ CHI_AO_MM::CHI_AO_MM()
 
     //默认非暂停
     m_bPause = HI_FALSE;
+
     m_pWaveFormat.cbSize = 0; //sizeof(WAVEFORMATEX);
     m_pWaveFormat.nChannels = 1;
     m_pWaveFormat.nSamplesPerSec = 8000;
@@ -54,13 +55,16 @@ CHI_AO_MM::CHI_AO_MM()
     m_pWaveFormat.wFormatTag = WAVE_FORMAT_PCM;
     m_pWaveFormat.nBlockAlign = 2;
     m_pWaveFormat.nAvgBytesPerSec = 16000;
+
     TIMECAPS tcaps;
     if (timeGetDevCaps(&tcaps, sizeof(TIMECAPS)) == TIMERR_NOERROR)
     {
         m_uAccuracy = min(max(tcaps.wPeriodMin, TIMER_ACCURACY), tcaps.wPeriodMax);
         timeBeginPeriod(m_uAccuracy);
     }
+
 	m_pAudioDec = new CHI_ADEC_DEC();
+    
     m_bFistLostPack = HI_FALSE;
     InitializeCriticalSection(&m_critSection);
 }
@@ -69,8 +73,10 @@ CHI_AO_MM::~CHI_AO_MM()
 {
     /*退出前执行关闭、清空操作*/
     AudioStop();
+
     SAFE_DELETEA(m_pAudioData);
     m_COMMONRingBuffer.RB_Destroy();
+    
     if (NULL != m_hEvent)
     {
         CloseHandle(m_hEvent);
@@ -801,3 +807,6 @@ HRESULT CHI_AO_MM::HI_ADEC_InPutAudioData(HI_U8 *pBuffer, HI_S32 s32DataLen, HI_
         return s32Rec;
     }
 }
+
+
+//////////////////////////////////////////////////////////////////////////

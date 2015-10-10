@@ -296,9 +296,16 @@ typedef struct HI_Video_Ext
 typedef struct HI_Resolution
 {
 	HI_U32 u32Channel;      /* 通道 */
-       HI_BOOL blFlag;            /* 主、次码流 HI_TRUE:主码流，HI_FALSE:次码流 */ 
+	HI_BOOL blFlag;            /* 主、次码流 HI_TRUE:主码流，HI_FALSE:次码流 */ 
 	HI_U32 u32Resolution;
 } HI_S_Resolution;
+
+typedef struct HI_Resolution_Ext
+{
+	HI_U32 u32Channel;      /* 通道 */
+	HI_U32 u32Stream;            /* 主、次码流 0:1:次码流 2:第三码流*/ 
+	HI_U32 u32Resolution;
+} HI_S_Resolution_Ext;
 
 /* 视频制式和频率  */
 typedef enum HI_Frequency
@@ -314,7 +321,7 @@ typedef enum HI_Frequency
 typedef struct HI_Audio
 {
 	HI_U32 u32Channel;              /* 通道 */
-       HI_BOOL blFlag;                      /*主次码流标志，HI_TRUE为主码流，HI_FALSE为次码流*/
+    HI_BOOL blFlag;                      /*主次码流标志，HI_TRUE为主码流，HI_FALSE为次码流*/
 	HI_BOOL blEnable;               /* HI_TRUE:开启音频，HI_FALSE:关闭音频  */
 	HI_U32 u32Type;
 } HI_S_Audio;
@@ -322,7 +329,7 @@ typedef struct HI_Audio
 typedef struct HI_Audio_Ext
 {
 	HI_U32 u32Channel;              /* 通道 */
-	HI_U32 u32Stream;                      /*主次码流标志，0为主码流，1为次码流，2为第三码流*/
+	HI_U32 u32Stream;                      /*主次码流标志，0为主码流，1为次码流 2为第三码流*/
 	HI_BOOL blEnable;               /* HI_TRUE:开启音频，HI_FALSE:关闭音频  */
 	HI_U32 u32Type;
 } HI_S_Audio_Ext;
@@ -348,10 +355,10 @@ typedef struct HI_OSD
 
 typedef struct HI_MD_PARAM
 {
-       HI_U32 u32Channel;       /* 通道 */
+	HI_U32 u32Channel;       /* 通道 */
 	HI_U32 u32Area;            /* 报警区域 */
-       HI_BOOL blEnable;        /* HI_TRUE启动报警，HI_FALSE关闭报警   */
-       HI_U32 u32Sensitivity;  /* 报警灵敏度，取值范围1~99 */
+	HI_BOOL blEnable;        /* HI_TRUE启动报警，HI_FALSE关闭报警   */
+	HI_U32 u32Sensitivity;  /* 报警灵敏度，取值范围1~99 */
 	HI_U32 u32X;
 	HI_U32 u32Y;
 	HI_U32 u32Width;
@@ -523,6 +530,7 @@ typedef struct HI_FTP_PARAM
 	HI_U32  u32Mode;
 	HI_CHAR sUser[24];
 	HI_CHAR sPass[24];
+	HI_CHAR sFilePath[256];
 }HI_S_FTP_PARAM;
 
 typedef struct HI_ATTR_EXT
@@ -543,19 +551,19 @@ typedef struct HI_PLATFORM
 
 typedef struct HI_DNS_PARAM
 {
-	HI_CHAR sServiceType[32];
-	HI_CHAR sUser[24];
-	HI_CHAR sPass[24];
-	HI_CHAR sDomain[32];
 	HI_U32  u32Enable;
+	HI_CHAR u32ServiceType;
+	HI_CHAR sUsername[32];
+	HI_CHAR sPassword[32];
+	HI_CHAR sDomain[32];
 }HI_S_DNS_PARAM;
 
 typedef struct HI_OUR_DNS
 {
-	HI_CHAR sServer[32];
+	HI_U32  u32Enable;
+	HI_CHAR sService[32];
 	HI_CHAR sUsername[32];
 	HI_CHAR sPassword[32];
-	HI_U32  u32Enable;
 	HI_U32	u32Port;
 	HI_CHAR sDomain[32];
 }HI_S_OUR_DNS;
@@ -605,6 +613,17 @@ typedef struct HI_MD_TIMER
 	HI_CHAR sWeekend[16];
 	HI_CHAR sWeek[7][16];
 }HI_S_MD_TIMER;
+
+typedef struct HI_MD_ALARM
+{
+	HI_U32 u32Email;
+	HI_U32 u32EmailSnap;
+	HI_U32 u32SDSnap;
+	HI_U32 u32SDRecord;
+	HI_U32 u32FtpRec;
+	HI_U32 u32Relay;
+	HI_U32 u32RelayTime;
+}HI_S_MD_ALARM;
 
 typedef struct HI_NET_EXT
 {
@@ -713,6 +732,18 @@ typedef struct HI_DEC_CHN_INFO
 	HI_CHAR sFileName[128];
 }HI_S_DEC_CHN_INFO;
 
+//Uid设置
+typedef struct _HI_UID
+{
+// 	HI_U32    dana_enable;
+// 	HI_CHAR   dana_server[64];
+// 	HI_U32    dana_port;
+//  HI_CHAR   dana_sn[64];
+	HI_U32 u32Enable;
+	HI_U32 u32Mode;
+	HI_CHAR sUID[64];
+}HI_Uid;
+
 typedef struct HI_REC_STATE
 {
 	HI_U32 u32link;
@@ -758,6 +789,9 @@ typedef struct hiIMAGE
 	HI_BOOL bWdr;			//宽动态开关
 	HI_BOOL bLumiswitch;	//低照度开关
 } HI_S_IMAGE;
+
+#define HI_USING_NET_LAN	0
+#define HI_USING_NET_WIFI	1
 
 
 
@@ -819,6 +853,126 @@ typedef struct hiFrameHeader
 	HI_U32 u32Format;			/*音频格式*/
 } HI_S_FrameHeader;
 
+typedef struct HI_TM_NTP
+{
+	HI_U32 u32Enable;
+	HI_U32 u32Interval;
+	HI_CHAR sServer[32];
+}HI_S_TM_NTP;
+
+#define HI_QT_TYPE_ALARM 0
+#define HI_QT_TYPE_PLAN  1
+#define HI_QT_TYPE_SNAP  2
+typedef struct HI_QUANTUM_TIME
+{
+	HI_U32 u32QtType;			//HI_QT_TYPE_ALARM, HI_QT_TYPE_PLAN
+	HI_CHAR sDayData[7][48+1];	//P, N
+}HI_S_QUANTUM_TIME;
+
+typedef struct HI_PREC_PARAM
+{
+	HI_U32 u32Enable;	//(0, 1)
+	HI_U32 u32FileLen;	//(15-900)
+	HI_U32 u32RecChn;	//(11, 12, 13)
+}HI_S_PREC_PARAM;
+
+#define HI_ALINKAGE_RECORD_SD		0
+#define HI_ALINKAGE_RECORD_FTP		1
+#define HI_ALINKAGE_SNAP_SD			2
+#define HI_ALINKAGE_SNAP_FTP		3
+#define HI_ALINKAGE_EMAIL			4
+#define HI_ALINKAGE_RELAY			5
+#define HI_ALINKAGE_ALARM_SERVER	6
+typedef struct HI_ALINKAGE_PARAM
+{
+	HI_U32 u32ALType;	//(0-6)
+	HI_U32 u32Enable;	//(0, 1)
+}HI_S_ALINKAGE_PARAM;
+
+typedef struct hiAUDIO_ALARM
+{
+	HI_U32 u32Enable;	//(0, 1)
+	HI_U32 u32Value;	//(1---100)
+}HI_S_AUDIO_ALARM;
+
+typedef struct hiSNAP_ALARM
+{
+	HI_U32 u32Enable;	//(0, 1)
+	HI_U32 u32Channel;	//(11, 12, 13)
+	HI_U32 u32Number;	//(1, 2, 3)
+	HI_U32 u32Interval;	//(>=5)
+}HI_S_SNAP_ALARM;
+
+
+#define HI_NET_DEV_SOUND_LIST1 1
+#define HI_NET_DEV_SOUND_LIST2 2
+#define HI_NET_DEV_SOUND_LIST3 3
+#define HI_NET_DEV_SOUND_LIST4 4
+typedef struct hiSPLAY_MODE
+{
+	HI_U32 u32Mode;		//(0-single, 1-list, 2-temp)
+	HI_U32 u32Loop;		//(0-no loop, 1-loop)
+	HI_U32 u32FileIndex;//(HI_NET_DEV_AUDIO_LIST1~HI_NET_DEV_AUDIO_LIST4)
+}HI_S_SOUND_PLAY_MODE;
+
+typedef struct hiSPLAY_LIST
+{
+	HI_U32 u32PlayIndex[4];	//(HI_NET_DEV_AUDIO_LIST1~HI_NET_DEV_AUDIO_LIST4)
+}HI_S_SOUND_PLAY_LIST;
+
+typedef struct hiSFILE_INFO
+{
+	HI_U32 u32Index;	//(HI_NET_DEV_AUDIO_LIST1~HI_NET_DEV_AUDIO_LIST4)
+	HI_CHAR sName[32];
+	HI_U32 u32Size;
+	HI_U32 u32PlayTime;
+	HI_U32 u32CreateTime;
+}HI_S_SOUND_FILE_INFO;
+
+
+
+
+typedef struct hiFrmHeader //解码器推送方式数据结构
+{
+	HI_U32 u32AVFrameFlag;
+	HI_U32 u32AVFrameLen;
+	HI_U32 u32AVFramePTS;
+	HI_U32 u32VFrameType;
+	HI_U32 u32Width;
+	HI_U32 u32Height;
+	HI_U32 u32Format;
+} HI_S_FrmHeader;
+
+typedef struct hiCMS_DEV 
+{
+	HI_U32 u32CmsChn;	//设备对应CMS通道
+	HI_CHAR sHost[24];	//设备主机
+	HI_U32 u32Port;		//设备端口
+	HI_U32 u32DevChn;	//设备连接的通道
+	HI_U32 u32DevMode;	//设备连接模式，0-正向 1-反向
+	HI_CHAR sName[24];	//设备名称
+	HI_CHAR sNode[256];	//设备所在节点 用|符号区分
+} HI_CMS_DEV, *PHI_CMS_DEV;
+
+
+#define CMS_DEV_NUM 1000
+typedef struct hiCMS_NODE 
+{
+	HI_U32 u32Num;
+	HI_CMS_DEV sDev[CMS_DEV_NUM];
+} HI_CMS_NODE, *PHI_CMS_NODE;
+
+typedef struct HI_RELAYCTRL //是否开启继电器
+{
+	HI_BOOL bEnable;
+}HI_S_RelayCtrl;
+		
+//2015/07/14
+typedef struct HI_EXTALARM//外置报警
+{
+	HI_BOOL bEnable;
+}HI_S_ExtAlarm;		
+
 
 /* 参数定义 */
 #define HI_NET_DEV_GET_PRODUCT_VENDOR			0x1000
@@ -858,14 +1012,19 @@ typedef struct hiFrameHeader
 #define HI_NET_DEV_CMD_SYSTEM_INFO				0x1034
 #define HI_NET_DEV_CMD_WIFI_CHECK				0x1035
 #define HI_NET_DEV_CMD_SERVER_TIME_EX			0x1036
-
+#define HI_NET_DEV_CMD_NET_STATE				0x1037
+#define HI_NET_DEV_CMD_NTP						0x1038
+#define HI_NET_DEV_CMD_INTERNET_IP				0x1039
 #define HI_NET_DEV_CMD_COLOR					0x1040
 #define HI_NET_DEV_CMD_SYS						0x1041
 #define HI_NET_DEV_CMD_DEVID					0x1042
 #define HI_NET_DEV_CMD_IMAGE_DEFAULT			0x1043
 #define HI_NET_DEV_CMD_OUR_DNS					0x1044
+#define HI_NET_DEV_CMD_RTSP_INFO				0x1045
+#define HI_NET_DEV_CMD_MD_ALARM					0x1046
 #define HI_NET_DEV_CMD_VIDEO_PARAM_EXT			0x1047
 #define HI_NET_DEV_CMD_AUDIO_PARAM_EXT			0x1048
+#define HI_NET_DEV_CMD_RESOLUTION_EXT			0x1049
 
 #define HI_NET_NVR_CMD_NET_EXT					0x1050
 #define HI_NET_NVR_CMD_RTSP_INFO				0x1051
@@ -882,10 +1041,30 @@ typedef struct hiFrameHeader
 #define HI_NET_NVR_CMD_DISK_INFO				0x1062
 #define HI_NET_NVR_CMD_DISK_FORMAT				0x1063
 #define HI_NET_NVR_CMD_RECORD_STATE_EX			0x1064
+#define HI_NET_NVR_CMD_DISPLAY_CFG				0x1065
 
 #define HI_NET_DEV_CMD_AUDIO_VOLUME_IN			0x1070
 #define HI_NET_DEV_CMD_AUDIO_VOLUME_OUT			0x1071
-#define HI_NET_DEV_CMD_BUT						0x1072
+#define HI_NET_DEV_CMD_QUANTUM_TIME				0x1072
+#define HI_NET_DEV_CMD_PLAN_REC_PARAM			0x1073
+#define HI_NET_DEV_CMD_SD_FORMAT				0x1074
+#define HI_NET_DEV_CMD_ALARM_LINKAGE_PARAM		0x1075
+#define HI_NET_DEV_CMD_AUDIO_ALARM				0x1076
+#define HI_NET_DEV_CMD_SNAP_ALARM				0x1077
+#define HI_NET_DEV_CMD_SOUND_PLAY_MODE			0x1078
+#define HI_NET_DEV_CMD_SOUND_PLAY_LIST			0x1079
+#define HI_NET_DEV_CMD_SOUND_FILE_INFO			0x1080
+#define HI_NET_DEV_CMD_GET_CMS_LIST				0x1081
+
+
+#define HI_NET_DEV_CMD_UID                      0x1083  //uid命令,对应结构体HI_Uid
+//2015/03/07
+#define HI_NET_DEV_CMD_RELAYCTRL				0x1084	//继电器控制
+//2015/06/16
+#define HI_NET_DEV_CMD_EXT_ALARM			0x1085	//外置报警抓拍
+
+#define HI_NET_DEV_CMD_BUT						0x1099
+
 
 /* 云台控制定义 */
 #define HI_NET_DEV_CTRL_PTZ_STOP			0x3000
@@ -893,6 +1072,7 @@ typedef struct hiFrameHeader
 #define HI_NET_DEV_CTRL_PTZ_DOWN			0x3002
 #define HI_NET_DEV_CTRL_PTZ_LEFT			0x3003
 #define HI_NET_DEV_CTRL_PTZ_RIGHT			0x3004
+
 #define HI_NET_DEV_CTRL_PTZ_ZOOMIN			0x3005
 #define HI_NET_DEV_CTRL_PTZ_ZOOMOUT			0x3006
 #define HI_NET_DEV_CTRL_PTZ_FOCUSIN			0x3007
@@ -917,13 +1097,20 @@ typedef struct hiFrameHeader
 #define HI_NET_DEV_CTRL_PTZ_GSPEED			0x3050
 #define HI_NET_DEV_CTRL_PTZ_SSPEED			0x3051
 
+#define HI_NET_DEV_CTRL_PTZ_UPLEFT      0x3052
+#define HI_NET_DEV_CTRL_PTZ_UPRIGHT     0x3053
+#define HI_NET_DEV_CTRL_PTZ_DOWNLEFT    0x3054
+#define HI_NET_DEV_CTRL_PTZ_DOWNRIGHT   0x3055
+
 #define HI_NET_DEV_CTRL_PTZ_TRAN	0x4000
 
 #define HI_NET_DEV_CTRL_PTZ_SPEED_MAX	0x3F
 #define HI_NET_DEV_CTRL_PTZ_SPEED_MIN	0x00
 #define HI_NET_DEV_CTRL_PTZ_PRESET_MAX	255
 #define HI_NET_DEV_CTRL_PTZ_PRESET_MIN	0
-#define HI_NET_DEV_CTRL_PTZ_FT_BUF_LEN	64
+//2015/03/07
+//#define HI_NET_DEV_CTRL_PTZ_FT_BUF_LEN	64
+#define HI_NET_DEV_CTRL_PTZ_FT_BUF_LEN	128
 
 #define HI_NET_DEV_SNAP_BUF_LEN_MIN		1024
 
@@ -947,7 +1134,6 @@ NETSDK_API HI_S32 NETSDK_APICALL HI_NET_DEV_SetReconnect(HI_U32 u32Handle, HI_U3
 /* 开始流传输 */
 NETSDK_API HI_S32 NETSDK_APICALL HI_NET_DEV_StartStream(HI_U32 u32Handle, HI_S_STREAM_INFO*  pstruStreamInfo);
 NETSDK_API HI_S32 NETSDK_APICALL HI_NET_DEV_StartStreamExt(HI_U32 u32Handle, HI_S_STREAM_INFO_EXT*  pstruStreamInfo);
-
 /* 停止流传输  */
 NETSDK_API HI_S32 NETSDK_APICALL HI_NET_DEV_StopStream(HI_U32 u32Handle);
 /* 设置流传输事件回调  */
@@ -1001,6 +1187,14 @@ NETSDK_API HI_S32 NETSDK_APICALL HI_NET_DEV_SetDecChnEnable(HI_U32 u32Handle, HI
 NETSDK_API HI_S32 NETSDK_APICALL HI_NET_DEV_SetRemotePlay(HI_U32 u32Handle, HI_U32 u32Channel, HI_S_DEC_CHN_INFO *pDecChnInfo);
 NETSDK_API HI_S32 NETSDK_APICALL HI_NET_DEV_SetRemotePlayControl(HI_U32 u32Handle, HI_U32 u32Channel, HI_U32 u32Command, 
 																 HI_U32 u32InValue, HI_U32 *pu32OutValue);
+NETSDK_API HI_U32 NETSDK_APICALL HI_NET_DEV_StartPassiveDecode(HI_U32 u32Handle, HI_U32 u32Channel, HI_U32* pu32PassiveHandle);
+NETSDK_API HI_S32 NETSDK_APICALL HI_NET_DEV_DecodeSendData(HI_U32 u32PassiveHandle, HI_U8 *pSendBuf, HI_U32 u32BufSize);
+NETSDK_API HI_S32 NETSDK_APICALL HI_NET_DEV_StopPassiveDecode(HI_U32 u32PassiveHandle);
+
+
+
+
+
 
 #define ERR_AVI_OK						0x00000000
 #define ERR_AVI_INVALIDARG				0x80000001

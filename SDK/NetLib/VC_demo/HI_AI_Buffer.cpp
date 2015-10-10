@@ -26,6 +26,7 @@ HI_AI_Buffer::HI_AI_Buffer(HI_VOID *pBuffer, HI_U32 dwLength)
     m_bAutoDelete = HI_FALSE;
     ptr.b = NULL;
     m_u32ByteLen = 0;
+
     GetBuffer(pBuffer, dwLength);
 }
 
@@ -48,6 +49,7 @@ HI_VOID HI_AI_Buffer::Erase(HI_VOID)
         memset(ptr.b, 0, m_u32ByteLen);
     }
 }
+
 //////////////////////////////////////////////////////////////////////////
 /************************************************
 * º¯ÊýÃû	     : HI_AI_GetUsedLength
@@ -64,6 +66,8 @@ HI_S16 HI_AI_Buffer::HI_AI_GetUsedLength(HI_VOID)
     return ptr.s[1] + 2;
 }
 
+//////////////////////////////////////////////////////////////////////////
+
 HI_VOID HI_AI_Buffer::GetBuffer(HI_VOID *pBuffer, HI_U32 dwLength)
 {
     m_bAutoDelete = HI_FALSE;
@@ -78,3 +82,5 @@ HI_VOID HI_AI_Buffer::GetBuffer(HI_VOID *pBuffer, HI_U32 dwLength)
         m_u32ByteLen = 0;
     }
 }
+
+//////////////////////////////////////////////////////////////////////////

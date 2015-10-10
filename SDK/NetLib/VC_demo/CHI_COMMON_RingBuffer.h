@@ -6,7 +6,7 @@
 //#include "hi_pcdefs.h"
 
 #define PLAY_AUDIO_MAX_RB_SIZE 1024 * 128
-const int TIMER_ACCURACY = 1;
+const TIMER_ACCURACY = 1;
 #define SAFE_DELETE(p)  { if((p) != NULL) { delete (p);     (p) = NULL; } }   //Delete object by New create
 
 typedef struct hi_AVSample_S
@@ -109,7 +109,7 @@ private:
      * 并将访问权限设置为private类型,防止用户使用默认拷贝构造和 "=" 操作符.
      * @see PROTECTMIC
      */
-    HI_S32 PROTECTMIC(CHI_COMMON_RingBuffer);
+    PROTECTMIC(CHI_COMMON_RingBuffer);
 };
 
 

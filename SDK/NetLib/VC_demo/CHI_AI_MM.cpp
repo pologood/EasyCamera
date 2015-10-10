@@ -25,6 +25,7 @@ CHI_AI_MM::CHI_AI_MM(void)
 	m_pAudio_ENC = NULL;
 	m_pAudioAttr = NULL;
 	m_pAudioAttr = (PLAYER_ATTR_AUDIO_S*)malloc(sizeof(PLAYER_ATTR_AUDIO_S));
+
     //Init Audio input Format
     m_Format.cbSize = 0; //sizeof(WAVEFORMATEX);
     m_Format.nChannels = 1;
@@ -62,8 +63,7 @@ CHI_AI_MM::~CHI_AI_MM(void)
 		DeleteCriticalSection(&m_callBack);
     }
     catch (...)
-    {
-	}
+    {}
 
 }
 
@@ -160,6 +160,7 @@ HRESULT CHI_AI_MM::HI_AI_Start(OnAudioCallback callBack, HI_VOID *pUserData)
         m_pAudio_ENC = NULL;
         return hr;
     }
+
     return Start();
 }
 
@@ -202,7 +203,9 @@ HI_VOID CALLBACK AudioInProc(HWAVEIN hwi, UINT uMsg, DWORD dwInstance, DWORD dwP
                     {
                         HI_AI_Buffer buff(pWaveHdr->lpData, pWaveHdr->dwBytesRecorded);
 
-                        pAudioIn->HI_AI_Encoder((HI_U8*)pWaveHdr->lpData,pWaveHdr->dwBufferLength, pAudioIn->GetTimeStamp());
+                        pAudioIn->HI_AI_Encoder((HI_U8*)pWaveHdr->lpData,
+												pWaveHdr->dwBufferLength, 
+												pAudioIn->GetTimeStamp());
                         //pWaveHdr->dwFlags = 0 ;
 						//printf("%d, %u\n", pWaveHdr->dwBufferLength, pAudioIn->GetTimeStamp());
                         waveInPrepareHeader(hwi, pWaveHdr, sizeof(WAVEHDR));

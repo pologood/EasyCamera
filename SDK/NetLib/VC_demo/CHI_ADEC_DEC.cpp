@@ -37,7 +37,10 @@ CHI_ADEC_DEC::~CHI_ADEC_DEC()
     m_pDecCodeState = NULL;
 }
 
-HRESULT CHI_ADEC_DEC::HI_ADEC_Decode(HI_U8 *pInBuf,HI_S32 s32InLen,HI_U8 *pOutBuf,HI_S32 *pOutLen)
+HRESULT CHI_ADEC_DEC::HI_ADEC_Decode(HI_U8 *pInBuf,
+                                      HI_S32 s32InLen,
+                                      HI_U8 *pOutBuf,
+                                      HI_S32 *pOutLen)
 {
     if ((NULL == pInBuf) || (NULL == pOutBuf) || NULL == pOutLen)
     {
@@ -60,12 +63,15 @@ HRESULT CHI_ADEC_DEC::HI_ADEC_Decode(HI_U8 *pInBuf,HI_S32 s32InLen,HI_U8 *pOutBu
     }
 }
 
+
 HRESULT CHI_ADEC_DEC::HI_ADEC_DeInit()
 {
     return HI_SUCCESS;
 }
 
-HRESULT CHI_ADEC_DEC::HI_ADEC_Init(PLAYER_ATTR_AUDIO_S *pAudioAttr,PLAYER_ATTR_AUDIO_S *pOutPutAttr)
+
+HRESULT CHI_ADEC_DEC::HI_ADEC_Init(PLAYER_ATTR_AUDIO_S *pAudioAttr,
+                                    PLAYER_ATTR_AUDIO_S *pOutPutAttr)
 {
     if (NULL == pAudioAttr || NULL == pOutPutAttr)
     {
@@ -136,12 +142,14 @@ HRESULT CHI_ADEC_DEC::HI_ADEC_Init(PLAYER_ATTR_AUDIO_S *pAudioAttr,PLAYER_ATTR_A
 }
 
 
-HI_S32 CHI_ADEC_DEC::AudioDecode(HI_S16 *pInBuf,HI_S16 *pOutBuf, HI_S16 *pBufLen)
+HI_S32 CHI_ADEC_DEC::AudioDecode(HI_S16 *pInBuf, \
+                                  HI_S16 *pOutBuf, HI_S16 *pBufLen)
 {
     if ((NULL == pInBuf) || (NULL == pOutBuf) || NULL == pBufLen)
-    {   
+    {   //非法长度
         return HI_ERR_NULL_POINTER;
     }
+
 	HI_S32 s32Rel = HI_SUCCESS;
     /*音频解码，输入解码句柄、音频数据、解码类型、数据长度，输出wave数据*/
     s32Rel = HI_VOICE_DecodeFrame(m_pDecCodeState, pInBuf, pOutBuf, pBufLen);

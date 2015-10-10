@@ -95,15 +95,18 @@ void CHI_COMMON_RingBuffer::RB_Disp_Stat(void)
 HI_U32 CHI_COMMON_RingBuffer::RB_MaxWriteSize(void)
 {
     HI_U32 ulMaxWriteSize = 0;
+
     if (NULL == m_pRB)
     {
         return HI_ERR_NULL_POINTER;
     }
+
     /*READ == WRITE 认为是空缓冲*/
     if (m_ulReadPos == m_ulWritePos)
     {
         ulMaxWriteSize = m_ulSize ;
     }
+
     if (m_ulReadPos > m_ulWritePos)
     {
         ulMaxWriteSize = m_ulReadPos - m_ulWritePos;
@@ -112,6 +115,7 @@ HI_U32 CHI_COMMON_RingBuffer::RB_MaxWriteSize(void)
     {
         ulMaxWriteSize = m_ulSize - m_ulWritePos + m_ulReadPos;
     }
+
     return ulMaxWriteSize;
 }
 
@@ -197,7 +201,11 @@ void CHI_COMMON_RingBuffer::RB_Destroy(void)
     }
 }
 
-HI_VOID CHI_COMMON_RingBuffer::DirectCopyData(HI_U8 *pData,HI_U32 ulWriteSize,HI_U32 ulDataLen,HI_U32 u32TimeStamp,HI_U32 u32FrameTag)
+HI_VOID CHI_COMMON_RingBuffer::DirectCopyData(HI_U8 *pData,
+        HI_U32 ulWriteSize,
+        HI_U32 ulDataLen,
+        HI_U32 u32TimeStamp,
+        HI_U32 u32FrameTag)
 {
     memcpy( (m_pRB + m_ulWritePos ), (&ulDataLen), RB_LEN_BYTES);
     //store time
@@ -209,7 +217,11 @@ HI_VOID CHI_COMMON_RingBuffer::DirectCopyData(HI_U8 *pData,HI_U32 ulWriteSize,HI
     m_ulWritePos += ulWriteSize;
 }
 
-HI_VOID CHI_COMMON_RingBuffer::WrapCopyData(HI_U8 *pData,HI_U32 ulWriteSize,HI_U32 ulDataLen,HI_U32 u32TimeStamp,HI_U32 u32FrameTag)
+HI_VOID CHI_COMMON_RingBuffer::WrapCopyData(HI_U8 *pData,
+        HI_U32 ulWriteSize,
+        HI_U32 ulDataLen,
+        HI_U32 u32TimeStamp,
+        HI_U32 u32FrameTag)
 {
     /*写需要分段*/
     HI_U32 ulFirstChunkSize = 0;
@@ -256,37 +268,51 @@ HI_VOID CHI_COMMON_RingBuffer::WrapCopyData(HI_U8 *pData,HI_U32 ulWriteSize,HI_U
         //store frame flag
         memcpy((m_pRB + m_ulWritePos + RB_LEN_BYTES + m_s32Move4), &u32FrameTag, m_s32Move4);
         //store data
-        memcpy( (m_pRB + m_ulWritePos + RB_LEN_BYTES + m_s32Move8),pData, ulFirstChunkSize - RB_LEN_BYTES - m_s32Move8);
+        memcpy( (m_pRB + m_ulWritePos + RB_LEN_BYTES + m_s32Move8),
+                pData, ulFirstChunkSize - RB_LEN_BYTES - m_s32Move8);
         memcpy( m_pRB, (pData + ulFirstChunkSize - RB_LEN_BYTES - m_s32Move8), ulSecondChunkSize);
-        //memcpy( (m_pRB + m_ulWritePos + RB_LEN_BYTES), pData, ulFirstChunkSize - RB_LEN_BYTES);
-        //memcpy( m_pRB, (pData + ulFirstChunkSize - RB_LEN_BYTES), ulSecondChunkSize);
+
+        //            memcpy( (m_pRB + m_ulWritePos + RB_LEN_BYTES), pData, ulFirstChunkSize - RB_LEN_BYTES);
+        //            memcpy( m_pRB, (pData + ulFirstChunkSize - RB_LEN_BYTES), ulSecondChunkSize);
     }
+
     m_ulWritePos = ulSecondChunkSize;
 }
 
 /*往RB写pData, 会在前面附加4Bytes的长度指示, 以4Byte为单位对齐*/
-HI_S32 CHI_COMMON_RingBuffer::RB_Write_X(HI_U8 *pData,HI_U32 ulDataLen,HI_U32 u32TimeStamp,HI_U32 u32FrameTag,HI_U32 *pulWriteLen)
+HI_S32 CHI_COMMON_RingBuffer::RB_Write_X(HI_U8 *pData,
+        HI_U32 ulDataLen,
+        HI_U32 u32TimeStamp,
+        HI_U32 u32FrameTag,
+        HI_U32 *pulWriteLen)
 {
     HI_U32 ulMaxWriteSize = 0;
+
     //a data len include data,time,frame
     ulDataLen = ulDataLen + m_s32Move8;
+
     /*Data对齐后的长度*/
     HI_U32 lenAlign = ALIGN_LENGTH(ulDataLen, RB_LEN_BYTES);
+
     /*真实写入的长度*/
     HI_U32 ulWriteSize = lenAlign + RB_LEN_BYTES;
+
     if (ulDataLen == 0)
     {
         CString str;
         RB_DO_STAT_TotalWriteError((HI_U64)1);
         return HI_ERR_OVERFLOW_MEMORY;
     }
+
     RB_DO_STAT_TotalWriteTimes((HI_U64)1);
+
     ulMaxWriteSize = RB_MaxWriteSize();
     if (ulWriteSize >= ulMaxWriteSize )
     {
         RB_DO_STAT_TotalWriteError((HI_U64)1);
         return HI_ERR_ABORTED_OPERATION;
     }
+
     if (NULL == m_pRB)
     {
         return HI_ERR_NULL_POINTER;
@@ -302,13 +328,16 @@ HI_S32 CHI_COMMON_RingBuffer::RB_Write_X(HI_U8 *pData,HI_U32 ulDataLen,HI_U32 u3
 	//	TRACE("CHI_COMMON_RingBuffer:WrapCopyData!LEN=%d!size=%d!090518!\n",ulDataLen,ulWriteSize);
         WrapCopyData(pData, ulWriteSize, ulDataLen, u32TimeStamp, u32FrameTag);
     }
+
     if (pulWriteLen != NULL)
     {
         *pulWriteLen = ulWriteSize;
     }
 
     RB_DO_STAT_TotalWriteSize((HI_U64)ulWriteSize);
+
     SetNodeNumVal(HI_TRUE);
+
     return HI_SUCCESS;
 }
 
@@ -323,22 +352,18 @@ HI_VOID CHI_COMMON_RingBuffer::SetNodeNumVal(HI_BOOL bSign)
     {
         m_ulNodeNums = m_ulNodeNums - 1;
     }
-	if(m_u32BufNumber > 0)
-	{
-		if(m_ulNodeNums >= m_u32BufNumber)
-		{
+
+	if(m_u32BufNumber > 0){
+		if(m_ulNodeNums >= m_u32BufNumber){
 			m_bStartPlay = HI_TRUE;
-		}
-		else if(m_ulNodeNums <= 0)
-		{
+		}else if(m_ulNodeNums <= 0){
 			m_bStartPlay = HI_FALSE;
 		}
-	}
-	else
-	{
+	}else{
 		if(m_bStartPlay == HI_FALSE)
 			m_bStartPlay = HI_TRUE;
 	}
+
     m_criticalSection.Unlock();
 }
 
@@ -346,29 +371,37 @@ HI_S32 CHI_COMMON_RingBuffer::RB_Read_X(HI_U8 *pData, HI_U32 *pulData)
 {
     HI_U32 ulMaxReadSize = 0;
     HI_U32 ulReadSize = 0; /*真实读出的数据*/
+
     /*读需要分段*/
     HI_U32 ulFirstChunkSize = 0;
     HI_U32 ulSecondChunkSize = 0;
+
     RB_DO_STAT_TotalReadTimes((HI_U64)1);
+
     ulMaxReadSize = RB_MaxReadSize();
     //增加保护代码
     if (ulMaxReadSize == 0)
     {
         return HI_ERR_OVERFLOW_MEMORY;
     }
+
     *pulData = RB_GetLen_X();
     ulReadSize = ALIGN_LENGTH(*pulData, RB_LEN_BYTES) + RB_LEN_BYTES;
 
     //增加保护代码
     //if (ulReadSize <= 0 || ulReadSize >= m_ulSize)
     if (ulReadSize > m_ulSize) //|| ulReadSize > ulMaxReadSize
+
     {
 #if 0
         CString str;
-        str.Format("RB RD_Error: ulMaxReadSize=%d, ulReadSize=%d, m_ulReadPos=%d, m_ulWritePos=%d, m_ulSize=%d >>\n",ulMaxReadSize, ulReadSize, m_ulReadPos, m_ulWritePos, m_ulSize);
+        str.Format("RB RD_Error: ulMaxReadSize=%d, ulReadSize=%d, m_ulReadPos=%d, m_ulWritePos=%d, m_ulSize=%d >>\n",
+                   ulMaxReadSize, ulReadSize, m_ulReadPos, m_ulWritePos, m_ulSize);
         InsertEventList(str);
 #endif
+
         RB_DO_STAT_TotalReadError((HI_U64)1);
+
         return HI_ERR_ABORTED_OPERATION;
     }
 
@@ -401,13 +434,18 @@ HI_S32 CHI_COMMON_RingBuffer::RB_Read_X(HI_U8 *pData, HI_U32 *pulData)
             memcpy( pData, (m_pRB + m_ulReadPos + RB_LEN_BYTES), ulFirstChunkSize - RB_LEN_BYTES);
             memcpy( pData + ulFirstChunkSize - RB_LEN_BYTES, m_pRB, ulSecondChunkSize);
         }
+
         m_ulReadPos = ulSecondChunkSize;
     }
 
     RB_DO_STAT_TotalReadSize((HI_U64)ulReadSize);
+
     SetNodeNumVal(HI_FALSE);
+
     return HI_SUCCESS;
 }
+
+
 
 HI_U32 CHI_COMMON_RingBuffer::RB_GetLen_X(void)
 {
@@ -420,6 +458,7 @@ HI_U32 CHI_COMMON_RingBuffer::RB_GetLen_X(void)
     return len;
 }
 
+
 HI_U8 CHI_COMMON_RingBuffer::RB_GetFirstHI_U8(void)
 {
     if (NULL == m_pRB)
@@ -429,6 +468,7 @@ HI_U8 CHI_COMMON_RingBuffer::RB_GetFirstHI_U8(void)
     return (HI_U8)(*(HI_U8 *)(m_pRB + m_ulReadPos));
 }
 
+/*2Byte*/
 HI_U16 CHI_COMMON_RingBuffer::RB_GetFirstHI_U16(void)
 {
     if (NULL == m_pRB)
@@ -490,6 +530,7 @@ HI_S32 CHI_COMMON_RingBuffer::ReadNextPTS(HI_U32 *pulPTS)
     {
         return HI_ERR_ABORTED_OPERATION;
     }
+
 }
 
 HI_U32 CHI_COMMON_RingBuffer::ReadPTS(HI_U32 ulReadPos)
@@ -551,6 +592,7 @@ HI_U32 CHI_COMMON_RingBuffer::GetNextReadPos(void)
     {
         ulPos = m_ulReadPos + ulReadSize - m_ulSize;
     }
+
     return ulPos;
 }
 
@@ -562,6 +604,7 @@ HI_S32 CHI_COMMON_RingBuffer::SkipOneNodeReadPos(void)
     {
         m_ulReadPos = GetNextReadPos();
         SetNodeNumVal(HI_FALSE);
+
         return HI_SUCCESS;
     }
     else
@@ -569,6 +612,7 @@ HI_S32 CHI_COMMON_RingBuffer::SkipOneNodeReadPos(void)
         return HI_ERR_ABORTED_OPERATION;
     }
 }
+
 
 HI_BOOL CHI_COMMON_RingBuffer::RB_GetPlayState()
 {

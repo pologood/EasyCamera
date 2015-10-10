@@ -86,7 +86,7 @@ private:
      * 并将访问权限设置为private类型,防止用户使用默认拷贝构造和 "=" 操作符.
      * @see PROTECTMIC
      */
-    HI_S32 PROTECTMIC(CHI_AO_MM);
+    PROTECTMIC(CHI_AO_MM);
 };
 
 
