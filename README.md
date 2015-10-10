@@ -6,9 +6,8 @@ EasyCamera服务支持跨平台Windows/Linux，支持ARM摄像机，支持安卓
 
 ## EasyCamera包括 ##
 
-- **SDK** 摄像机SDK调用示例
+- **SDK** 摄像机版本及SDK调用示例
 - **src** EasyCamera开源程序
-
 
 ## 编译和部署方法 ##
 
@@ -20,7 +19,7 @@ EasyCamera服务支持跨平台Windows/Linux，支持ARM摄像机，支持安卓
 
 - arm版本编译：
 
-这里只说明EasyDarwin开源摄像机的编译方法,其他类型摄像机编译方法类似, 前提是配置相应的交叉编译工具链，具体安装交叉编译工具链参考：
+这里只说明EasyDarwin开源摄像机的编译方法,其他类型摄像机编译方法类似, 前提是配置相应的交叉编译工具链，我们有两款方案的摄像机，GM8126和HI3518，工具链分别在EasyCamera-master\SDK\GM8126\和EasyCamera-master\SDK\HI3518\，我们这里以安装GM8126交叉编译工具链为例：
 
 > “
 > 交叉编译工具链为所提供的EasyCamera-master\SDK\8126交叉编译工具\crosstool.tgz文件，解压crosstool.tgz至Linux开发宿主机的/opt目录，在/etc/profile里设置将交叉编译工具链目录设置到PATH变量，重启完成安装。
@@ -107,22 +106,28 @@ Windows版本运行(控制台调试运行)：
 将摄像机通过有线的方式连接到摄像机，路由器需要开启DHCP功能，给摄像机分配到IP地址（如果路由器没有开启DHCP功能，摄像机连接网线后，摄像机的默认IP就是*192.168.1.88*）；
 
 ### 2、查找摄像机 ###
-打开EasyCamera-master\SDK\网络库&播放库\bin\HiCamSearcher.exe，搜索摄像机：
+打开EasyCamera-master\SDK\NetLib\bin\HiCamSearcher.exe，搜索摄像机：
 
 ![HiCamSearcher](http://www.easydarwin.org/d/file/article/doc/EasyCamera/001.png)
 
-### 3、摄像机开启Telnet服务 ###
-通过浏览器访问摄像机进入web管理页面，进入系统维护页面，在系统升级项中点击浏览找到所提供的EasyCamera-master\SDK\telnet_8126.pkg升级包，点击确定，等待系统重启。 例如：http://192.168.*.*/web/admin.html
+### 3、区分摄像机硬件方案 ###
+
+通过浏览器访问摄像机进入web管理页面，进入设备信息页面，找到“软件版本：	”项，如果版本号以V5打头，那么摄像机是智源GM8126方案，如果版本号以V7打头，那么摄像机是海思HI3518方案
+
+
+### 4、摄像机开启Telnet服务 ###
+
+通过浏览器访问摄像机进入web管理页面，进入系统维护页面，在系统升级项中点击浏览找到所提供的升级包（GM8126方案选择EasyCamera-master\SDK\GM8126\**telnet_8126.pkg**，HI3518方案选择EasyCamera-master\SDK\HI3518\**telnet_3518.pkg**），点击确定，等待系统重启。 例如：http://192.168.*.*/web/admin.html
 
 ![EasyCamera Telnet](http://www.easydarwin.org/d/file/article/doc/EasyCamera/002.png)
 
-### 4、通过Telnet访问摄像机 ###
+### 5、通过Telnet访问摄像机 ###
 
-摄像机开启telnet服务后即可通过telnet 终端进行访问。登录名为root，密码为空。如下图所示。**摄像机自带的程序与配置位于/mnt/mtd/，请勿删除此目录下任何内容！！！**
+摄像机开启telnet服务后即可通过telnet 终端进行访问。GM8126方案用户名为：root，密码为空、HI3518方案用户名为：admin，密码为：2601hx。如下图所示。**摄像机自带的程序与配置位于/mnt/mtd/，请勿删除此目录下任何内容！！！**
 
 ![telnet](http://www.easydarwin.org/d/file/article/doc/EasyCamera/003.png)
 
-### 5、下载文件到摄像机 ###
+### 6、下载文件到摄像机 ###
 
 可通过http、ftp协议进行文件传输，摄像机提供wget、ftpget、ftpput命令。用户可以自己的程序下载至/mnt/mtd目录(受嵌入式资源的限制，此款设备用户可支配的空间大约为2M)。
 
@@ -142,7 +147,7 @@ Windows版本运行(控制台调试运行)：
 
 
 
-### 6、通过FTP传输文件到摄像机 ###
+### 7、通过FTP传输文件到摄像机 ###
 
 我们提供了EasyCamera\SDK\pure-ftpd程序以便在摄像机里建立ftp服务器，下载执行方法如上节所述。下面便可以用ftp客户端访问摄像机了,**用户名为root，密码为空**;
 
@@ -150,7 +155,7 @@ Windows版本运行(控制台调试运行)：
 
 ![filezilla](http://www.easydarwin.org/d/file/article/doc/EasyCamera/007.png)
 
-### 7、摄像机多码流的RTSP地址 ###
+### 8、摄像机多码流的RTSP地址 ###
 
 摄像机提供1/2/3种码流，RTSP地址分别为：
 
@@ -161,7 +166,7 @@ Windows版本运行(控制台调试运行)：
 具体每一个码流的参数细节可在WEB管理中进行设置：
 ![EasyCamera RTSP](http://www.easydarwin.org/d/file/article/doc/EasyCamera/008.png)
 
-### 8、摄像机wifi无线连接设置 ###
+### 9、摄像机wifi无线连接设置 ###
 
 WEB连接到摄像机后，可以通过WEB管理界面进行WIFI连接的设置：
 ![EasyCamera wifi](http://www.easydarwin.org/d/file/article/doc/EasyCamera/009.png)
