@@ -1,3 +1,5 @@
+GM8126交叉编译工具链下载：http://pan.baidu.com/s/1kTxVIq7
+
 1. 将crosstool.tgz到/opt
 2. 使用tar -xvzf crosstool.tgz解压到/opt目录
 2. 在/etc/profile添加
