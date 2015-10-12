@@ -71,7 +71,7 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="ws2_32.lib wsock32.lib winmm.lib libEasyCMS.lib NetLib.lib libEasyPusher.lib"
+				AdditionalDependencies="ws2_32.lib wsock32.lib winmm.lib NetLib.lib libEasyPusher.lib"
 				OutputFile="..\WinNTSupport\Debug\EasyCamera.exe"
 				LinkIncremental="2"
 				SuppressStartupBanner="true"
@@ -164,7 +164,7 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="ws2_32.lib wsock32.lib winmm.lib libEasyCMS.lib NetLib.lib libEasyPusher.lib"
+				AdditionalDependencies="ws2_32.lib wsock32.lib winmm.lib NetLib.lib libEasyPusher.lib"
 				OutputFile="..\WinNTSupport\Release\EasyCamera.exe"
 				LinkIncremental="2"
 				SuppressStartupBanner="true"

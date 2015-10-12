@@ -37,7 +37,6 @@
 
 #include "QTSServerInterface.h"
 #include "Task.h"
-#include "EasyCMSAPI.h"
 #include "EasyMediaSource.h"
 
 class QTSServer : public QTSServerInterface
@@ -88,8 +87,6 @@ class QTSServer : public QTSServerInterface
         
         static QTSS_Error RereadPrefsService(QTSS_ServiceFunctionArgsPtr inArgs);
 
-		Easy_CMS_Handle		GetCMSHandle() {return fCMSHandle; }
-
      private:
     
         //
@@ -98,8 +95,6 @@ class QTSServer : public QTSServerInterface
         static char*        sPortPrefString;
         static XMLPrefsParser* sPrefsSource;
         static PrefsSource* sMessagesSource;
-
-		Easy_CMS_Handle	fCMSHandle;
         
         //
         // Module loading & unloading routines

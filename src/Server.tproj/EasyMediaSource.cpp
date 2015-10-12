@@ -257,7 +257,7 @@ SInt64 EasyMediaSource::Run()
 
 		QTSServer* svr = (QTSServer*)QTSServerInterface::GetServer();
 
-		EasyCMS_UpdateSnap(svr->GetCMSHandle(), (const char*)sData, snapBufLen);
+		//EasyCMS_UpdateSnap(svr->GetCMSHandle(), (const char*)sData, snapBufLen);
 
 	}while(0);
 
