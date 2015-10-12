@@ -94,8 +94,9 @@ extern int optreset;
 extern int optind;
 extern int opterr;
 extern int optopt;
+#ifndef HISI
 int getopt(int argc, char* const *argv, const char *optstr);
-
+#endif
 //#endif /* WIN32 */
 
 #ifdef __cplusplus

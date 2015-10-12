@@ -79,7 +79,7 @@ FFLAGS=
 ASFLAGS=
 
 # Link Libraries and Options
-LDLIBSOPTIONS=-LLib/arm
+LDLIBSOPTIONS=-LLib/arm/gm8126 -LCommonUtilitiesLib/${CND_CONF}
 
 # Build Targets
 .build-conf: ${BUILD_SUBPROJECTS}
@@ -87,7 +87,7 @@ LDLIBSOPTIONS=-LLib/arm
 
 Bin/easycamera: ${OBJECTFILES}
 	${MKDIR} -p Bin
-	${LINK.cc} -o Bin/easycamera ${OBJECTFILES} ${LDLIBSOPTIONS} -ldl -lEasyCMS -lCommonUtilitiesLib -lEasyProtocol -lNetLib -ljsoncpp -leasypusher
+	${LINK.cc} -o Bin/easycamera ${OBJECTFILES} ${LDLIBSOPTIONS} -ldl -lCommonUtilitiesLib -lNetLib -leasypusher -lpthread
 
 ${OBJECTDIR}/APICommonCode/QTAccessFile.o: APICommonCode/QTAccessFile.cpp 
 	${MKDIR} -p ${OBJECTDIR}/APICommonCode

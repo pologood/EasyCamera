@@ -1,8 +1,32 @@
 #!/bin/sh
  
-if [ "$*" = "clean" ] ; then
-    make -f nbproject/Makefile-ARM.mk QMAKE= SUBPROJECTS= .clean-conf	
+usage()
+{
+	echo "0. clean up ./Buildit clean"
+	echo "1. build program for GM8126 ./Buildit gm8126 [target in Bin]"	
+	echo "2. build program for HISI ./Buildit hisi[target in Bin]"		
+}
+
+build()
+{
+	if [ "$*" = "clean" ] ; then
+		make -f nbproject/Makefile-ARM.mk QMAKE= SUBPROJECTS= .clean-conf
+		make -f nbproject/Makefile-hisiv100.mk QMAKE= SUBPROJECTS= .clean-conf
+	elif [ "$*" = "gm8126" ] ; then
+		make -f nbproject/Makefile-ARM.mk QMAKE= SUBPROJECTS= .build-conf
+	elif [ "$*" = "hisi" ] ; then
+		make -f nbproject/Makefile-hisiv100.mk QMAKE= SUBPROJECTS= .build-conf
+	fi
+}
+
+
+if [ "$*" = "clean" -o "$*" = "gm8126" -o "$*" = "hisi" ] ; then 
+	cd CommonUtilitiesLib
+	build $1
+
+	cd ../
+	build $1
 else
-    make -f nbproject/Makefile-ARM.mk QMAKE= SUBPROJECTS= .build-conf
+	usage;
 fi
 

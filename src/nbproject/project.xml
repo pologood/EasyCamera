@@ -25,6 +25,10 @@
                     <name>ARM</name>
                     <type>1</type>
                 </confElem>
+                <confElem>
+                    <name>hisiv100</name>
+                    <type>1</type>
+                </confElem>
             </confList>
             <formatting>
                 <project-formatting-style>false</project-formatting-style>

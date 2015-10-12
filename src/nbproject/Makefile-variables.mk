@@ -30,6 +30,14 @@ CND_ARTIFACT_PATH_ARM=Bin/easycamera
 CND_PACKAGE_DIR_ARM=dist/ARM/GM8126-Linux-x86/package
 CND_PACKAGE_NAME_ARM=src.tar
 CND_PACKAGE_PATH_ARM=dist/ARM/GM8126-Linux-x86/package/src.tar
+# hisiv100 configuration
+CND_PLATFORM_hisiv100=hisiv100-Linux-x86
+CND_ARTIFACT_DIR_hisiv100=Bin
+CND_ARTIFACT_NAME_hisiv100=easycamera
+CND_ARTIFACT_PATH_hisiv100=Bin/easycamera
+CND_PACKAGE_DIR_hisiv100=dist/hisiv100/hisiv100-Linux-x86/package
+CND_PACKAGE_NAME_hisiv100=src.tar
+CND_PACKAGE_PATH_hisiv100=dist/hisiv100/hisiv100-Linux-x86/package/src.tar
 #
 # include compiler specific variables
 #

@@ -6,14 +6,14 @@
 
 # Macros
 TOP=`pwd`
-CND_PLATFORM=GM8126-Linux-x86
+CND_PLATFORM=GNU-Linux-x86
 CND_CONF=Release
 CND_DISTDIR=dist
 CND_BUILDDIR=build
 CND_DLIB_EXT=so
 NBTMPDIR=${CND_BUILDDIR}/${CND_CONF}/${CND_PLATFORM}/tmp-packaging
 TMPDIRNAME=tmp-packaging
-OUTPUT_PATH=../${CND_CONF}/libCommonUtilitiesLib.a
+OUTPUT_PATH=${CND_CONF}/libCommonUtilitiesLib.a
 OUTPUT_BASENAME=libCommonUtilitiesLib.a
 PACKAGE_TOP_DIR=CommonUtilitiesLib/
 

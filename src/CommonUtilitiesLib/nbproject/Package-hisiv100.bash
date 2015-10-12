@@ -6,8 +6,8 @@
 
 # Macros
 TOP=`pwd`
-CND_PLATFORM=GNU-Linux-x86
-CND_CONF=Debug
+CND_PLATFORM=hisiv100-Linux-x86
+CND_CONF=hisiv100
 CND_DISTDIR=dist
 CND_BUILDDIR=build
 CND_DLIB_EXT=so

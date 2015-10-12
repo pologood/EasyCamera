@@ -42,7 +42,7 @@
 #include "Task.h"
 
 #ifdef __linux__
-size_t strlcpy(char *dst, const char *src, size_t siz);
+//size_t strlcpy(char *dst, const char *src, size_t siz);
 size_t strlcpy(char *dst, const char *src, size_t siz)
 {
 	char *d = dst;
