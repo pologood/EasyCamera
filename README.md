@@ -131,33 +131,17 @@ Windows版本运行(控制台调试运行)：
 
 ### 6、下载文件到摄像机 ###
 
-可通过http、ftp协议进行文件传输，摄像机提供wget、ftpget、ftpput命令。用户可以自己的程序下载至/mnt/mtd目录(受嵌入式资源的限制，此款设备用户可支配的空间大约为2M)。
+可通过ftp协议进行文件传输，摄像机提供ftpget、ftpput命令。用户可以自己的程序下载至/mnt/mtd目录(受嵌入式资源的限制，此款设备用户可支配的空间大约为2M)。
 
-下面以wget命令示例下载EasyCamera-master\SDK\pure-ftpd程序至摄像机并运行。在Windows上可使用所提供的EasyCamera\SDK\hfs241.exe作为文件服务器。如下图所示，打开HFS，将需要下载至相机的文件拖拽到HFS，拷贝地址:
+以ftpget命令示例：下载EasyCamera-master\SDK\Quick Easy FTP Server V4.0.0.exe到Windows上(Linux同理找到相应的ftp服务器运行)，运行Quick Easy FTP Server V4.0.0.exe，设置对应的文件目录和ftp用户名密码:
 
 ![pure-ftp](http://www.easydarwin.org/d/file/article/doc/EasyCamera/004.png)
 
-在telnet终端里输入wget url进行下载：
+在telnet终端里输入ftpget进行下载：
 
 ![download](http://www.easydarwin.org/d/file/article/doc/EasyCamera/005.png)
 
-赋予所下载程序的可执行程序即可运行程序:
-
-	chmod +x pure-ftpd
-	./pure-ftpd &
-![](http://www.easydarwin.org/d/file/article/doc/EasyCamera/006.png)
-
-
-
-### 7、通过FTP传输文件到摄像机 ###
-
-我们提供了EasyCamera\SDK\pure-ftpd程序以便在摄像机里建立ftp服务器，下载执行方法如上节所述。下面便可以用ftp客户端访问摄像机了,**用户名为root，密码为空**;
-
-图为FileZilla客户端的访问界面，可以看到我们上一步建立的目录及上传的文件:
-
-![filezilla](http://www.easydarwin.org/d/file/article/doc/EasyCamera/007.png)
-
-### 8、摄像机多码流的RTSP地址 ###
+### 7、摄像机多码流的RTSP地址 ###
 
 摄像机提供1/2/3种码流，RTSP地址分别为：
 
@@ -168,7 +152,7 @@ Windows版本运行(控制台调试运行)：
 具体每一个码流的参数细节可在WEB管理中进行设置：
 ![EasyCamera RTSP](http://www.easydarwin.org/d/file/article/doc/EasyCamera/008.png)
 
-### 9、摄像机wifi无线连接设置 ###
+### 8、摄像机wifi无线连接设置 ###
 
 WEB连接到摄像机后，可以通过WEB管理界面进行WIFI连接的设置：
 ![EasyCamera wifi](http://www.easydarwin.org/d/file/article/doc/EasyCamera/009.png)
