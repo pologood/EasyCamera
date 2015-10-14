@@ -13,6 +13,8 @@ EasyCamera服务支持跨平台Windows/Linux，支持ARM摄像机，支持安卓
 
 ### 1、编译EasyCamera最新版本 ###
 
+目前EasyCamera只支持Windows/arm(GM8126、HI3518)两个版本！
+
 - Windows版本编译：
 
 可以直接用Visual Studio 2008打开源码文件中的：/EasyCamera-master/src/WinNTSupport/EasyCamera.sln解决方案文件，编译出exe可执行文件EasyCamera.exe；
