@@ -135,11 +135,11 @@ Windows版本运行(控制台调试运行)：
 
 以ftpget命令示例：下载EasyCamera-master\SDK\Quick Easy FTP Server V4.0.0.exe到Windows上(Linux同理找到相应的ftp服务器运行)，运行Quick Easy FTP Server V4.0.0.exe，设置对应的文件目录和ftp用户名密码:
 
-![pure-ftp](http://www.easydarwin.org/d/file/article/doc/EasyCamera/004.png)
+![pure-ftp](http://easydarwin.org/d/file/article/doc/EasyCamera/004.png)
 
 在telnet终端里输入ftpget进行下载：
 
-![download](http://www.easydarwin.org/d/file/article/doc/EasyCamera/005.png)
+![download](http://easydarwin.org/d/file/article/doc/EasyCamera/005.png)
 
 ### 7、摄像机多码流的RTSP地址 ###
 
