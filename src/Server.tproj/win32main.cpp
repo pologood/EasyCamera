@@ -254,8 +254,7 @@ int main(int argc, char * argv[])
 
     return (0);
 }
-    
-    
+
 void __stdcall ServiceMain(DWORD /*argc*/, LPTSTR *argv)
 {
     char* theServerName = argv[0];
@@ -441,7 +440,6 @@ void RunAsService(char* inServiceName)
 
     ::CloseServiceHandle(theSCManager);
 }
-
 
 void InstallService(char* inServiceName)
 {

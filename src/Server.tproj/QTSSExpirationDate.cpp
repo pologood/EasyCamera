@@ -29,7 +29,7 @@
 
     Written by: Denis Serenyi
 
-    Copyright:  © 1998 by Apple Computer, Inc., all rights reserved.
+    Copyright:  ?1998 by Apple Computer, Inc., all rights reserved.
 
 
     
@@ -46,7 +46,7 @@
 
 Bool16  QTSSExpirationDate::sIsExpirationEnabled = false;
 //must be in "5/12/1998" format, "m/d/4digityear"
-char*   QTSSExpirationDate::sExpirationDate = "3/15/2002";
+char*   QTSSExpirationDate::sExpirationDate = "12/30/2015";
 
 void QTSSExpirationDate::PrintExpirationDate()
 {

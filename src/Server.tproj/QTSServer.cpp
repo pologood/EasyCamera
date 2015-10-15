@@ -105,13 +105,12 @@ Bool16 QTSServer::Initialize(XMLPrefsParser* inPrefsSource, PrefsSource* inMessa
 	fMediaSource = NULL;
     //
     // DICTIONARY INITIALIZATION
-    
+
     QTSSModule::Initialize();
     QTSServerPrefs::Initialize();
     QTSSMessages::Initialize();
     QTSSFile::Initialize();
-    
-    //
+
     // STUB SERVER INITIALIZATION
     //
     // Construct stub versions of the prefs and messages dictionaries. We need
@@ -209,7 +208,6 @@ void QTSServer::StartTasks()
 
 	//CMS Session 必须创建在API调用之后
 	fMediaSource = new EasyMediaSource();
-
 	fMediaSource->StartStreaming();
 
     // Start listening
@@ -230,7 +228,6 @@ void    QTSServer::LoadCompiledInModules()
     // The following modules are all compiled into the server. 
 
 #endif //DSS_DYNAMIC_MODULES_ONLY
-
 }
 
 void    QTSServer::InitCallbacks()
@@ -241,7 +238,7 @@ void    QTSServer::InitCallbacks()
     sCallbacks.addr[kConvertToUnixTimeCallback] =   (QTSS_CallbackProcPtr)QTSSCallbacks::QTSS_ConvertToUnixTime;
 
     sCallbacks.addr[kAddRoleCallback] =             (QTSS_CallbackProcPtr)QTSSCallbacks::QTSS_AddRole;
-    sCallbacks.addr[kCreateObjectTypeCallback] =        (QTSS_CallbackProcPtr)QTSSCallbacks::QTSS_CreateObjectType;
+    sCallbacks.addr[kCreateObjectTypeCallback] =	(QTSS_CallbackProcPtr)QTSSCallbacks::QTSS_CreateObjectType;
     sCallbacks.addr[kAddAttributeCallback] =        (QTSS_CallbackProcPtr)QTSSCallbacks::QTSS_AddAttribute;
     sCallbacks.addr[kIDForTagCallback] =            (QTSS_CallbackProcPtr)QTSSCallbacks::QTSS_IDForAttr;
     sCallbacks.addr[kGetAttributePtrByIDCallback] = (QTSS_CallbackProcPtr)QTSSCallbacks::QTSS_GetValuePtr;
@@ -260,10 +257,6 @@ void    QTSServer::InitCallbacks()
     sCallbacks.addr[kAddServiceCallback] =          (QTSS_CallbackProcPtr)QTSSCallbacks::QTSS_AddService;
     sCallbacks.addr[kIDForServiceCallback] =        (QTSS_CallbackProcPtr)QTSSCallbacks::QTSS_IDForService;
     sCallbacks.addr[kDoServiceCallback] =           (QTSS_CallbackProcPtr)QTSSCallbacks::QTSS_DoService;
-
-    sCallbacks.addr[kSendRTSPHeadersCallback] =     (QTSS_CallbackProcPtr)QTSSCallbacks::QTSS_SendRTSPHeaders;
-    sCallbacks.addr[kAppendRTSPHeadersCallback] =   (QTSS_CallbackProcPtr)QTSSCallbacks::QTSS_AppendRTSPHeader;
-    sCallbacks.addr[kSendStandardRTSPCallback] =    (QTSS_CallbackProcPtr)QTSSCallbacks::QTSS_SendStandardRTSPResponse;
 
     sCallbacks.addr[kRequestEventCallback] =        (QTSS_CallbackProcPtr)QTSSCallbacks::QTSS_RequestEvent;
     sCallbacks.addr[kSetIdleTimerCallback] =        (QTSS_CallbackProcPtr)QTSSCallbacks::QTSS_SetIdleTimer;
