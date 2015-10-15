@@ -104,7 +104,6 @@ enum
     kAuthenticateCallback           = 43,
     kAuthorizeCallback              = 44,   
 
-
     kCreateObjectValueCallback      = 45,
     kCreateObjectTypeCallback       = 46,
     kLockObjectCallback             = 47,
