@@ -24,6 +24,7 @@ typedef unsigned char           Easy_U8;
 typedef unsigned char           Easy_UChar;
 typedef unsigned short          Easy_U16;
 typedef unsigned int            Easy_U32;
+typedef unsigned char			Easy_Bool;
 
 enum
 {

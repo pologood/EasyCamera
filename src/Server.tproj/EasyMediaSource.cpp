@@ -288,7 +288,7 @@ QTSS_Error EasyMediaSource::StartStreaming()
 		sprintf(sdpName,"%s.sdp",QTSServerInterface::GetServer()->GetPrefs()->GetDeviceSerialNumber()); 
 
 		EasyPusher_StartStream(fPusherHandle, QTSServerInterface::GetServer()->GetPrefs()->GetRTSPServerAddr(), 
-			QTSServerInterface::GetServer()->GetPrefs()->GetRTSPServerPort(), sdpName, "", "", &mediainfo, 1024);
+			QTSServerInterface::GetServer()->GetPrefs()->GetRTSPServerPort(), sdpName, "", "", &mediainfo, 1024, 0);
 	}
 
 	NetDevStartStream();
