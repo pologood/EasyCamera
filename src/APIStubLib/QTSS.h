@@ -840,46 +840,6 @@ typedef struct
 
 typedef struct
 {
-    QTSS_RTSPRequestObject      inRTSPRequest;
-} QTSS_RTSPAuth_Params;
-
-typedef struct 
-{
-    QTSS_RTSPSessionObject      inRTSPSession;
-    QTSS_ClientSessionObject    inClientSession;
-    char*                       inPacketData;
-    UInt32                      inPacketLen;
-
-} QTSS_IncomingData_Params;
-
-typedef struct
-{
-    QTSS_RTSPSessionObject      inRTSPSession;
-} QTSS_RTSPSession_Params;
-
-typedef struct
-{
-    QTSS_ClientSessionObject        inClientSession;
-    QTSS_TimeVal                    inCurrentTime;
-    QTSS_TimeVal                    outNextPacketTime;
-} QTSS_RTPSendPackets_Params;
-
-typedef struct
-{
-    QTSS_ClientSessionObject        inClientSession;
-    QTSS_CliSesClosingReason        inReason;
-} QTSS_ClientSessionClosing_Params;
-
-typedef struct
-{
-    QTSS_ClientSessionObject    inClientSession;
-    QTSS_RTPStreamObject        inRTPStream;
-    void*                       inRTCPPacketData;
-    UInt32                      inRTCPPacketDataLen;
-} QTSS_RTCPProcess_Params;
-
-typedef struct
-{
     char*                       inPath;
     QTSS_OpenFileFlags          inFlags;
     QTSS_Object                 inFileObject;
@@ -920,18 +880,6 @@ typedef union
     QTSS_StateChange_Params             stateChangeParams;
 
     QTSS_Filter_Params                  rtspFilterParams;
-    QTSS_IncomingData_Params            rtspIncomingDataParams;
-    QTSS_StandardRTSP_Params            rtspRouteParams;
-    QTSS_RTSPAuth_Params                rtspAthnParams;
-    QTSS_StandardRTSP_Params            rtspAuthParams;
-    QTSS_StandardRTSP_Params            rtspPreProcessorParams;
-    QTSS_StandardRTSP_Params            rtspRequestParams;
-    QTSS_StandardRTSP_Params            rtspPostProcessorParams;
-    QTSS_RTSPSession_Params             rtspSessionClosingParams;
-
-    QTSS_RTPSendPackets_Params          rtpSendPacketsParams;
-    QTSS_ClientSessionClosing_Params    clientSessionClosingParams;
-    QTSS_RTCPProcess_Params             rtcpProcessParams;
     
     QTSS_OpenFile_Params                openFilePreProcessParams;
     QTSS_OpenFile_Params                openFileParams;
