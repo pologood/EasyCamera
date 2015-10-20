@@ -101,19 +101,17 @@ enum
     kRequestGlobalLockCallback      = 40, 
     kIsGlobalLockedCallback         = 41, 
     kUnlockGlobalLock               = 42, 
-    kAuthenticateCallback           = 43,
-    kAuthorizeCallback              = 44,   
 
-    kCreateObjectValueCallback      = 45,
-    kCreateObjectTypeCallback       = 46,
-    kLockObjectCallback             = 47,
-    kUnlockObjectCallback           = 48,
-    kSetAttributePtrCallback        = 49,
-    kSetIntervalRoleTimerCallback   = 50,
-    kLockStdLibCallback             = 51,
-    kUnlockStdLibCallback           = 52,
+    kCreateObjectValueCallback      = 43,
+    kCreateObjectTypeCallback       = 44,
+    kLockObjectCallback             = 45,
+    kUnlockObjectCallback           = 46,
+    kSetAttributePtrCallback        = 47,
+    kSetIntervalRoleTimerCallback   = 48,
+    kLockStdLibCallback             = 49,
+    kUnlockStdLibCallback           = 50,
 
-    kLastCallback                   = 53
+    kLastCallback                   = 51
 };
 
 typedef struct {
