@@ -274,7 +274,6 @@ QTSS_Error  QTSS_CreateStreamFromSocket(int inFileDesc, QTSS_StreamRef* outStrea
 QTSS_Error  QTSS_DestroySocketStream(QTSS_StreamRef inStream)
 {
     return (sCallbacks->addr [kDestroySocketStreamCallback]) (inStream);        
-
 }
 
 // ASYNC I/O STREAM ROUTINES

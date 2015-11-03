@@ -218,6 +218,10 @@
 			ReferencedProjectIdentifier="{230D5525-AEA7-4037-95FE-3B45BEF98E55}"
 			RelativePathToProject="..\SafeStdLib\SafeInternalStdLib.vcproj"
 		/>
+		<ProjectReference
+			ReferencedProjectIdentifier="{14F332E3-1771-4908-8850-9A2581A4AED2}"
+			RelativePathToProject="..\..\..\EasyProtocol\EasyProtocol\EasyProtocol.vcproj"
+		/>
 	</References>
 	<Files>
 		<Filter

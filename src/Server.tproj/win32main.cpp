@@ -24,7 +24,6 @@
  */
 /*
     File:       win32main.cpp
-
     Contains:   main function to drive streaming server on win32.
 */
 
@@ -54,7 +53,6 @@ static void RemoveService(char *inServiceName);
 static void RunAsService(char* inServiceName);
 void WINAPI ServiceControl(DWORD);
 void WINAPI ServiceMain(DWORD argc, LPTSTR *argv);
-
 
 int main(int argc, char * argv[]) 
 {
