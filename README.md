@@ -92,7 +92,7 @@ Windows版本运行(控制台调试运行)：
 	...
 
 	cd /mnt/mtd/easycamera &&
-	./easycamera -c ./easycamera.xml &
+	./easycamera -c /mnt/mtd/easycamera/easycamera.xml &
 
 
 ### 5、检查EasyCamera是否运行成功 ###
