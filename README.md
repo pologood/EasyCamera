@@ -91,7 +91,7 @@ Windows版本运行(控制台调试运行)：
 	#! /bin/sh
 	...
 
-	cd /mnt/mtd/easydarwin &&
+	cd /mnt/mtd/easycamera &&
 	./easycamera -c ./easycamera.xml &
 
 
@@ -169,6 +169,6 @@ WEB：[www.EasyDarwin.org](http://www.easydarwin.org)
 
 QQ交流群：288214068
 
-Copyright &copy; EasyDarwin.org 2012-2015
+Copyright &copy; EasyDarwin.org 2012-2016
 
 ![EasyDarwin](http://www.easydarwin.org/skin/easydarwin/images/wx_qrcode.jpg)
