@@ -2,7 +2,7 @@
 
 **EasyCamera** 并不是做摄像机硬件方案，我们是在硬件方案的基础上，通过摄像机方案商提供的SDK在摄像机内部与摄像机主服务进行交互，包括实时音视频、云台控制、联动报警等功能，我们在摄像机内部植入EasyCamera程序，一边通过SDK与摄像机主进程交互(获取音视频数据、控制云台、联动报警等交互)，一边与EasyDarwin云平台(EasyCMS、EasyDarwin、EasyRMS等云服务器)对接，上传数据、接受指令控制，形成一套云视频摄像机方案.
 
-EasyCamera服务支持跨平台Windows/Linux，支持ARM摄像机(目前已经有国内多家摄像机方案支持接入，包括雄迈、海芯威视、普顺达等)，支持安卓/IOS移动设备(开发中)，对接EasyDarwin开源流媒体平台，我们定制的摄像机采海思3518E方案，支持RTSP、Onvif、WEB管理、配套SDK工具，作为开发和演示硬件工具，我们提供了全套完备的程序和文档，既可以用于流媒体学习，又可以用于方案移植参考，更可以直接用于项目中，购买参考设备可以在：[https://easydarwin.taobao.com/](https://easydarwin.taobao.com/ "EasyDarwin TaoBao")，用户也可以将我们参考摄像机的SDK部分替换成自己摄像机的硬件SDK，移植非常方便；
+EasyCamera服务支持跨平台Windows/Linux，支持ARM摄像机(目前已经有国内多家摄像机方案支持接入，包括雄迈、海芯威视、普顺达等)，支持Android/iOS移动设备(开发中)，对接EasyDarwin开源流媒体平台，我们定制的摄像机采海思3518E方案，支持RTSP、Onvif、Web管理、配套SDK工具，作为开发和演示硬件工具，我们提供了全套完备的程序和文档，既可以用于流媒体学习，又可以用于方案移植参考，更可以直接用于项目中，购买参考设备可以在：[https://easydarwin.taobao.com/](https://easydarwin.taobao.com/ "EasyDarwin TaoBao")，用户也可以将我们参考摄像机的SDK部分替换成自己摄像机的硬件SDK，移植非常方便；
 
 ## EasyCamera包括 ##
 
@@ -13,18 +13,18 @@ EasyCamera服务支持跨平台Windows/Linux，支持ARM摄像机(目前已经�
 
 ### 1、编译EasyCamera最新版本 ###
 
-目前EasyCamera只支持Windows/arm(GM8126、HI3518)两个版本！
+目前EasyCamera只支持Windows/ARM(GM8126、HI3518)两个版本！
 
 - Windows版本编译：
 
 可以直接用Visual Studio 2008打开源码文件中的：/EasyCamera-master/src/WinNTSupport/EasyCamera.sln解决方案文件，编译出exe可执行文件EasyCamera.exe；
 
-- arm版本编译：
+- ARM版本编译：
 
 这里只说明EasyDarwin开源摄像机的编译方法,其他类型摄像机编译方法类似, 前提是配置相应的交叉编译工具链，我们有两款方案的摄像机，GM8126和HI3518，工具链分别在EasyCamera-master\SDK\GM8126\和EasyCamera-master\SDK\HI3518\，我们这里以安装GM8126交叉编译工具链为例：
 
 > “
-> 交叉编译工具链为所提供的EasyCamera-master\SDK\8126交叉编译工具\crosstool.tgz文件，解压crosstool.tgz至Linux开发宿主机的/opt目录，在/etc/profile里设置将交叉编译工具链目录设置到PATH变量，重启完成安装。
+> 交叉编译工具链可以到[http://pan.baidu.com/s/1kTxVIq7](http://pan.baidu.com/s/1kTxVIq7)下载crosstool.tgz文件，解压crosstool.tgz至Linux开发宿主机的/opt目录，在/etc/profile里设置将交叉编译工具链目录设置到PATH变量，重启完成安装。
 > 解压命令：tar zxvf crosstool.tgz -C /opt
 > 在/etc/profile添加:
 > export PATH="$PATH:/opt/crosstool/arm-none-linux-gnueabi-4.4.0_ARMv5TE/bin"
@@ -32,9 +32,9 @@ EasyCamera服务支持跨平台Windows/Linux，支持ARM摄像机(目前已经�
 
 编译方法,
 
-    cd ./EasyCamera-master/src/
+    cd ./EasyDarwin-master/EasyCamera
     chmod +x ./Buildit
-    ./Buildit
+    ./Buildit gm8126
     cd ./Bin
 
 
@@ -45,11 +45,11 @@ EasyCamera主要的几个配置项：
 
 ***cms_port***：EasyCMS服务的监听端口；
 
-***local\_camera\_addr***：本地摄像机地址，例如EasyCamera Windows版本是与硬件分离的，那么具体配置摄像机的ip地址，arm版本EasyCamera内置于摄像机内部，可以直接配置成127.0.0.1；
+***local\_camera\_addr***：本地摄像机地址，例如EasyCamera Windows版本是与硬件分离的，那么具体配置摄像机的ip地址，ARM版本EasyCamera内置于摄像机内部，可以直接配置成127.0.0.1；
 
-***local\_camera\_port***：摄像机监听端口，默认80，也可以在摄像机WEB管理页面重新配置；
+***local\_camera\_port***：摄像机监听端口，默认80，也可以在摄像机Web管理页面重新配置；
 
-***serial_number***：自定义配置的摄像机序列号，12位字母与数字组合；
+***serial_number***：自定义配置的摄像机序列号，12位字符串(具体要求查看EasyDarwin/Doc/EasyDarwin Protocol.doc)；
 
 ***run\_user\_name***：摄像机用户名，默认admin;
 
@@ -64,16 +64,16 @@ Windows版本运行(控制台调试运行)：
 
 
 摄像机内运行：
-首先是将arm程序如何放入摄像机内部，方法见随后的*摄像机操作指南*部分，加入我们将可执行文件放置于**/mnt/mtd/easydarwin/**目录；
+首先是将ARM程序如何放入摄像机内部，方法见随后的*摄像机操作指南*部分，我们将可执行文件放置于**/mnt/mtd/easydarwin/**目录；
 
 调试模式运行（具体配置文件路径根据实际情况设置）,
 
-	cd /mnt/mtd/easydarwin/
+	cd /mnt/mtd/easycamera/
     ./easycamera -c ./easycamera.xml  -d
-后台服务运行,
+守护进程运行,
 
     ./easycamera -c ./easycamera.xml  &
-注：如果xml配置文件路径不能确定，建议最保险的方式就是用全路径，例如 “/mnt/mtd/easydarwin/easycamera.xml”，这样在下一次更新服务的时候，配置文件可以保留！
+注：如果xml配置文件路径不能确定，建议最安全的方式就是用全路径，例如 “/mnt/mtd/easydarwin/easycamera.xml”，这样在下一次更新服务的时候，配置文件可以保留！
 
 ### 4、跟随摄像机系统自启动 ###
 需要让EasyCamera程序跟随摄像机系统自动启动，我们需要修改**/mnt/mtd/ipc/allexit.sh**和**/mnt/mtd/ipc/platform.sh**两个启动脚本：
