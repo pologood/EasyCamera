@@ -7,7 +7,7 @@ EasyCamera服务支持跨平台Windows/Linux，支持ARM摄像机(目前已经�
 ## EasyCamera包括 ##
 
 - **SDK** 摄像机版本及SDK调用示例
-- **src** EasyCamera开源程序
+- **SRC** EasyCamera开源程序
 
 ## 编译和部署方法 ##
 
@@ -17,45 +17,58 @@ EasyCamera服务支持跨平台Windows/Linux，支持ARM摄像机(目前已经�
 
 - Windows版本编译：
 
-可以直接用Visual Studio 2008打开源码文件中的：/EasyCamera-master/src/WinNTSupport/EasyCamera.sln解决方案文件，编译出exe可执行文件EasyCamera.exe；
+可以直接用Visual Studio 2008打开源码文件中的：/EasyDarwin-master/EasyCamera/WinNTSupport/EasyCamera.sln解决方案文件，编译出exe可执行文件EasyCamera.exe；
 
 - ARM版本编译：
 
-这里只说明EasyDarwin开源摄像机的编译方法,其他类型摄像机编译方法类似, 前提是配置相应的交叉编译工具链，我们有两款方案的摄像机，GM8126和HI3518，工具链分别在EasyCamera-master\SDK\GM8126\和EasyCamera-master\SDK\HI3518\，我们这里以安装GM8126交叉编译工具链为例：
+这里只说明EasyDarwin开源摄像机的编译方法,其他类型摄像机编译方法类似, 前提是配置相应的交叉编译工具链，我们有两款方案的摄像机，GM8126和HI3518，工具链分别在/EasyCamera-master/SDK/GM8126/和/EasyCamera-master/SDK/HI3518/，我们这里以安装HI3518交叉编译工具链为例：
 
 > “
-> 交叉编译工具链可以到[http://pan.baidu.com/s/1kTxVIq7](http://pan.baidu.com/s/1kTxVIq7)下载crosstool.tgz文件，解压crosstool.tgz至Linux开发宿主机的/opt目录，在/etc/profile里设置将交叉编译工具链目录设置到PATH变量，重启完成安装。
-> 解压命令：tar zxvf crosstool.tgz -C /opt
-> 在/etc/profile添加:
-> export PATH="$PATH:/opt/crosstool/arm-none-linux-gnueabi-4.4.0_ARMv5TE/bin"
+> 交叉编译工具链可以到[http://pan.baidu.com/s/1qWBYFCC](http://pan.baidu.com/s/1qWBYFCC)下载hi3518gcc.tgz文件，解压hi3518gcc.tgz至Linux开发宿主机的/opt目录，在/etc/profile里设置将交叉编译工具链目录设置到PATH变量，重启完成安装，也可运行source /etc/profile命令使其立即生效。
+> 
+> - 解压命令：tar zxvf hi3518gcc.tgz -C /opt
+> 
+> - 在/etc/profile添加：export PATH="$PATH:/opt/hisi-linux-nptl/arm-hisiv100-linux/bin"
+> 
+> - 立即生效：source /etc/profile
+> 
+> - 验证PATH：echo $PATH
 > “
 
 编译方法,
 
     cd ./EasyDarwin-master/EasyCamera
     chmod +x ./Buildit
-    ./Buildit gm8126
+    ./Buildit hisiv100
     cd ./Bin
 
 
 ### 2、配置easycamera.xml ###
 EasyCamera主要的几个配置项：
 
-***cms_addr***：EasyCMS服务的IP地址或者域名；
+- ***easycms_ip***：EasyCMS服务的IP地址或者域名；
 
-***cms_port***：EasyCMS服务的监听端口；
+- ***easycms_port***：EasyCMS服务的监听端口；
 
-***local\_camera\_addr***：本地摄像机地址，例如EasyCamera Windows版本是与硬件分离的，那么具体配置摄像机的ip地址，ARM版本EasyCamera内置于摄像机内部，可以直接配置成127.0.0.1；
+- ***device_serial***：自定义配置的摄像机序列号，12位字符串(具体规则查看/EasyDarwin/Doc/EasyDarwin Protocol.doc)；
 
-***local\_camera\_port***：摄像机监听端口，默认80，也可以在摄像机Web管理页面重新配置；
+- ***device_name***：摄像机名称；
 
-***serial_number***：自定义配置的摄像机序列号，12位字符串(具体要求查看EasyDarwin/Doc/EasyDarwin Protocol.doc)；
+- ***device_key***：EasyCMS验证密码，默认123456；
 
-***run\_user\_name***：摄像机用户名，默认admin;
+- ***device_tag***：摄像机标签，默认dev；
 
-***run_password***：摄像机密码，默认admin；
+- ***keep_alive_interval***：保活间隔时长，单位为秒，默认30秒；
 
-***camera\_stream\_type***：默认摄像机传输的码流类型，0表示子码流，1表示主码流；
+- ***camera_ip***：本地摄像机地址，例如EasyCamera Windows版本是与硬件分离的，那么具体配置摄像机的ip地址，ARM版本EasyCamera内置于摄像机内部，可以直接配置成127.0.0.1；
+
+- ***camera_port***：摄像机监听端口，默认80，也可以在摄像机Web管理页面重新配置；
+
+- ***camera_user***：摄像机用户名，默认admin;
+
+- ***camera_password***：摄像机密码，默认admin；
+
+- ***camera_stream_type***：默认摄像机传输的码流类型，0表示子码流，1表示主码流；
 
 ### 3、运行EasyCamera ###
 Windows版本运行(控制台调试运行)：
@@ -64,7 +77,7 @@ Windows版本运行(控制台调试运行)：
 
 
 摄像机内运行：
-首先是将ARM程序如何放入摄像机内部，方法见随后的*摄像机操作指南*部分，我们将可执行文件放置于**/mnt/mtd/easydarwin/**目录；
+首先是将ARM程序如何放入摄像机内部，方法见随后的*摄像机操作指南*部分，我们将可执行文件放置于**/mnt/mtd/easycamera/**目录；
 
 调试模式运行（具体配置文件路径根据实际情况设置）,
 
@@ -73,7 +86,7 @@ Windows版本运行(控制台调试运行)：
 守护进程运行,
 
     ./easycamera -c ./easycamera.xml  &
-注：如果xml配置文件路径不能确定，建议最安全的方式就是用全路径，例如 “/mnt/mtd/easydarwin/easycamera.xml”，这样在下一次更新服务的时候，配置文件可以保留！
+注：如果xml配置文件路径不能确定，建议最安全的方式就是用全路径，例如 “/mnt/mtd/easycamera/easycamera.xml”，这样在下一次更新服务的时候，配置文件可以保留！
 
 ### 4、跟随摄像机系统自启动 ###
 需要让EasyCamera程序跟随摄像机系统自动启动，我们需要修改**/mnt/mtd/ipc/allexit.sh**和**/mnt/mtd/ipc/platform.sh**两个启动脚本：
@@ -108,18 +121,18 @@ Windows版本运行(控制台调试运行)：
 将摄像机通过有线的方式连接到摄像机，路由器需要开启DHCP功能，给摄像机分配到IP地址（如果路由器没有开启DHCP功能，摄像机连接网线后，摄像机的默认IP就是*192.168.1.88*）；
 
 ### 2、查找摄像机 ###
-打开EasyCamera-master\SDK\NetLib\bin\HiCamSearcher.exe，搜索摄像机：
+打开/EasyCamera-master/SDK/NetLib/bin/HiCamSearcher.exe，搜索摄像机：
 
 ![HiCamSearcher](http://www.easydarwin.org/d/file/article/doc/EasyCamera/001.png)
 
 ### 3、区分摄像机硬件方案 ###
 
-通过浏览器访问摄像机进入web管理页面，进入设备信息页面，找到“软件版本”或者“固件版本”项，如果版本号以V5打头，那么摄像机是智源GM8126方案，如果版本号以V7打头，那么摄像机是海思HI3518方案
+通过浏览器访问摄像机进入Web管理页面，进入设备信息页面，找到“软件版本”或者“固件版本”项，如果版本号以V5打头，那么摄像机是智源GM8126方案，如果版本号以V7打头，那么摄像机是海思HI3518方案
 
 
 ### 4、摄像机开启Telnet服务 ###
 
-通过浏览器访问摄像机进入web管理页面，进入系统维护页面，在系统升级项中点击浏览找到所提供的升级包（GM8126方案选择EasyCamera-master\SDK\GM8126\**telnet_8126.pkg**，HI3518方案选择EasyCamera-master\SDK\HI3518\**telnet_3518.pkg**），点击确定，等待系统重启。 例如：http://192.168.*.*/web/admin.html
+通过浏览器访问摄像机进入Web管理页面，进入系统维护页面，在系统升级项中点击浏览找到所提供的升级包（GM8126方案选择/EasyCamera-master/SDK/GM8126/**telnet_8126.pkg**，HI3518方案选择/EasyCamera-master/SDK/HI3518/**telnet_3518.pkg**），点击确定，等待系统重启。 例如：http://192.168.*.*/web/admin.html
 
 ![EasyCamera Telnet](http://www.easydarwin.org/d/file/article/doc/EasyCamera/002.png)
 
@@ -133,7 +146,7 @@ Windows版本运行(控制台调试运行)：
 
 可通过ftp协议进行文件传输，摄像机提供ftpget、ftpput命令。用户可以自己的程序下载至/mnt/mtd目录(受嵌入式资源的限制，此款设备用户可支配的空间大约为2M)。
 
-以ftpget命令示例：下载EasyCamera-master\SDK\Quick Easy FTP Server V4.0.0.exe到Windows上(Linux同理找到相应的ftp服务器运行)，运行Quick Easy FTP Server V4.0.0.exe，设置对应的文件目录和ftp用户名密码:
+以ftpget命令示例：下载/EasyCamera-master/SDK/Quick Easy FTP Server V4.0.0.exe到Windows上(Linux同理找到相应的ftp服务器运行)，运行Quick Easy FTP Server V4.0.0.exe，设置对应的文件目录和ftp用户名密码:
 
 ![pure-ftp](http://easydarwin.org/d/file/article/doc/EasyCamera/004.png)
 
@@ -149,12 +162,12 @@ Windows版本运行(控制台调试运行)：
 - 子码流：RTSP://[IP]:[PORT]/12
 - 三码流：RTSP://[IP]:[PORT]/13
 
-具体每一个码流的参数细节可在WEB管理中进行设置：
+具体每一个码流的参数细节可在Web管理中进行设置：
 ![EasyCamera RTSP](http://www.easydarwin.org/d/file/article/doc/EasyCamera/008.png)
 
 ### 8、摄像机wifi无线连接设置 ###
 
-WEB连接到摄像机后，可以通过WEB管理界面进行WIFI连接的设置：
+Web连接到摄像机后，可以通过Web管理界面进行WIFI连接的设置：
 ![EasyCamera wifi](http://www.easydarwin.org/d/file/article/doc/EasyCamera/009.png)
 
 
