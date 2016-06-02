@@ -2,7 +2,7 @@
 
 **EasyCamera** 并不是做摄像机硬件方案，我们是在硬件方案的基础上，通过摄像机方案商提供的SDK在摄像机内部与摄像机主服务进行交互，包括实时音视频、云台控制、联动报警等功能，我们在摄像机内部植入EasyCamera程序，一边通过SDK与摄像机主进程交互(获取音视频数据、控制云台、联动报警等交互)，一边与EasyDarwin云平台(EasyCMS、EasyDarwin、EasyRMS等云服务器)对接，上传数据、接受指令控制，形成一套云视频摄像机方案.
 
-EasyCamera服务支持跨平台Windows/Linux，支持ARM摄像机(目前已经有国内多家摄像机方案支持接入，包括雄迈、海芯威视、普顺达等)，支持Android/iOS移动设备(开发中)，对接EasyDarwin开源流媒体平台，我们定制的摄像机采海思3518E方案，支持RTSP、Onvif、Web管理、配套SDK工具，作为开发和演示硬件工具，我们提供了全套完备的程序和文档，既可以用于流媒体学习，又可以用于方案移植参考，更可以直接用于项目中，购买参考设备可以在：[https://easydarwin.taobao.com/](https://easydarwin.taobao.com/ "EasyDarwin TaoBao")，用户也可以将我们参考摄像机的SDK部分替换成自己摄像机的硬件SDK，移植非常方便；
+EasyCamera服务支持跨平台Windows/Linux，支持ARM摄像机(目前已经有国内多家摄像机方案支持接入，包括雄迈、海芯威视、普顺达等)，支持Android/iOS移动设备(开发中)，对接EasyDarwin开源流媒体平台，我们定制的摄像机采海思HI3518C/HI3518E方案，支持RTSP、Onvif、Web管理、配套SDK工具，作为开发和演示硬件工具，我们提供了全套完备的程序和文档，既可以用于流媒体学习，又可以用于方案移植参考，更可以直接用于项目中，购买参考设备可以在：[https://easydarwin.taobao.com/](https://easydarwin.taobao.com/ "EasyDarwin TaoBao")，用户也可以将我们参考摄像机的SDK部分替换成自己摄像机的硬件SDK，移植非常方便；
 
 ## EasyCamera包括 ##
 
@@ -13,7 +13,7 @@ EasyCamera服务支持跨平台Windows/Linux，支持ARM摄像机(目前已经�
 
 ### 1、编译EasyCamera最新版本 ###
 
-目前EasyCamera只支持Windows/ARM(GM8126、HI3518)两个版本！
+目前EasyCamera只支持Windows/ARM(GM8126、HI3518C/HI3518E)两个版本！
 
 - Windows版本编译：
 
@@ -21,7 +21,7 @@ EasyCamera服务支持跨平台Windows/Linux，支持ARM摄像机(目前已经�
 
 - ARM版本编译：
 
-这里只说明EasyDarwin开源摄像机的编译方法,其他类型摄像机编译方法类似, 前提是配置相应的交叉编译工具链，我们有两款方案的摄像机，GM8126和HI3518，工具链分别在/EasyCamera-master/SDK/GM8126/和/EasyCamera-master/SDK/HI3518/，我们这里以安装HI3518交叉编译工具链为例：
+这里只说明EasyDarwin开源摄像机的编译方法,其他类型摄像机编译方法类似, 前提是配置相应的交叉编译工具链，我们有两款方案的摄像机，GM8126和HI3518C/HI3518E，工具链分别在/EasyCamera-master/SDK/GM8126/和/EasyCamera-master/SDK/HI3518/，我们这里以安装HI3518C/HI3518E交叉编译工具链为例(HI3518C和HI3518E方案交叉编译工具链相同)：
 
 > “
 > 交叉编译工具链可以到[http://pan.baidu.com/s/1qWBYFCC](http://pan.baidu.com/s/1qWBYFCC)下载hi3518gcc.tgz文件，解压hi3518gcc.tgz至Linux开发宿主机的/opt目录，在/etc/profile里设置将交叉编译工具链目录设置到PATH变量，重启完成安装，也可运行source /etc/profile命令使其立即生效。
@@ -127,18 +127,18 @@ Windows版本运行(控制台调试运行)：
 
 ### 3、区分摄像机硬件方案 ###
 
-通过浏览器访问摄像机进入Web管理页面，进入设备信息页面，找到“软件版本”或者“固件版本”项，如果版本号以V5打头，那么摄像机是智源GM8126方案，如果版本号以V7打头，那么摄像机是海思HI3518方案
+通过浏览器访问摄像机进入Web管理页面，进入设备信息页面，找到“软件版本”或者“固件版本”项，如果版本号以V5打头，那么摄像机是智源GM8126方案，如果版本号以V6打头，那么摄像机是海思HI3518C方案,如果版本号以V7打头，那么摄像机是海思HI3518E方案。
 
 
 ### 4、摄像机开启Telnet服务 ###
 
-通过浏览器访问摄像机进入Web管理页面，进入系统维护页面，在系统升级项中点击浏览找到所提供的升级包（GM8126方案选择/EasyCamera-master/SDK/GM8126/**telnet_8126.pkg**，HI3518方案选择/EasyCamera-master/SDK/HI3518/**telnet_3518.pkg**），点击确定，等待系统重启。 例如：http://192.168.*.*/web/admin.html
+通过浏览器访问摄像机进入Web管理页面，进入系统维护页面，在系统升级项中点击浏览找到所提供的升级包（GM8126方案选择/EasyCamera-master/SDK/GM8126/**telnet_8126.pkg**，HI3518C/HI3518E方案选择/EasyCamera-master/SDK/HI3518/**telnet_3518.pkg**），点击确定，等待系统重启。 例如：http://192.168.*.*/web/admin.html
 
 ![EasyCamera Telnet](http://www.easydarwin.org/d/file/article/doc/EasyCamera/002.png)
 
 ### 5、通过Telnet访问摄像机 ###
 
-摄像机开启telnet服务后即可通过telnet 终端进行访问。GM8126方案用户名为：root，密码为空、HI3518方案用户名为：admin，密码为：2601hx。如下图所示。**摄像机自带的程序与配置位于/mnt/mtd/，请勿删除此目录下任何内容！！！**
+摄像机开启telnet服务后即可通过telnet 终端进行访问。GM8126方案用户名为：root，密码为空、HI3518C方案用户名为：admin，密码为：HX2105，HI3518E方案用户名为：admin，密码为：2601hx。如下图所示。**摄像机自带的程序与配置位于/mnt/mtd/，请勿删除此目录下任何内容！！！**
 
 ![telnet](http://www.easydarwin.org/d/file/article/doc/EasyCamera/003.png)
 
