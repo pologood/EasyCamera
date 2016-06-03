@@ -9,6 +9,9 @@ EasyCamera服务支持Windows平台/ARM摄像机(目前已经有国内多家摄�
 - **SDK** 摄像机版本及SDK调用示例
 - **SRC** EasyCamera开源程序
 
+## 视频教程 ##
+EasyCamera开源摄像机解决方案：编译、配置、部署：[http://edu.csdn.net/course/detail/2502/39197](http://edu.csdn.net/course/detail/2502/39197 "EasyCamera")
+
 ## 编译和部署方法 ##
 
 ### 1、编译EasyCamera最新版本 ###
