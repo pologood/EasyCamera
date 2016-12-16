@@ -176,7 +176,7 @@ Web连接到摄像机后，可以通过Web管理界面进行WIFI连接的设置�
 
 
 ## 摄像机硬件购买 ##
-[http://easydarwin.taobao.com/](http://easydarwin.taobao.com/ "EasyDarwin TaoBao")
+[http://www.easydarwin.org/camera](http://www.easydarwin.org/camera "EasyCamera摄像机购买")
 
 ## 获取更多信息 ##
 
