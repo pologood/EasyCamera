@@ -20,7 +20,7 @@ EasyCamera开源摄像机解决方案：编译、配置、部署：[http://edu.c
 
 ### 1、编译EasyCamera最新版本 ###
 
-目前EasyCamera只支持Windows/ARM(GM8126、HI3518C/HI3518E)两个版本！
+目前EasyCamera Demo提供了Windows/ARM(GM8126、HI3518C/HI3518E)两个版本！
 
 - Windows版本编译：
 
