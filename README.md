@@ -130,7 +130,7 @@ Windows版本运行(控制台调试运行)：
 ### 2、查找摄像机 ###
 打开/EasyCamera-master/SDK/NetLib/bin/HiCamSearcher.exe，搜索摄像机：
 
-![HiCamSearcher](http://www.easydarwin.org/d/file/article/doc/EasyCamera/001.png)
+![HiCamSearcher](http://www.easydarwin.org/github/images/easycamera/001.png)
 
 ### 3、区分摄像机硬件方案 ###
 
@@ -141,13 +141,13 @@ Windows版本运行(控制台调试运行)：
 
 通过浏览器访问摄像机进入Web管理页面，进入系统维护页面，在系统升级项中点击浏览找到所提供的升级包（GM8126方案选择/EasyCamera-master/SDK/GM8126/**telnet_8126.pkg**，HI3518C/HI3518E方案选择/EasyCamera-master/SDK/HI3518/**telnet_3518.pkg**），点击确定，等待系统重启。 例如：http://192.168.*.*/web/admin.html
 
-![EasyCamera Telnet](http://www.easydarwin.org/d/file/article/doc/EasyCamera/002.png)
+![EasyCamera Telnet](http://www.easydarwin.org/github/images/easycamera/002.png)
 
 ### 5、通过Telnet访问摄像机 ###
 
 摄像机开启telnet服务后即可通过telnet 终端进行访问。GM8126方案用户名为：root，密码为空、HI3518C方案用户名为：admin，密码为：HX2105，HI3518E方案用户名为：admin，密码为：2601hx。如下图所示。**摄像机自带的程序与配置位于/mnt/mtd/，请勿删除此目录下任何内容！！！**
 
-![telnet](http://www.easydarwin.org/d/file/article/doc/EasyCamera/003.png)
+![telnet](http://www.easydarwin.org/github/images/easycamera/003.png)
 
 ### 6、下载文件到摄像机 ###
 
@@ -155,11 +155,11 @@ Windows版本运行(控制台调试运行)：
 
 以ftpget命令示例：下载/EasyCamera-master/SDK/Quick Easy FTP Server V4.0.0.exe到Windows上(Linux同理找到相应的ftp服务器运行)，运行Quick Easy FTP Server V4.0.0.exe，设置对应的文件目录和ftp用户名密码:
 
-![pure-ftp](http://easydarwin.org/d/file/article/doc/EasyCamera/004.png)
+![pure-ftp](http://easydarwin.org/github/images/easycamera/004.png)
 
 在telnet终端里输入ftpget进行下载：
 
-![download](http://easydarwin.org/d/file/article/doc/EasyCamera/005.png)
+![download](http://easydarwin.org/github/images/easycamera/005.png)
 
 ### 7、摄像机多码流的RTSP地址 ###
 
@@ -170,12 +170,12 @@ Windows版本运行(控制台调试运行)：
 - 三码流：RTSP://[IP]:[PORT]/13
 
 具体每一个码流的参数细节可在Web管理中进行设置：
-![EasyCamera RTSP](http://www.easydarwin.org/d/file/article/doc/EasyCamera/008.png)
+![EasyCamera RTSP](http://www.easydarwin.org/github/images/easycamera/008.png)
 
 ### 8、摄像机wifi无线连接设置 ###
 
 Web连接到摄像机后，可以通过Web管理界面进行WIFI连接的设置：
-![EasyCamera wifi](http://www.easydarwin.org/d/file/article/doc/EasyCamera/009.png)
+![EasyCamera wifi](http://www.easydarwin.org/github/images/easycamera/009.png)
 
 
 ## 摄像机硬件购买 ##
